@@ -1,0 +1,42 @@
+{
+  "existing": {
+    "timeseries": {
+      "TIMESERIES00": {
+        "base": "s3c",
+        "end_date": "s3d",
+        "rate": {},
+        "start_date": "s3f",
+        "success": true,
+        "timeseries": false
+      },
+      "TIMESERIES01": {
+        "base": "s78",
+        "end_date": "s79",
+        "rate": {},
+        "start_date": "s7b",
+        "success": true,
+        "timeseries": false
+      },
+      "TIMESERIES02": {
+        "base": "sb4",
+        "end_date": "sb5",
+        "rate": {},
+        "start_date": "sb7",
+        "success": true,
+        "timeseries": false
+      }
+    }
+  },
+  "new": {
+    "timeseries": {
+      "timeseries_ref01": {
+        "base": "sf0",
+        "end_date": "sf1",
+        "rate": {},
+        "start_date": "sf3",
+        "success": true,
+        "timeseries": false
+      }
+    }
+  }
+}

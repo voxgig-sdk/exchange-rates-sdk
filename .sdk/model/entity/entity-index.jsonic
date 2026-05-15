@@ -1,0 +1,10 @@
+# Entity Models
+
+@"convert.jsonic"
+@"get_api_root.jsonic"
+@"get_historical_rate_for_currency_and_date.jsonic"
+@"get_historical_rates_for_date.jsonic"
+@"latest.jsonic"
+@"status.jsonic"
+@"symbol.jsonic"
+@"timeseries.jsonic"

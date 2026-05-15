@@ -1,0 +1,34 @@
+{
+  "existing": {
+    "get_api_root": {
+      "GET_API_ROOT00": {
+        "documentation": "s28",
+        "message": "s29",
+        "success": true,
+        "version": "s2b"
+      },
+      "GET_API_ROOT01": {
+        "documentation": "s50",
+        "message": "s51",
+        "success": true,
+        "version": "s53"
+      },
+      "GET_API_ROOT02": {
+        "documentation": "s78",
+        "message": "s79",
+        "success": true,
+        "version": "s7b"
+      }
+    }
+  },
+  "new": {
+    "get_api_root": {
+      "get_api_root_ref01": {
+        "documentation": "sa0",
+        "message": "sa1",
+        "success": true,
+        "version": "sa3"
+      }
+    }
+  }
+}

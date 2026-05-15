@@ -1,0 +1,10 @@
+# Flows
+
+@"BasicConvertFlow.jsonic"
+@"BasicGetApiRootFlow.jsonic"
+@"BasicGetHistoricalRateForCurrencyAndDateFlow.jsonic"
+@"BasicGetHistoricalRatesForDateFlow.jsonic"
+@"BasicLatestFlow.jsonic"
+@"BasicStatusFlow.jsonic"
+@"BasicSymbolFlow.jsonic"
+@"BasicTimeseriesFlow.jsonic"

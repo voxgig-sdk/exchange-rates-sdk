@@ -1,0 +1,79 @@
+# Entity: get_historical_rates_for_date
+
+main: kit: entity: get_historical_rates_for_date: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "base"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "date"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "rate"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "success"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "timestamp"
+      req: true
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "get_historical_rates_for_date"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "2025-08-31"
+                kind: "param"
+                name: "id"
+                orig: "date"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/{date}"
+          parts: [
+            "{id}"
+          ]
+          rename: {
+            param: {
+              date: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

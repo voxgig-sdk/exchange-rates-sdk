@@ -1,0 +1,84 @@
+# Entity: get_historical_rate_for_currency_and_date
+
+main: kit: entity: get_historical_rate_for_currency_and_date: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "base"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "date"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "rate"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "success"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "timestamp"
+      req: true
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "get_historical_rate_for_currency_and_date"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "USD"
+                kind: "param"
+                name: "currency"
+                orig: "currency"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                example: "2025-08-31"
+                kind: "param"
+                name: "date"
+                orig: "date"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/{date}/{currency}"
+          parts: [
+            "{date}"
+            "{currency}"
+          ]
+          select: {
+            exist: [
+              "currency"
+              "date"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,49 @@
+# Entity: get_api_root
+
+main: kit: entity: get_api_root: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "documentation"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "message"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "success"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "version"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "get_api_root"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/"
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

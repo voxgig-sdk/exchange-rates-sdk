@@ -1,0 +1,57 @@
+# Entity: symbol
+
+main: kit: entity: symbol: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "base"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "count"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "note"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "success"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "symbol"
+      req: true
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "symbol"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/symbols"
+          parts: [
+            "symbols"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

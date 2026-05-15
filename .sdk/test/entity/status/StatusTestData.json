@@ -1,0 +1,34 @@
+{
+  "existing": {
+    "status": {
+      "STATUS00": {
+        "last_update": "s28",
+        "next_update_expected": "s29",
+        "stale": true,
+        "status": "s2b"
+      },
+      "STATUS01": {
+        "last_update": "s50",
+        "next_update_expected": "s51",
+        "stale": true,
+        "status": "s53"
+      },
+      "STATUS02": {
+        "last_update": "s78",
+        "next_update_expected": "s79",
+        "stale": true,
+        "status": "s7b"
+      }
+    }
+  },
+  "new": {
+    "status": {
+      "status_ref01": {
+        "last_update": "sa0",
+        "next_update_expected": "sa1",
+        "stale": true,
+        "status": "sa3"
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+# Entity: status
+
+main: kit: entity: status: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "last_update"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "next_update_expected"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "stale"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "status"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "status"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/status"
+          parts: [
+            "status"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

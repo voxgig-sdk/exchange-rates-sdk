@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "latest": {
+      "LATEST00": {
+        "base": "s32",
+        "date": "s33",
+        "rate": {},
+        "success": false,
+        "timestamp": "s36"
+      },
+      "LATEST01": {
+        "base": "s64",
+        "date": "s65",
+        "rate": {},
+        "success": false,
+        "timestamp": "s68"
+      },
+      "LATEST02": {
+        "base": "s96",
+        "date": "s97",
+        "rate": {},
+        "success": false,
+        "timestamp": "s9a"
+      }
+    }
+  },
+  "new": {
+    "latest": {
+      "latest_ref01": {
+        "base": "sc8",
+        "date": "sc9",
+        "rate": {},
+        "success": false,
+        "timestamp": "scc"
+      }
+    }
+  }
+}

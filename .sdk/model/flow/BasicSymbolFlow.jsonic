@@ -1,0 +1,28 @@
+# BasicSymbolFlow
+
+main: kit: flow: BasicSymbolFlow:
+{
+  entity: "symbol",
+  kind: "basic",
+  name: "BasicSymbolFlow",
+  step: [
+    {
+      input: {
+        ref: "symbol_ref01",
+        srcdatavar: "symbol_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-symbol_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSymbolFlow"
+}

@@ -1,0 +1,26 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://www.exchangeratesapi.com.au"
+      }
+      description: "Official Reserve Bank of Australia (RBA) exchange rate data through a modern REST API. Transforms publicly available RBA data into clean JSON endpoints for Australian businesses and developers who need reliable AUD exchange rates."
+      license: {
+        name: "MIT"
+      }
+      servers: [
+        {
+          description: "Production API"
+          url: "https://api.exchangeratesapi.com.au"
+        }
+      ]
+      title: "RBA Exchange Rates API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

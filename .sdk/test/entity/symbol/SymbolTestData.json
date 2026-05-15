@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "symbol": {
+      "SYMBOL00": {
+        "base": "s32",
+        "count": "s33",
+        "note": "s34",
+        "success": false,
+        "symbol": {}
+      },
+      "SYMBOL01": {
+        "base": "s64",
+        "count": "s65",
+        "note": "s66",
+        "success": false,
+        "symbol": {}
+      },
+      "SYMBOL02": {
+        "base": "s96",
+        "count": "s97",
+        "note": "s98",
+        "success": false,
+        "symbol": {}
+      }
+    }
+  },
+  "new": {
+    "symbol": {
+      "symbol_ref01": {
+        "base": "sc8",
+        "count": "sc9",
+        "note": "sca",
+        "success": false,
+        "symbol": {}
+      }
+    }
+  }
+}

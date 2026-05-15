@@ -1,0 +1,42 @@
+{
+  "existing": {
+    "convert": {
+      "CONVERT00": {
+        "date": "s3c",
+        "free": false,
+        "info": {},
+        "query": {},
+        "result": 64,
+        "success": false
+      },
+      "CONVERT01": {
+        "date": "s78",
+        "free": false,
+        "info": {},
+        "query": {},
+        "result": 124,
+        "success": false
+      },
+      "CONVERT02": {
+        "date": "sb4",
+        "free": false,
+        "info": {},
+        "query": {},
+        "result": 184,
+        "success": false
+      }
+    }
+  },
+  "new": {
+    "convert": {
+      "convert_ref01": {
+        "date": "sf0",
+        "free": false,
+        "info": {},
+        "query": {},
+        "result": 244,
+        "success": false
+      }
+    }
+  }
+}

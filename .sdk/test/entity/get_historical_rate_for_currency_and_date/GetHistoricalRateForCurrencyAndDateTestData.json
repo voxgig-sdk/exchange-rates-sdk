@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "get_historical_rate_for_currency_and_date": {
+      "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE00": {
+        "base": "s32",
+        "date": "s33",
+        "rate": {},
+        "success": false,
+        "timestamp": "s36",
+        "currency": "CURRENCY01"
+      },
+      "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE01": {
+        "base": "s64",
+        "date": "s65",
+        "rate": {},
+        "success": false,
+        "timestamp": "s68",
+        "currency": "CURRENCY01"
+      },
+      "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE02": {
+        "base": "s96",
+        "date": "s97",
+        "rate": {},
+        "success": false,
+        "timestamp": "s9a",
+        "currency": "CURRENCY01"
+      }
+    }
+  },
+  "new": {
+    "get_historical_rate_for_currency_and_date": {
+      "get_historical_rate_for_currency_and_date_ref01": {
+        "base": "sc8",
+        "date": "sc9",
+        "rate": {},
+        "success": false,
+        "timestamp": "scc"
+      }
+    }
+  }
+}

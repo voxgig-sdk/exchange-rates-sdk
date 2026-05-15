@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "get_historical_rates_for_date": {
+      "GET_HISTORICAL_RATES_FOR_DATE00": {
+        "base": "s32",
+        "date": "s33",
+        "rate": {},
+        "success": false,
+        "timestamp": "s36"
+      },
+      "GET_HISTORICAL_RATES_FOR_DATE01": {
+        "base": "s64",
+        "date": "s65",
+        "rate": {},
+        "success": false,
+        "timestamp": "s68"
+      },
+      "GET_HISTORICAL_RATES_FOR_DATE02": {
+        "base": "s96",
+        "date": "s97",
+        "rate": {},
+        "success": false,
+        "timestamp": "s9a"
+      }
+    }
+  },
+  "new": {
+    "get_historical_rates_for_date": {
+      "get_historical_rates_for_date_ref01": {
+        "base": "sc8",
+        "date": "sc9",
+        "rate": {},
+        "success": false,
+        "timestamp": "scc"
+      }
+    }
+  }
+}

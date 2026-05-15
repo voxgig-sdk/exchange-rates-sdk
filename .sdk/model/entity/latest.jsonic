@@ -1,0 +1,117 @@
+# Entity: latest
+
+main: kit: entity: latest: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "base"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "date"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "rate"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "success"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "timestamp"
+      req: true
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "latest"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: "AUD"
+                kind: "query"
+                name: "base"
+                orig: "base"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "USD,EUR,GBP"
+                kind: "query"
+                name: "symbol"
+                orig: "symbol"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/latest"
+          parts: [
+            "latest"
+          ]
+          select: {
+            exist: [
+              "base"
+              "symbol"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                example: "USD"
+                kind: "param"
+                name: "id"
+                orig: "currency"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/latest/{currency}"
+          parts: [
+            "latest"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              currency: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

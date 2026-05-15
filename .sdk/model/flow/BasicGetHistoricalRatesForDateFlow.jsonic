@@ -1,0 +1,32 @@
+# BasicGetHistoricalRatesForDateFlow
+
+main: kit: flow: BasicGetHistoricalRatesForDateFlow:
+{
+  entity: "get_historical_rates_for_date",
+  kind: "basic",
+  name: "BasicGetHistoricalRatesForDateFlow",
+  step: [
+    {
+      input: {
+        ref: "get_historical_rates_for_date_ref01",
+        srcdatavar: "get_historical_rates_for_date_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "get_historical_rates_for_date01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-get_historical_rates_for_date_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicGetHistoricalRatesForDateFlow"
+}

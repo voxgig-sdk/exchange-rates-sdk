@@ -1,0 +1,63 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 8
+  metrics: count: path: 9
+  metrics: count: method: 9
+
+  entity: convert: {
+    path: "/convert": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: get_api_root: {
+    path: "/": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: get_historical_rate_for_currency_and_date: {
+    path: "/{date}/{currency}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: get_historical_rates_for_date: {
+    path: "/{date}": {
+      rename: param: "date": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: latest: {
+    path: "/latest": {
+      op: load: method: *GET
+    }
+    path: "/latest/{currency}": {
+      rename: param: "currency": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: status: {
+    path: "/status": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.status`")|top
+    }
+  }
+
+  entity: symbol: {
+    path: "/symbols": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: timeseries: {
+    path: "/timeseries": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.timeseries`")|top
+    }
+  }
+
+}
