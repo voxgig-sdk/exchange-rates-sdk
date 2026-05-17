@@ -7,7 +7,8 @@
         "info": {},
         "query": {},
         "result": 64,
-        "success": false
+        "success": false,
+        "id": "CONVERT00"
       },
       "CONVERT01": {
         "date": "s78",
@@ -15,7 +16,8 @@
         "info": {},
         "query": {},
         "result": 124,
-        "success": false
+        "success": false,
+        "id": "CONVERT01"
       },
       "CONVERT02": {
         "date": "sb4",
@@ -23,7 +25,8 @@
         "info": {},
         "query": {},
         "result": 184,
-        "success": false
+        "success": false,
+        "id": "CONVERT02"
       }
     }
   },

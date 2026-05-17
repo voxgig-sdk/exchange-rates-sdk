@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/exchange-rates-sdk/core"
+	"github.com/voxgig-sdk/exchange-rates-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/exchange-rates-sdk/go/utility/struct"
 )
 
 type StatusEntity struct {

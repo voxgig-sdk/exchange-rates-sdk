@@ -6,21 +6,24 @@
         "count": "s33",
         "note": "s34",
         "success": false,
-        "symbol": {}
+        "symbol": {},
+        "id": "SYMBOL00"
       },
       "SYMBOL01": {
         "base": "s64",
         "count": "s65",
         "note": "s66",
         "success": false,
-        "symbol": {}
+        "symbol": {},
+        "id": "SYMBOL01"
       },
       "SYMBOL02": {
         "base": "s96",
         "count": "s97",
         "note": "s98",
         "success": false,
-        "symbol": {}
+        "symbol": {},
+        "id": "SYMBOL02"
       }
     }
   },

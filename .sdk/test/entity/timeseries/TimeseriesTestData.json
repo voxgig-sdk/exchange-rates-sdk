@@ -7,7 +7,8 @@
         "rate": {},
         "start_date": "s3f",
         "success": true,
-        "timeseries": false
+        "timeseries": false,
+        "id": "TIMESERIES00"
       },
       "TIMESERIES01": {
         "base": "s78",
@@ -15,7 +16,8 @@
         "rate": {},
         "start_date": "s7b",
         "success": true,
-        "timeseries": false
+        "timeseries": false,
+        "id": "TIMESERIES01"
       },
       "TIMESERIES02": {
         "base": "sb4",
@@ -23,7 +25,8 @@
         "rate": {},
         "start_date": "sb7",
         "success": true,
-        "timeseries": false
+        "timeseries": false,
+        "id": "TIMESERIES02"
       }
     }
   },

@@ -5,19 +5,22 @@
         "last_update": "s28",
         "next_update_expected": "s29",
         "stale": true,
-        "status": "s2b"
+        "status": "s2b",
+        "id": "STATUS00"
       },
       "STATUS01": {
         "last_update": "s50",
         "next_update_expected": "s51",
         "stale": true,
-        "status": "s53"
+        "status": "s53",
+        "id": "STATUS01"
       },
       "STATUS02": {
         "last_update": "s78",
         "next_update_expected": "s79",
         "stale": true,
-        "status": "s7b"
+        "status": "s7b",
+        "id": "STATUS02"
       }
     }
   },

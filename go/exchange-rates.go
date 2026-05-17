@@ -1,10 +1,10 @@
 package voxgigexchangeratessdk
 
 import (
-	"github.com/voxgig-sdk/exchange-rates-sdk/core"
-	"github.com/voxgig-sdk/exchange-rates-sdk/entity"
-	"github.com/voxgig-sdk/exchange-rates-sdk/feature"
-	_ "github.com/voxgig-sdk/exchange-rates-sdk/utility"
+	"github.com/voxgig-sdk/exchange-rates-sdk/go/core"
+	"github.com/voxgig-sdk/exchange-rates-sdk/go/entity"
+	"github.com/voxgig-sdk/exchange-rates-sdk/go/feature"
+	_ "github.com/voxgig-sdk/exchange-rates-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

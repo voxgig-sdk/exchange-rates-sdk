@@ -5,19 +5,22 @@
         "documentation": "s28",
         "message": "s29",
         "success": true,
-        "version": "s2b"
+        "version": "s2b",
+        "id": "GET_API_ROOT00"
       },
       "GET_API_ROOT01": {
         "documentation": "s50",
         "message": "s51",
         "success": true,
-        "version": "s53"
+        "version": "s53",
+        "id": "GET_API_ROOT01"
       },
       "GET_API_ROOT02": {
         "documentation": "s78",
         "message": "s79",
         "success": true,
-        "version": "s7b"
+        "version": "s7b",
+        "id": "GET_API_ROOT02"
       }
     }
   },

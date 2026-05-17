@@ -7,7 +7,8 @@
         "rate": {},
         "success": false,
         "timestamp": "s36",
-        "currency": "CURRENCY01"
+        "currency": "CURRENCY01",
+        "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE00"
       },
       "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE01": {
         "base": "s64",
@@ -15,7 +16,8 @@
         "rate": {},
         "success": false,
         "timestamp": "s68",
-        "currency": "CURRENCY01"
+        "currency": "CURRENCY01",
+        "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE01"
       },
       "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE02": {
         "base": "s96",
@@ -23,7 +25,8 @@
         "rate": {},
         "success": false,
         "timestamp": "s9a",
-        "currency": "CURRENCY01"
+        "currency": "CURRENCY01",
+        "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE02"
       }
     }
   },

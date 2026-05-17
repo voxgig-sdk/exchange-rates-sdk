@@ -6,21 +6,24 @@
         "date": "s33",
         "rate": {},
         "success": false,
-        "timestamp": "s36"
+        "timestamp": "s36",
+        "id": "LATEST00"
       },
       "LATEST01": {
         "base": "s64",
         "date": "s65",
         "rate": {},
         "success": false,
-        "timestamp": "s68"
+        "timestamp": "s68",
+        "id": "LATEST01"
       },
       "LATEST02": {
         "base": "s96",
         "date": "s97",
         "rate": {},
         "success": false,
-        "timestamp": "s9a"
+        "timestamp": "s9a",
+        "id": "LATEST02"
       }
     }
   },
