@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://api.exchangeratesapi.com.au',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },

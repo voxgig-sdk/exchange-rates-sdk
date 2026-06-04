@@ -80,14 +80,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'EXCHANGERATES_TEST_CONVERT_ENTID': {},
     'EXCHANGERATES_TEST_LIVE': 'FALSE',
-    'EXCHANGERATES_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.EXCHANGERATES_TEST_LIVE
 
   if (live) {
     const client = new ExchangeRatesSDK({
-      apikey: env.EXCHANGERATES_APIKEY,
     })
 
     let idmap: any = env['EXCHANGERATES_TEST_CONVERT_ENTID']

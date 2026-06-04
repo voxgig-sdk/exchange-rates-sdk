@@ -91,7 +91,6 @@ def _symbol_basic_setup(extra):
         "EXCHANGERATES_TEST_SYMBOL_ENTID": idmap,
         "EXCHANGERATES_TEST_LIVE": "FALSE",
         "EXCHANGERATES_TEST_EXPLAIN": "FALSE",
-        "EXCHANGERATES_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +101,6 @@ def _symbol_basic_setup(extra):
     if env.get("EXCHANGERATES_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("EXCHANGERATES_APIKEY"),
             },
             extra or {},
         ])

@@ -91,7 +91,6 @@ function get_historical_rates_for_date_basic_setup(extra)
     ["EXCHANGERATES_TEST_GET_HISTORICAL_RATES_FOR_DATE_ENTID"] = idmap,
     ["EXCHANGERATES_TEST_LIVE"] = "FALSE",
     ["EXCHANGERATES_TEST_EXPLAIN"] = "FALSE",
-    ["EXCHANGERATES_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -103,7 +102,6 @@ function get_historical_rates_for_date_basic_setup(extra)
   if env["EXCHANGERATES_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["EXCHANGERATES_APIKEY"],
       },
       extra or {},
     })

@@ -117,7 +117,6 @@ func timeseriesBasicSetup(extra map[string]any) *entityTestSetup {
 		"EXCHANGERATES_TEST_TIMESERIES_ENTID": idmap,
 		"EXCHANGERATES_TEST_LIVE":      "FALSE",
 		"EXCHANGERATES_TEST_EXPLAIN":   "FALSE",
-		"EXCHANGERATES_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["EXCHANGERATES_TEST_TIMESERIES_ENTID"])
@@ -128,7 +127,6 @@ func timeseriesBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["EXCHANGERATES_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["EXCHANGERATES_APIKEY"],
 			},
 			extra,
 		})

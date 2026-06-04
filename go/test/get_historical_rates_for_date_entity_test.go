@@ -117,7 +117,6 @@ func get_historical_rates_for_dateBasicSetup(extra map[string]any) *entityTestSe
 		"EXCHANGERATES_TEST_GET_HISTORICAL_RATES_FOR_DATE_ENTID": idmap,
 		"EXCHANGERATES_TEST_LIVE":      "FALSE",
 		"EXCHANGERATES_TEST_EXPLAIN":   "FALSE",
-		"EXCHANGERATES_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["EXCHANGERATES_TEST_GET_HISTORICAL_RATES_FOR_DATE_ENTID"])
@@ -128,7 +127,6 @@ func get_historical_rates_for_dateBasicSetup(extra map[string]any) *entityTestSe
 	if env["EXCHANGERATES_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["EXCHANGERATES_APIKEY"],
 			},
 			extra,
 		})

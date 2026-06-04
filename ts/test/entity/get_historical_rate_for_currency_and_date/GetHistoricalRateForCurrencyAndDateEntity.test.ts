@@ -111,7 +111,6 @@ function basicSetup(extra?: any) {
     'EXCHANGE_RATES_TEST_GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE_ENTID': idmap,
     'EXCHANGE_RATES_TEST_LIVE': 'FALSE',
     'EXCHANGE_RATES_TEST_EXPLAIN': 'FALSE',
-    'EXCHANGE_RATES_APIKEY': 'NONE',
   })
 
   idmap = env['EXCHANGE_RATES_TEST_GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE_ENTID']
@@ -121,7 +120,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new ExchangeRatesSDK(merge([
       {
-        apikey: env.EXCHANGE_RATES_APIKEY,
       },
       extra
     ]))

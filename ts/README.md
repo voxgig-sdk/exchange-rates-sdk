@@ -17,9 +17,7 @@ loading a specific record.
 ```ts
 import { ExchangeRatesSDK } from 'exchange-rates'
 
-const client = new ExchangeRatesSDK({
-  apikey: process.env.EXCHANGE-RATES_APIKEY,
-})
+const client = new ExchangeRatesSDK({})
 ```
 
 ### 3. Load a convert
@@ -82,7 +80,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new ExchangeRatesSDK({ apikey: '...' })
+const client = new ExchangeRatesSDK()
 const testClient = client.tester()
 ```
 
@@ -118,7 +116,6 @@ const logger = {
 }
 
 const client = new ExchangeRatesSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -129,7 +126,6 @@ Create a `.env.local` file at the project root:
 
 ```
 EXCHANGE-RATES_TEST_LIVE=TRUE
-EXCHANGE-RATES_APIKEY=<your-key>
 ```
 
 Then run:
@@ -147,7 +143,6 @@ cd ts && npm test
 
 ```ts
 new ExchangeRatesSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -158,7 +153,6 @@ new ExchangeRatesSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
