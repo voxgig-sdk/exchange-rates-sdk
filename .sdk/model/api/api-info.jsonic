@@ -19,36 +19,7 @@ main: {
       ]
       title: "RBA Exchange Rates API"
       version: "1.0.0"
-      tagline: "Official Reserve Bank of Australia exchange rates as clean JSON, with AUD as the base currency"
-      homepage: "https://api.exchangeratesapi.com.au"
-      docs_url: "https://docs.exchangeratesapi.com.au"
-      license_short: "MIT (SDK). Underlying RBA exchange rate data is publicly available; the service is not affiliated with or endorsed by the RBA."
-      license_md: `- This SDK is distributed under the MIT licence.
-- Exchange rate data originates from the Reserve Bank of Australia (RBA), which publishes the underlying figures publicly.
-- The API operator states they are not affiliated with or endorsed by the RBA.
-- Check the upstream service terms at https://api.exchangeratesapi.com.au before redistributing data.`
-      about_md: `The [RBA Exchange Rates API](https://api.exchangeratesapi.com.au) is a developer-friendly REST service that republishes official [Reserve Bank of Australia](https://www.rba.gov.au/) exchange rate data as clean JSON. Rates are quoted against AUD as the base currency and refreshed daily from RBA sources.
-
-What you get from the API:
-
-- Latest AUD exchange rates against 24+ currencies (USD, EUR, GBP, JPY, CHF, CAD, CNY, KRW, SGD, NZD, HKD, TWD, INR, THB, MYR, IDR, VND, PHP, and more).
-- Historical rates for a specific date, or for a single currency on a given date.
-- Time series queries across a date range.
-- A currency conversion endpoint and a list of supported symbols.
-- A service status / health endpoint.
-
-Operational notes: requests are authenticated with a bearer token (\`Authorization: Bearer <api_key>\`). The published free tier allows 300 requests per month with no credit card required. Responses follow a standard shape with \`success\`, \`timestamp\`, \`base\` (\`AUD\`), \`date\`, and a \`rates\` object. The operator is independent of the RBA.`
-      entity_desc: {
-        convert: "Convert an amount from one currency to another using current or historical RBA rates."
-        get_api_root: "Root endpoint returning service metadata at `/`."
-        get_historical_rate_for_currency_and_date: "Fetch the AUD exchange rate for a single currency on a specific past date."
-        get_historical_rates_for_date: "Fetch all AUD exchange rates for a specific past date."
-        latest: "Latest AUD exchange rates against supported currencies via `/latest`."
-        status: "Service health and status indicator."
-        symbol: "Lookup or list of supported currency symbols via `/symbols`."
-        timeseries: "Exchange rate time series for a range of dates against AUD."
-      }
-      auth: false
     }
   }
 }
+

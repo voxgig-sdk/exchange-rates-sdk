@@ -67,12 +67,14 @@ function status_direct_setup($mockres)
     $env = Runner::env_override([
         "EXCHANGERATES_TEST_STATUS_ENTID" => [],
         "EXCHANGERATES_TEST_LIVE" => "FALSE",
+        "EXCHANGERATES_APIKEY" => "NONE",
     ]);
 
     $live = $env["EXCHANGERATES_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["EXCHANGERATES_APIKEY"],
         ];
         $client = new ExchangeRatesSDK($merged_opts);
         return [

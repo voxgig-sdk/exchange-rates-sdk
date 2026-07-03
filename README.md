@@ -1,22 +1,8 @@
 # ExchangeRates SDK
 
-Official Reserve Bank of Australia exchange rates as clean JSON, with AUD as the base currency
+RBA Exchange Rates API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About RBA Exchange Rates API
-
-The [RBA Exchange Rates API](https://api.exchangeratesapi.com.au) is a developer-friendly REST service that republishes official [Reserve Bank of Australia](https://www.rba.gov.au/) exchange rate data as clean JSON. Rates are quoted against AUD as the base currency and refreshed daily from RBA sources.
-
-What you get from the API:
-
-- Latest AUD exchange rates against 24+ currencies (USD, EUR, GBP, JPY, CHF, CAD, CNY, KRW, SGD, NZD, HKD, TWD, INR, THB, MYR, IDR, VND, PHP, and more).
-- Historical rates for a specific date, or for a single currency on a given date.
-- Time series queries across a date range.
-- A currency conversion endpoint and a list of supported symbols.
-- A service status / health endpoint.
-
-Operational notes: requests are authenticated with a bearer token (`Authorization: Bearer <api_key>`). The published free tier allows 300 requests per month with no credit card required. Responses follow a standard shape with `success`, `timestamp`, `base` (`AUD`), `date`, and a `rates` object. The operator is independent of the RBA.
 
 ## Try it
 
@@ -50,27 +36,31 @@ gem install exchange-rates-sdk
 luarocks install exchange-rates-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { ExchangeRatesSDK } from 'exchange-rates'
 
-const client = new ExchangeRatesSDK({})
+const client = new ExchangeRatesSDK({
+  apikey: process.env.EXCHANGE-RATES_APIKEY,
+})
 
+// Load convert data
+const convert = await client.Convert().load({})
+console.log(convert.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -100,14 +90,14 @@ The API exposes 8 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Convert** | Convert an amount from one currency to another using current or historical RBA rates. | `/convert` |
-| **GetApiRoot** | Root endpoint returning service metadata at `/`. | `/` |
-| **GetHistoricalRateForCurrencyAndDate** | Fetch the AUD exchange rate for a single currency on a specific past date. | `/{date}/{currency}` |
-| **GetHistoricalRatesForDate** | Fetch all AUD exchange rates for a specific past date. | `/{date}` |
-| **Latest** | Latest AUD exchange rates against supported currencies via `/latest`. | `/latest` |
-| **Status** | Service health and status indicator. | `/status` |
-| **Symbol** | Lookup or list of supported currency symbols via `/symbols`. | `/symbols` |
-| **Timeseries** | Exchange rate time series for a range of dates against AUD. | `/timeseries` |
+| **Convert** |  | `/convert` |
+| **GetApiRoot** |  | `/` |
+| **GetHistoricalRateForCurrencyAndDate** |  | `/{date}/{currency}` |
+| **GetHistoricalRatesForDate** |  | `/{date}` |
+| **Latest** |  | `/latest` |
+| **Status** |  | `/status` |
+| **Symbol** |  | `/symbols` |
+| **Timeseries** |  | `/timeseries` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -117,15 +107,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from exchangerates_sdk import ExchangeRatesSDK
 
-client = ExchangeRatesSDK({})
+client = ExchangeRatesSDK({
+    "apikey": os.environ.get("EXCHANGE-RATES_APIKEY"),
+})
 
 
 # Load a specific convert
-convert, err = client.Convert(None).load(
-    {"id": "example_id"}, None
-)
+convert, err = client.Convert().load({"id": "example_id"})
+print(convert)
 ```
 
 ### PHP
@@ -134,13 +126,14 @@ convert, err = client.Convert(None).load(
 <?php
 require_once 'exchangerates_sdk.php';
 
-$client = new ExchangeRatesSDK([]);
+$client = new ExchangeRatesSDK([
+    "apikey" => getenv("EXCHANGE-RATES_APIKEY"),
+]);
 
 
 // Load a specific convert
-[$convert, $err] = $client->Convert(null)->load(
-    ["id" => "example_id"], null
-);
+[$convert, $err] = $client->Convert()->load(["id" => "example_id"]);
+print_r($convert);
 ```
 
 ### Golang
@@ -148,8 +141,13 @@ $client = new ExchangeRatesSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/exchange-rates-sdk/go"
 
-client := sdk.NewExchangeRatesSDK(map[string]any{})
+client := sdk.NewExchangeRatesSDK(map[string]any{
+    "apikey": os.Getenv("EXCHANGE-RATES_APIKEY"),
+})
 
+// Load convert data
+convert, err := client.Convert(nil).Load(map[string]any{}, nil)
+fmt.Println(convert)
 ```
 
 ### Ruby
@@ -157,13 +155,14 @@ client := sdk.NewExchangeRatesSDK(map[string]any{})
 ```ruby
 require_relative "ExchangeRates_sdk"
 
-client = ExchangeRatesSDK.new({})
+client = ExchangeRatesSDK.new({
+  "apikey" => ENV["EXCHANGE-RATES_APIKEY"],
+})
 
 
 # Load a specific convert
-convert, err = client.Convert(nil).load(
-  { "id" => "example_id" }, nil
-)
+convert, err = client.Convert().load({ "id" => "example_id" })
+puts convert
 ```
 
 ### Lua
@@ -171,13 +170,14 @@ convert, err = client.Convert(nil).load(
 ```lua
 local sdk = require("exchange-rates_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("EXCHANGE-RATES_APIKEY"),
+})
 
 
 -- Load a specific convert
-local convert, err = client:Convert(nil):load(
-  { id = "example_id" }, nil
-)
+local convert, err = client:Convert():load({ id = "example_id" })
+print(convert)
 ```
 
 ## Unit testing in offline mode
@@ -196,25 +196,21 @@ const result = await client.Convert().load({ id: 'test01' })
 ### Python
 
 ```python
-client = ExchangeRatesSDK.test(None, None)
-result, err = client.Convert(None).load(
-    {"id": "test01"}, None
-)
+client = ExchangeRatesSDK.test()
+result, err = client.Convert().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = ExchangeRatesSDK::test(null, null);
-[$result, $err] = $client->Convert(null)->load(
-    ["id" => "test01"], null
-);
+$client = ExchangeRatesSDK::test();
+[$result, $err] = $client->Convert()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Convert(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -223,19 +219,15 @@ result, err := client.Convert(nil).Load(
 ### Ruby
 
 ```ruby
-client = ExchangeRatesSDK.test(nil, nil)
-result, err = client.Convert(nil).load(
-  { "id" => "test01" }, nil
-)
+client = ExchangeRatesSDK.test
+result, err = client.Convert().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Convert(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Convert():load({ id = "test01" })
 ```
 
 ## How it works
@@ -339,16 +331,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the RBA Exchange Rates API
-
-- Upstream: [https://api.exchangeratesapi.com.au](https://api.exchangeratesapi.com.au)
-- API docs: [https://docs.exchangeratesapi.com.au](https://docs.exchangeratesapi.com.au)
-
-- This SDK is distributed under the MIT licence.
-- Exchange rate data originates from the Reserve Bank of Australia (RBA), which publishes the underlying figures publicly.
-- The API operator states they are not affiliated with or endorsed by the RBA.
-- Check the upstream service terms at https://api.exchangeratesapi.com.au before redistributing data.
 
 ---
 

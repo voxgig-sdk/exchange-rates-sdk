@@ -115,12 +115,14 @@ func get_historical_rate_for_currency_and_dateDirectSetup(mockres any) *get_hist
 	env := envOverride(map[string]any{
 		"EXCHANGERATES_TEST_GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE_ENTID": map[string]any{},
 		"EXCHANGERATES_TEST_LIVE":    "FALSE",
+		"EXCHANGERATES_APIKEY":       "NONE",
 	})
 
 	live := env["EXCHANGERATES_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["EXCHANGERATES_APIKEY"],
 		}
 		client := sdk.NewExchangeRatesSDK(mergedOpts)
 

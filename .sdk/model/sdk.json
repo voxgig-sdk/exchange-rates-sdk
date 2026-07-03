@@ -1,49 +1,13 @@
 {
-  "name": "exchange-rates",
-  "origin": "voxgig-sdk",
   "def": "exchange-rates_0.1.0.json",
   "main": {
+    "def": {
+      "desc": ""
+    },
     "kit": {
-      "info": {
-        "contact": {
-          "url": "https://www.exchangeratesapi.com.au"
-        },
-        "description": "Official Reserve Bank of Australia (RBA) exchange rate data through a modern REST API. Transforms publicly available RBA data into clean JSON endpoints for Australian businesses and developers who need reliable AUD exchange rates.",
-        "license": {
-          "name": "MIT"
-        },
-        "servers": [
-          {
-            "description": "Production API",
-            "url": "https://api.exchangeratesapi.com.au"
-          }
-        ],
-        "title": "RBA Exchange Rates API",
-        "version": "1.0.0",
-        "tagline": "Official Reserve Bank of Australia exchange rates as clean JSON, with AUD as the base currency",
-        "homepage": "https://api.exchangeratesapi.com.au",
-        "docs_url": "https://docs.exchangeratesapi.com.au",
-        "license_short": "MIT (SDK). Underlying RBA exchange rate data is publicly available; the service is not affiliated with or endorsed by the RBA.",
-        "license_md": "- This SDK is distributed under the MIT licence.\n- Exchange rate data originates from the Reserve Bank of Australia (RBA), which publishes the underlying figures publicly.\n- The API operator states they are not affiliated with or endorsed by the RBA.\n- Check the upstream service terms at https://api.exchangeratesapi.com.au before redistributing data.",
-        "about_md": "The [RBA Exchange Rates API](https://api.exchangeratesapi.com.au) is a developer-friendly REST service that republishes official [Reserve Bank of Australia](https://www.rba.gov.au/) exchange rate data as clean JSON. Rates are quoted against AUD as the base currency and refreshed daily from RBA sources.\n\nWhat you get from the API:\n\n- Latest AUD exchange rates against 24+ currencies (USD, EUR, GBP, JPY, CHF, CAD, CNY, KRW, SGD, NZD, HKD, TWD, INR, THB, MYR, IDR, VND, PHP, and more).\n- Historical rates for a specific date, or for a single currency on a given date.\n- Time series queries across a date range.\n- A currency conversion endpoint and a list of supported symbols.\n- A service status / health endpoint.\n\nOperational notes: requests are authenticated with a bearer token (`Authorization: Bearer <api_key>`). The published free tier allows 300 requests per month with no credit card required. Responses follow a standard shape with `success`, `timestamp`, `base` (`AUD`), `date`, and a `rates` object. The operator is independent of the RBA.",
-        "entity_desc": {
-          "convert": "Convert an amount from one currency to another using current or historical RBA rates.",
-          "get_api_root": "Root endpoint returning service metadata at `/`.",
-          "get_historical_rate_for_currency_and_date": "Fetch the AUD exchange rate for a single currency on a specific past date.",
-          "get_historical_rates_for_date": "Fetch all AUD exchange rates for a specific past date.",
-          "latest": "Latest AUD exchange rates against supported currencies via `/latest`.",
-          "status": "Service health and status indicator.",
-          "symbol": "Lookup or list of supported currency symbols via `/symbols`.",
-          "timeseries": "Exchange rate time series for a range of dates against AUD."
-        },
-        "auth": false
-      },
       "config": {
         "auth": {
           "prefix": "Bearer"
-        },
-        "headers": {
-          "content-type": "application/json"
         },
         "docs_order": [
           "ts",
@@ -52,94 +16,100 @@
           "go",
           "rb",
           "lua"
-        ]
+        ],
+        "headers": {
+          "content-type": "application/json"
+        }
       },
       "entity": {
         "convert": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "date",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "free",
               "req": false,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "info",
               "req": true,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "query",
               "req": true,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "result",
               "req": true,
-              "type": "`$NUMBER`",
-              "active": true
+              "type": "`$NUMBER`"
             },
             {
+              "active": true,
               "name": "success",
               "req": true,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             }
           ],
           "name": "convert",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "example": 100,
                         "kind": "query",
                         "name": "amount",
                         "orig": "amount",
                         "reqd": true,
-                        "type": "`$NUMBER`",
-                        "active": true
+                        "type": "`$NUMBER`"
                       },
                       {
+                        "active": true,
                         "example": "2025-08-31",
                         "kind": "query",
                         "name": "date",
                         "orig": "date",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": "AUD",
                         "kind": "query",
                         "name": "from",
                         "orig": "from",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": "USD",
                         "kind": "query",
                         "name": "to",
                         "orig": "to",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -159,135 +129,135 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "get_api_root": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "documentation",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "message",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "success",
               "req": true,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "version",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "get_api_root",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
+                  "args": {},
                   "method": "GET",
                   "orig": "/",
+                  "parts": [],
+                  "select": {},
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true,
-                  "parts": [],
-                  "args": {},
-                  "select": {}
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "get_historical_rate_for_currency_and_date": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "base",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "date",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "rate",
               "req": true,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "success",
               "req": true,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "timestamp",
               "req": true,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             }
           ],
           "name": "get_historical_rate_for_currency_and_date",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "USD",
                         "kind": "param",
                         "name": "currency",
                         "orig": "currency",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": "2025-08-31",
                         "kind": "param",
                         "name": "date",
                         "orig": "date",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -306,70 +276,70 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "get_historical_rates_for_date": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "base",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "date",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "rate",
               "req": true,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "success",
               "req": true,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "timestamp",
               "req": true,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             }
           ],
           "name": "get_historical_rates_for_date",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "2025-08-31",
                         "kind": "param",
                         "name": "id",
                         "orig": "date",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -391,79 +361,79 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "latest": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "base",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "date",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "rate",
               "req": true,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "success",
               "req": true,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "timestamp",
               "req": true,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             }
           ],
           "name": "latest",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "example": "AUD",
                         "kind": "query",
                         "name": "base",
                         "orig": "base",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": "USD,EUR,GBP",
                         "kind": "query",
                         "name": "symbol",
                         "orig": "symbol",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -481,20 +451,20 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 },
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "example": "USD",
                         "kind": "param",
                         "name": "id",
                         "orig": "currency",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -517,225 +487,225 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "status": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "last_update",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "next_update_expected",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "stale",
               "req": true,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "status",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             }
           ],
           "name": "status",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
+                  "args": {},
                   "method": "GET",
                   "orig": "/status",
                   "parts": [
                     "status"
                   ],
+                  "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true,
-                  "args": {},
-                  "select": {}
+                    "res": "`body.status`"
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "symbol": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "base",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "count",
               "req": true,
-              "type": "`$INTEGER`",
-              "active": true
+              "type": "`$INTEGER`"
             },
             {
+              "active": true,
               "name": "note",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "success",
               "req": true,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "symbol",
               "req": true,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             }
           ],
           "name": "symbol",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
+                  "args": {},
                   "method": "GET",
                   "orig": "/symbols",
                   "parts": [
                     "symbols"
                   ],
+                  "select": {},
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true,
-                  "args": {},
-                  "select": {}
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "timeseries": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "base",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "end_date",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "rate",
               "req": true,
-              "type": "`$OBJECT`",
-              "active": true
+              "type": "`$OBJECT`"
             },
             {
+              "active": true,
               "name": "start_date",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "success",
               "req": true,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "timeseries",
               "req": true,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             }
           ],
           "name": "timeseries",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "example": "AUD",
                         "kind": "query",
                         "name": "base",
                         "orig": "base",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": "2025-08-31",
                         "kind": "query",
                         "name": "end_date",
                         "orig": "end_date",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": "2025-08-01",
                         "kind": "query",
                         "name": "start_date",
                         "orig": "start_date",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": "USD,EUR,GBP",
                         "kind": "query",
                         "name": "symbol",
                         "orig": "symbol",
                         "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -754,15 +724,12 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true
+                    "res": "`body.timeseries`"
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
@@ -770,9 +737,6 @@
       },
       "feature": {
         "test": {
-          "name": "test",
-          "title": "In-memory mock transport for testing without a live server",
-          "version": "0.0.1",
           "active": true,
           "config": {
             "options": {
@@ -780,6 +744,14 @@
             }
           },
           "hook": {
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
             "PostConstruct": {
               "active": true,
               "await": false
@@ -788,25 +760,11 @@
               "active": true,
               "await": false
             },
-            "SetData": {
-              "active": true,
-              "await": false
-            },
-            "GetData": {
-              "active": true,
-              "await": false
-            },
-            "SetMatch": {
-              "active": true
-            },
-            "GetMatch": {
-              "active": true,
+            "PostOperation": {
+              "active": false,
               "await": false
             },
             "PrePoint": {
-              "active": true
-            },
-            "PreSpec": {
               "active": true,
               "await": false
             },
@@ -822,20 +780,32 @@
               "active": true,
               "await": false
             },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
             "PreTarget": {
               "active": false,
               "await": false
             },
-            "PostOperation": {
-              "active": false,
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true,
               "await": false
             }
           },
+          "name": "test",
           "target": {
-            "ts": {
+            "go": {
               "deps": {}
             },
-            "go": {
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
               "deps": {}
             },
             "lua": {
@@ -850,28 +820,34 @@
             "rb": {
               "deps": {}
             },
-            "go-cli": {
-              "deps": {}
-            },
-            "go-mcp": {
+            "ts": {
               "deps": {}
             }
-          }
+          },
+          "title": "In-memory mock transport for testing without a live server",
+          "version": "0.0.1"
         }
       },
       "flow": {
         "BasicConvertFlow": {
+          "active": true,
           "entity": "convert",
+          "key$": "BasicConvertFlow",
           "kind": "basic",
           "name": "BasicConvertFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "convert_ref01",
                 "srcdatavar": "convert_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -879,29 +855,29 @@
                     "mark": "Mark01-convert_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicConvertFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicGetApiRootFlow": {
+          "active": true,
           "entity": "get_api_root",
+          "key$": "BasicGetApiRootFlow",
           "kind": "basic",
           "name": "BasicGetApiRootFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "get_api_root_ref01",
                 "srcdatavar": "get_api_root_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -909,23 +885,21 @@
                     "mark": "Mark01-get_api_root_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicGetApiRootFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicGetHistoricalRateForCurrencyAndDateFlow": {
+          "active": true,
           "entity": "get_historical_rate_for_currency_and_date",
+          "key$": "BasicGetHistoricalRateForCurrencyAndDateFlow",
           "kind": "basic",
           "name": "BasicGetHistoricalRateForCurrencyAndDateFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "get_historical_rate_for_currency_and_date_ref01",
                 "srcdatavar": "get_historical_rate_for_currency_and_date_ref01_data",
@@ -936,6 +910,7 @@
                 "id": "get_historical_rate_for_currency_and_date01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -943,22 +918,21 @@
                     "mark": "Mark01-get_historical_rate_for_currency_and_date_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicGetHistoricalRateForCurrencyAndDateFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicGetHistoricalRatesForDateFlow": {
+          "active": true,
           "entity": "get_historical_rates_for_date",
+          "key$": "BasicGetHistoricalRatesForDateFlow",
           "kind": "basic",
           "name": "BasicGetHistoricalRatesForDateFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "get_historical_rates_for_date_ref01",
                 "srcdatavar": "get_historical_rates_for_date_ref01_data",
@@ -968,6 +942,7 @@
                 "id": "get_historical_rates_for_date01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -975,22 +950,21 @@
                     "mark": "Mark01-get_historical_rates_for_date_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicGetHistoricalRatesForDateFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicLatestFlow": {
+          "active": true,
           "entity": "latest",
+          "key$": "BasicLatestFlow",
           "kind": "basic",
           "name": "BasicLatestFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "latest_ref01",
                 "srcdatavar": "latest_ref01_data",
@@ -1000,6 +974,7 @@
                 "id": "latest01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1007,28 +982,29 @@
                     "mark": "Mark01-latest_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicLatestFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicStatusFlow": {
+          "active": true,
           "entity": "status",
+          "key$": "BasicStatusFlow",
           "kind": "basic",
           "name": "BasicStatusFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "status_ref01",
                 "srcdatavar": "status_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1036,29 +1012,29 @@
                     "mark": "Mark01-status_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicStatusFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicSymbolFlow": {
+          "active": true,
           "entity": "symbol",
+          "key$": "BasicSymbolFlow",
           "kind": "basic",
           "name": "BasicSymbolFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "symbol_ref01",
                 "srcdatavar": "symbol_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1066,29 +1042,29 @@
                     "mark": "Mark01-symbol_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicSymbolFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicTimeseriesFlow": {
+          "active": true,
           "entity": "timeseries",
+          "key$": "BasicTimeseriesFlow",
           "kind": "basic",
           "name": "BasicTimeseriesFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "timeseries_ref01",
                 "srcdatavar": "timeseries_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -1096,28 +1072,55 @@
                     "mark": "Mark01-timeseries_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicTimeseriesFlow",
-          "active": true,
-          "param": {}
+          ]
         }
       },
+      "info": {
+        "contact": {
+          "url": "https://www.exchangeratesapi.com.au"
+        },
+        "description": "Official Reserve Bank of Australia (RBA) exchange rate data through a modern REST API. Transforms publicly available RBA data into clean JSON endpoints for Australian businesses and developers who need reliable AUD exchange rates.",
+        "license": {
+          "name": "MIT"
+        },
+        "servers": [
+          {
+            "description": "Production API",
+            "url": "https://api.exchangeratesapi.com.au"
+          }
+        ],
+        "title": "RBA Exchange Rates API",
+        "version": "1.0.0"
+      },
+      "option": {},
       "target": {
-        "go-cli": {
-          "title": "Go CLI",
-          "ext": "go",
+        "go": {
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "exchange-rates"
           },
+          "name": "go",
+          "srcfeature": false,
+          "title": "Golang"
+        },
+        "go-cli": {
+          "active": true,
+          "comment": {
+            "line": "//"
+          },
+          "deps": {},
+          "ext": "go",
+          "module": {
+            "name": "exchange-rates"
+          },
+          "name": "go-cli",
           "phase": {
             "entity": {
               "active": false
@@ -1132,19 +1135,19 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-cli",
-          "active": true
+          "title": "Go CLI"
         },
         "go-mcp": {
-          "title": "Go MCP server",
-          "ext": "go",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "exchange-rates"
           },
+          "name": "go-mcp",
           "phase": {
             "entity": {
               "active": false
@@ -1159,138 +1162,120 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-mcp",
-          "active": true
-        },
-        "ts": {
-          "title": "TypeScript",
-          "ext": "ts",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "exchange-rates"
-          },
-          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
-          "deps": {
-            "dotenv": {
-              "active": true,
-              "version": "^17.4.2",
-              "kind": "dev"
-            },
-            "typescript": {
-              "active": true,
-              "version": "^5.9.3",
-              "kind": "dev"
-            },
-            "@types/node": {
-              "active": true,
-              "version": "^25.6.0",
-              "kind": "dev"
-            }
-          },
-          "name": "ts",
-          "active": true
-        },
-        "go": {
-          "title": "Golang",
-          "ext": "go",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "exchange-rates"
-          },
-          "srcfeature": false,
-          "deps": {},
-          "name": "go",
-          "active": true
+          "title": "Go MCP server"
         },
         "lua": {
-          "title": "Lua",
-          "ext": "lua",
+          "active": true,
           "comment": {
             "line": "--"
           },
-          "module": {
-            "name": "exchange-rates"
-          },
-          "srcfeature": false,
           "deps": {
             "dkjson": {
               "active": true,
-              "version": "2.5",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.5"
             }
           },
+          "ext": "lua",
+          "module": {
+            "name": "exchange-rates"
+          },
           "name": "lua",
-          "active": true
+          "srcfeature": false,
+          "title": "Lua"
         },
         "php": {
-          "title": "PHP",
-          "ext": "php",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "php",
           "module": {
             "name": "exchange-rates"
           },
-          "srcfeature": false,
-          "deps": {},
           "name": "php",
-          "active": true
+          "srcfeature": false,
+          "title": "PHP"
         },
         "py": {
-          "title": "Python",
-          "ext": "py",
+          "active": true,
           "comment": {
             "line": "#"
           },
-          "module": {
-            "name": "exchange-rates"
-          },
-          "srcfeature": false,
           "deps": {
             "requests": {
               "active": true,
-              "version": "2.33",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.33"
             }
           },
-          "name": "py",
-          "active": true
-        },
-        "rb": {
-          "title": "Ruby",
-          "ext": "rb",
-          "comment": {
-            "line": "#"
-          },
+          "ext": "py",
           "module": {
             "name": "exchange-rates"
           },
+          "name": "py",
           "srcfeature": false,
+          "title": "Python"
+        },
+        "rb": {
+          "active": true,
+          "comment": {
+            "line": "#"
+          },
           "deps": {
-            "voxgig-struct": {
-              "active": true,
-              "version": "0.0.10",
-              "kind": "prod"
-            },
             "json": {
               "active": true,
-              "version": "0",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "0"
+            },
+            "voxgig-struct": {
+              "active": true,
+              "kind": "prod",
+              "version": "0.0.10"
             }
           },
+          "ext": "rb",
+          "module": {
+            "name": "exchange-rates"
+          },
           "name": "rb",
-          "active": true
+          "srcfeature": false,
+          "title": "Ruby"
+        },
+        "ts": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "comment": {
+            "line": "//"
+          },
+          "deps": {
+            "@types/node": {
+              "active": true,
+              "kind": "dev",
+              "version": "^25.6.0"
+            },
+            "dotenv": {
+              "active": true,
+              "kind": "dev",
+              "version": "^17.4.2"
+            },
+            "typescript": {
+              "active": true,
+              "kind": "dev",
+              "version": "^5.9.3"
+            }
+          },
+          "ext": "ts",
+          "module": {
+            "name": "exchange-rates"
+          },
+          "name": "ts",
+          "title": "TypeScript"
         }
-      },
-      "option": {}
-    },
-    "def": {
-      "desc": ""
+      }
     }
-  }
+  },
+  "name": "exchange-rates",
+  "origin": "voxgig-sdk"
 }

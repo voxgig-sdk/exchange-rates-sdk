@@ -38,6 +38,10 @@ class Config {
   options = {
     base: 'https://api.exchangeratesapi.com.au',
 
+    auth: {
+      prefix: 'Bearer',
+    },
+
     headers: {
       "content-type": "application/json"
     },
@@ -76,91 +80,93 @@ class Config {
     "convert": {
       "fields": [
         {
+          "active": true,
           "name": "date",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 0
         },
         {
+          "active": true,
           "name": "free",
           "req": false,
           "type": "`$BOOLEAN`",
-          "active": true,
           "index$": 1
         },
         {
+          "active": true,
           "name": "info",
           "req": true,
           "type": "`$OBJECT`",
-          "active": true,
           "index$": 2
         },
         {
+          "active": true,
           "name": "query",
           "req": true,
           "type": "`$OBJECT`",
-          "active": true,
           "index$": 3
         },
         {
+          "active": true,
           "name": "result",
           "req": true,
           "type": "`$NUMBER`",
-          "active": true,
           "index$": 4
         },
         {
+          "active": true,
           "name": "success",
           "req": true,
           "type": "`$BOOLEAN`",
-          "active": true,
           "index$": 5
         }
       ],
       "name": "convert",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
               "args": {
                 "query": [
                   {
+                    "active": true,
                     "example": 100,
                     "kind": "query",
                     "name": "amount",
                     "orig": "amount",
                     "reqd": true,
-                    "type": "`$NUMBER`",
-                    "active": true
+                    "type": "`$NUMBER`"
                   },
                   {
+                    "active": true,
                     "example": "2025-08-31",
                     "kind": "query",
                     "name": "date",
                     "orig": "date",
                     "reqd": false,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   },
                   {
+                    "active": true,
                     "example": "AUD",
                     "kind": "query",
                     "name": "from",
                     "orig": "from",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   },
                   {
+                    "active": true,
                     "example": "USD",
                     "kind": "query",
                     "name": "to",
                     "orig": "to",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -181,11 +187,9 @@ class Config {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },
@@ -196,54 +200,54 @@ class Config {
     "get_api_root": {
       "fields": [
         {
+          "active": true,
           "name": "documentation",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 0
         },
         {
+          "active": true,
           "name": "message",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 1
         },
         {
+          "active": true,
           "name": "success",
           "req": true,
           "type": "`$BOOLEAN`",
-          "active": true,
           "index$": 2
         },
         {
+          "active": true,
           "name": "version",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 3
         }
       ],
       "name": "get_api_root",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
+              "args": {},
               "method": "GET",
               "orig": "/",
+              "parts": [],
+              "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
-              "parts": [],
-              "args": {},
-              "select": {},
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },
@@ -254,66 +258,68 @@ class Config {
     "get_historical_rate_for_currency_and_date": {
       "fields": [
         {
+          "active": true,
           "name": "base",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 0
         },
         {
+          "active": true,
           "name": "date",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 1
         },
         {
+          "active": true,
           "name": "rate",
           "req": true,
           "type": "`$OBJECT`",
-          "active": true,
           "index$": 2
         },
         {
+          "active": true,
           "name": "success",
           "req": true,
           "type": "`$BOOLEAN`",
-          "active": true,
           "index$": 3
         },
         {
+          "active": true,
           "name": "timestamp",
           "req": true,
           "type": "`$INTEGER`",
-          "active": true,
           "index$": 4
         }
       ],
       "name": "get_historical_rate_for_currency_and_date",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
               "args": {
                 "params": [
                   {
+                    "active": true,
                     "example": "USD",
                     "kind": "param",
                     "name": "currency",
                     "orig": "currency",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   },
                   {
+                    "active": true,
                     "example": "2025-08-31",
                     "kind": "param",
                     "name": "date",
                     "orig": "date",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -333,11 +339,9 @@ class Config {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },
@@ -348,57 +352,59 @@ class Config {
     "get_historical_rates_for_date": {
       "fields": [
         {
+          "active": true,
           "name": "base",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 0
         },
         {
+          "active": true,
           "name": "date",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 1
         },
         {
+          "active": true,
           "name": "rate",
           "req": true,
           "type": "`$OBJECT`",
-          "active": true,
           "index$": 2
         },
         {
+          "active": true,
           "name": "success",
           "req": true,
           "type": "`$BOOLEAN`",
-          "active": true,
           "index$": 3
         },
         {
+          "active": true,
           "name": "timestamp",
           "req": true,
           "type": "`$INTEGER`",
-          "active": true,
           "index$": 4
         }
       ],
       "name": "get_historical_rates_for_date",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
               "args": {
                 "params": [
                   {
+                    "active": true,
                     "example": "2025-08-31",
                     "kind": "param",
                     "name": "id",
                     "orig": "date",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -421,11 +427,9 @@ class Config {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },
@@ -436,66 +440,68 @@ class Config {
     "latest": {
       "fields": [
         {
+          "active": true,
           "name": "base",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 0
         },
         {
+          "active": true,
           "name": "date",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 1
         },
         {
+          "active": true,
           "name": "rate",
           "req": true,
           "type": "`$OBJECT`",
-          "active": true,
           "index$": 2
         },
         {
+          "active": true,
           "name": "success",
           "req": true,
           "type": "`$BOOLEAN`",
-          "active": true,
           "index$": 3
         },
         {
+          "active": true,
           "name": "timestamp",
           "req": true,
           "type": "`$INTEGER`",
-          "active": true,
           "index$": 4
         }
       ],
       "name": "latest",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
               "args": {
                 "query": [
                   {
+                    "active": true,
                     "example": "AUD",
                     "kind": "query",
                     "name": "base",
                     "orig": "base",
                     "reqd": false,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   },
                   {
+                    "active": true,
                     "example": "USD,EUR,GBP",
                     "kind": "query",
                     "name": "symbol",
                     "orig": "symbol",
                     "reqd": false,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -514,20 +520,20 @@ class Config {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
               "index$": 0
             },
             {
+              "active": true,
               "args": {
                 "params": [
                   {
+                    "active": true,
                     "example": "USD",
                     "kind": "param",
                     "name": "id",
                     "orig": "currency",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -551,11 +557,9 @@ class Config {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
               "index$": 1
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },
@@ -566,56 +570,56 @@ class Config {
     "status": {
       "fields": [
         {
+          "active": true,
           "name": "last_update",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 0
         },
         {
+          "active": true,
           "name": "next_update_expected",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 1
         },
         {
+          "active": true,
           "name": "stale",
           "req": true,
           "type": "`$BOOLEAN`",
-          "active": true,
           "index$": 2
         },
         {
+          "active": true,
           "name": "status",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 3
         }
       ],
       "name": "status",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
+              "args": {},
               "method": "GET",
               "orig": "/status",
               "parts": [
                 "status"
               ],
+              "select": {},
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.status`"
               },
-              "active": true,
-              "args": {},
-              "select": {},
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },
@@ -626,63 +630,63 @@ class Config {
     "symbol": {
       "fields": [
         {
+          "active": true,
           "name": "base",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 0
         },
         {
+          "active": true,
           "name": "count",
           "req": true,
           "type": "`$INTEGER`",
-          "active": true,
           "index$": 1
         },
         {
+          "active": true,
           "name": "note",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 2
         },
         {
+          "active": true,
           "name": "success",
           "req": true,
           "type": "`$BOOLEAN`",
-          "active": true,
           "index$": 3
         },
         {
+          "active": true,
           "name": "symbol",
           "req": true,
           "type": "`$OBJECT`",
-          "active": true,
           "index$": 4
         }
       ],
       "name": "symbol",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
+              "args": {},
               "method": "GET",
               "orig": "/symbols",
               "parts": [
                 "symbols"
               ],
+              "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
-              "args": {},
-              "select": {},
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },
@@ -693,91 +697,93 @@ class Config {
     "timeseries": {
       "fields": [
         {
+          "active": true,
           "name": "base",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 0
         },
         {
+          "active": true,
           "name": "end_date",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 1
         },
         {
+          "active": true,
           "name": "rate",
           "req": true,
           "type": "`$OBJECT`",
-          "active": true,
           "index$": 2
         },
         {
+          "active": true,
           "name": "start_date",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 3
         },
         {
+          "active": true,
           "name": "success",
           "req": true,
           "type": "`$BOOLEAN`",
-          "active": true,
           "index$": 4
         },
         {
+          "active": true,
           "name": "timeseries",
           "req": true,
           "type": "`$BOOLEAN`",
-          "active": true,
           "index$": 5
         }
       ],
       "name": "timeseries",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
               "args": {
                 "query": [
                   {
+                    "active": true,
                     "example": "AUD",
                     "kind": "query",
                     "name": "base",
                     "orig": "base",
                     "reqd": false,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   },
                   {
+                    "active": true,
                     "example": "2025-08-31",
                     "kind": "query",
                     "name": "end_date",
                     "orig": "end_date",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   },
                   {
+                    "active": true,
                     "example": "2025-08-01",
                     "kind": "query",
                     "name": "start_date",
                     "orig": "start_date",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   },
                   {
+                    "active": true,
                     "example": "USD,EUR,GBP",
                     "kind": "query",
                     "name": "symbol",
                     "orig": "symbol",
                     "reqd": false,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -796,13 +802,11 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.timeseries`"
               },
-              "active": true,
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },

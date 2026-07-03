@@ -71,12 +71,14 @@ def get_historical_rate_for_currency_and_date_direct_setup(mockres)
   env = Runner.env_override({
     "EXCHANGERATES_TEST_GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE_ENTID" => {},
     "EXCHANGERATES_TEST_LIVE" => "FALSE",
+    "EXCHANGERATES_APIKEY" => "NONE",
   })
 
   live = env["EXCHANGERATES_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
+      "apikey" => env["EXCHANGERATES_APIKEY"],
     }
     client = ExchangeRatesSDK.new(merged_opts)
     return {

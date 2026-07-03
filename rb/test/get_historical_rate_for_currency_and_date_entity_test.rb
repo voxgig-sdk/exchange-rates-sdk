@@ -82,6 +82,7 @@ def get_historical_rate_for_currency_and_date_basic_setup(extra)
     "EXCHANGERATES_TEST_GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE_ENTID" => idmap,
     "EXCHANGERATES_TEST_LIVE" => "FALSE",
     "EXCHANGERATES_TEST_EXPLAIN" => "FALSE",
+    "EXCHANGERATES_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -93,6 +94,7 @@ def get_historical_rate_for_currency_and_date_basic_setup(extra)
   if env["EXCHANGERATES_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
+        "apikey" => env["EXCHANGERATES_APIKEY"],
       },
       extra || {},
     ])

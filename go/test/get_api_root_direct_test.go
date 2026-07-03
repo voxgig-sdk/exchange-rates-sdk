@@ -99,12 +99,14 @@ func get_api_rootDirectSetup(mockres any) *get_api_rootDirectSetupResult {
 	env := envOverride(map[string]any{
 		"EXCHANGERATES_TEST_GET_API_ROOT_ENTID": map[string]any{},
 		"EXCHANGERATES_TEST_LIVE":    "FALSE",
+		"EXCHANGERATES_APIKEY":       "NONE",
 	})
 
 	live := env["EXCHANGERATES_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["EXCHANGERATES_APIKEY"],
 		}
 		client := sdk.NewExchangeRatesSDK(mergedOpts)
 

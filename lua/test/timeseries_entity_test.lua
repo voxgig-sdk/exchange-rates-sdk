@@ -91,6 +91,7 @@ function timeseries_basic_setup(extra)
     ["EXCHANGERATES_TEST_TIMESERIES_ENTID"] = idmap,
     ["EXCHANGERATES_TEST_LIVE"] = "FALSE",
     ["EXCHANGERATES_TEST_EXPLAIN"] = "FALSE",
+    ["EXCHANGERATES_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -102,6 +103,7 @@ function timeseries_basic_setup(extra)
   if env["EXCHANGERATES_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["EXCHANGERATES_APIKEY"],
       },
       extra or {},
     })

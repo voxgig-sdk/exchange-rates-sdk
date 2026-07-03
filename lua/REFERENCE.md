@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -133,7 +133,7 @@ local convert = client:Convert(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Convert(nil):load({ id = "convert_id" }, nil)
+local result, err = client:Convert():load({ id = "convert_id" })
 ```
 
 ### Common Methods
@@ -188,7 +188,7 @@ local get_api_root = client:GetApiRoot(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:GetApiRoot(nil):load({ id = "get_api_root_id" }, nil)
+local result, err = client:GetApiRoot():load({ id = "get_api_root_id" })
 ```
 
 ### Common Methods
@@ -244,7 +244,7 @@ local get_historical_rate_for_currency_and_date = client:GetHistoricalRateForCur
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:GetHistoricalRateForCurrencyAndDate(nil):load({ id = "get_historical_rate_for_currency_and_date_id" }, nil)
+local result, err = client:GetHistoricalRateForCurrencyAndDate():load({ id = "get_historical_rate_for_currency_and_date_id" })
 ```
 
 ### Common Methods
@@ -300,7 +300,7 @@ local get_historical_rates_for_date = client:GetHistoricalRatesForDate(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:GetHistoricalRatesForDate(nil):load({ id = "get_historical_rates_for_date_id" }, nil)
+local result, err = client:GetHistoricalRatesForDate():load({ id = "get_historical_rates_for_date_id" })
 ```
 
 ### Common Methods
@@ -356,7 +356,7 @@ local latest = client:Latest(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Latest(nil):load({ id = "latest_id" }, nil)
+local result, err = client:Latest():load({ id = "latest_id" })
 ```
 
 ### Common Methods
@@ -411,7 +411,7 @@ local status = client:Status(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Status(nil):load({ id = "status_id" }, nil)
+local result, err = client:Status():load({ id = "status_id" })
 ```
 
 ### Common Methods
@@ -467,7 +467,7 @@ local symbol = client:Symbol(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Symbol(nil):load({ id = "symbol_id" }, nil)
+local result, err = client:Symbol():load({ id = "symbol_id" })
 ```
 
 ### Common Methods
@@ -524,7 +524,7 @@ local timeseries = client:Timeseries(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Timeseries(nil):load({ id = "timeseries_id" }, nil)
+local result, err = client:Timeseries():load({ id = "timeseries_id" })
 ```
 
 ### Common Methods
