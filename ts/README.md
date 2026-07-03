@@ -10,7 +10,7 @@ The TypeScript SDK for the ExchangeRates API — a type-safe, entity-oriented cl
 
 ## Install
 ```bash
-npm install exchange-rates
+npm install @voxgig-sdk/exchange-rates
 ```
 ## Tutorial: your first API call
 

@@ -8,12 +8,14 @@ source = {
   dir = "exchange-rates-sdk/lua"
 }
 description = {
-  summary = "ExchangeRates SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the RBA Exchange Rates public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/exchange-rates-sdk",
+  issues_url = "https://github.com/voxgig-sdk/exchange-rates-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "exchange-rates" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {

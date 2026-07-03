@@ -10,7 +10,7 @@ The PHP SDK for the ExchangeRates API — an entity-oriented client using PHP co
 
 ## Install
 ```bash
-composer require voxgig/exchange-rates-sdk
+composer require voxgig-sdk/exchange-rates
 ```
 
 

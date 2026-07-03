@@ -10,7 +10,7 @@ The Python SDK for the ExchangeRates API — an entity-oriented client following
 
 ## Install
 ```bash
-pip install exchange-rates-sdk
+pip install voxgig-sdk-exchange-rates
 ```
 
 Or install from source:
