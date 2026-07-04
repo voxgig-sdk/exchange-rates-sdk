@@ -233,10 +233,10 @@ class ExchangeRatesSDK
 
     private $_convert = null;
 
-    // Idiomatic facade: $client->convert()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Convert() (PHP method
-    // names are case-insensitive).
-    public function convert($data = null)
+    // Canonical facade: $client->Convert()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->convert()
+    // resolves here too.
+    public function Convert($data = null)
     {
         require_once __DIR__ . '/entity/convert_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class ExchangeRatesSDK
 
     private $_get_api_root = null;
 
-    // Idiomatic facade: $client->get_api_root()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias GetApiRoot() (PHP method
-    // names are case-insensitive).
-    public function get_api_root($data = null)
+    // Canonical facade: $client->GetApiRoot()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->get_api_root()
+    // resolves here too.
+    public function GetApiRoot($data = null)
     {
         require_once __DIR__ . '/entity/get_api_root_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class ExchangeRatesSDK
 
     private $_get_historical_rate_for_currency_and_date = null;
 
-    // Idiomatic facade: $client->get_historical_rate_for_currency_and_date()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias GetHistoricalRateForCurrencyAndDate() (PHP method
-    // names are case-insensitive).
-    public function get_historical_rate_for_currency_and_date($data = null)
+    // Canonical facade: $client->GetHistoricalRateForCurrencyAndDate()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->get_historical_rate_for_currency_and_date()
+    // resolves here too.
+    public function GetHistoricalRateForCurrencyAndDate($data = null)
     {
         require_once __DIR__ . '/entity/get_historical_rate_for_currency_and_date_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class ExchangeRatesSDK
 
     private $_get_historical_rates_for_date = null;
 
-    // Idiomatic facade: $client->get_historical_rates_for_date()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias GetHistoricalRatesForDate() (PHP method
-    // names are case-insensitive).
-    public function get_historical_rates_for_date($data = null)
+    // Canonical facade: $client->GetHistoricalRatesForDate()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->get_historical_rates_for_date()
+    // resolves here too.
+    public function GetHistoricalRatesForDate($data = null)
     {
         require_once __DIR__ . '/entity/get_historical_rates_for_date_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class ExchangeRatesSDK
 
     private $_latest = null;
 
-    // Idiomatic facade: $client->latest()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Latest() (PHP method
-    // names are case-insensitive).
-    public function latest($data = null)
+    // Canonical facade: $client->Latest()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->latest()
+    // resolves here too.
+    public function Latest($data = null)
     {
         require_once __DIR__ . '/entity/latest_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class ExchangeRatesSDK
 
     private $_status = null;
 
-    // Idiomatic facade: $client->status()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Status() (PHP method
-    // names are case-insensitive).
-    public function status($data = null)
+    // Canonical facade: $client->Status()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->status()
+    // resolves here too.
+    public function Status($data = null)
     {
         require_once __DIR__ . '/entity/status_entity.php';
         if ($data === null) {
@@ -341,10 +341,10 @@ class ExchangeRatesSDK
 
     private $_symbol = null;
 
-    // Idiomatic facade: $client->symbol()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Symbol() (PHP method
-    // names are case-insensitive).
-    public function symbol($data = null)
+    // Canonical facade: $client->Symbol()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->symbol()
+    // resolves here too.
+    public function Symbol($data = null)
     {
         require_once __DIR__ . '/entity/symbol_entity.php';
         if ($data === null) {
@@ -359,10 +359,10 @@ class ExchangeRatesSDK
 
     private $_timeseries = null;
 
-    // Idiomatic facade: $client->timeseries()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Timeseries() (PHP method
-    // names are case-insensitive).
-    public function timeseries($data = null)
+    // Canonical facade: $client->Timeseries()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->timeseries()
+    // resolves here too.
+    public function Timeseries($data = null)
     {
         require_once __DIR__ . '/entity/timeseries_entity.php';
         if ($data === null) {

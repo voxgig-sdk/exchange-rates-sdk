@@ -574,7 +574,7 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.status`",
+									"res": "`body`",
 								},
 								"index$": 0,
 							},
@@ -761,7 +761,7 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.timeseries`",
+									"res": "`body`",
 								},
 								"index$": 0,
 							},

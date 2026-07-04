@@ -194,7 +194,7 @@ Alias for `ExchangeRatesSDK.test()`.
 ## ConvertEntity
 
 ```ts
-const convert = client.convert
+const convert = client.Convert()
 ```
 
 ### Fields
@@ -215,7 +215,7 @@ const convert = client.convert
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.convert.load({ id: 'convert_id' })
+const result = await client.Convert().load({ id: 'convert_id' })
 ```
 
 ### Common Methods
@@ -249,7 +249,7 @@ Return a copy of the entity options.
 ## GetApiRootEntity
 
 ```ts
-const get_api_root = client.get_api_root
+const get_api_root = client.GetApiRoot()
 ```
 
 ### Fields
@@ -268,7 +268,7 @@ const get_api_root = client.get_api_root
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.get_api_root.load({ id: 'get_api_root_id' })
+const result = await client.GetApiRoot().load({ id: 'get_api_root_id' })
 ```
 
 ### Common Methods
@@ -302,7 +302,7 @@ Return a copy of the entity options.
 ## GetHistoricalRateForCurrencyAndDateEntity
 
 ```ts
-const get_historical_rate_for_currency_and_date = client.get_historical_rate_for_currency_and_date
+const get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate()
 ```
 
 ### Fields
@@ -322,7 +322,7 @@ const get_historical_rate_for_currency_and_date = client.get_historical_rate_for
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.get_historical_rate_for_currency_and_date.load({ id: 'get_historical_rate_for_currency_and_date_id' })
+const result = await client.GetHistoricalRateForCurrencyAndDate().load({ id: 'get_historical_rate_for_currency_and_date_id' })
 ```
 
 ### Common Methods
@@ -356,7 +356,7 @@ Return a copy of the entity options.
 ## GetHistoricalRatesForDateEntity
 
 ```ts
-const get_historical_rates_for_date = client.get_historical_rates_for_date
+const get_historical_rates_for_date = client.GetHistoricalRatesForDate()
 ```
 
 ### Fields
@@ -376,7 +376,7 @@ const get_historical_rates_for_date = client.get_historical_rates_for_date
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.get_historical_rates_for_date.load({ id: 'get_historical_rates_for_date_id' })
+const result = await client.GetHistoricalRatesForDate().load({ id: 'get_historical_rates_for_date_id' })
 ```
 
 ### Common Methods
@@ -410,7 +410,7 @@ Return a copy of the entity options.
 ## LatestEntity
 
 ```ts
-const latest = client.latest
+const latest = client.Latest()
 ```
 
 ### Fields
@@ -430,7 +430,7 @@ const latest = client.latest
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.latest.load({ id: 'latest_id' })
+const result = await client.Latest().load({ id: 'latest_id' })
 ```
 
 ### Common Methods
@@ -464,7 +464,7 @@ Return a copy of the entity options.
 ## StatusEntity
 
 ```ts
-const status = client.status
+const status = client.Status()
 ```
 
 ### Fields
@@ -483,7 +483,7 @@ const status = client.status
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.status.load({ id: 'status_id' })
+const result = await client.Status().load({ id: 'status_id' })
 ```
 
 ### Common Methods
@@ -517,7 +517,7 @@ Return a copy of the entity options.
 ## SymbolEntity
 
 ```ts
-const symbol = client.symbol
+const symbol = client.Symbol()
 ```
 
 ### Fields
@@ -537,7 +537,7 @@ const symbol = client.symbol
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.symbol.load({ id: 'symbol_id' })
+const result = await client.Symbol().load({ id: 'symbol_id' })
 ```
 
 ### Common Methods
@@ -571,7 +571,7 @@ Return a copy of the entity options.
 ## TimeseriesEntity
 
 ```ts
-const timeseries = client.timeseries
+const timeseries = client.Timeseries()
 ```
 
 ### Fields
@@ -592,7 +592,7 @@ const timeseries = client.timeseries
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.timeseries.load({ id: 'timeseries_id' })
+const result = await client.Timeseries().load({ id: 'timeseries_id' })
 ```
 
 ### Common Methods

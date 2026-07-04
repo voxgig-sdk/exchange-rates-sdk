@@ -36,9 +36,9 @@ local client = sdk.new({
 ### 3. Load a convert
 
 ```lua
-local result, err = client:convert():load({ id = "example_id" })
+local convert, err = client:Convert():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(convert)
 ```
 
 
@@ -84,8 +84,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:convert():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Convert():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -194,17 +194,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local convert, err = client:Convert():load({ id = "example_id" })
+    if err then error(err) end
+    -- convert is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -327,7 +332,7 @@ API path: `/timeseries`
 
 ### Convert
 
-Create an instance: `const convert = client.convert`
+Create an instance: `local convert = client:Convert(nil)`
 
 #### Operations
 
@@ -348,14 +353,14 @@ Create an instance: `const convert = client.convert`
 
 #### Example: Load
 
-```ts
-const convert = await client.convert.load({ id: 'convert_id' })
+```lua
+local convert, err = client:Convert():load({ id = "convert_id" })
 ```
 
 
 ### GetApiRoot
 
-Create an instance: `const get_api_root = client.get_api_root`
+Create an instance: `local get_api_root = client:GetApiRoot(nil)`
 
 #### Operations
 
@@ -374,14 +379,14 @@ Create an instance: `const get_api_root = client.get_api_root`
 
 #### Example: Load
 
-```ts
-const get_api_root = await client.get_api_root.load({ id: 'get_api_root_id' })
+```lua
+local get_api_root, err = client:GetApiRoot():load({ id = "get_api_root_id" })
 ```
 
 
 ### GetHistoricalRateForCurrencyAndDate
 
-Create an instance: `const get_historical_rate_for_currency_and_date = client.get_historical_rate_for_currency_and_date`
+Create an instance: `local get_historical_rate_for_currency_and_date = client:GetHistoricalRateForCurrencyAndDate(nil)`
 
 #### Operations
 
@@ -401,14 +406,14 @@ Create an instance: `const get_historical_rate_for_currency_and_date = client.ge
 
 #### Example: Load
 
-```ts
-const get_historical_rate_for_currency_and_date = await client.get_historical_rate_for_currency_and_date.load({ id: 'get_historical_rate_for_currency_and_date_id' })
+```lua
+local get_historical_rate_for_currency_and_date, err = client:GetHistoricalRateForCurrencyAndDate():load({ id = "get_historical_rate_for_currency_and_date_id" })
 ```
 
 
 ### GetHistoricalRatesForDate
 
-Create an instance: `const get_historical_rates_for_date = client.get_historical_rates_for_date`
+Create an instance: `local get_historical_rates_for_date = client:GetHistoricalRatesForDate(nil)`
 
 #### Operations
 
@@ -428,14 +433,14 @@ Create an instance: `const get_historical_rates_for_date = client.get_historical
 
 #### Example: Load
 
-```ts
-const get_historical_rates_for_date = await client.get_historical_rates_for_date.load({ id: 'get_historical_rates_for_date_id' })
+```lua
+local get_historical_rates_for_date, err = client:GetHistoricalRatesForDate():load({ id = "get_historical_rates_for_date_id" })
 ```
 
 
 ### Latest
 
-Create an instance: `const latest = client.latest`
+Create an instance: `local latest = client:Latest(nil)`
 
 #### Operations
 
@@ -455,14 +460,14 @@ Create an instance: `const latest = client.latest`
 
 #### Example: Load
 
-```ts
-const latest = await client.latest.load({ id: 'latest_id' })
+```lua
+local latest, err = client:Latest():load({ id = "latest_id" })
 ```
 
 
 ### Status
 
-Create an instance: `const status = client.status`
+Create an instance: `local status = client:Status(nil)`
 
 #### Operations
 
@@ -481,14 +486,14 @@ Create an instance: `const status = client.status`
 
 #### Example: Load
 
-```ts
-const status = await client.status.load({ id: 'status_id' })
+```lua
+local status, err = client:Status():load({ id = "status_id" })
 ```
 
 
 ### Symbol
 
-Create an instance: `const symbol = client.symbol`
+Create an instance: `local symbol = client:Symbol(nil)`
 
 #### Operations
 
@@ -508,14 +513,14 @@ Create an instance: `const symbol = client.symbol`
 
 #### Example: Load
 
-```ts
-const symbol = await client.symbol.load({ id: 'symbol_id' })
+```lua
+local symbol, err = client:Symbol():load({ id = "symbol_id" })
 ```
 
 
 ### Timeseries
 
-Create an instance: `const timeseries = client.timeseries`
+Create an instance: `local timeseries = client:Timeseries(nil)`
 
 #### Operations
 
@@ -536,8 +541,8 @@ Create an instance: `const timeseries = client.timeseries`
 
 #### Example: Load
 
-```ts
-const timeseries = await client.timeseries.load({ id: 'timeseries_id' })
+```lua
+local timeseries, err = client:Timeseries():load({ id = "timeseries_id" })
 ```
 
 
@@ -612,7 +617,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local convert = client:convert()
+local convert = client:Convert()
 convert:load({ id = "example_id" })
 
 -- convert:data_get() now returns the loaded convert data

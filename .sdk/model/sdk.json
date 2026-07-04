@@ -544,7 +544,7 @@
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body.status`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -724,7 +724,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body.timeseries`"
+                    "res": "`body`"
                   }
                 }
               ]

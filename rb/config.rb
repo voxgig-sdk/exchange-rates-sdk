@@ -575,7 +575,7 @@ module ExchangeRatesConfig
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body.status`",
+                    "res" => "`body`",
                   },
                   "index$" => 0,
                 },
@@ -762,7 +762,7 @@ module ExchangeRatesConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body.timeseries`",
+                    "res" => "`body`",
                   },
                   "index$" => 0,
                 },

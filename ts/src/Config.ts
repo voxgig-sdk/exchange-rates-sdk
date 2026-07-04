@@ -619,7 +619,7 @@ class Config {
               "select": {},
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body.status`"
+                "res": "`body`"
               },
               "index$": 0
             }
@@ -806,7 +806,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body.timeseries`"
+                "res": "`body`"
               },
               "index$": 0
             }

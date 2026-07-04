@@ -115,7 +115,7 @@ same parameters as `direct()`. Raises on error.
 ## ConvertEntity
 
 ```ruby
-convert = client.convert
+convert = client.Convert
 ```
 
 ### Fields
@@ -136,7 +136,7 @@ convert = client.convert
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.convert.load({ "id" => "convert_id" })
+result = client.Convert.load({ "id" => "convert_id" })
 ```
 
 ### Common Methods
@@ -172,7 +172,7 @@ Return the entity name.
 ## GetApiRootEntity
 
 ```ruby
-get_api_root = client.get_api_root
+get_api_root = client.GetApiRoot
 ```
 
 ### Fields
@@ -191,7 +191,7 @@ get_api_root = client.get_api_root
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.get_api_root.load({ "id" => "get_api_root_id" })
+result = client.GetApiRoot.load({ "id" => "get_api_root_id" })
 ```
 
 ### Common Methods
@@ -227,7 +227,7 @@ Return the entity name.
 ## GetHistoricalRateForCurrencyAndDateEntity
 
 ```ruby
-get_historical_rate_for_currency_and_date = client.get_historical_rate_for_currency_and_date
+get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate
 ```
 
 ### Fields
@@ -247,7 +247,7 @@ get_historical_rate_for_currency_and_date = client.get_historical_rate_for_curre
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.get_historical_rate_for_currency_and_date.load({ "id" => "get_historical_rate_for_currency_and_date_id" })
+result = client.GetHistoricalRateForCurrencyAndDate.load({ "id" => "get_historical_rate_for_currency_and_date_id" })
 ```
 
 ### Common Methods
@@ -283,7 +283,7 @@ Return the entity name.
 ## GetHistoricalRatesForDateEntity
 
 ```ruby
-get_historical_rates_for_date = client.get_historical_rates_for_date
+get_historical_rates_for_date = client.GetHistoricalRatesForDate
 ```
 
 ### Fields
@@ -303,7 +303,7 @@ get_historical_rates_for_date = client.get_historical_rates_for_date
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.get_historical_rates_for_date.load({ "id" => "get_historical_rates_for_date_id" })
+result = client.GetHistoricalRatesForDate.load({ "id" => "get_historical_rates_for_date_id" })
 ```
 
 ### Common Methods
@@ -339,7 +339,7 @@ Return the entity name.
 ## LatestEntity
 
 ```ruby
-latest = client.latest
+latest = client.Latest
 ```
 
 ### Fields
@@ -359,7 +359,7 @@ latest = client.latest
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.latest.load({ "id" => "latest_id" })
+result = client.Latest.load({ "id" => "latest_id" })
 ```
 
 ### Common Methods
@@ -395,7 +395,7 @@ Return the entity name.
 ## StatusEntity
 
 ```ruby
-status = client.status
+status = client.Status
 ```
 
 ### Fields
@@ -414,7 +414,7 @@ status = client.status
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.status.load({ "id" => "status_id" })
+result = client.Status.load({ "id" => "status_id" })
 ```
 
 ### Common Methods
@@ -450,7 +450,7 @@ Return the entity name.
 ## SymbolEntity
 
 ```ruby
-symbol = client.symbol
+symbol = client.Symbol
 ```
 
 ### Fields
@@ -470,7 +470,7 @@ symbol = client.symbol
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.symbol.load({ "id" => "symbol_id" })
+result = client.Symbol.load({ "id" => "symbol_id" })
 ```
 
 ### Common Methods
@@ -506,7 +506,7 @@ Return the entity name.
 ## TimeseriesEntity
 
 ```ruby
-timeseries = client.timeseries
+timeseries = client.Timeseries
 ```
 
 ### Fields
@@ -527,7 +527,7 @@ timeseries = client.timeseries
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.timeseries.load({ "id" => "timeseries_id" })
+result = client.Timeseries.load({ "id" => "timeseries_id" })
 ```
 
 ### Common Methods

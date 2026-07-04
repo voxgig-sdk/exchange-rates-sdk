@@ -109,7 +109,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## ConvertEntity
 
 ```python
-convert = client.convert
+convert = client.Convert()
 ```
 
 ### Fields
@@ -130,7 +130,7 @@ convert = client.convert
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.convert.load({"id": "convert_id"})
+result = client.Convert().load({"id": "convert_id"})
 ```
 
 ### Common Methods
@@ -165,7 +165,7 @@ Return the entity name.
 ## GetApiRootEntity
 
 ```python
-get_api_root = client.get_api_root
+get_api_root = client.GetApiRoot()
 ```
 
 ### Fields
@@ -184,7 +184,7 @@ get_api_root = client.get_api_root
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.get_api_root.load({"id": "get_api_root_id"})
+result = client.GetApiRoot().load({"id": "get_api_root_id"})
 ```
 
 ### Common Methods
@@ -219,7 +219,7 @@ Return the entity name.
 ## GetHistoricalRateForCurrencyAndDateEntity
 
 ```python
-get_historical_rate_for_currency_and_date = client.get_historical_rate_for_currency_and_date
+get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate()
 ```
 
 ### Fields
@@ -239,7 +239,7 @@ get_historical_rate_for_currency_and_date = client.get_historical_rate_for_curre
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.get_historical_rate_for_currency_and_date.load({"id": "get_historical_rate_for_currency_and_date_id"})
+result = client.GetHistoricalRateForCurrencyAndDate().load({"id": "get_historical_rate_for_currency_and_date_id"})
 ```
 
 ### Common Methods
@@ -274,7 +274,7 @@ Return the entity name.
 ## GetHistoricalRatesForDateEntity
 
 ```python
-get_historical_rates_for_date = client.get_historical_rates_for_date
+get_historical_rates_for_date = client.GetHistoricalRatesForDate()
 ```
 
 ### Fields
@@ -294,7 +294,7 @@ get_historical_rates_for_date = client.get_historical_rates_for_date
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.get_historical_rates_for_date.load({"id": "get_historical_rates_for_date_id"})
+result = client.GetHistoricalRatesForDate().load({"id": "get_historical_rates_for_date_id"})
 ```
 
 ### Common Methods
@@ -329,7 +329,7 @@ Return the entity name.
 ## LatestEntity
 
 ```python
-latest = client.latest
+latest = client.Latest()
 ```
 
 ### Fields
@@ -349,7 +349,7 @@ latest = client.latest
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.latest.load({"id": "latest_id"})
+result = client.Latest().load({"id": "latest_id"})
 ```
 
 ### Common Methods
@@ -384,7 +384,7 @@ Return the entity name.
 ## StatusEntity
 
 ```python
-status = client.status
+status = client.Status()
 ```
 
 ### Fields
@@ -403,7 +403,7 @@ status = client.status
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.status.load({"id": "status_id"})
+result = client.Status().load({"id": "status_id"})
 ```
 
 ### Common Methods
@@ -438,7 +438,7 @@ Return the entity name.
 ## SymbolEntity
 
 ```python
-symbol = client.symbol
+symbol = client.Symbol()
 ```
 
 ### Fields
@@ -458,7 +458,7 @@ symbol = client.symbol
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.symbol.load({"id": "symbol_id"})
+result = client.Symbol().load({"id": "symbol_id"})
 ```
 
 ### Common Methods
@@ -493,7 +493,7 @@ Return the entity name.
 ## TimeseriesEntity
 
 ```python
-timeseries = client.timeseries
+timeseries = client.Timeseries()
 ```
 
 ### Fields
@@ -514,7 +514,7 @@ timeseries = client.timeseries
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.timeseries.load({"id": "timeseries_id"})
+result = client.Timeseries().load({"id": "timeseries_id"})
 ```
 
 ### Common Methods

@@ -208,104 +208,56 @@ class ExchangeRatesSDK
   end
 
 
-  # Idiomatic facade: client.convert.list / client.convert.load({ "id" => ... })
-  def convert
-    require_relative 'entity/convert_entity'
-    @convert ||= ConvertEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.convert instead.
+  # Canonical facade: client.Convert.list / client.Convert.load({ "id" => ... })
   def Convert(data = nil)
     require_relative 'entity/convert_entity'
     ConvertEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.get_api_root.list / client.get_api_root.load({ "id" => ... })
-  def get_api_root
-    require_relative 'entity/get_api_root_entity'
-    @get_api_root ||= GetApiRootEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.get_api_root instead.
+  # Canonical facade: client.GetApiRoot.list / client.GetApiRoot.load({ "id" => ... })
   def GetApiRoot(data = nil)
     require_relative 'entity/get_api_root_entity'
     GetApiRootEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.get_historical_rate_for_currency_and_date.list / client.get_historical_rate_for_currency_and_date.load({ "id" => ... })
-  def get_historical_rate_for_currency_and_date
-    require_relative 'entity/get_historical_rate_for_currency_and_date_entity'
-    @get_historical_rate_for_currency_and_date ||= GetHistoricalRateForCurrencyAndDateEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.get_historical_rate_for_currency_and_date instead.
+  # Canonical facade: client.GetHistoricalRateForCurrencyAndDate.list / client.GetHistoricalRateForCurrencyAndDate.load({ "id" => ... })
   def GetHistoricalRateForCurrencyAndDate(data = nil)
     require_relative 'entity/get_historical_rate_for_currency_and_date_entity'
     GetHistoricalRateForCurrencyAndDateEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.get_historical_rates_for_date.list / client.get_historical_rates_for_date.load({ "id" => ... })
-  def get_historical_rates_for_date
-    require_relative 'entity/get_historical_rates_for_date_entity'
-    @get_historical_rates_for_date ||= GetHistoricalRatesForDateEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.get_historical_rates_for_date instead.
+  # Canonical facade: client.GetHistoricalRatesForDate.list / client.GetHistoricalRatesForDate.load({ "id" => ... })
   def GetHistoricalRatesForDate(data = nil)
     require_relative 'entity/get_historical_rates_for_date_entity'
     GetHistoricalRatesForDateEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.latest.list / client.latest.load({ "id" => ... })
-  def latest
-    require_relative 'entity/latest_entity'
-    @latest ||= LatestEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.latest instead.
+  # Canonical facade: client.Latest.list / client.Latest.load({ "id" => ... })
   def Latest(data = nil)
     require_relative 'entity/latest_entity'
     LatestEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.status.list / client.status.load({ "id" => ... })
-  def status
-    require_relative 'entity/status_entity'
-    @status ||= StatusEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.status instead.
+  # Canonical facade: client.Status.list / client.Status.load({ "id" => ... })
   def Status(data = nil)
     require_relative 'entity/status_entity'
     StatusEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.symbol.list / client.symbol.load({ "id" => ... })
-  def symbol
-    require_relative 'entity/symbol_entity'
-    @symbol ||= SymbolEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.symbol instead.
+  # Canonical facade: client.Symbol.list / client.Symbol.load({ "id" => ... })
   def Symbol(data = nil)
     require_relative 'entity/symbol_entity'
     SymbolEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.timeseries.list / client.timeseries.load({ "id" => ... })
-  def timeseries
-    require_relative 'entity/timeseries_entity'
-    @timeseries ||= TimeseriesEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.timeseries instead.
+  # Canonical facade: client.Timeseries.list / client.Timeseries.load({ "id" => ... })
   def Timeseries(data = nil)
     require_relative 'entity/timeseries_entity'
     TimeseriesEntity.new(self, data)

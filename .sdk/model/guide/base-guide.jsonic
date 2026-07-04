@@ -43,7 +43,6 @@ guide: {
   entity: status: {
     path: "/status": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.status`")|top
     }
   }
 
@@ -56,7 +55,6 @@ guide: {
   entity: timeseries: {
     path: "/timeseries": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.timeseries`")|top
     }
   }
 

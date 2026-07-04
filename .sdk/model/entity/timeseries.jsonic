@@ -94,7 +94,7 @@ main: kit: entity: timeseries: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body.timeseries`"
+            res: "`body`"
           }
         }
       ]

@@ -36,10 +36,12 @@ client = ExchangeRatesSDK({
 
 ### 3. Load a convert
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.convert.load({"id": "example_id"})
-    print(result)
+    convert = client.Convert().load({"id": "example_id"})
+    print(convert)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -87,8 +89,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = ExchangeRatesSDK.test()
 
-result = client.convert.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+convert = client.Convert().load({"id": "test01"})
+# convert contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -332,7 +335,7 @@ API path: `/timeseries`
 
 ### Convert
 
-Create an instance: `const convert = client.convert`
+Create an instance: `convert = client.Convert()`
 
 #### Operations
 
@@ -353,14 +356,14 @@ Create an instance: `const convert = client.convert`
 
 #### Example: Load
 
-```ts
-const convert = await client.convert.load({ id: 'convert_id' })
+```python
+convert = client.Convert().load({"id": "convert_id"})
 ```
 
 
 ### GetApiRoot
 
-Create an instance: `const get_api_root = client.get_api_root`
+Create an instance: `get_api_root = client.GetApiRoot()`
 
 #### Operations
 
@@ -379,14 +382,14 @@ Create an instance: `const get_api_root = client.get_api_root`
 
 #### Example: Load
 
-```ts
-const get_api_root = await client.get_api_root.load({ id: 'get_api_root_id' })
+```python
+get_api_root = client.GetApiRoot().load({"id": "get_api_root_id"})
 ```
 
 
 ### GetHistoricalRateForCurrencyAndDate
 
-Create an instance: `const get_historical_rate_for_currency_and_date = client.get_historical_rate_for_currency_and_date`
+Create an instance: `get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate()`
 
 #### Operations
 
@@ -406,14 +409,14 @@ Create an instance: `const get_historical_rate_for_currency_and_date = client.ge
 
 #### Example: Load
 
-```ts
-const get_historical_rate_for_currency_and_date = await client.get_historical_rate_for_currency_and_date.load({ id: 'get_historical_rate_for_currency_and_date_id' })
+```python
+get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate().load({"id": "get_historical_rate_for_currency_and_date_id"})
 ```
 
 
 ### GetHistoricalRatesForDate
 
-Create an instance: `const get_historical_rates_for_date = client.get_historical_rates_for_date`
+Create an instance: `get_historical_rates_for_date = client.GetHistoricalRatesForDate()`
 
 #### Operations
 
@@ -433,14 +436,14 @@ Create an instance: `const get_historical_rates_for_date = client.get_historical
 
 #### Example: Load
 
-```ts
-const get_historical_rates_for_date = await client.get_historical_rates_for_date.load({ id: 'get_historical_rates_for_date_id' })
+```python
+get_historical_rates_for_date = client.GetHistoricalRatesForDate().load({"id": "get_historical_rates_for_date_id"})
 ```
 
 
 ### Latest
 
-Create an instance: `const latest = client.latest`
+Create an instance: `latest = client.Latest()`
 
 #### Operations
 
@@ -460,14 +463,14 @@ Create an instance: `const latest = client.latest`
 
 #### Example: Load
 
-```ts
-const latest = await client.latest.load({ id: 'latest_id' })
+```python
+latest = client.Latest().load({"id": "latest_id"})
 ```
 
 
 ### Status
 
-Create an instance: `const status = client.status`
+Create an instance: `status = client.Status()`
 
 #### Operations
 
@@ -486,14 +489,14 @@ Create an instance: `const status = client.status`
 
 #### Example: Load
 
-```ts
-const status = await client.status.load({ id: 'status_id' })
+```python
+status = client.Status().load({"id": "status_id"})
 ```
 
 
 ### Symbol
 
-Create an instance: `const symbol = client.symbol`
+Create an instance: `symbol = client.Symbol()`
 
 #### Operations
 
@@ -513,14 +516,14 @@ Create an instance: `const symbol = client.symbol`
 
 #### Example: Load
 
-```ts
-const symbol = await client.symbol.load({ id: 'symbol_id' })
+```python
+symbol = client.Symbol().load({"id": "symbol_id"})
 ```
 
 
 ### Timeseries
 
-Create an instance: `const timeseries = client.timeseries`
+Create an instance: `timeseries = client.Timeseries()`
 
 #### Operations
 
@@ -541,8 +544,8 @@ Create an instance: `const timeseries = client.timeseries`
 
 #### Example: Load
 
-```ts
-const timeseries = await client.timeseries.load({ id: 'timeseries_id' })
+```python
+timeseries = client.Timeseries().load({"id": "timeseries_id"})
 ```
 
 
@@ -616,7 +619,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-convert = client.convert
+convert = client.Convert()
 convert.load({"id": "example_id"})
 
 # convert.data_get() now returns the loaded convert data

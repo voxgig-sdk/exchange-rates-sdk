@@ -211,112 +211,56 @@ class ExchangeRatesSDK {
 
 
 
-  _convert?: ConvertEntity
-
-  // Idiomatic facade: `client.convert.list()` / `client.convert.load({ id })`.
-  get convert(): ConvertEntity {
-    return (this._convert ??= new ConvertEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.convert` instead. */
+  // Entity access: `client.Convert().list()` / `client.Convert().load({ id })`.
   Convert(data?: any) {
     const self = this
     return new ConvertEntity(self,data)
   }
 
 
-  _get_api_root?: GetApiRootEntity
-
-  // Idiomatic facade: `client.get_api_root.list()` / `client.get_api_root.load({ id })`.
-  get get_api_root(): GetApiRootEntity {
-    return (this._get_api_root ??= new GetApiRootEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.get_api_root` instead. */
+  // Entity access: `client.GetApiRoot().list()` / `client.GetApiRoot().load({ id })`.
   GetApiRoot(data?: any) {
     const self = this
     return new GetApiRootEntity(self,data)
   }
 
 
-  _get_historical_rate_for_currency_and_date?: GetHistoricalRateForCurrencyAndDateEntity
-
-  // Idiomatic facade: `client.get_historical_rate_for_currency_and_date.list()` / `client.get_historical_rate_for_currency_and_date.load({ id })`.
-  get get_historical_rate_for_currency_and_date(): GetHistoricalRateForCurrencyAndDateEntity {
-    return (this._get_historical_rate_for_currency_and_date ??= new GetHistoricalRateForCurrencyAndDateEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.get_historical_rate_for_currency_and_date` instead. */
+  // Entity access: `client.GetHistoricalRateForCurrencyAndDate().list()` / `client.GetHistoricalRateForCurrencyAndDate().load({ id })`.
   GetHistoricalRateForCurrencyAndDate(data?: any) {
     const self = this
     return new GetHistoricalRateForCurrencyAndDateEntity(self,data)
   }
 
 
-  _get_historical_rates_for_date?: GetHistoricalRatesForDateEntity
-
-  // Idiomatic facade: `client.get_historical_rates_for_date.list()` / `client.get_historical_rates_for_date.load({ id })`.
-  get get_historical_rates_for_date(): GetHistoricalRatesForDateEntity {
-    return (this._get_historical_rates_for_date ??= new GetHistoricalRatesForDateEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.get_historical_rates_for_date` instead. */
+  // Entity access: `client.GetHistoricalRatesForDate().list()` / `client.GetHistoricalRatesForDate().load({ id })`.
   GetHistoricalRatesForDate(data?: any) {
     const self = this
     return new GetHistoricalRatesForDateEntity(self,data)
   }
 
 
-  _latest?: LatestEntity
-
-  // Idiomatic facade: `client.latest.list()` / `client.latest.load({ id })`.
-  get latest(): LatestEntity {
-    return (this._latest ??= new LatestEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.latest` instead. */
+  // Entity access: `client.Latest().list()` / `client.Latest().load({ id })`.
   Latest(data?: any) {
     const self = this
     return new LatestEntity(self,data)
   }
 
 
-  _status?: StatusEntity
-
-  // Idiomatic facade: `client.status.list()` / `client.status.load({ id })`.
-  get status(): StatusEntity {
-    return (this._status ??= new StatusEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.status` instead. */
+  // Entity access: `client.Status().list()` / `client.Status().load({ id })`.
   Status(data?: any) {
     const self = this
     return new StatusEntity(self,data)
   }
 
 
-  _symbol?: SymbolEntity
-
-  // Idiomatic facade: `client.symbol.list()` / `client.symbol.load({ id })`.
-  get symbol(): SymbolEntity {
-    return (this._symbol ??= new SymbolEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.symbol` instead. */
+  // Entity access: `client.Symbol().list()` / `client.Symbol().load({ id })`.
   Symbol(data?: any) {
     const self = this
     return new SymbolEntity(self,data)
   }
 
 
-  _timeseries?: TimeseriesEntity
-
-  // Idiomatic facade: `client.timeseries.list()` / `client.timeseries.load({ id })`.
-  get timeseries(): TimeseriesEntity {
-    return (this._timeseries ??= new TimeseriesEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.timeseries` instead. */
+  // Entity access: `client.Timeseries().list()` / `client.Timeseries().load({ id })`.
   Timeseries(data?: any) {
     const self = this
     return new TimeseriesEntity(self,data)

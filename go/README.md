@@ -30,7 +30,12 @@ go mod edit -replace github.com/voxgig-sdk/exchange-rates-sdk/go=../exchange-rat
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
@@ -38,31 +43,20 @@ package main
 import (
     "fmt"
     "os"
-
     sdk "github.com/voxgig-sdk/exchange-rates-sdk/go"
-    "github.com/voxgig-sdk/exchange-rates-sdk/go/core"
 )
 
 func main() {
     client := sdk.NewExchangeRatesSDK(map[string]any{
         "apikey": os.Getenv("EXCHANGE_RATES_APIKEY"),
     })
-```
 
-### 3. Load a convert
-
-```go
-    result, err = client.Convert(nil).Load(
-        map[string]any{"id": "example_id"}, nil,
-    )
+    // Load a single convert — the value is the loaded record.
+    convert, err := client.Convert(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
-
-    rm = core.ToMapAny(result)
-    if rm["ok"] == true {
-        fmt.Println(rm["data"])
-    }
+    fmt.Println(convert)
 }
 ```
 
@@ -113,10 +107,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Convert(nil).Load(
+convert, err := client.Convert(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(convert) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -222,17 +219,24 @@ All entities implement the `ExchangeRatesEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    convert, err := client.Convert(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // convert is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -377,7 +381,11 @@ Create an instance: `convert := client.Convert(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Convert(nil).Load(map[string]any{"id": "convert_id"}, nil)
+convert, err := client.Convert(nil).Load(map[string]any{"id": "convert_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(convert) // the loaded record
 ```
 
 
@@ -403,7 +411,11 @@ Create an instance: `get_api_root := client.GetApiRoot(nil)`
 #### Example: Load
 
 ```go
-result, err := client.GetApiRoot(nil).Load(map[string]any{"id": "get_api_root_id"}, nil)
+get_api_root, err := client.GetApiRoot(nil).Load(map[string]any{"id": "get_api_root_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(get_api_root) // the loaded record
 ```
 
 
@@ -430,7 +442,11 @@ Create an instance: `get_historical_rate_for_currency_and_date := client.GetHist
 #### Example: Load
 
 ```go
-result, err := client.GetHistoricalRateForCurrencyAndDate(nil).Load(map[string]any{"id": "get_historical_rate_for_currency_and_date_id"}, nil)
+get_historical_rate_for_currency_and_date, err := client.GetHistoricalRateForCurrencyAndDate(nil).Load(map[string]any{"id": "get_historical_rate_for_currency_and_date_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(get_historical_rate_for_currency_and_date) // the loaded record
 ```
 
 
@@ -457,7 +473,11 @@ Create an instance: `get_historical_rates_for_date := client.GetHistoricalRatesF
 #### Example: Load
 
 ```go
-result, err := client.GetHistoricalRatesForDate(nil).Load(map[string]any{"id": "get_historical_rates_for_date_id"}, nil)
+get_historical_rates_for_date, err := client.GetHistoricalRatesForDate(nil).Load(map[string]any{"id": "get_historical_rates_for_date_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(get_historical_rates_for_date) // the loaded record
 ```
 
 
@@ -484,7 +504,11 @@ Create an instance: `latest := client.Latest(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Latest(nil).Load(map[string]any{"id": "latest_id"}, nil)
+latest, err := client.Latest(nil).Load(map[string]any{"id": "latest_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(latest) // the loaded record
 ```
 
 
@@ -510,7 +534,11 @@ Create an instance: `status := client.Status(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Status(nil).Load(map[string]any{"id": "status_id"}, nil)
+status, err := client.Status(nil).Load(map[string]any{"id": "status_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(status) // the loaded record
 ```
 
 
@@ -537,7 +565,11 @@ Create an instance: `symbol := client.Symbol(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Symbol(nil).Load(map[string]any{"id": "symbol_id"}, nil)
+symbol, err := client.Symbol(nil).Load(map[string]any{"id": "symbol_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(symbol) // the loaded record
 ```
 
 
@@ -565,7 +597,11 @@ Create an instance: `timeseries := client.Timeseries(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Timeseries(nil).Load(map[string]any{"id": "timeseries_id"}, nil)
+timeseries, err := client.Timeseries(nil).Load(map[string]any{"id": "timeseries_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(timeseries) // the loaded record
 ```
 
 

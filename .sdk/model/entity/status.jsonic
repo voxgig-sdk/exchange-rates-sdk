@@ -40,7 +40,7 @@ main: kit: entity: status: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body.status`"
+            res: "`body`"
           }
         }
       ]

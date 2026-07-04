@@ -112,7 +112,7 @@ same parameters as `direct()`.
 ## ConvertEntity
 
 ```lua
-local convert = client:convert(nil)
+local convert = client:Convert(nil)
 ```
 
 ### Fields
@@ -133,7 +133,7 @@ local convert = client:convert(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:convert():load({ id = "convert_id" })
+local result, err = client:Convert():load({ id = "convert_id" })
 ```
 
 ### Common Methods
@@ -169,7 +169,7 @@ Return the entity name.
 ## GetApiRootEntity
 
 ```lua
-local get_api_root = client:get_api_root(nil)
+local get_api_root = client:GetApiRoot(nil)
 ```
 
 ### Fields
@@ -188,7 +188,7 @@ local get_api_root = client:get_api_root(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:get_api_root():load({ id = "get_api_root_id" })
+local result, err = client:GetApiRoot():load({ id = "get_api_root_id" })
 ```
 
 ### Common Methods
@@ -224,7 +224,7 @@ Return the entity name.
 ## GetHistoricalRateForCurrencyAndDateEntity
 
 ```lua
-local get_historical_rate_for_currency_and_date = client:get_historical_rate_for_currency_and_date(nil)
+local get_historical_rate_for_currency_and_date = client:GetHistoricalRateForCurrencyAndDate(nil)
 ```
 
 ### Fields
@@ -244,7 +244,7 @@ local get_historical_rate_for_currency_and_date = client:get_historical_rate_for
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:get_historical_rate_for_currency_and_date():load({ id = "get_historical_rate_for_currency_and_date_id" })
+local result, err = client:GetHistoricalRateForCurrencyAndDate():load({ id = "get_historical_rate_for_currency_and_date_id" })
 ```
 
 ### Common Methods
@@ -280,7 +280,7 @@ Return the entity name.
 ## GetHistoricalRatesForDateEntity
 
 ```lua
-local get_historical_rates_for_date = client:get_historical_rates_for_date(nil)
+local get_historical_rates_for_date = client:GetHistoricalRatesForDate(nil)
 ```
 
 ### Fields
@@ -300,7 +300,7 @@ local get_historical_rates_for_date = client:get_historical_rates_for_date(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:get_historical_rates_for_date():load({ id = "get_historical_rates_for_date_id" })
+local result, err = client:GetHistoricalRatesForDate():load({ id = "get_historical_rates_for_date_id" })
 ```
 
 ### Common Methods
@@ -336,7 +336,7 @@ Return the entity name.
 ## LatestEntity
 
 ```lua
-local latest = client:latest(nil)
+local latest = client:Latest(nil)
 ```
 
 ### Fields
@@ -356,7 +356,7 @@ local latest = client:latest(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:latest():load({ id = "latest_id" })
+local result, err = client:Latest():load({ id = "latest_id" })
 ```
 
 ### Common Methods
@@ -392,7 +392,7 @@ Return the entity name.
 ## StatusEntity
 
 ```lua
-local status = client:status(nil)
+local status = client:Status(nil)
 ```
 
 ### Fields
@@ -411,7 +411,7 @@ local status = client:status(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:status():load({ id = "status_id" })
+local result, err = client:Status():load({ id = "status_id" })
 ```
 
 ### Common Methods
@@ -447,7 +447,7 @@ Return the entity name.
 ## SymbolEntity
 
 ```lua
-local symbol = client:symbol(nil)
+local symbol = client:Symbol(nil)
 ```
 
 ### Fields
@@ -467,7 +467,7 @@ local symbol = client:symbol(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:symbol():load({ id = "symbol_id" })
+local result, err = client:Symbol():load({ id = "symbol_id" })
 ```
 
 ### Common Methods
@@ -503,7 +503,7 @@ Return the entity name.
 ## TimeseriesEntity
 
 ```lua
-local timeseries = client:timeseries(nil)
+local timeseries = client:Timeseries(nil)
 ```
 
 ### Fields
@@ -524,7 +524,7 @@ local timeseries = client:timeseries(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:timeseries():load({ id = "timeseries_id" })
+local result, err = client:Timeseries():load({ id = "timeseries_id" })
 ```
 
 ### Common Methods

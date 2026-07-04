@@ -575,7 +575,7 @@ def make_config():
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.status`",
+                  "res": "`body`",
                 },
                 "index$": 0,
               },
@@ -762,7 +762,7 @@ def make_config():
                 },
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.timeseries`",
+                  "res": "`body`",
                 },
                 "index$": 0,
               },
