@@ -49,8 +49,7 @@ class TestLatestEntity:
         # LOAD
         latest_ref01_ent = client.Latest(None)
         latest_ref01_match_dt0 = {}
-        latest_ref01_data_dt0_loaded, err = latest_ref01_ent.load(latest_ref01_match_dt0, None)
-        assert err is None
+        latest_ref01_data_dt0_loaded = latest_ref01_ent.load(latest_ref01_match_dt0, None)
         assert latest_ref01_data_dt0_loaded is not None
 
 

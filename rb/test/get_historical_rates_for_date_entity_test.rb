@@ -42,8 +42,7 @@ class GetHistoricalRatesForDateEntityTest < Minitest::Test
     # LOAD
     get_historical_rates_for_date_ref01_ent = client.GetHistoricalRatesForDate(nil)
     get_historical_rates_for_date_ref01_match_dt0 = {}
-    get_historical_rates_for_date_ref01_data_dt0_loaded, err = get_historical_rates_for_date_ref01_ent.load(get_historical_rates_for_date_ref01_match_dt0, nil)
-    assert_nil err
+    get_historical_rates_for_date_ref01_data_dt0_loaded = get_historical_rates_for_date_ref01_ent.load(get_historical_rates_for_date_ref01_match_dt0, nil)
     assert !get_historical_rates_for_date_ref01_data_dt0_loaded.nil?
 
   end

@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'ExchangeRates_types'
+
 
 class ExchangeRatesSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class ExchangeRatesSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class ExchangeRatesSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue ExchangeRatesError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = ExchangeRatesHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class ExchangeRatesSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,58 +198,114 @@ class ExchangeRatesSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.convert.list / client.convert.load({ "id" => ... })
+  def convert
+    require_relative 'entity/convert_entity'
+    @convert ||= ConvertEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.convert instead.
   def Convert(data = nil)
     require_relative 'entity/convert_entity'
     ConvertEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.get_api_root.list / client.get_api_root.load({ "id" => ... })
+  def get_api_root
+    require_relative 'entity/get_api_root_entity'
+    @get_api_root ||= GetApiRootEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.get_api_root instead.
   def GetApiRoot(data = nil)
     require_relative 'entity/get_api_root_entity'
     GetApiRootEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.get_historical_rate_for_currency_and_date.list / client.get_historical_rate_for_currency_and_date.load({ "id" => ... })
+  def get_historical_rate_for_currency_and_date
+    require_relative 'entity/get_historical_rate_for_currency_and_date_entity'
+    @get_historical_rate_for_currency_and_date ||= GetHistoricalRateForCurrencyAndDateEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.get_historical_rate_for_currency_and_date instead.
   def GetHistoricalRateForCurrencyAndDate(data = nil)
     require_relative 'entity/get_historical_rate_for_currency_and_date_entity'
     GetHistoricalRateForCurrencyAndDateEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.get_historical_rates_for_date.list / client.get_historical_rates_for_date.load({ "id" => ... })
+  def get_historical_rates_for_date
+    require_relative 'entity/get_historical_rates_for_date_entity'
+    @get_historical_rates_for_date ||= GetHistoricalRatesForDateEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.get_historical_rates_for_date instead.
   def GetHistoricalRatesForDate(data = nil)
     require_relative 'entity/get_historical_rates_for_date_entity'
     GetHistoricalRatesForDateEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.latest.list / client.latest.load({ "id" => ... })
+  def latest
+    require_relative 'entity/latest_entity'
+    @latest ||= LatestEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.latest instead.
   def Latest(data = nil)
     require_relative 'entity/latest_entity'
     LatestEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.status.list / client.status.load({ "id" => ... })
+  def status
+    require_relative 'entity/status_entity'
+    @status ||= StatusEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.status instead.
   def Status(data = nil)
     require_relative 'entity/status_entity'
     StatusEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.symbol.list / client.symbol.load({ "id" => ... })
+  def symbol
+    require_relative 'entity/symbol_entity'
+    @symbol ||= SymbolEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.symbol instead.
   def Symbol(data = nil)
     require_relative 'entity/symbol_entity'
     SymbolEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.timeseries.list / client.timeseries.load({ "id" => ... })
+  def timeseries
+    require_relative 'entity/timeseries_entity'
+    @timeseries ||= TimeseriesEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.timeseries instead.
   def Timeseries(data = nil)
     require_relative 'entity/timeseries_entity'
     TimeseriesEntity.new(self, data)

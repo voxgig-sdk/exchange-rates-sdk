@@ -310,7 +310,8 @@ class Config {
                     "name": "currency",
                     "orig": "currency",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   },
                   {
                     "active": true,
@@ -319,7 +320,8 @@ class Config {
                     "name": "date",
                     "orig": "date",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 1
                   }
                 ]
               },
@@ -404,7 +406,8 @@ class Config {
                     "name": "id",
                     "orig": "date",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -533,7 +536,8 @@ class Config {
                     "name": "id",
                     "orig": "currency",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

@@ -49,8 +49,7 @@ class TestTimeseriesEntity:
         # LOAD
         timeseries_ref01_ent = client.Timeseries(None)
         timeseries_ref01_match_dt0 = {}
-        timeseries_ref01_data_dt0_loaded, err = timeseries_ref01_ent.load(timeseries_ref01_match_dt0, None)
-        assert err is None
+        timeseries_ref01_data_dt0_loaded = timeseries_ref01_ent.load(timeseries_ref01_match_dt0, None)
         assert timeseries_ref01_data_dt0_loaded is not None
 
 

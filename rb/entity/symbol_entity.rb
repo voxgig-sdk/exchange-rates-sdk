@@ -45,6 +45,7 @@ class SymbolEntity
     end
   end
 
+  # @return [Symbol, Hash] the current Symbol data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class SymbolEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Symbol fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Symbol.
+  #
+  # @param reqmatch [SymbolLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Symbol, Hash] the loaded Symbol; raises ExchangeRatesError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

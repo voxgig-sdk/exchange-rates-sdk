@@ -84,7 +84,10 @@ Return a copy of the SDK utility object.
 
 #### `direct(array $fetchargs = []): array`
 
-Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
+Make a direct HTTP request to any API endpoint. This is the raw-HTTP escape
+hatch: it does **not** throw. It returns a result array
+`["ok" => bool, "status" => int, "headers" => array, "data" => mixed]`, or
+`["ok" => false, "err" => \Exception]` on failure. Branch on `$result["ok"]`.
 
 **Parameters:**
 
@@ -98,11 +101,12 @@ Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
 | `$fetchargs["body"]` | `mixed` | Request body (arrays are JSON-serialized). |
 | `$fetchargs["ctrl"]` | `array` | Control options. |
 
-**Returns:** `array [$result, $err]`
+**Returns:** `array` — the result dict (see above); never throws.
 
-#### `prepare(array $fetchargs = []): array`
+#### `prepare(array $fetchargs = []): mixed`
 
-Prepare a fetch definition without sending the request. Returns `[$fetchdef, $err]`.
+Prepare a fetch definition without sending the request. Returns the
+`$fetchdef` array. Throws on error.
 
 
 ---
@@ -110,7 +114,7 @@ Prepare a fetch definition without sending the request. Returns `[$fetchdef, $er
 ## ConvertEntity
 
 ```php
-$convert = $client->Convert();
+$convert = $client->convert();
 ```
 
 ### Fields
@@ -126,12 +130,12 @@ $convert = $client->Convert();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Convert()->load(["id" => "convert_id"]);
+$result = $client->convert()->load(["id" => "convert_id"]);
 ```
 
 ### Common Methods
@@ -167,7 +171,7 @@ Return the entity name.
 ## GetApiRootEntity
 
 ```php
-$get_api_root = $client->GetApiRoot();
+$get_api_root = $client->get_api_root();
 ```
 
 ### Fields
@@ -181,12 +185,12 @@ $get_api_root = $client->GetApiRoot();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->GetApiRoot()->load(["id" => "get_api_root_id"]);
+$result = $client->get_api_root()->load(["id" => "get_api_root_id"]);
 ```
 
 ### Common Methods
@@ -222,7 +226,7 @@ Return the entity name.
 ## GetHistoricalRateForCurrencyAndDateEntity
 
 ```php
-$get_historical_rate_for_currency_and_date = $client->GetHistoricalRateForCurrencyAndDate();
+$get_historical_rate_for_currency_and_date = $client->get_historical_rate_for_currency_and_date();
 ```
 
 ### Fields
@@ -237,12 +241,12 @@ $get_historical_rate_for_currency_and_date = $client->GetHistoricalRateForCurren
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->GetHistoricalRateForCurrencyAndDate()->load(["id" => "get_historical_rate_for_currency_and_date_id"]);
+$result = $client->get_historical_rate_for_currency_and_date()->load(["id" => "get_historical_rate_for_currency_and_date_id"]);
 ```
 
 ### Common Methods
@@ -278,7 +282,7 @@ Return the entity name.
 ## GetHistoricalRatesForDateEntity
 
 ```php
-$get_historical_rates_for_date = $client->GetHistoricalRatesForDate();
+$get_historical_rates_for_date = $client->get_historical_rates_for_date();
 ```
 
 ### Fields
@@ -293,12 +297,12 @@ $get_historical_rates_for_date = $client->GetHistoricalRatesForDate();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->GetHistoricalRatesForDate()->load(["id" => "get_historical_rates_for_date_id"]);
+$result = $client->get_historical_rates_for_date()->load(["id" => "get_historical_rates_for_date_id"]);
 ```
 
 ### Common Methods
@@ -334,7 +338,7 @@ Return the entity name.
 ## LatestEntity
 
 ```php
-$latest = $client->Latest();
+$latest = $client->latest();
 ```
 
 ### Fields
@@ -349,12 +353,12 @@ $latest = $client->Latest();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Latest()->load(["id" => "latest_id"]);
+$result = $client->latest()->load(["id" => "latest_id"]);
 ```
 
 ### Common Methods
@@ -390,7 +394,7 @@ Return the entity name.
 ## StatusEntity
 
 ```php
-$status = $client->Status();
+$status = $client->status();
 ```
 
 ### Fields
@@ -404,12 +408,12 @@ $status = $client->Status();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Status()->load(["id" => "status_id"]);
+$result = $client->status()->load(["id" => "status_id"]);
 ```
 
 ### Common Methods
@@ -445,7 +449,7 @@ Return the entity name.
 ## SymbolEntity
 
 ```php
-$symbol = $client->Symbol();
+$symbol = $client->symbol();
 ```
 
 ### Fields
@@ -460,12 +464,12 @@ $symbol = $client->Symbol();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Symbol()->load(["id" => "symbol_id"]);
+$result = $client->symbol()->load(["id" => "symbol_id"]);
 ```
 
 ### Common Methods
@@ -501,7 +505,7 @@ Return the entity name.
 ## TimeseriesEntity
 
 ```php
-$timeseries = $client->Timeseries();
+$timeseries = $client->timeseries();
 ```
 
 ### Fields
@@ -517,12 +521,12 @@ $timeseries = $client->Timeseries();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Timeseries()->load(["id" => "timeseries_id"]);
+$result = $client->timeseries()->load(["id" => "timeseries_id"]);
 ```
 
 ### Common Methods

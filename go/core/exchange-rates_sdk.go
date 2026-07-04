@@ -245,41 +245,65 @@ func (sdk *ExchangeRatesSDK) Direct(fetchargs map[string]any) (map[string]any, e
 }
 
 
+// Convert returns a Convert entity bound to this client.
+// Idiomatic usage: client.Convert(nil).List(nil, nil) or
+// client.Convert(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ExchangeRatesSDK) Convert(data map[string]any) ExchangeRatesEntity {
 	return NewConvertEntityFunc(sdk, data)
 }
 
 
+// GetApiRoot returns a GetApiRoot entity bound to this client.
+// Idiomatic usage: client.GetApiRoot(nil).List(nil, nil) or
+// client.GetApiRoot(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ExchangeRatesSDK) GetApiRoot(data map[string]any) ExchangeRatesEntity {
 	return NewGetApiRootEntityFunc(sdk, data)
 }
 
 
+// GetHistoricalRateForCurrencyAndDate returns a GetHistoricalRateForCurrencyAndDate entity bound to this client.
+// Idiomatic usage: client.GetHistoricalRateForCurrencyAndDate(nil).List(nil, nil) or
+// client.GetHistoricalRateForCurrencyAndDate(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ExchangeRatesSDK) GetHistoricalRateForCurrencyAndDate(data map[string]any) ExchangeRatesEntity {
 	return NewGetHistoricalRateForCurrencyAndDateEntityFunc(sdk, data)
 }
 
 
+// GetHistoricalRatesForDate returns a GetHistoricalRatesForDate entity bound to this client.
+// Idiomatic usage: client.GetHistoricalRatesForDate(nil).List(nil, nil) or
+// client.GetHistoricalRatesForDate(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ExchangeRatesSDK) GetHistoricalRatesForDate(data map[string]any) ExchangeRatesEntity {
 	return NewGetHistoricalRatesForDateEntityFunc(sdk, data)
 }
 
 
+// Latest returns a Latest entity bound to this client.
+// Idiomatic usage: client.Latest(nil).List(nil, nil) or
+// client.Latest(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ExchangeRatesSDK) Latest(data map[string]any) ExchangeRatesEntity {
 	return NewLatestEntityFunc(sdk, data)
 }
 
 
+// Status returns a Status entity bound to this client.
+// Idiomatic usage: client.Status(nil).List(nil, nil) or
+// client.Status(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ExchangeRatesSDK) Status(data map[string]any) ExchangeRatesEntity {
 	return NewStatusEntityFunc(sdk, data)
 }
 
 
+// Symbol returns a Symbol entity bound to this client.
+// Idiomatic usage: client.Symbol(nil).List(nil, nil) or
+// client.Symbol(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ExchangeRatesSDK) Symbol(data map[string]any) ExchangeRatesEntity {
 	return NewSymbolEntityFunc(sdk, data)
 }
 
 
+// Timeseries returns a Timeseries entity bound to this client.
+// Idiomatic usage: client.Timeseries(nil).List(nil, nil) or
+// client.Timeseries(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ExchangeRatesSDK) Timeseries(data map[string]any) ExchangeRatesEntity {
 	return NewTimeseriesEntityFunc(sdk, data)
 }

@@ -49,8 +49,7 @@ class GetHistoricalRateForCurrencyAndDateEntityTest extends TestCase
         // LOAD
         $get_historical_rate_for_currency_and_date_ref01_ent = $client->GetHistoricalRateForCurrencyAndDate(null);
         $get_historical_rate_for_currency_and_date_ref01_match_dt0 = [];
-        [$get_historical_rate_for_currency_and_date_ref01_data_dt0_loaded, $err] = $get_historical_rate_for_currency_and_date_ref01_ent->load($get_historical_rate_for_currency_and_date_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $get_historical_rate_for_currency_and_date_ref01_data_dt0_loaded = $get_historical_rate_for_currency_and_date_ref01_ent->load($get_historical_rate_for_currency_and_date_ref01_match_dt0, null);
         $this->assertNotNull($get_historical_rate_for_currency_and_date_ref01_data_dt0_loaded);
 
     }

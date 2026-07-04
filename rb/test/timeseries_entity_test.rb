@@ -42,8 +42,7 @@ class TimeseriesEntityTest < Minitest::Test
     # LOAD
     timeseries_ref01_ent = client.Timeseries(nil)
     timeseries_ref01_match_dt0 = {}
-    timeseries_ref01_data_dt0_loaded, err = timeseries_ref01_ent.load(timeseries_ref01_match_dt0, nil)
-    assert_nil err
+    timeseries_ref01_data_dt0_loaded = timeseries_ref01_ent.load(timeseries_ref01_match_dt0, nil)
     assert !timeseries_ref01_data_dt0_loaded.nil?
 
   end

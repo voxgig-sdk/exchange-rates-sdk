@@ -42,8 +42,7 @@ class SymbolEntityTest < Minitest::Test
     # LOAD
     symbol_ref01_ent = client.Symbol(nil)
     symbol_ref01_match_dt0 = {}
-    symbol_ref01_data_dt0_loaded, err = symbol_ref01_ent.load(symbol_ref01_match_dt0, nil)
-    assert_nil err
+    symbol_ref01_data_dt0_loaded = symbol_ref01_ent.load(symbol_ref01_match_dt0, nil)
     assert !symbol_ref01_data_dt0_loaded.nil?
 
   end

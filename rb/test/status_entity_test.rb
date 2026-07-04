@@ -42,8 +42,7 @@ class StatusEntityTest < Minitest::Test
     # LOAD
     status_ref01_ent = client.Status(nil)
     status_ref01_match_dt0 = {}
-    status_ref01_data_dt0_loaded, err = status_ref01_ent.load(status_ref01_match_dt0, nil)
-    assert_nil err
+    status_ref01_data_dt0_loaded = status_ref01_ent.load(status_ref01_match_dt0, nil)
     assert !status_ref01_data_dt0_loaded.nil?
 
   end

@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch TimeseriesLoadMatch
+---@param ctrl? table
+---@return Timeseries
+---@return string? err
 function TimeseriesEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

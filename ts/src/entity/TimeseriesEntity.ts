@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Timeseries,
+  TimeseriesLoadMatch,
+} from '../ExchangeRatesTypes'
 
 // TODO: needs Entity superclass
-class TimeseriesEntity extends ExchangeRatesEntityBase {
+class TimeseriesEntity extends ExchangeRatesEntityBase<Timeseries> {
 
   constructor(client: ExchangeRatesSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class TimeseriesEntity extends ExchangeRatesEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: TimeseriesLoadMatch, ctrl?: Control): Promise<Timeseries> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class TimeseriesEntity extends ExchangeRatesEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Timeseries> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

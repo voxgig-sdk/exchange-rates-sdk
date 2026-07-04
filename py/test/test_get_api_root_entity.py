@@ -49,8 +49,7 @@ class TestGetApiRootEntity:
         # LOAD
         get_api_root_ref01_ent = client.GetApiRoot(None)
         get_api_root_ref01_match_dt0 = {}
-        get_api_root_ref01_data_dt0_loaded, err = get_api_root_ref01_ent.load(get_api_root_ref01_match_dt0, None)
-        assert err is None
+        get_api_root_ref01_data_dt0_loaded = get_api_root_ref01_ent.load(get_api_root_ref01_match_dt0, None)
         assert get_api_root_ref01_data_dt0_loaded is not None
 
 

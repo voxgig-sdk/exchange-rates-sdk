@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch SymbolLoadMatch
+---@param ctrl? table
+---@return Symbol
+---@return string? err
 function SymbolEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

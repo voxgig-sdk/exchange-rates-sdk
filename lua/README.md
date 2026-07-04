@@ -9,12 +9,9 @@ The Lua SDK for the ExchangeRates API — an entity-oriented client using Lua co
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-exchange-rates
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/exchange-rates-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -32,14 +29,14 @@ loading a specific record.
 local sdk = require("exchange-rates_sdk")
 
 local client = sdk.new({
-  apikey = os.getenv("EXCHANGE-RATES_APIKEY"),
+  apikey = os.getenv("EXCHANGE_RATES_APIKEY"),
 })
 ```
 
 ### 3. Load a convert
 
 ```lua
-local result, err = client:Convert():load({ id = "example_id" })
+local result, err = client:convert():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -87,7 +84,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:ExchangeRates():load({ id = "test01" })
+local result, err = client:convert():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -120,8 +117,8 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-EXCHANGE-RATES_TEST_LIVE=TRUE
-EXCHANGE-RATES_APIKEY=<your-key>
+EXCHANGE_RATES_TEST_LIVE=TRUE
+EXCHANGE_RATES_APIKEY=<your-key>
 ```
 
 Then run:
@@ -330,7 +327,7 @@ API path: `/timeseries`
 
 ### Convert
 
-Create an instance: `const convert = client.Convert()`
+Create an instance: `const convert = client.convert`
 
 #### Operations
 
@@ -352,13 +349,13 @@ Create an instance: `const convert = client.Convert()`
 #### Example: Load
 
 ```ts
-const convert = await client.Convert().load({ id: 'convert_id' })
+const convert = await client.convert.load({ id: 'convert_id' })
 ```
 
 
 ### GetApiRoot
 
-Create an instance: `const get_api_root = client.GetApiRoot()`
+Create an instance: `const get_api_root = client.get_api_root`
 
 #### Operations
 
@@ -378,13 +375,13 @@ Create an instance: `const get_api_root = client.GetApiRoot()`
 #### Example: Load
 
 ```ts
-const get_api_root = await client.GetApiRoot().load({ id: 'get_api_root_id' })
+const get_api_root = await client.get_api_root.load({ id: 'get_api_root_id' })
 ```
 
 
 ### GetHistoricalRateForCurrencyAndDate
 
-Create an instance: `const get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate()`
+Create an instance: `const get_historical_rate_for_currency_and_date = client.get_historical_rate_for_currency_and_date`
 
 #### Operations
 
@@ -405,13 +402,13 @@ Create an instance: `const get_historical_rate_for_currency_and_date = client.Ge
 #### Example: Load
 
 ```ts
-const get_historical_rate_for_currency_and_date = await client.GetHistoricalRateForCurrencyAndDate().load({ id: 'get_historical_rate_for_currency_and_date_id' })
+const get_historical_rate_for_currency_and_date = await client.get_historical_rate_for_currency_and_date.load({ id: 'get_historical_rate_for_currency_and_date_id' })
 ```
 
 
 ### GetHistoricalRatesForDate
 
-Create an instance: `const get_historical_rates_for_date = client.GetHistoricalRatesForDate()`
+Create an instance: `const get_historical_rates_for_date = client.get_historical_rates_for_date`
 
 #### Operations
 
@@ -432,13 +429,13 @@ Create an instance: `const get_historical_rates_for_date = client.GetHistoricalR
 #### Example: Load
 
 ```ts
-const get_historical_rates_for_date = await client.GetHistoricalRatesForDate().load({ id: 'get_historical_rates_for_date_id' })
+const get_historical_rates_for_date = await client.get_historical_rates_for_date.load({ id: 'get_historical_rates_for_date_id' })
 ```
 
 
 ### Latest
 
-Create an instance: `const latest = client.Latest()`
+Create an instance: `const latest = client.latest`
 
 #### Operations
 
@@ -459,13 +456,13 @@ Create an instance: `const latest = client.Latest()`
 #### Example: Load
 
 ```ts
-const latest = await client.Latest().load({ id: 'latest_id' })
+const latest = await client.latest.load({ id: 'latest_id' })
 ```
 
 
 ### Status
 
-Create an instance: `const status = client.Status()`
+Create an instance: `const status = client.status`
 
 #### Operations
 
@@ -485,13 +482,13 @@ Create an instance: `const status = client.Status()`
 #### Example: Load
 
 ```ts
-const status = await client.Status().load({ id: 'status_id' })
+const status = await client.status.load({ id: 'status_id' })
 ```
 
 
 ### Symbol
 
-Create an instance: `const symbol = client.Symbol()`
+Create an instance: `const symbol = client.symbol`
 
 #### Operations
 
@@ -512,13 +509,13 @@ Create an instance: `const symbol = client.Symbol()`
 #### Example: Load
 
 ```ts
-const symbol = await client.Symbol().load({ id: 'symbol_id' })
+const symbol = await client.symbol.load({ id: 'symbol_id' })
 ```
 
 
 ### Timeseries
 
-Create an instance: `const timeseries = client.Timeseries()`
+Create an instance: `const timeseries = client.timeseries`
 
 #### Operations
 
@@ -540,7 +537,7 @@ Create an instance: `const timeseries = client.Timeseries()`
 #### Example: Load
 
 ```ts
-const timeseries = await client.Timeseries().load({ id: 'timeseries_id' })
+const timeseries = await client.timeseries.load({ id: 'timeseries_id' })
 ```
 
 
@@ -615,11 +612,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local convert = client:convert()
+convert:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- convert:data_get() now returns the loaded convert data
+-- convert:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

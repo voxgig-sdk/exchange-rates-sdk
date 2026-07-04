@@ -9,9 +9,12 @@ The TypeScript SDK for the ExchangeRates API — a type-safe, entity-oriented cl
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/exchange-rates
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/exchange-rates-sdk/releases](https://github.com/voxgig-sdk/exchange-rates-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,17 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { ExchangeRatesSDK } from 'exchange-rates'
+import { ExchangeRatesSDK } from '@voxgig-sdk/exchange-rates'
 
 const client = new ExchangeRatesSDK({
-  apikey: process.env.EXCHANGE-RATES_APIKEY,
+  apikey: process.env.EXCHANGE_RATES_APIKEY,
 })
 ```
 
 ### 3. Load a convert
 
 ```ts
-const result = await client.Convert().load({ id: 'example_id' })
+const result = await client.convert.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ExchangeRatesSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.convert.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -96,7 +99,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.convert
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -133,8 +136,8 @@ const client = new ExchangeRatesSDK({
 Create a `.env.local` file at the project root:
 
 ```
-EXCHANGE-RATES_TEST_LIVE=TRUE
-EXCHANGE-RATES_APIKEY=<your-key>
+EXCHANGE_RATES_TEST_LIVE=TRUE
+EXCHANGE_RATES_APIKEY=<your-key>
 ```
 
 Then run:
@@ -375,7 +378,7 @@ API path: `/timeseries`
 
 ### Convert
 
-Create an instance: `const convert = client.Convert()`
+Create an instance: `const convert = client.convert`
 
 #### Operations
 
@@ -397,13 +400,13 @@ Create an instance: `const convert = client.Convert()`
 #### Example: Load
 
 ```ts
-const convert = await client.Convert().load({ id: 'convert_id' })
+const convert = await client.convert.load({ id: 'convert_id' })
 ```
 
 
 ### GetApiRoot
 
-Create an instance: `const get_api_root = client.GetApiRoot()`
+Create an instance: `const get_api_root = client.get_api_root`
 
 #### Operations
 
@@ -423,13 +426,13 @@ Create an instance: `const get_api_root = client.GetApiRoot()`
 #### Example: Load
 
 ```ts
-const get_api_root = await client.GetApiRoot().load({ id: 'get_api_root_id' })
+const get_api_root = await client.get_api_root.load({ id: 'get_api_root_id' })
 ```
 
 
 ### GetHistoricalRateForCurrencyAndDate
 
-Create an instance: `const get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate()`
+Create an instance: `const get_historical_rate_for_currency_and_date = client.get_historical_rate_for_currency_and_date`
 
 #### Operations
 
@@ -450,13 +453,13 @@ Create an instance: `const get_historical_rate_for_currency_and_date = client.Ge
 #### Example: Load
 
 ```ts
-const get_historical_rate_for_currency_and_date = await client.GetHistoricalRateForCurrencyAndDate().load({ id: 'get_historical_rate_for_currency_and_date_id' })
+const get_historical_rate_for_currency_and_date = await client.get_historical_rate_for_currency_and_date.load({ id: 'get_historical_rate_for_currency_and_date_id' })
 ```
 
 
 ### GetHistoricalRatesForDate
 
-Create an instance: `const get_historical_rates_for_date = client.GetHistoricalRatesForDate()`
+Create an instance: `const get_historical_rates_for_date = client.get_historical_rates_for_date`
 
 #### Operations
 
@@ -477,13 +480,13 @@ Create an instance: `const get_historical_rates_for_date = client.GetHistoricalR
 #### Example: Load
 
 ```ts
-const get_historical_rates_for_date = await client.GetHistoricalRatesForDate().load({ id: 'get_historical_rates_for_date_id' })
+const get_historical_rates_for_date = await client.get_historical_rates_for_date.load({ id: 'get_historical_rates_for_date_id' })
 ```
 
 
 ### Latest
 
-Create an instance: `const latest = client.Latest()`
+Create an instance: `const latest = client.latest`
 
 #### Operations
 
@@ -504,13 +507,13 @@ Create an instance: `const latest = client.Latest()`
 #### Example: Load
 
 ```ts
-const latest = await client.Latest().load({ id: 'latest_id' })
+const latest = await client.latest.load({ id: 'latest_id' })
 ```
 
 
 ### Status
 
-Create an instance: `const status = client.Status()`
+Create an instance: `const status = client.status`
 
 #### Operations
 
@@ -530,13 +533,13 @@ Create an instance: `const status = client.Status()`
 #### Example: Load
 
 ```ts
-const status = await client.Status().load({ id: 'status_id' })
+const status = await client.status.load({ id: 'status_id' })
 ```
 
 
 ### Symbol
 
-Create an instance: `const symbol = client.Symbol()`
+Create an instance: `const symbol = client.symbol`
 
 #### Operations
 
@@ -557,13 +560,13 @@ Create an instance: `const symbol = client.Symbol()`
 #### Example: Load
 
 ```ts
-const symbol = await client.Symbol().load({ id: 'symbol_id' })
+const symbol = await client.symbol.load({ id: 'symbol_id' })
 ```
 
 
 ### Timeseries
 
-Create an instance: `const timeseries = client.Timeseries()`
+Create an instance: `const timeseries = client.timeseries`
 
 #### Operations
 
@@ -585,7 +588,7 @@ Create an instance: `const timeseries = client.Timeseries()`
 #### Example: Load
 
 ```ts
-const timeseries = await client.Timeseries().load({ id: 'timeseries_id' })
+const timeseries = await client.timeseries.load({ id: 'timeseries_id' })
 ```
 
 
@@ -646,7 +649,7 @@ exchange-rates/
 Import the SDK from the package root:
 
 ```ts
-import { ExchangeRatesSDK } from 'exchange-rates'
+import { ExchangeRatesSDK } from '@voxgig-sdk/exchange-rates'
 ```
 
 ### Entity state
@@ -656,11 +659,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const convert = client.convert
+await convert.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// convert.data() now returns the loaded convert data
+// convert.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Symbol,
+  SymbolLoadMatch,
+} from '../ExchangeRatesTypes'
 
 // TODO: needs Entity superclass
-class SymbolEntity extends ExchangeRatesEntityBase {
+class SymbolEntity extends ExchangeRatesEntityBase<Symbol> {
 
   constructor(client: ExchangeRatesSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class SymbolEntity extends ExchangeRatesEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: SymbolLoadMatch, ctrl?: Control): Promise<Symbol> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class SymbolEntity extends ExchangeRatesEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Symbol> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

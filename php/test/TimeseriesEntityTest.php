@@ -49,8 +49,7 @@ class TimeseriesEntityTest extends TestCase
         // LOAD
         $timeseries_ref01_ent = $client->Timeseries(null);
         $timeseries_ref01_match_dt0 = [];
-        [$timeseries_ref01_data_dt0_loaded, $err] = $timeseries_ref01_ent->load($timeseries_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $timeseries_ref01_data_dt0_loaded = $timeseries_ref01_ent->load($timeseries_ref01_match_dt0, null);
         $this->assertNotNull($timeseries_ref01_data_dt0_loaded);
 
     }

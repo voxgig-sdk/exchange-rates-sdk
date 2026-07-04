@@ -85,6 +85,27 @@ func (e *GetApiRootEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an GetApiRoot; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *GetApiRootEntity) DataTyped(data ...GetApiRoot) GetApiRoot {
+	if len(data) > 0 {
+		return typedFrom[GetApiRoot](e.Data(asMap(data[0])))
+	}
+	return typedFrom[GetApiRoot](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through GetApiRoot (all fields
+// optional at the wire level).
+func (e *GetApiRootEntity) MatchTyped(match ...GetApiRoot) GetApiRoot {
+	if len(match) > 0 {
+		return typedFrom[GetApiRoot](e.Match(asMap(match[0])))
+	}
+	return typedFrom[GetApiRoot](e.Match())
+}
+
 
 func (e *GetApiRootEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *GetApiRootEntity) Load(reqmatch map[string]any, ctrl map[string]any) (a
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// GetApiRootLoadMatch and returns an GetApiRoot. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *GetApiRootEntity) LoadTyped(reqmatch GetApiRootLoadMatch, ctrl map[string]any) (GetApiRoot, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return GetApiRoot{}, err
+	}
+	return typedFrom[GetApiRoot](res), nil
 }
 
 

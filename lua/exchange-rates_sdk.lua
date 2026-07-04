@@ -244,48 +244,152 @@ end
 
 
 
+-- Idiomatic facade: client:convert():list() / client:convert():load({ id = ... })
+function ExchangeRatesSDK:convert(data)
+  local EntityMod = require("entity.convert_entity")
+  if data == nil then
+    if self._convert == nil then
+      self._convert = EntityMod.new(self, nil)
+    end
+    return self._convert
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:convert() instead.
 function ExchangeRatesSDK:Convert(data)
   local EntityMod = require("entity.convert_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:get_api_root():list() / client:get_api_root():load({ id = ... })
+function ExchangeRatesSDK:get_api_root(data)
+  local EntityMod = require("entity.get_api_root_entity")
+  if data == nil then
+    if self._get_api_root == nil then
+      self._get_api_root = EntityMod.new(self, nil)
+    end
+    return self._get_api_root
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:get_api_root() instead.
 function ExchangeRatesSDK:GetApiRoot(data)
   local EntityMod = require("entity.get_api_root_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:get_historical_rate_for_currency_and_date():list() / client:get_historical_rate_for_currency_and_date():load({ id = ... })
+function ExchangeRatesSDK:get_historical_rate_for_currency_and_date(data)
+  local EntityMod = require("entity.get_historical_rate_for_currency_and_date_entity")
+  if data == nil then
+    if self._get_historical_rate_for_currency_and_date == nil then
+      self._get_historical_rate_for_currency_and_date = EntityMod.new(self, nil)
+    end
+    return self._get_historical_rate_for_currency_and_date
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:get_historical_rate_for_currency_and_date() instead.
 function ExchangeRatesSDK:GetHistoricalRateForCurrencyAndDate(data)
   local EntityMod = require("entity.get_historical_rate_for_currency_and_date_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:get_historical_rates_for_date():list() / client:get_historical_rates_for_date():load({ id = ... })
+function ExchangeRatesSDK:get_historical_rates_for_date(data)
+  local EntityMod = require("entity.get_historical_rates_for_date_entity")
+  if data == nil then
+    if self._get_historical_rates_for_date == nil then
+      self._get_historical_rates_for_date = EntityMod.new(self, nil)
+    end
+    return self._get_historical_rates_for_date
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:get_historical_rates_for_date() instead.
 function ExchangeRatesSDK:GetHistoricalRatesForDate(data)
   local EntityMod = require("entity.get_historical_rates_for_date_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:latest():list() / client:latest():load({ id = ... })
+function ExchangeRatesSDK:latest(data)
+  local EntityMod = require("entity.latest_entity")
+  if data == nil then
+    if self._latest == nil then
+      self._latest = EntityMod.new(self, nil)
+    end
+    return self._latest
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:latest() instead.
 function ExchangeRatesSDK:Latest(data)
   local EntityMod = require("entity.latest_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:status():list() / client:status():load({ id = ... })
+function ExchangeRatesSDK:status(data)
+  local EntityMod = require("entity.status_entity")
+  if data == nil then
+    if self._status == nil then
+      self._status = EntityMod.new(self, nil)
+    end
+    return self._status
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:status() instead.
 function ExchangeRatesSDK:Status(data)
   local EntityMod = require("entity.status_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:symbol():list() / client:symbol():load({ id = ... })
+function ExchangeRatesSDK:symbol(data)
+  local EntityMod = require("entity.symbol_entity")
+  if data == nil then
+    if self._symbol == nil then
+      self._symbol = EntityMod.new(self, nil)
+    end
+    return self._symbol
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:symbol() instead.
 function ExchangeRatesSDK:Symbol(data)
   local EntityMod = require("entity.symbol_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:timeseries():list() / client:timeseries():load({ id = ... })
+function ExchangeRatesSDK:timeseries(data)
+  local EntityMod = require("entity.timeseries_entity")
+  if data == nil then
+    if self._timeseries == nil then
+      self._timeseries = EntityMod.new(self, nil)
+    end
+    return self._timeseries
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:timeseries() instead.
 function ExchangeRatesSDK:Timeseries(data)
   local EntityMod = require("entity.timeseries_entity")
   return EntityMod.new(self, data)

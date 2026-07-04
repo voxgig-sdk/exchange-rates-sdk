@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Convert,
+  ConvertLoadMatch,
+} from '../ExchangeRatesTypes'
 
 // TODO: needs Entity superclass
-class ConvertEntity extends ExchangeRatesEntityBase {
+class ConvertEntity extends ExchangeRatesEntityBase<Convert> {
 
   constructor(client: ExchangeRatesSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class ConvertEntity extends ExchangeRatesEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ConvertLoadMatch, ctrl?: Control): Promise<Convert> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class ConvertEntity extends ExchangeRatesEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Convert> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

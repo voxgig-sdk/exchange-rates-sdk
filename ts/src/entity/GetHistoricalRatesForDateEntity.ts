@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  GetHistoricalRatesForDate,
+  GetHistoricalRatesForDateLoadMatch,
+} from '../ExchangeRatesTypes'
 
 // TODO: needs Entity superclass
-class GetHistoricalRatesForDateEntity extends ExchangeRatesEntityBase {
+class GetHistoricalRatesForDateEntity extends ExchangeRatesEntityBase<GetHistoricalRatesForDate> {
 
   constructor(client: ExchangeRatesSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class GetHistoricalRatesForDateEntity extends ExchangeRatesEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: GetHistoricalRatesForDateLoadMatch, ctrl?: Control): Promise<GetHistoricalRatesForDate> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class GetHistoricalRatesForDateEntity extends ExchangeRatesEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<GetHistoricalRatesForDate> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

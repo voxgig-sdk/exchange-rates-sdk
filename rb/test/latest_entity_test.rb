@@ -42,8 +42,7 @@ class LatestEntityTest < Minitest::Test
     # LOAD
     latest_ref01_ent = client.Latest(nil)
     latest_ref01_match_dt0 = {}
-    latest_ref01_data_dt0_loaded, err = latest_ref01_ent.load(latest_ref01_match_dt0, nil)
-    assert_nil err
+    latest_ref01_data_dt0_loaded = latest_ref01_ent.load(latest_ref01_match_dt0, nil)
     assert !latest_ref01_data_dt0_loaded.nil?
 
   end

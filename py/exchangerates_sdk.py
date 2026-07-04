@@ -144,16 +144,23 @@ class ExchangeRatesSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class ExchangeRatesSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,50 +212,138 @@ class ExchangeRatesSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def convert(self):
+        """Idiomatic facade: client.convert.list() / client.convert.load({"id": ...})."""
+        from entity.convert_entity import ConvertEntity
+        cached = getattr(self, "_convert", None)
+        if cached is None:
+            cached = ConvertEntity(self, None)
+            self._convert = cached
+        return cached
 
     def Convert(self, data=None):
+        # Deprecated: use client.convert instead.
         from entity.convert_entity import ConvertEntity
         return ConvertEntity(self, data)
 
 
+    @property
+    def get_api_root(self):
+        """Idiomatic facade: client.get_api_root.list() / client.get_api_root.load({"id": ...})."""
+        from entity.get_api_root_entity import GetApiRootEntity
+        cached = getattr(self, "_get_api_root", None)
+        if cached is None:
+            cached = GetApiRootEntity(self, None)
+            self._get_api_root = cached
+        return cached
+
     def GetApiRoot(self, data=None):
+        # Deprecated: use client.get_api_root instead.
         from entity.get_api_root_entity import GetApiRootEntity
         return GetApiRootEntity(self, data)
 
 
+    @property
+    def get_historical_rate_for_currency_and_date(self):
+        """Idiomatic facade: client.get_historical_rate_for_currency_and_date.list() / client.get_historical_rate_for_currency_and_date.load({"id": ...})."""
+        from entity.get_historical_rate_for_currency_and_date_entity import GetHistoricalRateForCurrencyAndDateEntity
+        cached = getattr(self, "_get_historical_rate_for_currency_and_date", None)
+        if cached is None:
+            cached = GetHistoricalRateForCurrencyAndDateEntity(self, None)
+            self._get_historical_rate_for_currency_and_date = cached
+        return cached
+
     def GetHistoricalRateForCurrencyAndDate(self, data=None):
+        # Deprecated: use client.get_historical_rate_for_currency_and_date instead.
         from entity.get_historical_rate_for_currency_and_date_entity import GetHistoricalRateForCurrencyAndDateEntity
         return GetHistoricalRateForCurrencyAndDateEntity(self, data)
 
 
+    @property
+    def get_historical_rates_for_date(self):
+        """Idiomatic facade: client.get_historical_rates_for_date.list() / client.get_historical_rates_for_date.load({"id": ...})."""
+        from entity.get_historical_rates_for_date_entity import GetHistoricalRatesForDateEntity
+        cached = getattr(self, "_get_historical_rates_for_date", None)
+        if cached is None:
+            cached = GetHistoricalRatesForDateEntity(self, None)
+            self._get_historical_rates_for_date = cached
+        return cached
+
     def GetHistoricalRatesForDate(self, data=None):
+        # Deprecated: use client.get_historical_rates_for_date instead.
         from entity.get_historical_rates_for_date_entity import GetHistoricalRatesForDateEntity
         return GetHistoricalRatesForDateEntity(self, data)
 
 
+    @property
+    def latest(self):
+        """Idiomatic facade: client.latest.list() / client.latest.load({"id": ...})."""
+        from entity.latest_entity import LatestEntity
+        cached = getattr(self, "_latest", None)
+        if cached is None:
+            cached = LatestEntity(self, None)
+            self._latest = cached
+        return cached
+
     def Latest(self, data=None):
+        # Deprecated: use client.latest instead.
         from entity.latest_entity import LatestEntity
         return LatestEntity(self, data)
 
 
+    @property
+    def status(self):
+        """Idiomatic facade: client.status.list() / client.status.load({"id": ...})."""
+        from entity.status_entity import StatusEntity
+        cached = getattr(self, "_status", None)
+        if cached is None:
+            cached = StatusEntity(self, None)
+            self._status = cached
+        return cached
+
     def Status(self, data=None):
+        # Deprecated: use client.status instead.
         from entity.status_entity import StatusEntity
         return StatusEntity(self, data)
 
 
+    @property
+    def symbol(self):
+        """Idiomatic facade: client.symbol.list() / client.symbol.load({"id": ...})."""
+        from entity.symbol_entity import SymbolEntity
+        cached = getattr(self, "_symbol", None)
+        if cached is None:
+            cached = SymbolEntity(self, None)
+            self._symbol = cached
+        return cached
+
     def Symbol(self, data=None):
+        # Deprecated: use client.symbol instead.
         from entity.symbol_entity import SymbolEntity
         return SymbolEntity(self, data)
 
 
+    @property
+    def timeseries(self):
+        """Idiomatic facade: client.timeseries.list() / client.timeseries.load({"id": ...})."""
+        from entity.timeseries_entity import TimeseriesEntity
+        cached = getattr(self, "_timeseries", None)
+        if cached is None:
+            cached = TimeseriesEntity(self, None)
+            self._timeseries = cached
+        return cached
+
     def Timeseries(self, data=None):
+        # Deprecated: use client.timeseries instead.
         from entity.timeseries_entity import TimeseriesEntity
         return TimeseriesEntity(self, data)
 

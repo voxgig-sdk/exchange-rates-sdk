@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch GetHistoricalRatesForDateLoadMatch
+---@param ctrl? table
+---@return GetHistoricalRatesForDate
+---@return string? err
 function GetHistoricalRatesForDateEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

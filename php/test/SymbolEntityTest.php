@@ -49,8 +49,7 @@ class SymbolEntityTest extends TestCase
         // LOAD
         $symbol_ref01_ent = $client->Symbol(null);
         $symbol_ref01_match_dt0 = [];
-        [$symbol_ref01_data_dt0_loaded, $err] = $symbol_ref01_ent->load($symbol_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $symbol_ref01_data_dt0_loaded = $symbol_ref01_ent->load($symbol_ref01_match_dt0, null);
         $this->assertNotNull($symbol_ref01_data_dt0_loaded);
 
     }

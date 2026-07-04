@@ -49,8 +49,7 @@ class TestGetHistoricalRatesForDateEntity:
         # LOAD
         get_historical_rates_for_date_ref01_ent = client.GetHistoricalRatesForDate(None)
         get_historical_rates_for_date_ref01_match_dt0 = {}
-        get_historical_rates_for_date_ref01_data_dt0_loaded, err = get_historical_rates_for_date_ref01_ent.load(get_historical_rates_for_date_ref01_match_dt0, None)
-        assert err is None
+        get_historical_rates_for_date_ref01_data_dt0_loaded = get_historical_rates_for_date_ref01_ent.load(get_historical_rates_for_date_ref01_match_dt0, None)
         assert get_historical_rates_for_date_ref01_data_dt0_loaded is not None
 
 

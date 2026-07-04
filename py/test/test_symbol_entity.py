@@ -49,8 +49,7 @@ class TestSymbolEntity:
         # LOAD
         symbol_ref01_ent = client.Symbol(None)
         symbol_ref01_match_dt0 = {}
-        symbol_ref01_data_dt0_loaded, err = symbol_ref01_ent.load(symbol_ref01_match_dt0, None)
-        assert err is None
+        symbol_ref01_data_dt0_loaded = symbol_ref01_ent.load(symbol_ref01_match_dt0, None)
         assert symbol_ref01_data_dt0_loaded is not None
 
 

@@ -82,9 +82,11 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs = {}) -> Hash, err`
+#### `direct(fetchargs = {}) -> Hash`
 
-Make a direct HTTP request to any API endpoint.
+Make a direct HTTP request to any API endpoint. Returns a result hash
+(`{ "ok" => ..., "status" => ..., "data" => ..., "err" => ... }`); it
+does not raise — inspect `result["ok"]`.
 
 **Parameters:**
 
@@ -98,14 +100,14 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs["body"]` | `any` | Request body (hashes are JSON-serialized). |
 | `fetchargs["ctrl"]` | `Hash` | Control options (e.g. `{ "explain" => true }`). |
 
-**Returns:** `Hash, err`
+**Returns:** `Hash`
 
-#### `prepare(fetchargs = {}) -> Hash, err`
+#### `prepare(fetchargs = {}) -> Hash`
 
 Prepare a fetch definition without sending the request. Accepts the
-same parameters as `direct()`.
+same parameters as `direct()`. Raises on error.
 
-**Returns:** `Hash, err`
+**Returns:** `Hash` (the fetch definition; raises on error)
 
 
 ---
@@ -113,7 +115,7 @@ same parameters as `direct()`.
 ## ConvertEntity
 
 ```ruby
-convert = client.Convert
+convert = client.convert
 ```
 
 ### Fields
@@ -129,12 +131,12 @@ convert = client.Convert
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Convert.load({ "id" => "convert_id" })
+result = client.convert.load({ "id" => "convert_id" })
 ```
 
 ### Common Methods
@@ -170,7 +172,7 @@ Return the entity name.
 ## GetApiRootEntity
 
 ```ruby
-get_api_root = client.GetApiRoot
+get_api_root = client.get_api_root
 ```
 
 ### Fields
@@ -184,12 +186,12 @@ get_api_root = client.GetApiRoot
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.GetApiRoot.load({ "id" => "get_api_root_id" })
+result = client.get_api_root.load({ "id" => "get_api_root_id" })
 ```
 
 ### Common Methods
@@ -225,7 +227,7 @@ Return the entity name.
 ## GetHistoricalRateForCurrencyAndDateEntity
 
 ```ruby
-get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate
+get_historical_rate_for_currency_and_date = client.get_historical_rate_for_currency_and_date
 ```
 
 ### Fields
@@ -240,12 +242,12 @@ get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyA
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.GetHistoricalRateForCurrencyAndDate.load({ "id" => "get_historical_rate_for_currency_and_date_id" })
+result = client.get_historical_rate_for_currency_and_date.load({ "id" => "get_historical_rate_for_currency_and_date_id" })
 ```
 
 ### Common Methods
@@ -281,7 +283,7 @@ Return the entity name.
 ## GetHistoricalRatesForDateEntity
 
 ```ruby
-get_historical_rates_for_date = client.GetHistoricalRatesForDate
+get_historical_rates_for_date = client.get_historical_rates_for_date
 ```
 
 ### Fields
@@ -296,12 +298,12 @@ get_historical_rates_for_date = client.GetHistoricalRatesForDate
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.GetHistoricalRatesForDate.load({ "id" => "get_historical_rates_for_date_id" })
+result = client.get_historical_rates_for_date.load({ "id" => "get_historical_rates_for_date_id" })
 ```
 
 ### Common Methods
@@ -337,7 +339,7 @@ Return the entity name.
 ## LatestEntity
 
 ```ruby
-latest = client.Latest
+latest = client.latest
 ```
 
 ### Fields
@@ -352,12 +354,12 @@ latest = client.Latest
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Latest.load({ "id" => "latest_id" })
+result = client.latest.load({ "id" => "latest_id" })
 ```
 
 ### Common Methods
@@ -393,7 +395,7 @@ Return the entity name.
 ## StatusEntity
 
 ```ruby
-status = client.Status
+status = client.status
 ```
 
 ### Fields
@@ -407,12 +409,12 @@ status = client.Status
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Status.load({ "id" => "status_id" })
+result = client.status.load({ "id" => "status_id" })
 ```
 
 ### Common Methods
@@ -448,7 +450,7 @@ Return the entity name.
 ## SymbolEntity
 
 ```ruby
-symbol = client.Symbol
+symbol = client.symbol
 ```
 
 ### Fields
@@ -463,12 +465,12 @@ symbol = client.Symbol
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Symbol.load({ "id" => "symbol_id" })
+result = client.symbol.load({ "id" => "symbol_id" })
 ```
 
 ### Common Methods
@@ -504,7 +506,7 @@ Return the entity name.
 ## TimeseriesEntity
 
 ```ruby
-timeseries = client.Timeseries
+timeseries = client.timeseries
 ```
 
 ### Fields
@@ -520,12 +522,12 @@ timeseries = client.Timeseries
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Timeseries.load({ "id" => "timeseries_id" })
+result = client.timeseries.load({ "id" => "timeseries_id" })
 ```
 
 ### Common Methods

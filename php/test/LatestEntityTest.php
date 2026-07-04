@@ -49,8 +49,7 @@ class LatestEntityTest extends TestCase
         // LOAD
         $latest_ref01_ent = $client->Latest(null);
         $latest_ref01_match_dt0 = [];
-        [$latest_ref01_data_dt0_loaded, $err] = $latest_ref01_ent->load($latest_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $latest_ref01_data_dt0_loaded = $latest_ref01_ent->load($latest_ref01_match_dt0, null);
         $this->assertNotNull($latest_ref01_data_dt0_loaded);
 
     }
