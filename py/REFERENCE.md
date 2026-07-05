@@ -8,7 +8,7 @@ Complete API reference for the ExchangeRates Python SDK.
 ### Constructor
 
 ```python
-from exchange-rates_sdk import ExchangeRatesSDK
+from exchangerates_sdk import ExchangeRatesSDK
 
 client = ExchangeRatesSDK(options)
 ```
@@ -116,12 +116,12 @@ convert = client.Convert()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | Yes |  |
-| `free` | ``$BOOLEAN`` | No |  |
-| `info` | ``$OBJECT`` | Yes |  |
-| `query` | ``$OBJECT`` | Yes |  |
-| `result` | ``$NUMBER`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
+| `date` | `str` | Yes |  |
+| `free` | `bool` | No |  |
+| `info` | `dict` | Yes |  |
+| `query` | `dict` | Yes |  |
+| `result` | `float` | Yes |  |
+| `success` | `bool` | Yes |  |
 
 ### Operations
 
@@ -130,7 +130,7 @@ convert = client.Convert()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Convert().load({"id": "convert_id"})
+result = client.Convert().load()
 ```
 
 ### Common Methods
@@ -172,10 +172,10 @@ get_api_root = client.GetApiRoot()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `documentation` | ``$STRING`` | Yes |  |
-| `message` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `documentation` | `str` | Yes |  |
+| `message` | `str` | Yes |  |
+| `success` | `bool` | Yes |  |
+| `version` | `str` | Yes |  |
 
 ### Operations
 
@@ -184,7 +184,7 @@ get_api_root = client.GetApiRoot()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.GetApiRoot().load({"id": "get_api_root_id"})
+result = client.GetApiRoot().load()
 ```
 
 ### Common Methods
@@ -226,11 +226,11 @@ get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyA
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `str` | Yes |  |
+| `date` | `str` | Yes |  |
+| `rate` | `dict` | Yes |  |
+| `success` | `bool` | Yes |  |
+| `timestamp` | `int` | Yes |  |
 
 ### Operations
 
@@ -239,7 +239,7 @@ get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyA
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.GetHistoricalRateForCurrencyAndDate().load({"id": "get_historical_rate_for_currency_and_date_id"})
+result = client.GetHistoricalRateForCurrencyAndDate().load()
 ```
 
 ### Common Methods
@@ -281,11 +281,11 @@ get_historical_rates_for_date = client.GetHistoricalRatesForDate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `str` | Yes |  |
+| `date` | `str` | Yes |  |
+| `rate` | `dict` | Yes |  |
+| `success` | `bool` | Yes |  |
+| `timestamp` | `int` | Yes |  |
 
 ### Operations
 
@@ -336,11 +336,11 @@ latest = client.Latest()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `str` | Yes |  |
+| `date` | `str` | Yes |  |
+| `rate` | `dict` | Yes |  |
+| `success` | `bool` | Yes |  |
+| `timestamp` | `int` | Yes |  |
 
 ### Operations
 
@@ -391,10 +391,10 @@ status = client.Status()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `last_update` | ``$STRING`` | Yes |  |
-| `next_update_expected` | ``$STRING`` | Yes |  |
-| `stale` | ``$BOOLEAN`` | Yes |  |
-| `status` | ``$STRING`` | Yes |  |
+| `last_update` | `str` | Yes |  |
+| `next_update_expected` | `str` | Yes |  |
+| `stale` | `bool` | Yes |  |
+| `status` | `str` | Yes |  |
 
 ### Operations
 
@@ -403,7 +403,7 @@ status = client.Status()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Status().load({"id": "status_id"})
+result = client.Status().load()
 ```
 
 ### Common Methods
@@ -445,11 +445,11 @@ symbol = client.Symbol()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `count` | ``$INTEGER`` | Yes |  |
-| `note` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `symbol` | ``$OBJECT`` | Yes |  |
+| `base` | `str` | Yes |  |
+| `count` | `int` | Yes |  |
+| `note` | `str` | Yes |  |
+| `success` | `bool` | Yes |  |
+| `symbol` | `dict` | Yes |  |
 
 ### Operations
 
@@ -458,7 +458,7 @@ symbol = client.Symbol()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Symbol().load({"id": "symbol_id"})
+result = client.Symbol().load()
 ```
 
 ### Common Methods
@@ -500,12 +500,12 @@ timeseries = client.Timeseries()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `end_date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `start_date` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timeseries` | ``$BOOLEAN`` | Yes |  |
+| `base` | `str` | Yes |  |
+| `end_date` | `str` | Yes |  |
+| `rate` | `dict` | Yes |  |
+| `start_date` | `str` | Yes |  |
+| `success` | `bool` | Yes |  |
+| `timeseries` | `bool` | Yes |  |
 
 ### Operations
 
@@ -514,7 +514,7 @@ timeseries = client.Timeseries()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Timeseries().load({"id": "timeseries_id"})
+result = client.Timeseries().load()
 ```
 
 ### Common Methods

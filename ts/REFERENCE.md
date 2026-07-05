@@ -201,12 +201,12 @@ const convert = client.Convert()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | Yes |  |
-| `free` | ``$BOOLEAN`` | No |  |
-| `info` | ``$OBJECT`` | Yes |  |
-| `query` | ``$OBJECT`` | Yes |  |
-| `result` | ``$NUMBER`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
+| `date` | `string` | Yes |  |
+| `free` | `boolean` | No |  |
+| `info` | `Record<string, any>` | Yes |  |
+| `query` | `Record<string, any>` | Yes |  |
+| `result` | `number` | Yes |  |
+| `success` | `boolean` | Yes |  |
 
 ### Operations
 
@@ -215,7 +215,7 @@ const convert = client.Convert()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Convert().load({ id: 'convert_id' })
+const result = await client.Convert().load()
 ```
 
 ### Common Methods
@@ -256,10 +256,10 @@ const get_api_root = client.GetApiRoot()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `documentation` | ``$STRING`` | Yes |  |
-| `message` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `documentation` | `string` | Yes |  |
+| `message` | `string` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -268,7 +268,7 @@ const get_api_root = client.GetApiRoot()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.GetApiRoot().load({ id: 'get_api_root_id' })
+const result = await client.GetApiRoot().load()
 ```
 
 ### Common Methods
@@ -309,11 +309,11 @@ const get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCur
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `date` | `string` | Yes |  |
+| `rate` | `Record<string, any>` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `timestamp` | `number` | Yes |  |
 
 ### Operations
 
@@ -322,7 +322,7 @@ const get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCur
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.GetHistoricalRateForCurrencyAndDate().load({ id: 'get_historical_rate_for_currency_and_date_id' })
+const result = await client.GetHistoricalRateForCurrencyAndDate().load()
 ```
 
 ### Common Methods
@@ -363,11 +363,11 @@ const get_historical_rates_for_date = client.GetHistoricalRatesForDate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `date` | `string` | Yes |  |
+| `rate` | `Record<string, any>` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `timestamp` | `number` | Yes |  |
 
 ### Operations
 
@@ -417,11 +417,11 @@ const latest = client.Latest()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `date` | `string` | Yes |  |
+| `rate` | `Record<string, any>` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `timestamp` | `number` | Yes |  |
 
 ### Operations
 
@@ -471,10 +471,10 @@ const status = client.Status()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `last_update` | ``$STRING`` | Yes |  |
-| `next_update_expected` | ``$STRING`` | Yes |  |
-| `stale` | ``$BOOLEAN`` | Yes |  |
-| `status` | ``$STRING`` | Yes |  |
+| `last_update` | `string` | Yes |  |
+| `next_update_expected` | `string` | Yes |  |
+| `stale` | `boolean` | Yes |  |
+| `status` | `string` | Yes |  |
 
 ### Operations
 
@@ -483,7 +483,7 @@ const status = client.Status()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Status().load({ id: 'status_id' })
+const result = await client.Status().load()
 ```
 
 ### Common Methods
@@ -524,11 +524,11 @@ const symbol = client.Symbol()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `count` | ``$INTEGER`` | Yes |  |
-| `note` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `symbol` | ``$OBJECT`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `count` | `number` | Yes |  |
+| `note` | `string` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `symbol` | `Record<string, any>` | Yes |  |
 
 ### Operations
 
@@ -537,7 +537,7 @@ const symbol = client.Symbol()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Symbol().load({ id: 'symbol_id' })
+const result = await client.Symbol().load()
 ```
 
 ### Common Methods
@@ -578,12 +578,12 @@ const timeseries = client.Timeseries()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `end_date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `start_date` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timeseries` | ``$BOOLEAN`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `end_date` | `string` | Yes |  |
+| `rate` | `Record<string, any>` | Yes |  |
+| `start_date` | `string` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `timeseries` | `boolean` | Yes |  |
 
 ### Operations
 
@@ -592,7 +592,7 @@ const timeseries = client.Timeseries()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Timeseries().load({ id: 'timeseries_id' })
+const result = await client.Timeseries().load()
 ```
 
 ### Common Methods

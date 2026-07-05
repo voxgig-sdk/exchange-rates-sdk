@@ -8,7 +8,7 @@ Complete API reference for the ExchangeRates Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'exchange-rates_sdk'
+require_relative 'ExchangeRates_sdk'
 
 client = ExchangeRatesSDK.new(options)
 ```
@@ -122,12 +122,12 @@ convert = client.Convert
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | Yes |  |
-| `free` | ``$BOOLEAN`` | No |  |
-| `info` | ``$OBJECT`` | Yes |  |
-| `query` | ``$OBJECT`` | Yes |  |
-| `result` | ``$NUMBER`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
+| `date` | `String` | Yes |  |
+| `free` | `Boolean` | No |  |
+| `info` | `Hash` | Yes |  |
+| `query` | `Hash` | Yes |  |
+| `result` | `Float` | Yes |  |
+| `success` | `Boolean` | Yes |  |
 
 ### Operations
 
@@ -136,7 +136,7 @@ convert = client.Convert
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Convert.load({ "id" => "convert_id" })
+result = client.Convert.load()
 ```
 
 ### Common Methods
@@ -179,10 +179,10 @@ get_api_root = client.GetApiRoot
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `documentation` | ``$STRING`` | Yes |  |
-| `message` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `documentation` | `String` | Yes |  |
+| `message` | `String` | Yes |  |
+| `success` | `Boolean` | Yes |  |
+| `version` | `String` | Yes |  |
 
 ### Operations
 
@@ -191,7 +191,7 @@ get_api_root = client.GetApiRoot
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.GetApiRoot.load({ "id" => "get_api_root_id" })
+result = client.GetApiRoot.load()
 ```
 
 ### Common Methods
@@ -234,11 +234,11 @@ get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyA
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `String` | Yes |  |
+| `date` | `String` | Yes |  |
+| `rate` | `Hash` | Yes |  |
+| `success` | `Boolean` | Yes |  |
+| `timestamp` | `Integer` | Yes |  |
 
 ### Operations
 
@@ -247,7 +247,7 @@ get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyA
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.GetHistoricalRateForCurrencyAndDate.load({ "id" => "get_historical_rate_for_currency_and_date_id" })
+result = client.GetHistoricalRateForCurrencyAndDate.load()
 ```
 
 ### Common Methods
@@ -290,11 +290,11 @@ get_historical_rates_for_date = client.GetHistoricalRatesForDate
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `String` | Yes |  |
+| `date` | `String` | Yes |  |
+| `rate` | `Hash` | Yes |  |
+| `success` | `Boolean` | Yes |  |
+| `timestamp` | `Integer` | Yes |  |
 
 ### Operations
 
@@ -346,11 +346,11 @@ latest = client.Latest
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `String` | Yes |  |
+| `date` | `String` | Yes |  |
+| `rate` | `Hash` | Yes |  |
+| `success` | `Boolean` | Yes |  |
+| `timestamp` | `Integer` | Yes |  |
 
 ### Operations
 
@@ -402,10 +402,10 @@ status = client.Status
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `last_update` | ``$STRING`` | Yes |  |
-| `next_update_expected` | ``$STRING`` | Yes |  |
-| `stale` | ``$BOOLEAN`` | Yes |  |
-| `status` | ``$STRING`` | Yes |  |
+| `last_update` | `String` | Yes |  |
+| `next_update_expected` | `String` | Yes |  |
+| `stale` | `Boolean` | Yes |  |
+| `status` | `String` | Yes |  |
 
 ### Operations
 
@@ -414,7 +414,7 @@ status = client.Status
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Status.load({ "id" => "status_id" })
+result = client.Status.load()
 ```
 
 ### Common Methods
@@ -457,11 +457,11 @@ symbol = client.Symbol
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `count` | ``$INTEGER`` | Yes |  |
-| `note` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `symbol` | ``$OBJECT`` | Yes |  |
+| `base` | `String` | Yes |  |
+| `count` | `Integer` | Yes |  |
+| `note` | `String` | Yes |  |
+| `success` | `Boolean` | Yes |  |
+| `symbol` | `Hash` | Yes |  |
 
 ### Operations
 
@@ -470,7 +470,7 @@ symbol = client.Symbol
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Symbol.load({ "id" => "symbol_id" })
+result = client.Symbol.load()
 ```
 
 ### Common Methods
@@ -513,12 +513,12 @@ timeseries = client.Timeseries
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `end_date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `start_date` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timeseries` | ``$BOOLEAN`` | Yes |  |
+| `base` | `String` | Yes |  |
+| `end_date` | `String` | Yes |  |
+| `rate` | `Hash` | Yes |  |
+| `start_date` | `String` | Yes |  |
+| `success` | `Boolean` | Yes |  |
+| `timeseries` | `Boolean` | Yes |  |
 
 ### Operations
 
@@ -527,7 +527,7 @@ timeseries = client.Timeseries
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Timeseries.load({ "id" => "timeseries_id" })
+result = client.Timeseries.load()
 ```
 
 ### Common Methods

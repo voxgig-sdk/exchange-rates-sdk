@@ -4,6 +4,11 @@
 
 The Python SDK for the ExchangeRates API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Convert()` — each
+carrying a small, uniform set of operations (`load`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -40,10 +45,38 @@ client = ExchangeRatesSDK({
 
 ```python
 try:
-    convert = client.Convert().load({"id": "example_id"})
+    convert = client.Convert().load()
     print(convert)
 except Exception as err:
     print(f"load failed: {err}")
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    convert = client.Convert().load()
+    print(convert)
+except Exception as err:
+    print(f"load failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -64,7 +97,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -90,7 +126,7 @@ Create a mock client for unit testing — no server required:
 client = ExchangeRatesSDK.test()
 
 # Entity ops return the bare record and raise on error.
-convert = client.Convert().load({"id": "test01"})
+convert = client.Convert().load()
 # convert contains the mock response record
 ```
 
@@ -185,10 +221,6 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -347,17 +379,17 @@ Create an instance: `convert = client.Convert()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `free` | ``$BOOLEAN`` |  |
-| `info` | ``$OBJECT`` |  |
-| `query` | ``$OBJECT`` |  |
-| `result` | ``$NUMBER`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `date` | `str` |  |
+| `free` | `bool` |  |
+| `info` | `dict` |  |
+| `query` | `dict` |  |
+| `result` | `float` |  |
+| `success` | `bool` |  |
 
 #### Example: Load
 
 ```python
-convert = client.Convert().load({"id": "convert_id"})
+convert = client.Convert().load()
 ```
 
 
@@ -375,15 +407,15 @@ Create an instance: `get_api_root = client.GetApiRoot()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `documentation` | ``$STRING`` |  |
-| `message` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `version` | ``$STRING`` |  |
+| `documentation` | `str` |  |
+| `message` | `str` |  |
+| `success` | `bool` |  |
+| `version` | `str` |  |
 
 #### Example: Load
 
 ```python
-get_api_root = client.GetApiRoot().load({"id": "get_api_root_id"})
+get_api_root = client.GetApiRoot().load()
 ```
 
 
@@ -401,16 +433,16 @@ Create an instance: `get_historical_rate_for_currency_and_date = client.GetHisto
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timestamp` | ``$INTEGER`` |  |
+| `base` | `str` |  |
+| `date` | `str` |  |
+| `rate` | `dict` |  |
+| `success` | `bool` |  |
+| `timestamp` | `int` |  |
 
 #### Example: Load
 
 ```python
-get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate().load({"id": "get_historical_rate_for_currency_and_date_id"})
+get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate().load()
 ```
 
 
@@ -428,11 +460,11 @@ Create an instance: `get_historical_rates_for_date = client.GetHistoricalRatesFo
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timestamp` | ``$INTEGER`` |  |
+| `base` | `str` |  |
+| `date` | `str` |  |
+| `rate` | `dict` |  |
+| `success` | `bool` |  |
+| `timestamp` | `int` |  |
 
 #### Example: Load
 
@@ -455,11 +487,11 @@ Create an instance: `latest = client.Latest()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timestamp` | ``$INTEGER`` |  |
+| `base` | `str` |  |
+| `date` | `str` |  |
+| `rate` | `dict` |  |
+| `success` | `bool` |  |
+| `timestamp` | `int` |  |
 
 #### Example: Load
 
@@ -482,15 +514,15 @@ Create an instance: `status = client.Status()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `last_update` | ``$STRING`` |  |
-| `next_update_expected` | ``$STRING`` |  |
-| `stale` | ``$BOOLEAN`` |  |
-| `status` | ``$STRING`` |  |
+| `last_update` | `str` |  |
+| `next_update_expected` | `str` |  |
+| `stale` | `bool` |  |
+| `status` | `str` |  |
 
 #### Example: Load
 
 ```python
-status = client.Status().load({"id": "status_id"})
+status = client.Status().load()
 ```
 
 
@@ -508,16 +540,16 @@ Create an instance: `symbol = client.Symbol()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `count` | ``$INTEGER`` |  |
-| `note` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `symbol` | ``$OBJECT`` |  |
+| `base` | `str` |  |
+| `count` | `int` |  |
+| `note` | `str` |  |
+| `success` | `bool` |  |
+| `symbol` | `dict` |  |
 
 #### Example: Load
 
 ```python
-symbol = client.Symbol().load({"id": "symbol_id"})
+symbol = client.Symbol().load()
 ```
 
 
@@ -535,26 +567,30 @@ Create an instance: `timeseries = client.Timeseries()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `end_date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `start_date` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timeseries` | ``$BOOLEAN`` |  |
+| `base` | `str` |  |
+| `end_date` | `str` |  |
+| `rate` | `dict` |  |
+| `start_date` | `str` |  |
+| `success` | `bool` |  |
+| `timeseries` | `bool` |  |
 
 #### Example: Load
 
 ```python
-timeseries = client.Timeseries().load({"id": "timeseries_id"})
+timeseries = client.Timeseries().load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -571,8 +607,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -620,9 +657,9 @@ stores the returned data and match criteria internally.
 
 ```python
 convert = client.Convert()
-convert.load({"id": "example_id"})
+convert.load()
 
-# convert.data_get() now returns the loaded convert data
+# convert.data_get() now returns the convert data from the last load
 # convert.match_get() returns the last match criteria
 ```
 

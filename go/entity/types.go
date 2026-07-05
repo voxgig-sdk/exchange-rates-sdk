@@ -18,8 +18,7 @@ type Convert struct {
 	Success bool `json:"success"`
 }
 
-// ConvertLoadMatch mirrors the convert fields as an all-optional match
-// filter (Go analog of Partial<Convert>).
+// ConvertLoadMatch is the typed request payload for Convert.LoadTyped.
 type ConvertLoadMatch struct {
 	Date *string `json:"date,omitempty"`
 	Free *bool `json:"free,omitempty"`
@@ -37,8 +36,7 @@ type GetApiRoot struct {
 	Version string `json:"version"`
 }
 
-// GetApiRootLoadMatch mirrors the get_api_root fields as an all-optional match
-// filter (Go analog of Partial<GetApiRoot>).
+// GetApiRootLoadMatch is the typed request payload for GetApiRoot.LoadTyped.
 type GetApiRootLoadMatch struct {
 	Documentation *string `json:"documentation,omitempty"`
 	Message *string `json:"message,omitempty"`
@@ -97,8 +95,7 @@ type Status struct {
 	Status string `json:"status"`
 }
 
-// StatusLoadMatch mirrors the status fields as an all-optional match
-// filter (Go analog of Partial<Status>).
+// StatusLoadMatch is the typed request payload for Status.LoadTyped.
 type StatusLoadMatch struct {
 	LastUpdate *string `json:"last_update,omitempty"`
 	NextUpdateExpected *string `json:"next_update_expected,omitempty"`
@@ -115,8 +112,7 @@ type Symbol struct {
 	Symbol map[string]any `json:"symbol"`
 }
 
-// SymbolLoadMatch mirrors the symbol fields as an all-optional match
-// filter (Go analog of Partial<Symbol>).
+// SymbolLoadMatch is the typed request payload for Symbol.LoadTyped.
 type SymbolLoadMatch struct {
 	Base *string `json:"base,omitempty"`
 	Count *int `json:"count,omitempty"`
@@ -135,8 +131,7 @@ type Timeseries struct {
 	Timeseries bool `json:"timeseries"`
 }
 
-// TimeseriesLoadMatch mirrors the timeseries fields as an all-optional match
-// filter (Go analog of Partial<Timeseries>).
+// TimeseriesLoadMatch is the typed request payload for Timeseries.LoadTyped.
 type TimeseriesLoadMatch struct {
 	Base *string `json:"base,omitempty"`
 	EndDate *string `json:"end_date,omitempty"`

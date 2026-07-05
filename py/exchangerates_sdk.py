@@ -221,49 +221,49 @@ class ExchangeRatesSDK:
 
 
     def Convert(self, data=None) -> "ConvertEntity":
-        """Entity factory: client.Convert().list({}) / client.Convert().load({"id": ...})."""
+        """Entity factory: client.Convert().list() / client.Convert().load({"id": ...})."""
         from entity.convert_entity import ConvertEntity
         return ConvertEntity(self, data)
 
 
     def GetApiRoot(self, data=None) -> "GetApiRootEntity":
-        """Entity factory: client.GetApiRoot().list({}) / client.GetApiRoot().load({"id": ...})."""
+        """Entity factory: client.GetApiRoot().list() / client.GetApiRoot().load({"id": ...})."""
         from entity.get_api_root_entity import GetApiRootEntity
         return GetApiRootEntity(self, data)
 
 
     def GetHistoricalRateForCurrencyAndDate(self, data=None) -> "GetHistoricalRateForCurrencyAndDateEntity":
-        """Entity factory: client.GetHistoricalRateForCurrencyAndDate().list({}) / client.GetHistoricalRateForCurrencyAndDate().load({"id": ...})."""
+        """Entity factory: client.GetHistoricalRateForCurrencyAndDate().list() / client.GetHistoricalRateForCurrencyAndDate().load({"id": ...})."""
         from entity.get_historical_rate_for_currency_and_date_entity import GetHistoricalRateForCurrencyAndDateEntity
         return GetHistoricalRateForCurrencyAndDateEntity(self, data)
 
 
     def GetHistoricalRatesForDate(self, data=None) -> "GetHistoricalRatesForDateEntity":
-        """Entity factory: client.GetHistoricalRatesForDate().list({}) / client.GetHistoricalRatesForDate().load({"id": ...})."""
+        """Entity factory: client.GetHistoricalRatesForDate().list() / client.GetHistoricalRatesForDate().load({"id": ...})."""
         from entity.get_historical_rates_for_date_entity import GetHistoricalRatesForDateEntity
         return GetHistoricalRatesForDateEntity(self, data)
 
 
     def Latest(self, data=None) -> "LatestEntity":
-        """Entity factory: client.Latest().list({}) / client.Latest().load({"id": ...})."""
+        """Entity factory: client.Latest().list() / client.Latest().load({"id": ...})."""
         from entity.latest_entity import LatestEntity
         return LatestEntity(self, data)
 
 
     def Status(self, data=None) -> "StatusEntity":
-        """Entity factory: client.Status().list({}) / client.Status().load({"id": ...})."""
+        """Entity factory: client.Status().list() / client.Status().load({"id": ...})."""
         from entity.status_entity import StatusEntity
         return StatusEntity(self, data)
 
 
     def Symbol(self, data=None) -> "SymbolEntity":
-        """Entity factory: client.Symbol().list({}) / client.Symbol().load({"id": ...})."""
+        """Entity factory: client.Symbol().list() / client.Symbol().load({"id": ...})."""
         from entity.symbol_entity import SymbolEntity
         return SymbolEntity(self, data)
 
 
     def Timeseries(self, data=None) -> "TimeseriesEntity":
-        """Entity factory: client.Timeseries().list({}) / client.Timeseries().load({"id": ...})."""
+        """Entity factory: client.Timeseries().list() / client.Timeseries().load({"id": ...})."""
         from entity.timeseries_entity import TimeseriesEntity
         return TimeseriesEntity(self, data)
 

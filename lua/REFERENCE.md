@@ -119,12 +119,12 @@ local convert = client:Convert(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | Yes |  |
-| `free` | ``$BOOLEAN`` | No |  |
-| `info` | ``$OBJECT`` | Yes |  |
-| `query` | ``$OBJECT`` | Yes |  |
-| `result` | ``$NUMBER`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
+| `date` | `string` | Yes |  |
+| `free` | `boolean` | No |  |
+| `info` | `table` | Yes |  |
+| `query` | `table` | Yes |  |
+| `result` | `number` | Yes |  |
+| `success` | `boolean` | Yes |  |
 
 ### Operations
 
@@ -133,7 +133,7 @@ local convert = client:Convert(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Convert():load({ id = "convert_id" })
+local result, err = client:Convert():load()
 ```
 
 ### Common Methods
@@ -176,10 +176,10 @@ local get_api_root = client:GetApiRoot(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `documentation` | ``$STRING`` | Yes |  |
-| `message` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `documentation` | `string` | Yes |  |
+| `message` | `string` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -188,7 +188,7 @@ local get_api_root = client:GetApiRoot(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:GetApiRoot():load({ id = "get_api_root_id" })
+local result, err = client:GetApiRoot():load()
 ```
 
 ### Common Methods
@@ -231,11 +231,11 @@ local get_historical_rate_for_currency_and_date = client:GetHistoricalRateForCur
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `date` | `string` | Yes |  |
+| `rate` | `table` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `timestamp` | `number` | Yes |  |
 
 ### Operations
 
@@ -244,7 +244,7 @@ local get_historical_rate_for_currency_and_date = client:GetHistoricalRateForCur
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:GetHistoricalRateForCurrencyAndDate():load({ id = "get_historical_rate_for_currency_and_date_id" })
+local result, err = client:GetHistoricalRateForCurrencyAndDate():load()
 ```
 
 ### Common Methods
@@ -287,11 +287,11 @@ local get_historical_rates_for_date = client:GetHistoricalRatesForDate(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `date` | `string` | Yes |  |
+| `rate` | `table` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `timestamp` | `number` | Yes |  |
 
 ### Operations
 
@@ -343,11 +343,11 @@ local latest = client:Latest(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `date` | `string` | Yes |  |
+| `rate` | `table` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `timestamp` | `number` | Yes |  |
 
 ### Operations
 
@@ -399,10 +399,10 @@ local status = client:Status(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `last_update` | ``$STRING`` | Yes |  |
-| `next_update_expected` | ``$STRING`` | Yes |  |
-| `stale` | ``$BOOLEAN`` | Yes |  |
-| `status` | ``$STRING`` | Yes |  |
+| `last_update` | `string` | Yes |  |
+| `next_update_expected` | `string` | Yes |  |
+| `stale` | `boolean` | Yes |  |
+| `status` | `string` | Yes |  |
 
 ### Operations
 
@@ -411,7 +411,7 @@ local status = client:Status(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Status():load({ id = "status_id" })
+local result, err = client:Status():load()
 ```
 
 ### Common Methods
@@ -454,11 +454,11 @@ local symbol = client:Symbol(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `count` | ``$INTEGER`` | Yes |  |
-| `note` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `symbol` | ``$OBJECT`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `count` | `number` | Yes |  |
+| `note` | `string` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `symbol` | `table` | Yes |  |
 
 ### Operations
 
@@ -467,7 +467,7 @@ local symbol = client:Symbol(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Symbol():load({ id = "symbol_id" })
+local result, err = client:Symbol():load()
 ```
 
 ### Common Methods
@@ -510,12 +510,12 @@ local timeseries = client:Timeseries(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `end_date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `start_date` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | Yes |  |
-| `timeseries` | ``$BOOLEAN`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `end_date` | `string` | Yes |  |
+| `rate` | `table` | Yes |  |
+| `start_date` | `string` | Yes |  |
+| `success` | `boolean` | Yes |  |
+| `timeseries` | `boolean` | Yes |  |
 
 ### Operations
 
@@ -524,7 +524,7 @@ local timeseries = client:Timeseries(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Timeseries():load({ id = "timeseries_id" })
+local result, err = client:Timeseries():load()
 ```
 
 ### Common Methods

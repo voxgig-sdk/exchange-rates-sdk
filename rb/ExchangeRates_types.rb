@@ -37,7 +37,7 @@ Convert = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Convert#load (any subset of Convert fields).
+# Request payload for Convert#load.
 #
 # @!attribute [rw] date
 #   @return [String, nil]
@@ -87,7 +87,7 @@ GetApiRoot = Struct.new(
   keyword_init: true
 )
 
-# Match filter for GetApiRoot#load (any subset of GetApiRoot fields).
+# Request payload for GetApiRoot#load.
 #
 # @!attribute [rw] documentation
 #   @return [String, nil]
@@ -235,7 +235,7 @@ Status = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Status#load (any subset of Status fields).
+# Request payload for Status#load.
 #
 # @!attribute [rw] last_update
 #   @return [String, nil]
@@ -281,7 +281,7 @@ Symbol = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Symbol#load (any subset of Symbol fields).
+# Request payload for Symbol#load.
 #
 # @!attribute [rw] base
 #   @return [String, nil]
@@ -335,7 +335,7 @@ Timeseries = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Timeseries#load (any subset of Timeseries fields).
+# Request payload for Timeseries#load.
 #
 # @!attribute [rw] base
 #   @return [String, nil]

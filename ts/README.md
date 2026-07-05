@@ -4,6 +4,11 @@
 
 The TypeScript SDK for the ExchangeRates API — a type-safe, entity-oriented client with full async/await support.
 
+The API is exposed as capitalised, semantic **Entities** — e.g.
+`client.Convert()` — each with a small set of operations (`load`)
+instead of raw URL paths and query parameters. This keeps the surface
+predictable and low-friction for both humans and AI agents.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -36,10 +41,39 @@ const client = new ExchangeRatesSDK({
 
 ```ts
 try {
-  const convert = await client.Convert().load({ id: 'example_id' })
+  const convert = await client.Convert().load()
   console.log(convert)
 } catch (err) {
   console.error('load failed:', err)
+}
+```
+
+
+## Error handling
+
+Entity operations reject on failure, so wrap them in `try` / `catch`:
+
+```ts
+try {
+  const convert = await client.Convert().load()
+  console.log(convert)
+} catch (err) {
+  console.error('load failed:', err)
+}
+```
+
+The low-level `direct()` method does **not** throw — it returns the
+value or an `Error`, so check the result before using it:
+
+```ts
+const result = await client.direct({
+  path: '/api/resource/{id}',
+  method: 'GET',
+  params: { id: 'example_id' },
+})
+
+if (result instanceof Error) {
+  throw result
 }
 ```
 
@@ -88,7 +122,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ExchangeRatesSDK.test()
 
-const convert = await client.Convert().load({ id: 'test01' })
+const convert = await client.Convert().load()
 // convert is a bare entity populated with mock response data
 console.log(convert)
 ```
@@ -107,12 +141,12 @@ Entity instances remember their last match and data:
 ```ts
 const entity = client.Convert()
 
-// First call sets internal match
-await entity.load({ id: 'example' })
+// First call runs the operation and stores its result
+await entity.load()
 
-// Subsequent calls reuse the stored match
+// Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data.id) // 'example'
+console.log(data)
 ```
 
 ### Add custom middleware
@@ -212,12 +246,8 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
-| `data` | `data(data?): any` | Get or set entity data. |
-| `match` | `match(match?): any` | Get or set entity match criteria. |
+| `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
+| `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): ExchangeRatesSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
@@ -227,10 +257,7 @@ All entities share the same interface.
 Entity operations resolve to the entity data directly — there is no
 result envelope:
 
-- `load`, `create` and `update` resolve to a single entity object.
-- `list` resolves to an **array** of entity objects (iterate it directly;
-  there is no `.data` and no `.ok`).
-- `remove` resolves to `void`.
+- `load` resolves to a single entity object.
 
 On a failed request these methods **throw**, so wrap calls in
 `try`/`catch` to handle errors. Only `direct()` returns the result
@@ -397,17 +424,17 @@ Create an instance: `const convert = client.Convert()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `free` | ``$BOOLEAN`` |  |
-| `info` | ``$OBJECT`` |  |
-| `query` | ``$OBJECT`` |  |
-| `result` | ``$NUMBER`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `date` | `string` |  |
+| `free` | `boolean` |  |
+| `info` | `Record<string, any>` |  |
+| `query` | `Record<string, any>` |  |
+| `result` | `number` |  |
+| `success` | `boolean` |  |
 
 #### Example: Load
 
 ```ts
-const convert = await client.Convert().load({ id: 'convert_id' })
+const convert = await client.Convert().load()
 ```
 
 
@@ -425,15 +452,15 @@ Create an instance: `const get_api_root = client.GetApiRoot()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `documentation` | ``$STRING`` |  |
-| `message` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `version` | ``$STRING`` |  |
+| `documentation` | `string` |  |
+| `message` | `string` |  |
+| `success` | `boolean` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const get_api_root = await client.GetApiRoot().load({ id: 'get_api_root_id' })
+const get_api_root = await client.GetApiRoot().load()
 ```
 
 
@@ -451,16 +478,16 @@ Create an instance: `const get_historical_rate_for_currency_and_date = client.Ge
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timestamp` | ``$INTEGER`` |  |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rate` | `Record<string, any>` |  |
+| `success` | `boolean` |  |
+| `timestamp` | `number` |  |
 
 #### Example: Load
 
 ```ts
-const get_historical_rate_for_currency_and_date = await client.GetHistoricalRateForCurrencyAndDate().load({ id: 'get_historical_rate_for_currency_and_date_id' })
+const get_historical_rate_for_currency_and_date = await client.GetHistoricalRateForCurrencyAndDate().load()
 ```
 
 
@@ -478,11 +505,11 @@ Create an instance: `const get_historical_rates_for_date = client.GetHistoricalR
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timestamp` | ``$INTEGER`` |  |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rate` | `Record<string, any>` |  |
+| `success` | `boolean` |  |
+| `timestamp` | `number` |  |
 
 #### Example: Load
 
@@ -505,11 +532,11 @@ Create an instance: `const latest = client.Latest()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timestamp` | ``$INTEGER`` |  |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rate` | `Record<string, any>` |  |
+| `success` | `boolean` |  |
+| `timestamp` | `number` |  |
 
 #### Example: Load
 
@@ -532,15 +559,15 @@ Create an instance: `const status = client.Status()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `last_update` | ``$STRING`` |  |
-| `next_update_expected` | ``$STRING`` |  |
-| `stale` | ``$BOOLEAN`` |  |
-| `status` | ``$STRING`` |  |
+| `last_update` | `string` |  |
+| `next_update_expected` | `string` |  |
+| `stale` | `boolean` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const status = await client.Status().load({ id: 'status_id' })
+const status = await client.Status().load()
 ```
 
 
@@ -558,16 +585,16 @@ Create an instance: `const symbol = client.Symbol()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `count` | ``$INTEGER`` |  |
-| `note` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `symbol` | ``$OBJECT`` |  |
+| `base` | `string` |  |
+| `count` | `number` |  |
+| `note` | `string` |  |
+| `success` | `boolean` |  |
+| `symbol` | `Record<string, any>` |  |
 
 #### Example: Load
 
 ```ts
-const symbol = await client.Symbol().load({ id: 'symbol_id' })
+const symbol = await client.Symbol().load()
 ```
 
 
@@ -585,26 +612,30 @@ Create an instance: `const timeseries = client.Timeseries()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `end_date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `start_date` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timeseries` | ``$BOOLEAN`` |  |
+| `base` | `string` |  |
+| `end_date` | `string` |  |
+| `rate` | `Record<string, any>` |  |
+| `start_date` | `string` |  |
+| `success` | `boolean` |  |
+| `timeseries` | `boolean` |  |
 
 #### Example: Load
 
 ```ts
-const timeseries = await client.Timeseries().load({ id: 'timeseries_id' })
+const timeseries = await client.Timeseries().load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -621,11 +652,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller.
-
-An unexpected exception triggers the `PreUnexpected` hook before
-propagating.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -667,10 +696,10 @@ calls on the same instance can rely on this state.
 
 ```ts
 const convert = client.Convert()
-await convert.load({ id: "example_id" })
+await convert.load()
 
-// convert.data() now returns the loaded convert data
-// convert.match() returns { id: "example_id" }
+// convert.data() now returns the convert data from the last `load`
+// convert.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

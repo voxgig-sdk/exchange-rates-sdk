@@ -15,6 +15,12 @@
 ---@field success boolean
 
 ---@class ConvertLoadMatch
+---@field date? string
+---@field free? boolean
+---@field info? table
+---@field query? table
+---@field result? number
+---@field success? boolean
 
 ---@class GetApiRoot
 ---@field documentation string
@@ -23,6 +29,10 @@
 ---@field version string
 
 ---@class GetApiRootLoadMatch
+---@field documentation? string
+---@field message? string
+---@field success? boolean
+---@field version? string
 
 ---@class GetHistoricalRateForCurrencyAndDate
 ---@field base string
@@ -62,6 +72,10 @@
 ---@field status string
 
 ---@class StatusLoadMatch
+---@field last_update? string
+---@field next_update_expected? string
+---@field stale? boolean
+---@field status? string
 
 ---@class Symbol
 ---@field base string
@@ -71,6 +85,11 @@
 ---@field symbol table
 
 ---@class SymbolLoadMatch
+---@field base? string
+---@field count? number
+---@field note? string
+---@field success? boolean
+---@field symbol? table
 
 ---@class Timeseries
 ---@field base string
@@ -81,6 +100,12 @@
 ---@field timeseries boolean
 
 ---@class TimeseriesLoadMatch
+---@field base? string
+---@field end_date? string
+---@field rate? table
+---@field start_date? string
+---@field success? boolean
+---@field timeseries? boolean
 
 local M = {}
 

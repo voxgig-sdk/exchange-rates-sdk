@@ -23,7 +23,7 @@ class Convert
     public bool $success;
 }
 
-/** Match filter for Convert#load (any subset of Convert fields). */
+/** Request payload for Convert#load. */
 class ConvertLoadMatch
 {
     public ?string $date = null;
@@ -43,7 +43,7 @@ class GetApiRoot
     public string $version;
 }
 
-/** Match filter for GetApiRoot#load (any subset of GetApiRoot fields). */
+/** Request payload for GetApiRoot#load. */
 class GetApiRootLoadMatch
 {
     public ?string $documentation = null;
@@ -110,7 +110,7 @@ class Status
     public string $status;
 }
 
-/** Match filter for Status#load (any subset of Status fields). */
+/** Request payload for Status#load. */
 class StatusLoadMatch
 {
     public ?string $last_update = null;
@@ -129,7 +129,7 @@ class Symbol
     public array $symbol;
 }
 
-/** Match filter for Symbol#load (any subset of Symbol fields). */
+/** Request payload for Symbol#load. */
 class SymbolLoadMatch
 {
     public ?string $base = null;
@@ -150,7 +150,7 @@ class Timeseries
     public bool $timeseries;
 }
 
-/** Match filter for Timeseries#load (any subset of Timeseries fields). */
+/** Request payload for Timeseries#load. */
 class TimeseriesLoadMatch
 {
     public ?string $base = null;

@@ -4,6 +4,8 @@
 
 The PHP SDK for the ExchangeRates API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Convert()` — with named operations (`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -36,10 +38,41 @@ $client = new ExchangeRatesSDK([
 ```php
 try {
     // load() returns the bare Convert record (throws on error).
-    $convert = $client->Convert()->load(["id" => "example_id"]);
+    $convert = $client->Convert()->load();
     print_r($convert);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
+}
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $convert = $client->Convert()->load();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -63,7 +96,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -84,16 +120,13 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = ExchangeRatesSDK::test([
-    "entity" => ["convert" => ["test01" => ["id" => "test01"]]],
-]);
+$client = ExchangeRatesSDK::test();
 
-// load() returns the bare mock record (throws on error).
-$convert = $client->Convert()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$convert = $client->Convert()->load();
 print_r($convert);
 ```
 
@@ -191,10 +224,6 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -353,18 +382,18 @@ Create an instance: `$convert = $client->Convert();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `free` | ``$BOOLEAN`` |  |
-| `info` | ``$OBJECT`` |  |
-| `query` | ``$OBJECT`` |  |
-| `result` | ``$NUMBER`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `date` | `string` |  |
+| `free` | `bool` |  |
+| `info` | `array` |  |
+| `query` | `array` |  |
+| `result` | `float` |  |
+| `success` | `bool` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Convert record (throws on error).
-$convert = $client->Convert()->load(["id" => "convert_id"]);
+$convert = $client->Convert()->load();
 ```
 
 
@@ -382,16 +411,16 @@ Create an instance: `$get_api_root = $client->GetApiRoot();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `documentation` | ``$STRING`` |  |
-| `message` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `version` | ``$STRING`` |  |
+| `documentation` | `string` |  |
+| `message` | `string` |  |
+| `success` | `bool` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare GetApiRoot record (throws on error).
-$get_api_root = $client->GetApiRoot()->load(["id" => "get_api_root_id"]);
+$get_api_root = $client->GetApiRoot()->load();
 ```
 
 
@@ -409,17 +438,17 @@ Create an instance: `$get_historical_rate_for_currency_and_date = $client->GetHi
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timestamp` | ``$INTEGER`` |  |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rate` | `array` |  |
+| `success` | `bool` |  |
+| `timestamp` | `int` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare GetHistoricalRateForCurrencyAndDate record (throws on error).
-$get_historical_rate_for_currency_and_date = $client->GetHistoricalRateForCurrencyAndDate()->load(["id" => "get_historical_rate_for_currency_and_date_id"]);
+$get_historical_rate_for_currency_and_date = $client->GetHistoricalRateForCurrencyAndDate()->load();
 ```
 
 
@@ -437,11 +466,11 @@ Create an instance: `$get_historical_rates_for_date = $client->GetHistoricalRate
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timestamp` | ``$INTEGER`` |  |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rate` | `array` |  |
+| `success` | `bool` |  |
+| `timestamp` | `int` |  |
 
 #### Example: Load
 
@@ -465,11 +494,11 @@ Create an instance: `$latest = $client->Latest();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timestamp` | ``$INTEGER`` |  |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rate` | `array` |  |
+| `success` | `bool` |  |
+| `timestamp` | `int` |  |
 
 #### Example: Load
 
@@ -493,16 +522,16 @@ Create an instance: `$status = $client->Status();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `last_update` | ``$STRING`` |  |
-| `next_update_expected` | ``$STRING`` |  |
-| `stale` | ``$BOOLEAN`` |  |
-| `status` | ``$STRING`` |  |
+| `last_update` | `string` |  |
+| `next_update_expected` | `string` |  |
+| `stale` | `bool` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Status record (throws on error).
-$status = $client->Status()->load(["id" => "status_id"]);
+$status = $client->Status()->load();
 ```
 
 
@@ -520,17 +549,17 @@ Create an instance: `$symbol = $client->Symbol();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `count` | ``$INTEGER`` |  |
-| `note` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `symbol` | ``$OBJECT`` |  |
+| `base` | `string` |  |
+| `count` | `int` |  |
+| `note` | `string` |  |
+| `success` | `bool` |  |
+| `symbol` | `array` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Symbol record (throws on error).
-$symbol = $client->Symbol()->load(["id" => "symbol_id"]);
+$symbol = $client->Symbol()->load();
 ```
 
 
@@ -548,27 +577,31 @@ Create an instance: `$timeseries = $client->Timeseries();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `end_date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `start_date` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `timeseries` | ``$BOOLEAN`` |  |
+| `base` | `string` |  |
+| `end_date` | `string` |  |
+| `rate` | `array` |  |
+| `start_date` | `string` |  |
+| `success` | `bool` |  |
+| `timeseries` | `bool` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Timeseries record (throws on error).
-$timeseries = $client->Timeseries()->load(["id" => "timeseries_id"]);
+$timeseries = $client->Timeseries()->load();
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -585,8 +618,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -635,10 +669,10 @@ stores the returned data and match criteria internally.
 
 ```php
 $convert = $client->Convert();
-$convert->load(["id" => "example_id"]);
+$convert->load();
 
-// $convert->dataGet() now returns the loaded convert data
-// $convert->matchGet() returns the last match criteria
+// $convert->data_get() now returns the convert data from the last load
+// $convert->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

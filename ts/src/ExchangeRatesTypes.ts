@@ -14,7 +14,14 @@ export interface Convert {
   success: boolean
 }
 
-export type ConvertLoadMatch = Partial<Convert>
+export interface ConvertLoadMatch {
+  date?: string
+  free?: boolean
+  info?: Record<string, any>
+  query?: Record<string, any>
+  result?: number
+  success?: boolean
+}
 
 export interface GetApiRoot {
   documentation: string
@@ -23,7 +30,12 @@ export interface GetApiRoot {
   version: string
 }
 
-export type GetApiRootLoadMatch = Partial<GetApiRoot>
+export interface GetApiRootLoadMatch {
+  documentation?: string
+  message?: string
+  success?: boolean
+  version?: string
+}
 
 export interface GetHistoricalRateForCurrencyAndDate {
   base: string
@@ -69,7 +81,12 @@ export interface Status {
   status: string
 }
 
-export type StatusLoadMatch = Partial<Status>
+export interface StatusLoadMatch {
+  last_update?: string
+  next_update_expected?: string
+  stale?: boolean
+  status?: string
+}
 
 export interface Symbol {
   base: string
@@ -79,7 +96,13 @@ export interface Symbol {
   symbol: Record<string, any>
 }
 
-export type SymbolLoadMatch = Partial<Symbol>
+export interface SymbolLoadMatch {
+  base?: string
+  count?: number
+  note?: string
+  success?: boolean
+  symbol?: Record<string, any>
+}
 
 export interface Timeseries {
   base: string
@@ -90,5 +113,12 @@ export interface Timeseries {
   timeseries: boolean
 }
 
-export type TimeseriesLoadMatch = Partial<Timeseries>
+export interface TimeseriesLoadMatch {
+  base?: string
+  end_date?: string
+  rate?: Record<string, any>
+  start_date?: string
+  success?: boolean
+  timeseries?: boolean
+}
 
