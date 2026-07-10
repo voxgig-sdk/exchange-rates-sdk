@@ -487,7 +487,7 @@ Create an instance: `const get_historical_rate_for_currency_and_date = client.Ge
 #### Example: Load
 
 ```ts
-const get_historical_rate_for_currency_and_date = await client.GetHistoricalRateForCurrencyAndDate().load()
+const get_historical_rate_for_currency_and_date = await client.GetHistoricalRateForCurrencyAndDate().load({ currency: 'currency', date: 'date' })
 ```
 
 

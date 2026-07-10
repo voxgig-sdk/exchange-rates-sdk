@@ -71,7 +71,7 @@ export interface Latest {
 }
 
 export interface LatestLoadMatch {
-  id: string
+  id?: string
 }
 
 export interface Status {

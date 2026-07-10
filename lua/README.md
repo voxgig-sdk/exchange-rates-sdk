@@ -426,7 +426,7 @@ Create an instance: `local get_historical_rate_for_currency_and_date = client:Ge
 #### Example: Load
 
 ```lua
-local get_historical_rate_for_currency_and_date, err = client:GetHistoricalRateForCurrencyAndDate():load()
+local get_historical_rate_for_currency_and_date, err = client:GetHistoricalRateForCurrencyAndDate():load({ currency = "currency", date = "date" })
 ```
 
 

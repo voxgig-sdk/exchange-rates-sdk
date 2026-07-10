@@ -84,7 +84,7 @@ class Latest(TypedDict):
     timestamp: int
 
 
-class LatestLoadMatch(TypedDict):
+class LatestLoadMatch(TypedDict, total=False):
     id: str
 
 

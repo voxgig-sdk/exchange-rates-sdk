@@ -244,7 +244,7 @@ local get_historical_rate_for_currency_and_date = client:GetHistoricalRateForCur
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:GetHistoricalRateForCurrencyAndDate():load()
+local result, err = client:GetHistoricalRateForCurrencyAndDate():load({ currency = "currency", date = "date" })
 ```
 
 ### Common Methods

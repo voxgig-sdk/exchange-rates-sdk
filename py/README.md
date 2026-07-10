@@ -442,7 +442,7 @@ Create an instance: `get_historical_rate_for_currency_and_date = client.GetHisto
 #### Example: Load
 
 ```python
-get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate().load()
+get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate().load({"currency": "currency", "date": "date"})
 ```
 
 

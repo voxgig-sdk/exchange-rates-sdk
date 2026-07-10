@@ -1,0 +1,10 @@
+# Entity Models
+
+@"convert.aontu"
+@"get_api_root.aontu"
+@"get_historical_rate_for_currency_and_date.aontu"
+@"get_historical_rates_for_date.aontu"
+@"latest.aontu"
+@"status.aontu"
+@"symbol.aontu"
+@"timeseries.aontu"

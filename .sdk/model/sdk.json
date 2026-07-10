@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -1085,14 +1082,24 @@
         "license": {
           "name": "MIT"
         },
+        "meta_source": "https://www.freepublicapis.com",
+        "security": {
+          "in": "header",
+          "name": "Authorization",
+          "prefix": "Bearer",
+          "scheme": "bearerAuth",
+          "type": "http"
+        },
         "servers": [
           {
             "description": "Production API",
             "url": "https://api.exchangeratesapi.com.au"
           }
         ],
+        "summary": "Official Reserve Bank of Australia (RBA) exchange rate data through a modern REST API.",
         "title": "RBA Exchange Rates API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://exchangeratesapi.com.au"
       },
       "option": {},
       "target": {
@@ -1145,6 +1152,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -1195,6 +1205,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

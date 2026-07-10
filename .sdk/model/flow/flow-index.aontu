@@ -1,0 +1,10 @@
+# Flows
+
+@"BasicConvertFlow.aontu"
+@"BasicGetApiRootFlow.aontu"
+@"BasicGetHistoricalRateForCurrencyAndDateFlow.aontu"
+@"BasicGetHistoricalRatesForDateFlow.aontu"
+@"BasicLatestFlow.aontu"
+@"BasicStatusFlow.aontu"
+@"BasicSymbolFlow.aontu"
+@"BasicTimeseriesFlow.aontu"

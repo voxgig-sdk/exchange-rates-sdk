@@ -11,15 +11,22 @@ main: {
       license: {
         name: "MIT"
       }
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Bearer"
+        scheme: "bearerAuth"
+        type: "http"
+      }
       servers: [
         {
           description: "Production API"
           url: "https://api.exchangeratesapi.com.au"
         }
       ]
+      summary: "Official Reserve Bank of Australia (RBA) exchange rate data through a modern REST API."
       title: "RBA Exchange Rates API"
       version: "1.0.0"
+      website: "https://exchangeratesapi.com.au"
     }
   }
-}
-

@@ -63,7 +63,7 @@
 ---@field timestamp number
 
 ---@class LatestLoadMatch
----@field id string
+---@field id? string
 
 ---@class Status
 ---@field last_update string

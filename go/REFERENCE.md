@@ -120,6 +120,7 @@ same parameters as `Direct()`.
 
 ```go
 convert := client.Convert(nil)
+fmt.Println(convert.GetName()) // "convert"
 ```
 
 ### Fields
@@ -141,6 +142,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Convert(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -170,7 +175,8 @@ Return the entity name.
 ## GetApiRootEntity
 
 ```go
-get_api_root := client.GetApiRoot(nil)
+getApiRoot := client.GetApiRoot(nil)
+fmt.Println(getApiRoot.GetName()) // "get_api_root"
 ```
 
 ### Fields
@@ -190,6 +196,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.GetApiRoot(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -219,7 +229,8 @@ Return the entity name.
 ## GetHistoricalRateForCurrencyAndDateEntity
 
 ```go
-get_historical_rate_for_currency_and_date := client.GetHistoricalRateForCurrencyAndDate(nil)
+getHistoricalRateForCurrencyAndDate := client.GetHistoricalRateForCurrencyAndDate(nil)
+fmt.Println(getHistoricalRateForCurrencyAndDate.GetName()) // "get_historical_rate_for_currency_and_date"
 ```
 
 ### Fields
@@ -239,7 +250,11 @@ get_historical_rate_for_currency_and_date := client.GetHistoricalRateForCurrency
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.GetHistoricalRateForCurrencyAndDate(nil).Load(nil, nil)
+result, err := client.GetHistoricalRateForCurrencyAndDate(nil).Load(map[string]any{"currency": "currency", "date": "date"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -269,7 +284,8 @@ Return the entity name.
 ## GetHistoricalRatesForDateEntity
 
 ```go
-get_historical_rates_for_date := client.GetHistoricalRatesForDate(nil)
+getHistoricalRatesForDate := client.GetHistoricalRatesForDate(nil)
+fmt.Println(getHistoricalRatesForDate.GetName()) // "get_historical_rates_for_date"
 ```
 
 ### Fields
@@ -290,6 +306,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.GetHistoricalRatesForDate(nil).Load(map[string]any{"id": "get_historical_rates_for_date_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -320,6 +340,7 @@ Return the entity name.
 
 ```go
 latest := client.Latest(nil)
+fmt.Println(latest.GetName()) // "latest"
 ```
 
 ### Fields
@@ -340,6 +361,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Latest(nil).Load(map[string]any{"id": "latest_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -370,6 +395,7 @@ Return the entity name.
 
 ```go
 status := client.Status(nil)
+fmt.Println(status.GetName()) // "status"
 ```
 
 ### Fields
@@ -389,6 +415,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Status(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -419,6 +449,7 @@ Return the entity name.
 
 ```go
 symbol := client.Symbol(nil)
+fmt.Println(symbol.GetName()) // "symbol"
 ```
 
 ### Fields
@@ -439,6 +470,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Symbol(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -469,6 +504,7 @@ Return the entity name.
 
 ```go
 timeseries := client.Timeseries(nil)
+fmt.Println(timeseries.GetName()) // "timeseries"
 ```
 
 ### Fields
@@ -490,6 +526,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Timeseries(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

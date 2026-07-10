@@ -417,7 +417,7 @@ fmt.Println(convert) // the loaded record
 
 ### GetApiRoot
 
-Create an instance: `get_api_root := client.GetApiRoot(nil)`
+Create an instance: `getApiRoot := client.GetApiRoot(nil)`
 
 #### Operations
 
@@ -437,17 +437,17 @@ Create an instance: `get_api_root := client.GetApiRoot(nil)`
 #### Example: Load
 
 ```go
-get_api_root, err := client.GetApiRoot(nil).Load(nil, nil)
+getApiRoot, err := client.GetApiRoot(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(get_api_root) // the loaded record
+fmt.Println(getApiRoot) // the loaded record
 ```
 
 
 ### GetHistoricalRateForCurrencyAndDate
 
-Create an instance: `get_historical_rate_for_currency_and_date := client.GetHistoricalRateForCurrencyAndDate(nil)`
+Create an instance: `getHistoricalRateForCurrencyAndDate := client.GetHistoricalRateForCurrencyAndDate(nil)`
 
 #### Operations
 
@@ -468,17 +468,17 @@ Create an instance: `get_historical_rate_for_currency_and_date := client.GetHist
 #### Example: Load
 
 ```go
-get_historical_rate_for_currency_and_date, err := client.GetHistoricalRateForCurrencyAndDate(nil).Load(nil, nil)
+getHistoricalRateForCurrencyAndDate, err := client.GetHistoricalRateForCurrencyAndDate(nil).Load(map[string]any{"currency": "currency", "date": "date"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(get_historical_rate_for_currency_and_date) // the loaded record
+fmt.Println(getHistoricalRateForCurrencyAndDate) // the loaded record
 ```
 
 
 ### GetHistoricalRatesForDate
 
-Create an instance: `get_historical_rates_for_date := client.GetHistoricalRatesForDate(nil)`
+Create an instance: `getHistoricalRatesForDate := client.GetHistoricalRatesForDate(nil)`
 
 #### Operations
 
@@ -499,11 +499,11 @@ Create an instance: `get_historical_rates_for_date := client.GetHistoricalRatesF
 #### Example: Load
 
 ```go
-get_historical_rates_for_date, err := client.GetHistoricalRatesForDate(nil).Load(map[string]any{"id": "get_historical_rates_for_date_id"}, nil)
+getHistoricalRatesForDate, err := client.GetHistoricalRatesForDate(nil).Load(map[string]any{"id": "get_historical_rates_for_date_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(get_historical_rates_for_date) // the loaded record
+fmt.Println(getHistoricalRatesForDate) // the loaded record
 ```
 
 

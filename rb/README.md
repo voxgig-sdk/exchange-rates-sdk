@@ -438,7 +438,7 @@ Create an instance: `get_historical_rate_for_currency_and_date = client.GetHisto
 
 ```ruby
 # load returns the bare GetHistoricalRateForCurrencyAndDate record (raises on error).
-get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate.load()
+get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate.load({ "currency" => "currency", "date" => "date" })
 ```
 
 

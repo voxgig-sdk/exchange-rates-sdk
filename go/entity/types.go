@@ -84,7 +84,7 @@ type Latest struct {
 
 // LatestLoadMatch is the typed request payload for Latest.LoadTyped.
 type LatestLoadMatch struct {
-	Id string `json:"id"`
+	Id *string `json:"id,omitempty"`
 }
 
 // Status is the typed data model for the status entity.

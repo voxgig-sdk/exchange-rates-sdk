@@ -239,7 +239,7 @@ get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyA
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.GetHistoricalRateForCurrencyAndDate().load()
+result = client.GetHistoricalRateForCurrencyAndDate().load({"currency": "currency", "date": "date"})
 ```
 
 ### Common Methods
