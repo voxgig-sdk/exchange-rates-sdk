@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- ExchangeRates SDK exists test
 
 local sdk = require("exchange-rates_sdk")
 
