@@ -37,7 +37,7 @@ $client = new ExchangeRatesSDK([
 
 ```php
 try {
-    // load() returns the bare Convert record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Convert record (throws on error).
     $convert = $client->Convert()->load();
     print_r($convert);
 } catch (\Throwable $err) {
@@ -53,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $convert = $client->Convert()->load();
+    $latest = $client->Latest()->load();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -120,14 +120,18 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = ExchangeRatesSDK::test();
+$client = ExchangeRatesSDK::test([
+    "entity" => ["latest" => ["test01" => ["id" => "test01"]]],
+]);
 
-// Entity ops return the bare mock record (throws on error).
-$convert = $client->Convert()->load();
-print_r($convert);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$latest = $client->Latest()->load(["id" => "test01"]);
+print_r($latest);
 ```
 
 ### Use a custom fetch function
@@ -233,7 +237,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -285,7 +289,7 @@ API path: `/`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -299,7 +303,7 @@ API path: `/{date}/{currency}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -313,7 +317,7 @@ API path: `/{date}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -338,10 +342,8 @@ API path: `/status`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `count` |  |
-| `note` |  |
-| `success` |  |
+| `country` |  |
+| `name` |  |
 | `symbol` |  |
 
 Operations: Load.
@@ -354,7 +356,7 @@ API path: `/symbols`
 | --- | --- |
 | `base` |  |
 | `end_date` |  |
-| `rate` |  |
+| `rates` |  |
 | `start_date` |  |
 | `success` |  |
 | `timeseries` |  |
@@ -392,7 +394,7 @@ Create an instance: `$convert = $client->Convert();`
 #### Example: Load
 
 ```php
-// load() returns the bare Convert record (throws on error).
+// load() returns the ENTITY — call data_get() for the Convert record (throws on error).
 $convert = $client->Convert()->load();
 ```
 
@@ -419,7 +421,7 @@ Create an instance: `$get_api_root = $client->GetApiRoot();`
 #### Example: Load
 
 ```php
-// load() returns the bare GetApiRoot record (throws on error).
+// load() returns the ENTITY — call data_get() for the GetApiRoot record (throws on error).
 $get_api_root = $client->GetApiRoot()->load();
 ```
 
@@ -440,14 +442,14 @@ Create an instance: `$get_historical_rate_for_currency_and_date = $client->GetHi
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `array` |  |
+| `rates` | `array` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare GetHistoricalRateForCurrencyAndDate record (throws on error).
+// load() returns the ENTITY — call data_get() for the GetHistoricalRateForCurrencyAndDate record (throws on error).
 $get_historical_rate_for_currency_and_date = $client->GetHistoricalRateForCurrencyAndDate()->load(["currency" => "currency", "date" => "date"]);
 ```
 
@@ -468,14 +470,14 @@ Create an instance: `$get_historical_rates_for_date = $client->GetHistoricalRate
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `array` |  |
+| `rates` | `array` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare GetHistoricalRatesForDate record (throws on error).
+// load() returns the ENTITY — call data_get() for the GetHistoricalRatesForDate record (throws on error).
 $get_historical_rates_for_date = $client->GetHistoricalRatesForDate()->load(["id" => "get_historical_rates_for_date_id"]);
 ```
 
@@ -496,14 +498,14 @@ Create an instance: `$latest = $client->Latest();`
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `array` |  |
+| `rates` | `array` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Latest record (throws on error).
+// load() returns the ENTITY — call data_get() for the Latest record (throws on error).
 $latest = $client->Latest()->load(["id" => "latest_id"]);
 ```
 
@@ -530,7 +532,7 @@ Create an instance: `$status = $client->Status();`
 #### Example: Load
 
 ```php
-// load() returns the bare Status record (throws on error).
+// load() returns the ENTITY — call data_get() for the Status record (throws on error).
 $status = $client->Status()->load();
 ```
 
@@ -549,16 +551,14 @@ Create an instance: `$symbol = $client->Symbol();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `string` |  |
-| `count` | `int` |  |
-| `note` | `string` |  |
-| `success` | `bool` |  |
-| `symbol` | `array` |  |
+| `country` | `string` |  |
+| `name` | `string` |  |
+| `symbol` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Symbol record (throws on error).
+// load() returns the ENTITY — call data_get() for the Symbol record (throws on error).
 $symbol = $client->Symbol()->load();
 ```
 
@@ -579,7 +579,7 @@ Create an instance: `$timeseries = $client->Timeseries();`
 | --- | --- | --- |
 | `base` | `string` |  |
 | `end_date` | `string` |  |
-| `rate` | `array` |  |
+| `rates` | `array` |  |
 | `start_date` | `string` |  |
 | `success` | `bool` |  |
 | `timeseries` | `bool` |  |
@@ -587,7 +587,7 @@ Create an instance: `$timeseries = $client->Timeseries();`
 #### Example: Load
 
 ```php
-// load() returns the bare Timeseries record (throws on error).
+// load() returns the ENTITY — call data_get() for the Timeseries record (throws on error).
 $timeseries = $client->Timeseries()->load();
 ```
 
@@ -668,11 +668,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$convert = $client->Convert();
-$convert->load();
+$latest = $client->Latest();
+$latest->load();
 
-// $convert->data_get() now returns the convert data from the last load
-// $convert->match_get() returns the last match criteria
+// $latest->data_get() now returns the latest data from the last load
+// $latest->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

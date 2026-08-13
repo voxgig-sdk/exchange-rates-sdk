@@ -20,6 +20,7 @@ guide: {
   entity: get_historical_rate_for_currency_and_date: {
     path: "/{date}/{currency}": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.rates`")|top
     }
   }
 
@@ -27,16 +28,19 @@ guide: {
     path: "/{date}": {
       rename: param: "date": *"id"
       op: load: method: *GET
+      op: load: transform: res: *("`body.rates`")|top
     }
   }
 
   entity: latest: {
     path: "/latest": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.rates`")|top
     }
     path: "/latest/{currency}": {
       rename: param: "currency": *"id"
       op: load: method: *GET
+      op: load: transform: res: *("`body.rates`")|top
     }
   }
 
@@ -49,12 +53,14 @@ guide: {
   entity: symbol: {
     path: "/symbols": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.symbols`")|top
     }
   }
 
   entity: timeseries: {
     path: "/timeseries": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.rates`")|top
     }
   }
 

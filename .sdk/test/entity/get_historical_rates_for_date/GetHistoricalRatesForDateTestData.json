@@ -4,7 +4,7 @@
       "GET_HISTORICAL_RATES_FOR_DATE00": {
         "base": "s32",
         "date": "s33",
-        "rate": {},
+        "rates": {},
         "success": false,
         "timestamp": "s36",
         "id": "GET_HISTORICAL_RATES_FOR_DATE00"
@@ -12,7 +12,7 @@
       "GET_HISTORICAL_RATES_FOR_DATE01": {
         "base": "s64",
         "date": "s65",
-        "rate": {},
+        "rates": {},
         "success": false,
         "timestamp": "s68",
         "id": "GET_HISTORICAL_RATES_FOR_DATE01"
@@ -20,7 +20,7 @@
       "GET_HISTORICAL_RATES_FOR_DATE02": {
         "base": "s96",
         "date": "s97",
-        "rate": {},
+        "rates": {},
         "success": false,
         "timestamp": "s9a",
         "id": "GET_HISTORICAL_RATES_FOR_DATE02"
@@ -32,7 +32,7 @@
       "get_historical_rates_for_date_ref01": {
         "base": "sc8",
         "date": "sc9",
-        "rate": {},
+        "rates": {},
         "success": false,
         "timestamp": "scc"
       }

@@ -233,11 +233,11 @@ $get_historical_rate_for_currency_and_date = $client->GetHistoricalRateForCurren
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `date` | `string` | Yes |  |
-| `rate` | `array` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timestamp` | `int` | Yes |  |
+| `base` | `string` | No |  |
+| `date` | `string` | No |  |
+| `rates` | `array` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `int` | No |  |
 
 ### Operations
 
@@ -289,11 +289,11 @@ $get_historical_rates_for_date = $client->GetHistoricalRatesForDate();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `date` | `string` | Yes |  |
-| `rate` | `array` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timestamp` | `int` | Yes |  |
+| `base` | `string` | No |  |
+| `date` | `string` | No |  |
+| `rates` | `array` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `int` | No |  |
 
 ### Operations
 
@@ -345,11 +345,11 @@ $latest = $client->Latest();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `date` | `string` | Yes |  |
-| `rate` | `array` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timestamp` | `int` | Yes |  |
+| `base` | `string` | No |  |
+| `date` | `string` | No |  |
+| `rates` | `array` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `int` | No |  |
 
 ### Operations
 
@@ -456,11 +456,9 @@ $symbol = $client->Symbol();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `count` | `int` | Yes |  |
-| `note` | `string` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `symbol` | `array` | Yes |  |
+| `country` | `string` | Yes |  |
+| `name` | `string` | Yes |  |
+| `symbol` | `string` | Yes |  |
 
 ### Operations
 
@@ -512,12 +510,12 @@ $timeseries = $client->Timeseries();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `end_date` | `string` | Yes |  |
-| `rate` | `array` | Yes |  |
-| `start_date` | `string` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timeseries` | `bool` | Yes |  |
+| `base` | `string` | No |  |
+| `end_date` | `string` | No |  |
+| `rates` | `array` | No |  |
+| `start_date` | `string` | No |  |
+| `success` | `bool` | No |  |
+| `timeseries` | `bool` | No |  |
 
 ### Operations
 

@@ -237,11 +237,11 @@ fmt.Println(getHistoricalRateForCurrencyAndDate.GetName()) // "get_historical_ra
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `date` | `string` | Yes |  |
-| `rate` | `map[string]any` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timestamp` | `int` | Yes |  |
+| `base` | `string` | No |  |
+| `date` | `string` | No |  |
+| `rates` | `map[string]any` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `int` | No |  |
 
 ### Operations
 
@@ -292,11 +292,11 @@ fmt.Println(getHistoricalRatesForDate.GetName()) // "get_historical_rates_for_da
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `date` | `string` | Yes |  |
-| `rate` | `map[string]any` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timestamp` | `int` | Yes |  |
+| `base` | `string` | No |  |
+| `date` | `string` | No |  |
+| `rates` | `map[string]any` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `int` | No |  |
 
 ### Operations
 
@@ -347,11 +347,11 @@ fmt.Println(latest.GetName()) // "latest"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `date` | `string` | Yes |  |
-| `rate` | `map[string]any` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timestamp` | `int` | Yes |  |
+| `base` | `string` | No |  |
+| `date` | `string` | No |  |
+| `rates` | `map[string]any` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `int` | No |  |
 
 ### Operations
 
@@ -456,11 +456,9 @@ fmt.Println(symbol.GetName()) // "symbol"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `count` | `int` | Yes |  |
-| `note` | `string` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `symbol` | `map[string]any` | Yes |  |
+| `country` | `string` | Yes |  |
+| `name` | `string` | Yes |  |
+| `symbol` | `string` | Yes |  |
 
 ### Operations
 
@@ -511,12 +509,12 @@ fmt.Println(timeseries.GetName()) // "timeseries"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `end_date` | `string` | Yes |  |
-| `rate` | `map[string]any` | Yes |  |
-| `start_date` | `string` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timeseries` | `bool` | Yes |  |
+| `base` | `string` | No |  |
+| `end_date` | `string` | No |  |
+| `rates` | `map[string]any` | No |  |
+| `start_date` | `string` | No |  |
+| `success` | `bool` | No |  |
+| `timeseries` | `bool` | No |  |
 
 ### Operations
 

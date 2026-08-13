@@ -55,11 +55,11 @@ class GetApiRootLoadMatch
 /** GetHistoricalRateForCurrencyAndDate entity data model. */
 class GetHistoricalRateForCurrencyAndDate
 {
-    public string $base;
-    public string $date;
-    public array $rate;
-    public bool $success;
-    public int $timestamp;
+    public ?string $base = null;
+    public ?string $date = null;
+    public ?array $rates = null;
+    public ?bool $success = null;
+    public ?int $timestamp = null;
 }
 
 /** Request payload for GetHistoricalRateForCurrencyAndDate#load. */
@@ -72,11 +72,11 @@ class GetHistoricalRateForCurrencyAndDateLoadMatch
 /** GetHistoricalRatesForDate entity data model. */
 class GetHistoricalRatesForDate
 {
-    public string $base;
-    public string $date;
-    public array $rate;
-    public bool $success;
-    public int $timestamp;
+    public ?string $base = null;
+    public ?string $date = null;
+    public ?array $rates = null;
+    public ?bool $success = null;
+    public ?int $timestamp = null;
 }
 
 /** Request payload for GetHistoricalRatesForDate#load. */
@@ -88,11 +88,11 @@ class GetHistoricalRatesForDateLoadMatch
 /** Latest entity data model. */
 class Latest
 {
-    public string $base;
-    public string $date;
-    public array $rate;
-    public bool $success;
-    public int $timestamp;
+    public ?string $base = null;
+    public ?string $date = null;
+    public ?array $rates = null;
+    public ?bool $success = null;
+    public ?int $timestamp = null;
 }
 
 /** Request payload for Latest#load. */
@@ -122,32 +122,28 @@ class StatusLoadMatch
 /** Symbol entity data model. */
 class Symbol
 {
-    public string $base;
-    public int $count;
-    public string $note;
-    public bool $success;
-    public array $symbol;
+    public string $country;
+    public string $name;
+    public string $symbol;
 }
 
 /** Request payload for Symbol#load. */
 class SymbolLoadMatch
 {
-    public ?string $base = null;
-    public ?int $count = null;
-    public ?string $note = null;
-    public ?bool $success = null;
-    public ?array $symbol = null;
+    public ?string $country = null;
+    public ?string $name = null;
+    public ?string $symbol = null;
 }
 
 /** Timeseries entity data model. */
 class Timeseries
 {
-    public string $base;
-    public string $end_date;
-    public array $rate;
-    public string $start_date;
-    public bool $success;
-    public bool $timeseries;
+    public ?string $base = null;
+    public ?string $end_date = null;
+    public ?array $rates = null;
+    public ?string $start_date = null;
+    public ?bool $success = null;
+    public ?bool $timeseries = null;
 }
 
 /** Request payload for Timeseries#load. */
@@ -155,7 +151,7 @@ class TimeseriesLoadMatch
 {
     public ?string $base = null;
     public ?string $end_date = null;
-    public ?array $rate = null;
+    public ?array $rates = null;
     public ?string $start_date = null;
     public ?bool $success = null;
     public ?bool $timeseries = null;

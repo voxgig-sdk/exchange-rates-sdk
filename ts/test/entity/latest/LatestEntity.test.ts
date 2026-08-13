@@ -26,8 +26,8 @@ import {
 describe('LatestEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when EXCHANGERATES_TEST_LIVE=TRUE.
-  afterEach(liveDelay('EXCHANGERATES_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when EXCHANGE_RATES_TEST_LIVE=TRUE.
+  afterEach(liveDelay('EXCHANGE_RATES_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ExchangeRatesSDK.test()
@@ -62,7 +62,7 @@ describe('LatestEntity', async () => {
     // LOAD
     const latest_ref01_ent = client.Latest()
     const latest_ref01_match_dt0: any = {}
-    const latest_ref01_data_dt0 = await latest_ref01_ent.load(latest_ref01_match_dt0)
+    const latest_ref01_data_dt0 = (await latest_ref01_ent.load(latest_ref01_match_dt0)).data()
     assert(null != latest_ref01_data_dt0)
 
 

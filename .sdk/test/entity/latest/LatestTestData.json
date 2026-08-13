@@ -4,7 +4,7 @@
       "LATEST00": {
         "base": "s32",
         "date": "s33",
-        "rate": {},
+        "rates": {},
         "success": false,
         "timestamp": "s36",
         "id": "LATEST00"
@@ -12,7 +12,7 @@
       "LATEST01": {
         "base": "s64",
         "date": "s65",
-        "rate": {},
+        "rates": {},
         "success": false,
         "timestamp": "s68",
         "id": "LATEST01"
@@ -20,7 +20,7 @@
       "LATEST02": {
         "base": "s96",
         "date": "s97",
-        "rate": {},
+        "rates": {},
         "success": false,
         "timestamp": "s9a",
         "id": "LATEST02"
@@ -32,7 +32,7 @@
       "latest_ref01": {
         "base": "sc8",
         "date": "sc9",
-        "rate": {},
+        "rates": {},
         "success": false,
         "timestamp": "scc"
       }

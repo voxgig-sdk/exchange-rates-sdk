@@ -38,11 +38,11 @@ export interface GetApiRootLoadMatch {
 }
 
 export interface GetHistoricalRateForCurrencyAndDate {
-  base: string
-  date: string
-  rate: Record<string, any>
-  success: boolean
-  timestamp: number
+  base?: string
+  date?: string
+  rates?: Record<string, any>
+  success?: boolean
+  timestamp?: number
 }
 
 export interface GetHistoricalRateForCurrencyAndDateLoadMatch {
@@ -51,11 +51,11 @@ export interface GetHistoricalRateForCurrencyAndDateLoadMatch {
 }
 
 export interface GetHistoricalRatesForDate {
-  base: string
-  date: string
-  rate: Record<string, any>
-  success: boolean
-  timestamp: number
+  base?: string
+  date?: string
+  rates?: Record<string, any>
+  success?: boolean
+  timestamp?: number
 }
 
 export interface GetHistoricalRatesForDateLoadMatch {
@@ -63,11 +63,11 @@ export interface GetHistoricalRatesForDateLoadMatch {
 }
 
 export interface Latest {
-  base: string
-  date: string
-  rate: Record<string, any>
-  success: boolean
-  timestamp: number
+  base?: string
+  date?: string
+  rates?: Record<string, any>
+  success?: boolean
+  timestamp?: number
 }
 
 export interface LatestLoadMatch {
@@ -89,34 +89,30 @@ export interface StatusLoadMatch {
 }
 
 export interface Symbol {
-  base: string
-  count: number
-  note: string
-  success: boolean
-  symbol: Record<string, any>
+  country: string
+  name: string
+  symbol: string
 }
 
 export interface SymbolLoadMatch {
-  base?: string
-  count?: number
-  note?: string
-  success?: boolean
-  symbol?: Record<string, any>
+  country?: string
+  name?: string
+  symbol?: string
 }
 
 export interface Timeseries {
-  base: string
-  end_date: string
-  rate: Record<string, any>
-  start_date: string
-  success: boolean
-  timeseries: boolean
+  base?: string
+  end_date?: string
+  rates?: Record<string, any>
+  start_date?: string
+  success?: boolean
+  timeseries?: boolean
 }
 
 export interface TimeseriesLoadMatch {
   base?: string
   end_date?: string
-  rate?: Record<string, any>
+  rates?: Record<string, any>
   start_date?: string
   success?: boolean
   timeseries?: boolean

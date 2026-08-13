@@ -26,8 +26,8 @@ import {
 describe('SymbolEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when EXCHANGERATES_TEST_LIVE=TRUE.
-  afterEach(liveDelay('EXCHANGERATES_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when EXCHANGE_RATES_TEST_LIVE=TRUE.
+  afterEach(liveDelay('EXCHANGE_RATES_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ExchangeRatesSDK.test()
@@ -62,7 +62,7 @@ describe('SymbolEntity', async () => {
     // LOAD
     const symbol_ref01_ent = client.Symbol()
     const symbol_ref01_match_dt0: any = {}
-    const symbol_ref01_data_dt0 = await symbol_ref01_ent.load(symbol_ref01_match_dt0)
+    const symbol_ref01_data_dt0 = (await symbol_ref01_ent.load(symbol_ref01_match_dt0)).data()
     assert(null != symbol_ref01_data_dt0)
 
 

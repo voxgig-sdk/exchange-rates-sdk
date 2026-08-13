@@ -44,7 +44,7 @@ func TestLatestEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set EXCHANGERATES_TEST_LATEST_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set EXCHANGE_RATES_TEST_LATEST_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -110,38 +110,38 @@ func latestBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("EXCHANGERATES_TEST_LATEST_ENTID")
+	entidEnvRaw := os.Getenv("EXCHANGE_RATES_TEST_LATEST_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"EXCHANGERATES_TEST_LATEST_ENTID": idmap,
-		"EXCHANGERATES_TEST_LIVE":      "FALSE",
-		"EXCHANGERATES_TEST_EXPLAIN":   "FALSE",
-		"EXCHANGERATES_APIKEY":         "NONE",
+		"EXCHANGE_RATES_TEST_LATEST_ENTID": idmap,
+		"EXCHANGE_RATES_TEST_LIVE":      "FALSE",
+		"EXCHANGE_RATES_TEST_EXPLAIN":   "FALSE",
+		"EXCHANGE_RATES_APIKEY":         "NONE",
 	})
 
-	idmapResolved := core.ToMapAny(env["EXCHANGERATES_TEST_LATEST_ENTID"])
+	idmapResolved := core.ToMapAny(env["EXCHANGE_RATES_TEST_LATEST_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["EXCHANGERATES_TEST_LIVE"] == "TRUE" {
+	if env["EXCHANGE_RATES_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["EXCHANGERATES_APIKEY"],
+				"apikey": env["EXCHANGE_RATES_APIKEY"],
 			},
 			extra,
 		})
 		client = sdk.NewExchangeRatesSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["EXCHANGERATES_TEST_LIVE"] == "TRUE"
+	live := env["EXCHANGE_RATES_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["EXCHANGERATES_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["EXCHANGE_RATES_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

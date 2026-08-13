@@ -35,32 +35,32 @@
 ---@field version? string
 
 ---@class GetHistoricalRateForCurrencyAndDate
----@field base string
----@field date string
----@field rate table
----@field success boolean
----@field timestamp number
+---@field base? string
+---@field date? string
+---@field rates? table
+---@field success? boolean
+---@field timestamp? number
 
 ---@class GetHistoricalRateForCurrencyAndDateLoadMatch
 ---@field currency string
 ---@field date string
 
 ---@class GetHistoricalRatesForDate
----@field base string
----@field date string
----@field rate table
----@field success boolean
----@field timestamp number
+---@field base? string
+---@field date? string
+---@field rates? table
+---@field success? boolean
+---@field timestamp? number
 
 ---@class GetHistoricalRatesForDateLoadMatch
 ---@field id string
 
 ---@class Latest
----@field base string
----@field date string
----@field rate table
----@field success boolean
----@field timestamp number
+---@field base? string
+---@field date? string
+---@field rates? table
+---@field success? boolean
+---@field timestamp? number
 
 ---@class LatestLoadMatch
 ---@field id? string
@@ -78,31 +78,27 @@
 ---@field status? string
 
 ---@class Symbol
----@field base string
----@field count number
----@field note string
----@field success boolean
----@field symbol table
+---@field country string
+---@field name string
+---@field symbol string
 
 ---@class SymbolLoadMatch
----@field base? string
----@field count? number
----@field note? string
----@field success? boolean
----@field symbol? table
+---@field country? string
+---@field name? string
+---@field symbol? string
 
 ---@class Timeseries
----@field base string
----@field end_date string
----@field rate table
----@field start_date string
----@field success boolean
----@field timeseries boolean
+---@field base? string
+---@field end_date? string
+---@field rates? table
+---@field start_date? string
+---@field success? boolean
+---@field timeseries? boolean
 
 ---@class TimeseriesLoadMatch
 ---@field base? string
 ---@field end_date? string
----@field rate? table
+---@field rates? table
 ---@field start_date? string
 ---@field success? boolean
 ---@field timeseries? boolean

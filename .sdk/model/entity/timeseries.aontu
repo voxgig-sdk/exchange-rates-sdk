@@ -7,32 +7,32 @@ main: kit: entity: timeseries: {
   fields: [
     {
       name: "base"
-      req: true
+      req: false
       type: "`$STRING`"
     }
     {
       name: "end_date"
-      req: true
+      req: false
       type: "`$STRING`"
     }
     {
-      name: "rate"
-      req: true
+      name: "rates"
+      req: false
       type: "`$OBJECT`"
     }
     {
       name: "start_date"
-      req: true
+      req: false
       type: "`$STRING`"
     }
     {
       name: "success"
-      req: true
+      req: false
       type: "`$BOOLEAN`"
     }
     {
       name: "timeseries"
-      req: true
+      req: false
       type: "`$BOOLEAN`"
     }
   ]
@@ -94,7 +94,7 @@ main: kit: entity: timeseries: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.rates`"
           }
         }
       ]

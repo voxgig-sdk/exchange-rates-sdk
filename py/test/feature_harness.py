@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import ExchangeRatesControl
-from core.error import ExchangeRatesError
-from core.result import ExchangeRatesResult
-from core.spec import ExchangeRatesSpec
+from exchangerates_sdk.config import make_config
+from exchangerates_sdk.features import _make_feature
+from exchangerates_sdk.core.control import ExchangeRatesControl
+from exchangerates_sdk.core.error import ExchangeRatesError
+from exchangerates_sdk.core.result import ExchangeRatesResult
+from exchangerates_sdk.core.spec import ExchangeRatesSpec
 
 
 # True when this SDK was generated with the named feature.

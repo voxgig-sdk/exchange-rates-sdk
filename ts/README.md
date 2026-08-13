@@ -55,8 +55,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const convert = await client.Convert().load()
-  console.log(convert)
+  const latest = await client.Latest().load()
+  console.log(latest)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -122,9 +122,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ExchangeRatesSDK.test()
 
-const convert = await client.Convert().load()
-// convert is a bare entity populated with mock response data
-console.log(convert)
+const latest = await client.Latest().load({ id: 'test01' })
+// latest is the entity, populated with mock response data
+// — call latest.data() for the record itself
+console.log(latest)
 ```
 
 You can also use the instance method:
@@ -139,10 +140,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Convert()
+const entity = client.Latest()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.load({ id: 'example' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -327,7 +328,7 @@ API path: `/`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -341,7 +342,7 @@ API path: `/{date}/{currency}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -355,7 +356,7 @@ API path: `/{date}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -380,10 +381,8 @@ API path: `/status`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `count` |  |
-| `note` |  |
-| `success` |  |
+| `country` |  |
+| `name` |  |
 | `symbol` |  |
 
 Operations: load.
@@ -396,7 +395,7 @@ API path: `/symbols`
 | --- | --- |
 | `base` |  |
 | `end_date` |  |
-| `rate` |  |
+| `rates` |  |
 | `start_date` |  |
 | `success` |  |
 | `timeseries` |  |
@@ -480,7 +479,7 @@ Create an instance: `const get_historical_rate_for_currency_and_date = client.Ge
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `Record<string, any>` |  |
+| `rates` | `Record<string, any>` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |
 
@@ -507,7 +506,7 @@ Create an instance: `const get_historical_rates_for_date = client.GetHistoricalR
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `Record<string, any>` |  |
+| `rates` | `Record<string, any>` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |
 
@@ -534,7 +533,7 @@ Create an instance: `const latest = client.Latest()`
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `Record<string, any>` |  |
+| `rates` | `Record<string, any>` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |
 
@@ -585,11 +584,9 @@ Create an instance: `const symbol = client.Symbol()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `string` |  |
-| `count` | `number` |  |
-| `note` | `string` |  |
-| `success` | `boolean` |  |
-| `symbol` | `Record<string, any>` |  |
+| `country` | `string` |  |
+| `name` | `string` |  |
+| `symbol` | `string` |  |
 
 #### Example: Load
 
@@ -614,7 +611,7 @@ Create an instance: `const timeseries = client.Timeseries()`
 | --- | --- | --- |
 | `base` | `string` |  |
 | `end_date` | `string` |  |
-| `rate` | `Record<string, any>` |  |
+| `rates` | `Record<string, any>` |  |
 | `start_date` | `string` |  |
 | `success` | `boolean` |  |
 | `timeseries` | `boolean` |  |
@@ -695,11 +692,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const convert = client.Convert()
-await convert.load()
+const latest = client.Latest()
+await latest.load()
 
-// convert.data() now returns the convert data from the last `load`
-// convert.match() returns the last match criteria
+// latest.data() now returns the latest data from the last `load`
+// latest.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

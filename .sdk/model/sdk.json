@@ -5,6 +5,10 @@
       "desc": ""
     },
     "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
       "config": {
         "docs_order": [
           "ts",
@@ -18,6 +22,7 @@
           "content-type": "application/json"
         }
       },
+      "contributor": {},
       "entity": {
         "convert": {
           "active": true,
@@ -110,6 +115,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/convert",
                   "parts": [
@@ -175,6 +181,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/",
                   "parts": [],
@@ -200,31 +207,31 @@
             {
               "active": true,
               "name": "base",
-              "req": true,
+              "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "date",
-              "req": true,
+              "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "rate",
-              "req": true,
+              "name": "rates",
+              "req": false,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
               "name": "success",
-              "req": true,
+              "req": false,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "timestamp",
-              "req": true,
+              "req": false,
               "type": "`$INTEGER`"
             }
           ],
@@ -258,6 +265,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/{date}/{currency}",
                   "parts": [
@@ -272,7 +280,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.rates`"
                   }
                 }
               ]
@@ -291,31 +299,31 @@
             {
               "active": true,
               "name": "base",
-              "req": true,
+              "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "date",
-              "req": true,
+              "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "rate",
-              "req": true,
+              "name": "rates",
+              "req": false,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
               "name": "success",
-              "req": true,
+              "req": false,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "timestamp",
-              "req": true,
+              "req": false,
               "type": "`$INTEGER`"
             }
           ],
@@ -340,6 +348,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/{date}",
                   "parts": [
@@ -357,7 +366,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.rates`"
                   }
                 }
               ]
@@ -376,31 +385,31 @@
             {
               "active": true,
               "name": "base",
-              "req": true,
+              "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "date",
-              "req": true,
+              "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "rate",
-              "req": true,
+              "name": "rates",
+              "req": false,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
               "name": "success",
-              "req": true,
+              "req": false,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "timestamp",
-              "req": true,
+              "req": false,
               "type": "`$INTEGER`"
             }
           ],
@@ -434,6 +443,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/latest",
                   "parts": [
@@ -447,7 +457,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.rates`"
                   }
                 },
                 {
@@ -465,6 +475,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/latest/{currency}",
                   "parts": [
@@ -483,7 +494,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.rates`"
                   }
                 }
               ]
@@ -533,6 +544,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/status",
                   "parts": [
@@ -559,33 +571,21 @@
           "fields": [
             {
               "active": true,
-              "name": "base",
+              "name": "country",
               "req": true,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "count",
-              "req": true,
-              "type": "`$INTEGER`"
-            },
-            {
-              "active": true,
-              "name": "note",
+              "name": "name",
               "req": true,
               "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "success",
-              "req": true,
-              "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "symbol",
               "req": true,
-              "type": "`$OBJECT`"
+              "type": "`$STRING`"
             }
           ],
           "name": "symbol",
@@ -597,6 +597,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/symbols",
                   "parts": [
@@ -605,7 +606,7 @@
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.symbols`"
                   }
                 }
               ]
@@ -624,37 +625,37 @@
             {
               "active": true,
               "name": "base",
-              "req": true,
+              "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "end_date",
-              "req": true,
+              "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "rate",
-              "req": true,
+              "name": "rates",
+              "req": false,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
               "name": "start_date",
-              "req": true,
+              "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "success",
-              "req": true,
+              "req": false,
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "timeseries",
-              "req": true,
+              "req": false,
               "type": "`$BOOLEAN`"
             }
           ],
@@ -706,6 +707,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/timeseries",
                   "parts": [
@@ -721,7 +723,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.rates`"
                   }
                 }
               ]
@@ -1102,18 +1104,41 @@
         "website": "https://exchangeratesapi.com.au"
       },
       "option": {},
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
       "target": {
         "go": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [
+              "test/feature_test.go"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "exchange-rates"
+            "goversion": "",
+            "name": "exchange-rates",
+            "package": "",
+            "path": ""
           },
           "name": "go",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1135,22 +1160,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Golang"
         },
         "go-cli": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "exchange-rates"
+            "goversion": "",
+            "name": "exchange-rates",
+            "package": "",
+            "path": ""
           },
           "name": "go-cli",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -1189,21 +1232,39 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go CLI"
         },
         "go-mcp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "exchange-rates"
+            "goversion": "",
+            "name": "exchange-rates",
+            "package": "",
+            "path": ""
           },
           "name": "go-mcp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -1242,12 +1303,17 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go MCP server"
         },
         "lua": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "--"
           },
@@ -1259,10 +1325,23 @@
             }
           },
           "ext": "lua",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "exchange-rates"
+            "goversion": "",
+            "name": "exchange-rates",
+            "package": "",
+            "path": ""
           },
           "name": "lua",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1284,22 +1363,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Lua"
         },
         "php": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "php",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "exchange-rates"
+            "goversion": "",
+            "name": "exchange-rates",
+            "package": "",
+            "path": ""
           },
           "name": "php",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1321,13 +1418,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "PHP"
         },
         "py": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1339,10 +1441,23 @@
             }
           },
           "ext": "py",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "exchange-rates"
+            "goversion": "",
+            "name": "exchange-rates",
+            "package": "",
+            "path": ""
           },
           "name": "py",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1364,13 +1479,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Python"
         },
         "rb": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1387,10 +1507,23 @@
             }
           },
           "ext": "rb",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "exchange-rates"
+            "goversion": "",
+            "name": "exchange-rates",
+            "package": "",
+            "path": ""
           },
           "name": "rb",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1412,13 +1545,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Ruby"
         },
         "ts": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
@@ -1441,10 +1579,23 @@
             }
           },
           "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "exchange-rates"
+            "goversion": "",
+            "name": "exchange-rates",
+            "package": "",
+            "path": ""
           },
           "name": "ts",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1466,9 +1617,17 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": false
         }
       }
     }

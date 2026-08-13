@@ -26,8 +26,8 @@ import {
 describe('ConvertEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when EXCHANGERATES_TEST_LIVE=TRUE.
-  afterEach(liveDelay('EXCHANGERATES_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when EXCHANGE_RATES_TEST_LIVE=TRUE.
+  afterEach(liveDelay('EXCHANGE_RATES_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ExchangeRatesSDK.test()
@@ -62,7 +62,7 @@ describe('ConvertEntity', async () => {
     // LOAD
     const convert_ref01_ent = client.Convert()
     const convert_ref01_match_dt0: any = {}
-    const convert_ref01_data_dt0 = await convert_ref01_ent.load(convert_ref01_match_dt0)
+    const convert_ref01_data_dt0 = (await convert_ref01_ent.load(convert_ref01_match_dt0)).data()
     assert(null != convert_ref01_data_dt0)
 
 

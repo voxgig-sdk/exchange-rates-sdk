@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# ExchangeRates SDK exists test
 
 import pytest
 from exchangerates_sdk import ExchangeRatesSDK

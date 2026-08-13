@@ -111,23 +111,23 @@ GetApiRootLoadMatch = Struct.new(
 # GetHistoricalRateForCurrencyAndDate entity data model.
 #
 # @!attribute [rw] base
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] date
-#   @return [String]
+#   @return [String, nil]
 #
-# @!attribute [rw] rate
-#   @return [Hash]
+# @!attribute [rw] rates
+#   @return [Hash, nil]
 #
 # @!attribute [rw] success
-#   @return [Boolean]
+#   @return [Boolean, nil]
 #
 # @!attribute [rw] timestamp
-#   @return [Integer]
+#   @return [Integer, nil]
 GetHistoricalRateForCurrencyAndDate = Struct.new(
   :base,
   :date,
-  :rate,
+  :rates,
   :success,
   :timestamp,
   keyword_init: true
@@ -149,23 +149,23 @@ GetHistoricalRateForCurrencyAndDateLoadMatch = Struct.new(
 # GetHistoricalRatesForDate entity data model.
 #
 # @!attribute [rw] base
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] date
-#   @return [String]
+#   @return [String, nil]
 #
-# @!attribute [rw] rate
-#   @return [Hash]
+# @!attribute [rw] rates
+#   @return [Hash, nil]
 #
 # @!attribute [rw] success
-#   @return [Boolean]
+#   @return [Boolean, nil]
 #
 # @!attribute [rw] timestamp
-#   @return [Integer]
+#   @return [Integer, nil]
 GetHistoricalRatesForDate = Struct.new(
   :base,
   :date,
-  :rate,
+  :rates,
   :success,
   :timestamp,
   keyword_init: true
@@ -183,23 +183,23 @@ GetHistoricalRatesForDateLoadMatch = Struct.new(
 # Latest entity data model.
 #
 # @!attribute [rw] base
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] date
-#   @return [String]
+#   @return [String, nil]
 #
-# @!attribute [rw] rate
-#   @return [Hash]
+# @!attribute [rw] rates
+#   @return [Hash, nil]
 #
 # @!attribute [rw] success
-#   @return [Boolean]
+#   @return [Boolean, nil]
 #
 # @!attribute [rw] timestamp
-#   @return [Integer]
+#   @return [Integer, nil]
 Latest = Struct.new(
   :base,
   :date,
-  :rate,
+  :rates,
   :success,
   :timestamp,
   keyword_init: true
@@ -258,50 +258,34 @@ StatusLoadMatch = Struct.new(
 
 # Symbol entity data model.
 #
-# @!attribute [rw] base
+# @!attribute [rw] country
 #   @return [String]
 #
-# @!attribute [rw] count
-#   @return [Integer]
-#
-# @!attribute [rw] note
+# @!attribute [rw] name
 #   @return [String]
-#
-# @!attribute [rw] success
-#   @return [Boolean]
 #
 # @!attribute [rw] symbol
-#   @return [Hash]
-Symbol = Struct.new(
-  :base,
-  :count,
-  :note,
-  :success,
+#   @return [String]
+SymbolType = Struct.new(
+  :country,
+  :name,
   :symbol,
   keyword_init: true
 )
 
 # Request payload for Symbol#load.
 #
-# @!attribute [rw] base
+# @!attribute [rw] country
 #   @return [String, nil]
 #
-# @!attribute [rw] count
-#   @return [Integer, nil]
-#
-# @!attribute [rw] note
+# @!attribute [rw] name
 #   @return [String, nil]
-#
-# @!attribute [rw] success
-#   @return [Boolean, nil]
 #
 # @!attribute [rw] symbol
-#   @return [Hash, nil]
+#   @return [String, nil]
 SymbolLoadMatch = Struct.new(
-  :base,
-  :count,
-  :note,
-  :success,
+  :country,
+  :name,
   :symbol,
   keyword_init: true
 )
@@ -309,26 +293,26 @@ SymbolLoadMatch = Struct.new(
 # Timeseries entity data model.
 #
 # @!attribute [rw] base
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] end_date
-#   @return [String]
+#   @return [String, nil]
 #
-# @!attribute [rw] rate
-#   @return [Hash]
+# @!attribute [rw] rates
+#   @return [Hash, nil]
 #
 # @!attribute [rw] start_date
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] success
-#   @return [Boolean]
+#   @return [Boolean, nil]
 #
 # @!attribute [rw] timeseries
-#   @return [Boolean]
+#   @return [Boolean, nil]
 Timeseries = Struct.new(
   :base,
   :end_date,
-  :rate,
+  :rates,
   :start_date,
   :success,
   :timeseries,
@@ -343,7 +327,7 @@ Timeseries = Struct.new(
 # @!attribute [rw] end_date
 #   @return [String, nil]
 #
-# @!attribute [rw] rate
+# @!attribute [rw] rates
 #   @return [Hash, nil]
 #
 # @!attribute [rw] start_date
@@ -357,7 +341,7 @@ Timeseries = Struct.new(
 TimeseriesLoadMatch = Struct.new(
   :base,
   :end_date,
-  :rate,
+  :rates,
   :start_date,
   :success,
   :timeseries,

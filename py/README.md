@@ -41,7 +41,7 @@ client = ExchangeRatesSDK({
 
 ### 3. Load a convert
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -58,8 +58,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    convert = client.Convert().load()
-    print(convert)
+    latest = client.Latest().load()
+    print(latest)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -125,9 +125,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = ExchangeRatesSDK.test()
 
-# Entity ops return the bare record and raise on error.
-convert = client.Convert().load()
-# convert contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+latest = client.Latest().load({"id": "test01"})
+# latest contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -230,7 +231,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -282,7 +283,7 @@ API path: `/`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -296,7 +297,7 @@ API path: `/{date}/{currency}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -310,7 +311,7 @@ API path: `/{date}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -335,10 +336,8 @@ API path: `/status`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `count` |  |
-| `note` |  |
-| `success` |  |
+| `country` |  |
+| `name` |  |
 | `symbol` |  |
 
 Operations: Load.
@@ -351,7 +350,7 @@ API path: `/symbols`
 | --- | --- |
 | `base` |  |
 | `end_date` |  |
-| `rate` |  |
+| `rates` |  |
 | `start_date` |  |
 | `success` |  |
 | `timeseries` |  |
@@ -435,7 +434,7 @@ Create an instance: `get_historical_rate_for_currency_and_date = client.GetHisto
 | --- | --- | --- |
 | `base` | `str` |  |
 | `date` | `str` |  |
-| `rate` | `dict` |  |
+| `rates` | `dict` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
 
@@ -462,7 +461,7 @@ Create an instance: `get_historical_rates_for_date = client.GetHistoricalRatesFo
 | --- | --- | --- |
 | `base` | `str` |  |
 | `date` | `str` |  |
-| `rate` | `dict` |  |
+| `rates` | `dict` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
 
@@ -489,7 +488,7 @@ Create an instance: `latest = client.Latest()`
 | --- | --- | --- |
 | `base` | `str` |  |
 | `date` | `str` |  |
-| `rate` | `dict` |  |
+| `rates` | `dict` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
 
@@ -540,11 +539,9 @@ Create an instance: `symbol = client.Symbol()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `str` |  |
-| `count` | `int` |  |
-| `note` | `str` |  |
-| `success` | `bool` |  |
-| `symbol` | `dict` |  |
+| `country` | `str` |  |
+| `name` | `str` |  |
+| `symbol` | `str` |  |
 
 #### Example: Load
 
@@ -569,7 +566,7 @@ Create an instance: `timeseries = client.Timeseries()`
 | --- | --- | --- |
 | `base` | `str` |  |
 | `end_date` | `str` |  |
-| `rate` | `dict` |  |
+| `rates` | `dict` |  |
 | `start_date` | `str` |  |
 | `success` | `bool` |  |
 | `timeseries` | `bool` |  |
@@ -656,11 +653,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-convert = client.Convert()
-convert.load()
+latest = client.Latest()
+latest.load()
 
-# convert.data_get() now returns the convert data from the last load
-# convert.match_get() returns the last match criteria
+# latest.data_get() now returns the latest data from the last load
+# latest.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

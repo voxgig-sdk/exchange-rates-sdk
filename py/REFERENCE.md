@@ -226,11 +226,11 @@ get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyA
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `str` | Yes |  |
-| `date` | `str` | Yes |  |
-| `rate` | `dict` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timestamp` | `int` | Yes |  |
+| `base` | `str` | No |  |
+| `date` | `str` | No |  |
+| `rates` | `dict` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `int` | No |  |
 
 ### Operations
 
@@ -281,11 +281,11 @@ get_historical_rates_for_date = client.GetHistoricalRatesForDate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `str` | Yes |  |
-| `date` | `str` | Yes |  |
-| `rate` | `dict` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timestamp` | `int` | Yes |  |
+| `base` | `str` | No |  |
+| `date` | `str` | No |  |
+| `rates` | `dict` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `int` | No |  |
 
 ### Operations
 
@@ -336,11 +336,11 @@ latest = client.Latest()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `str` | Yes |  |
-| `date` | `str` | Yes |  |
-| `rate` | `dict` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timestamp` | `int` | Yes |  |
+| `base` | `str` | No |  |
+| `date` | `str` | No |  |
+| `rates` | `dict` | No |  |
+| `success` | `bool` | No |  |
+| `timestamp` | `int` | No |  |
 
 ### Operations
 
@@ -445,11 +445,9 @@ symbol = client.Symbol()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `str` | Yes |  |
-| `count` | `int` | Yes |  |
-| `note` | `str` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `symbol` | `dict` | Yes |  |
+| `country` | `str` | Yes |  |
+| `name` | `str` | Yes |  |
+| `symbol` | `str` | Yes |  |
 
 ### Operations
 
@@ -500,12 +498,12 @@ timeseries = client.Timeseries()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `str` | Yes |  |
-| `end_date` | `str` | Yes |  |
-| `rate` | `dict` | Yes |  |
-| `start_date` | `str` | Yes |  |
-| `success` | `bool` | Yes |  |
-| `timeseries` | `bool` | Yes |  |
+| `base` | `str` | No |  |
+| `end_date` | `str` | No |  |
+| `rates` | `dict` | No |  |
+| `start_date` | `str` | No |  |
+| `success` | `bool` | No |  |
+| `timeseries` | `bool` | No |  |
 
 ### Operations
 

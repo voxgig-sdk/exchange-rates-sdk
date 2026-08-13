@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from exchangerates_sdk.utility.voxgig_struct import voxgig_struct as vs
 from exchangerates_sdk import ExchangeRatesSDK
-from core import helpers
+from exchangerates_sdk.core import helpers
 from test import runner
 
 
@@ -62,16 +62,16 @@ def _timeseries_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "EXCHANGERATES_TEST_TIMESERIES_ENTID": {},
-        "EXCHANGERATES_TEST_LIVE": "FALSE",
-        "EXCHANGERATES_APIKEY": "NONE",
+        "EXCHANGE_RATES_TEST_TIMESERIES_ENTID": {},
+        "EXCHANGE_RATES_TEST_LIVE": "FALSE",
+        "EXCHANGE_RATES_APIKEY": "NONE",
     })
 
-    live = env.get("EXCHANGERATES_TEST_LIVE") == "TRUE"
+    live = env.get("EXCHANGE_RATES_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("EXCHANGERATES_APIKEY"),
+            "apikey": env.get("EXCHANGE_RATES_APIKEY"),
         }
         client = ExchangeRatesSDK(merged_opts)
         return {

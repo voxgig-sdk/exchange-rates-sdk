@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'ExchangeRates',
   }
 
 
@@ -170,6 +170,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/convert",
               "parts": [
@@ -237,6 +238,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/",
               "parts": [],
@@ -260,35 +262,35 @@ class Config {
         {
           "active": true,
           "name": "base",
-          "req": true,
+          "req": false,
           "type": "`$STRING`",
           "index$": 0
         },
         {
           "active": true,
           "name": "date",
-          "req": true,
+          "req": false,
           "type": "`$STRING`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "rate",
-          "req": true,
+          "name": "rates",
+          "req": false,
           "type": "`$OBJECT`",
           "index$": 2
         },
         {
           "active": true,
           "name": "success",
-          "req": true,
+          "req": false,
           "type": "`$BOOLEAN`",
           "index$": 3
         },
         {
           "active": true,
           "name": "timestamp",
-          "req": true,
+          "req": false,
           "type": "`$INTEGER`",
           "index$": 4
         }
@@ -325,6 +327,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/{date}/{currency}",
               "parts": [
@@ -339,7 +342,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.rates`"
               },
               "index$": 0
             }
@@ -356,35 +359,35 @@ class Config {
         {
           "active": true,
           "name": "base",
-          "req": true,
+          "req": false,
           "type": "`$STRING`",
           "index$": 0
         },
         {
           "active": true,
           "name": "date",
-          "req": true,
+          "req": false,
           "type": "`$STRING`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "rate",
-          "req": true,
+          "name": "rates",
+          "req": false,
           "type": "`$OBJECT`",
           "index$": 2
         },
         {
           "active": true,
           "name": "success",
-          "req": true,
+          "req": false,
           "type": "`$BOOLEAN`",
           "index$": 3
         },
         {
           "active": true,
           "name": "timestamp",
-          "req": true,
+          "req": false,
           "type": "`$INTEGER`",
           "index$": 4
         }
@@ -411,6 +414,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/{date}",
               "parts": [
@@ -428,7 +432,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.rates`"
               },
               "index$": 0
             }
@@ -445,35 +449,35 @@ class Config {
         {
           "active": true,
           "name": "base",
-          "req": true,
+          "req": false,
           "type": "`$STRING`",
           "index$": 0
         },
         {
           "active": true,
           "name": "date",
-          "req": true,
+          "req": false,
           "type": "`$STRING`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "rate",
-          "req": true,
+          "name": "rates",
+          "req": false,
           "type": "`$OBJECT`",
           "index$": 2
         },
         {
           "active": true,
           "name": "success",
-          "req": true,
+          "req": false,
           "type": "`$BOOLEAN`",
           "index$": 3
         },
         {
           "active": true,
           "name": "timestamp",
-          "req": true,
+          "req": false,
           "type": "`$INTEGER`",
           "index$": 4
         }
@@ -508,6 +512,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/latest",
               "parts": [
@@ -521,7 +526,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.rates`"
               },
               "index$": 0
             },
@@ -541,6 +546,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/latest/{currency}",
               "parts": [
@@ -559,7 +565,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.rates`"
               },
               "index$": 1
             }
@@ -611,6 +617,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/status",
               "parts": [
@@ -635,38 +642,24 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "base",
+          "name": "country",
           "req": true,
           "type": "`$STRING`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "count",
-          "req": true,
-          "type": "`$INTEGER`",
-          "index$": 1
-        },
-        {
-          "active": true,
-          "name": "note",
+          "name": "name",
           "req": true,
           "type": "`$STRING`",
-          "index$": 2
-        },
-        {
-          "active": true,
-          "name": "success",
-          "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 3
+          "index$": 1
         },
         {
           "active": true,
           "name": "symbol",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 4
+          "type": "`$STRING`",
+          "index$": 2
         }
       ],
       "name": "symbol",
@@ -678,6 +671,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/symbols",
               "parts": [
@@ -686,7 +680,7 @@ class Config {
               "select": {},
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.symbols`"
               },
               "index$": 0
             }
@@ -703,42 +697,42 @@ class Config {
         {
           "active": true,
           "name": "base",
-          "req": true,
+          "req": false,
           "type": "`$STRING`",
           "index$": 0
         },
         {
           "active": true,
           "name": "end_date",
-          "req": true,
+          "req": false,
           "type": "`$STRING`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "rate",
-          "req": true,
+          "name": "rates",
+          "req": false,
           "type": "`$OBJECT`",
           "index$": 2
         },
         {
           "active": true,
           "name": "start_date",
-          "req": true,
+          "req": false,
           "type": "`$STRING`",
           "index$": 3
         },
         {
           "active": true,
           "name": "success",
-          "req": true,
+          "req": false,
           "type": "`$BOOLEAN`",
           "index$": 4
         },
         {
           "active": true,
           "name": "timeseries",
-          "req": true,
+          "req": false,
           "type": "`$BOOLEAN`",
           "index$": 5
         }
@@ -791,6 +785,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/timeseries",
               "parts": [
@@ -806,7 +801,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.rates`"
               },
               "index$": 0
             }

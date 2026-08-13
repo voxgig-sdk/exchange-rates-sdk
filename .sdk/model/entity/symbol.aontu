@@ -6,29 +6,19 @@ main: kit: entity: symbol: {
 
   fields: [
     {
-      name: "base"
+      name: "country"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "count"
-      req: true
-      type: "`$INTEGER`"
-    }
-    {
-      name: "note"
+      name: "name"
       req: true
       type: "`$STRING`"
-    }
-    {
-      name: "success"
-      req: true
-      type: "`$BOOLEAN`"
     }
     {
       name: "symbol"
       req: true
-      type: "`$OBJECT`"
+      type: "`$STRING`"
     }
   ]
 
@@ -45,7 +35,7 @@ main: kit: entity: symbol: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.symbols`"
           }
         }
       ]

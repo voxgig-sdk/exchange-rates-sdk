@@ -69,12 +69,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-convert, err := client.Convert(nil).Load(nil, nil)
+latest, err := client.Latest(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = convert
+_ = latest
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -138,13 +138,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-convert, err := client.Convert(nil).Load(
-    nil, nil,
+latest, err := client.Latest(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(convert) // the returned mock data
+fmt.Println(latest) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -300,7 +300,7 @@ API path: `/`
 | --- | --- |
 | `"base"` |  |
 | `"date"` |  |
-| `"rate"` |  |
+| `"rates"` |  |
 | `"success"` |  |
 | `"timestamp"` |  |
 
@@ -314,7 +314,7 @@ API path: `/{date}/{currency}`
 | --- | --- |
 | `"base"` |  |
 | `"date"` |  |
-| `"rate"` |  |
+| `"rates"` |  |
 | `"success"` |  |
 | `"timestamp"` |  |
 
@@ -328,7 +328,7 @@ API path: `/{date}`
 | --- | --- |
 | `"base"` |  |
 | `"date"` |  |
-| `"rate"` |  |
+| `"rates"` |  |
 | `"success"` |  |
 | `"timestamp"` |  |
 
@@ -353,10 +353,8 @@ API path: `/status`
 
 | Field | Description |
 | --- | --- |
-| `"base"` |  |
-| `"count"` |  |
-| `"note"` |  |
-| `"success"` |  |
+| `"country"` |  |
+| `"name"` |  |
 | `"symbol"` |  |
 
 Operations: Load.
@@ -369,7 +367,7 @@ API path: `/symbols`
 | --- | --- |
 | `"base"` |  |
 | `"end_date"` |  |
-| `"rate"` |  |
+| `"rates"` |  |
 | `"start_date"` |  |
 | `"success"` |  |
 | `"timeseries"` |  |
@@ -461,7 +459,7 @@ Create an instance: `getHistoricalRateForCurrencyAndDate := client.GetHistorical
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `map[string]any` |  |
+| `rates` | `map[string]any` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
 
@@ -492,7 +490,7 @@ Create an instance: `getHistoricalRatesForDate := client.GetHistoricalRatesForDa
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `map[string]any` |  |
+| `rates` | `map[string]any` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
 
@@ -523,7 +521,7 @@ Create an instance: `latest := client.Latest(nil)`
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `map[string]any` |  |
+| `rates` | `map[string]any` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
 
@@ -582,11 +580,9 @@ Create an instance: `symbol := client.Symbol(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `string` |  |
-| `count` | `int` |  |
-| `note` | `string` |  |
-| `success` | `bool` |  |
-| `symbol` | `map[string]any` |  |
+| `country` | `string` |  |
+| `name` | `string` |  |
+| `symbol` | `string` |  |
 
 #### Example: Load
 
@@ -615,7 +611,7 @@ Create an instance: `timeseries := client.Timeseries(nil)`
 | --- | --- | --- |
 | `base` | `string` |  |
 | `end_date` | `string` |  |
-| `rate` | `map[string]any` |  |
+| `rates` | `map[string]any` |  |
 | `start_date` | `string` |  |
 | `success` | `bool` |  |
 | `timeseries` | `bool` |  |
@@ -704,11 +700,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-convert := client.Convert(nil)
-convert.Load(nil, nil)
+latest := client.Latest(nil)
+latest.Load(nil, nil)
 
-// convert.Data() now returns the convert data from the last load
-// convert.Match() returns the last match criteria
+// latest.Data() now returns the latest data from the last load
+// latest.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ ExchangeRatesUtility::setRegistrar(function (ExchangeRatesUtility $u): void {
     $u->prepare_params = [ExchangeRatesPrepareParams::class, 'call'];
     $u->prepare_path = [ExchangeRatesPreparePath::class, 'call'];
     $u->prepare_query = [ExchangeRatesPrepareQuery::class, 'call'];
+    $u->graphql_body = [ExchangeRatesGraphql::class, 'body'];
+    $u->graphql_errors = [ExchangeRatesGraphql::class, 'errors'];
     $u->result_basic = [ExchangeRatesResultBasic::class, 'call'];
     $u->result_body = [ExchangeRatesResultBody::class, 'call'];
     $u->result_headers = [ExchangeRatesResultHeaders::class, 'call'];

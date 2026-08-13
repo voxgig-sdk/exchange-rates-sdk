@@ -2,27 +2,21 @@
   "existing": {
     "symbol": {
       "SYMBOL00": {
-        "base": "s32",
-        "count": "s33",
-        "note": "s34",
-        "success": false,
-        "symbol": {},
+        "country": "s1e",
+        "name": "s1f",
+        "symbol": "s20",
         "id": "SYMBOL00"
       },
       "SYMBOL01": {
-        "base": "s64",
-        "count": "s65",
-        "note": "s66",
-        "success": false,
-        "symbol": {},
+        "country": "s3c",
+        "name": "s3d",
+        "symbol": "s3e",
         "id": "SYMBOL01"
       },
       "SYMBOL02": {
-        "base": "s96",
-        "count": "s97",
-        "note": "s98",
-        "success": false,
-        "symbol": {},
+        "country": "s5a",
+        "name": "s5b",
+        "symbol": "s5c",
         "id": "SYMBOL02"
       }
     }
@@ -30,11 +24,9 @@
   "new": {
     "symbol": {
       "symbol_ref01": {
-        "base": "sc8",
-        "count": "sc9",
-        "note": "sca",
-        "success": false,
-        "symbol": {}
+        "country": "s78",
+        "name": "s79",
+        "symbol": "s7a"
       }
     }
   }

@@ -234,11 +234,11 @@ get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyA
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `String` | Yes |  |
-| `date` | `String` | Yes |  |
-| `rate` | `Hash` | Yes |  |
-| `success` | `Boolean` | Yes |  |
-| `timestamp` | `Integer` | Yes |  |
+| `base` | `String` | No |  |
+| `date` | `String` | No |  |
+| `rates` | `Hash` | No |  |
+| `success` | `Boolean` | No |  |
+| `timestamp` | `Integer` | No |  |
 
 ### Operations
 
@@ -290,11 +290,11 @@ get_historical_rates_for_date = client.GetHistoricalRatesForDate
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `String` | Yes |  |
-| `date` | `String` | Yes |  |
-| `rate` | `Hash` | Yes |  |
-| `success` | `Boolean` | Yes |  |
-| `timestamp` | `Integer` | Yes |  |
+| `base` | `String` | No |  |
+| `date` | `String` | No |  |
+| `rates` | `Hash` | No |  |
+| `success` | `Boolean` | No |  |
+| `timestamp` | `Integer` | No |  |
 
 ### Operations
 
@@ -346,11 +346,11 @@ latest = client.Latest
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `String` | Yes |  |
-| `date` | `String` | Yes |  |
-| `rate` | `Hash` | Yes |  |
-| `success` | `Boolean` | Yes |  |
-| `timestamp` | `Integer` | Yes |  |
+| `base` | `String` | No |  |
+| `date` | `String` | No |  |
+| `rates` | `Hash` | No |  |
+| `success` | `Boolean` | No |  |
+| `timestamp` | `Integer` | No |  |
 
 ### Operations
 
@@ -457,11 +457,9 @@ symbol = client.Symbol
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `String` | Yes |  |
-| `count` | `Integer` | Yes |  |
-| `note` | `String` | Yes |  |
-| `success` | `Boolean` | Yes |  |
-| `symbol` | `Hash` | Yes |  |
+| `country` | `String` | Yes |  |
+| `name` | `String` | Yes |  |
+| `symbol` | `String` | Yes |  |
 
 ### Operations
 
@@ -513,12 +511,12 @@ timeseries = client.Timeseries
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `String` | Yes |  |
-| `end_date` | `String` | Yes |  |
-| `rate` | `Hash` | Yes |  |
-| `start_date` | `String` | Yes |  |
-| `success` | `Boolean` | Yes |  |
-| `timeseries` | `Boolean` | Yes |  |
+| `base` | `String` | No |  |
+| `end_date` | `String` | No |  |
+| `rates` | `Hash` | No |  |
+| `start_date` | `String` | No |  |
+| `success` | `Boolean` | No |  |
+| `timeseries` | `Boolean` | No |  |
 
 ### Operations
 

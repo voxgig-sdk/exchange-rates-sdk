@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from exchangerates_sdk.utility.voxgig_struct import voxgig_struct as vs
 from exchangerates_sdk import ExchangeRatesSDK
-from core import helpers
+from exchangerates_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -36,7 +36,7 @@ class TestLatestEntity:
         # without an *_ENTID env override, those IDs hit the live API and 4xx.
         if setup.get("synthetic_only"):
             pytest.skip("live entity test uses synthetic IDs from fixture — "
-                        "set EXCHANGERATES_TEST_LATEST_ENTID JSON to run live")
+                        "set EXCHANGE_RATES_TEST_LATEST_ENTID JSON to run live")
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -83,37 +83,37 @@ def _latest_basic_setup(extra):
     # mode is on without a real override, the basic test runs against synthetic
     # IDs from the fixture and 4xx's. We surface this so the test can skip.
     _entid_env_raw = os.environ.get(
-        "EXCHANGERATES_TEST_LATEST_ENTID")
+        "EXCHANGE_RATES_TEST_LATEST_ENTID")
     _idmap_overridden = _entid_env_raw is not None and _entid_env_raw.strip().startswith("{")
 
     env = runner.env_override({
-        "EXCHANGERATES_TEST_LATEST_ENTID": idmap,
-        "EXCHANGERATES_TEST_LIVE": "FALSE",
-        "EXCHANGERATES_TEST_EXPLAIN": "FALSE",
-        "EXCHANGERATES_APIKEY": "NONE",
+        "EXCHANGE_RATES_TEST_LATEST_ENTID": idmap,
+        "EXCHANGE_RATES_TEST_LIVE": "FALSE",
+        "EXCHANGE_RATES_TEST_EXPLAIN": "FALSE",
+        "EXCHANGE_RATES_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
-        env.get("EXCHANGERATES_TEST_LATEST_ENTID"))
+        env.get("EXCHANGE_RATES_TEST_LATEST_ENTID"))
     if idmap_resolved is None:
         idmap_resolved = helpers.to_map(idmap)
 
-    if env.get("EXCHANGERATES_TEST_LIVE") == "TRUE":
+    if env.get("EXCHANGE_RATES_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("EXCHANGERATES_APIKEY"),
+                "apikey": env.get("EXCHANGE_RATES_APIKEY"),
             },
             extra or {},
         ])
         client = ExchangeRatesSDK(helpers.to_map(merged_opts))
 
-    _live = env.get("EXCHANGERATES_TEST_LIVE") == "TRUE"
+    _live = env.get("EXCHANGE_RATES_TEST_LIVE") == "TRUE"
     return {
         "client": client,
         "data": entity_data,
         "idmap": idmap_resolved,
         "env": env,
-        "explain": env.get("EXCHANGERATES_TEST_EXPLAIN") == "TRUE",
+        "explain": env.get("EXCHANGE_RATES_TEST_EXPLAIN") == "TRUE",
         "live": _live,
         "synthetic_only": _live and not _idmap_overridden,
         "now": int(time.time() * 1000),

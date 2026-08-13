@@ -36,7 +36,7 @@ client = ExchangeRatesSDK.new({
 
 ```ruby
 begin
-  # load returns the bare Convert record (raises on error).
+  # load returns the ENTITY — call data_get for the Convert record (raises on error).
   convert = client.Convert.load()
   puts convert
 rescue => err
@@ -51,7 +51,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  convert = client.Convert.load()
+  latest = client.Latest.load()
 rescue => err
   warn "load failed: #{err}"
 end
@@ -114,14 +114,18 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = ExchangeRatesSDK.test
+client = ExchangeRatesSDK.test({
+  "entity" => { "latest" => { "test01" => { "id" => "test01" } } },
+})
 
-# Entity ops return the bare mock record (raises on error).
-convert = client.Convert.load()
-puts convert
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+latest = client.Latest.load({ "id" => "test01" })
+puts latest
 ```
 
 ### Use a custom fetch function
@@ -275,7 +279,7 @@ API path: `/`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -289,7 +293,7 @@ API path: `/{date}/{currency}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -303,7 +307,7 @@ API path: `/{date}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -328,10 +332,8 @@ API path: `/status`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `count` |  |
-| `note` |  |
-| `success` |  |
+| `country` |  |
+| `name` |  |
 | `symbol` |  |
 
 Operations: Load.
@@ -344,7 +346,7 @@ API path: `/symbols`
 | --- | --- |
 | `base` |  |
 | `end_date` |  |
-| `rate` |  |
+| `rates` |  |
 | `start_date` |  |
 | `success` |  |
 | `timeseries` |  |
@@ -382,7 +384,7 @@ Create an instance: `convert = client.Convert`
 #### Example: Load
 
 ```ruby
-# load returns the bare Convert record (raises on error).
+# load returns the ENTITY — call data_get for the Convert record (raises on error).
 convert = client.Convert.load()
 ```
 
@@ -409,7 +411,7 @@ Create an instance: `get_api_root = client.GetApiRoot`
 #### Example: Load
 
 ```ruby
-# load returns the bare GetApiRoot record (raises on error).
+# load returns the ENTITY — call data_get for the GetApiRoot record (raises on error).
 get_api_root = client.GetApiRoot.load()
 ```
 
@@ -430,14 +432,14 @@ Create an instance: `get_historical_rate_for_currency_and_date = client.GetHisto
 | --- | --- | --- |
 | `base` | `String` |  |
 | `date` | `String` |  |
-| `rate` | `Hash` |  |
+| `rates` | `Hash` |  |
 | `success` | `Boolean` |  |
 | `timestamp` | `Integer` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare GetHistoricalRateForCurrencyAndDate record (raises on error).
+# load returns the ENTITY — call data_get for the GetHistoricalRateForCurrencyAndDate record (raises on error).
 get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyAndDate.load({ "currency" => "currency", "date" => "date" })
 ```
 
@@ -458,14 +460,14 @@ Create an instance: `get_historical_rates_for_date = client.GetHistoricalRatesFo
 | --- | --- | --- |
 | `base` | `String` |  |
 | `date` | `String` |  |
-| `rate` | `Hash` |  |
+| `rates` | `Hash` |  |
 | `success` | `Boolean` |  |
 | `timestamp` | `Integer` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare GetHistoricalRatesForDate record (raises on error).
+# load returns the ENTITY — call data_get for the GetHistoricalRatesForDate record (raises on error).
 get_historical_rates_for_date = client.GetHistoricalRatesForDate.load({ "id" => "get_historical_rates_for_date_id" })
 ```
 
@@ -486,14 +488,14 @@ Create an instance: `latest = client.Latest`
 | --- | --- | --- |
 | `base` | `String` |  |
 | `date` | `String` |  |
-| `rate` | `Hash` |  |
+| `rates` | `Hash` |  |
 | `success` | `Boolean` |  |
 | `timestamp` | `Integer` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Latest record (raises on error).
+# load returns the ENTITY — call data_get for the Latest record (raises on error).
 latest = client.Latest.load({ "id" => "latest_id" })
 ```
 
@@ -520,7 +522,7 @@ Create an instance: `status = client.Status`
 #### Example: Load
 
 ```ruby
-# load returns the bare Status record (raises on error).
+# load returns the ENTITY — call data_get for the Status record (raises on error).
 status = client.Status.load()
 ```
 
@@ -539,16 +541,14 @@ Create an instance: `symbol = client.Symbol`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `String` |  |
-| `count` | `Integer` |  |
-| `note` | `String` |  |
-| `success` | `Boolean` |  |
-| `symbol` | `Hash` |  |
+| `country` | `String` |  |
+| `name` | `String` |  |
+| `symbol` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Symbol record (raises on error).
+# load returns the ENTITY — call data_get for the Symbol record (raises on error).
 symbol = client.Symbol.load()
 ```
 
@@ -569,7 +569,7 @@ Create an instance: `timeseries = client.Timeseries`
 | --- | --- | --- |
 | `base` | `String` |  |
 | `end_date` | `String` |  |
-| `rate` | `Hash` |  |
+| `rates` | `Hash` |  |
 | `start_date` | `String` |  |
 | `success` | `Boolean` |  |
 | `timeseries` | `Boolean` |  |
@@ -577,7 +577,7 @@ Create an instance: `timeseries = client.Timeseries`
 #### Example: Load
 
 ```ruby
-# load returns the bare Timeseries record (raises on error).
+# load returns the ENTITY — call data_get for the Timeseries record (raises on error).
 timeseries = client.Timeseries.load()
 ```
 
@@ -658,11 +658,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-convert = client.Convert
-convert.load()
+latest = client.Latest
+latest.load()
 
-# convert.data_get now returns the convert data from the last load
-# convert.match_get returns the last match criteria
+# latest.data_get now returns the latest data from the last load
+# latest.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

@@ -7,27 +7,27 @@ main: kit: entity: get_historical_rates_for_date: {
   fields: [
     {
       name: "base"
-      req: true
+      req: false
       type: "`$STRING`"
     }
     {
       name: "date"
-      req: true
+      req: false
       type: "`$STRING`"
     }
     {
-      name: "rate"
-      req: true
+      name: "rates"
+      req: false
       type: "`$OBJECT`"
     }
     {
       name: "success"
-      req: true
+      req: false
       type: "`$BOOLEAN`"
     }
     {
       name: "timestamp"
-      req: true
+      req: false
       type: "`$INTEGER`"
     }
   ]
@@ -67,7 +67,7 @@ main: kit: entity: get_historical_rates_for_date: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.rates`"
           }
         }
       ]

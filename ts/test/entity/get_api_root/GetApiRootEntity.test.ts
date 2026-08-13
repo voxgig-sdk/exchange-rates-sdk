@@ -26,8 +26,8 @@ import {
 describe('GetApiRootEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when EXCHANGERATES_TEST_LIVE=TRUE.
-  afterEach(liveDelay('EXCHANGERATES_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when EXCHANGE_RATES_TEST_LIVE=TRUE.
+  afterEach(liveDelay('EXCHANGE_RATES_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ExchangeRatesSDK.test()
@@ -62,7 +62,7 @@ describe('GetApiRootEntity', async () => {
     // LOAD
     const get_api_root_ref01_ent = client.GetApiRoot()
     const get_api_root_ref01_match_dt0: any = {}
-    const get_api_root_ref01_data_dt0 = await get_api_root_ref01_ent.load(get_api_root_ref01_match_dt0)
+    const get_api_root_ref01_data_dt0 = (await get_api_root_ref01_ent.load(get_api_root_ref01_match_dt0)).data()
     assert(null != get_api_root_ref01_data_dt0)
 
 

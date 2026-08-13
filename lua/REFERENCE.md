@@ -231,11 +231,11 @@ local get_historical_rate_for_currency_and_date = client:GetHistoricalRateForCur
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `date` | `string` | Yes |  |
-| `rate` | `table` | Yes |  |
-| `success` | `boolean` | Yes |  |
-| `timestamp` | `number` | Yes |  |
+| `base` | `string` | No |  |
+| `date` | `string` | No |  |
+| `rates` | `table` | No |  |
+| `success` | `boolean` | No |  |
+| `timestamp` | `number` | No |  |
 
 ### Operations
 
@@ -287,11 +287,11 @@ local get_historical_rates_for_date = client:GetHistoricalRatesForDate(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `date` | `string` | Yes |  |
-| `rate` | `table` | Yes |  |
-| `success` | `boolean` | Yes |  |
-| `timestamp` | `number` | Yes |  |
+| `base` | `string` | No |  |
+| `date` | `string` | No |  |
+| `rates` | `table` | No |  |
+| `success` | `boolean` | No |  |
+| `timestamp` | `number` | No |  |
 
 ### Operations
 
@@ -343,11 +343,11 @@ local latest = client:Latest(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `date` | `string` | Yes |  |
-| `rate` | `table` | Yes |  |
-| `success` | `boolean` | Yes |  |
-| `timestamp` | `number` | Yes |  |
+| `base` | `string` | No |  |
+| `date` | `string` | No |  |
+| `rates` | `table` | No |  |
+| `success` | `boolean` | No |  |
+| `timestamp` | `number` | No |  |
 
 ### Operations
 
@@ -454,11 +454,9 @@ local symbol = client:Symbol(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `count` | `number` | Yes |  |
-| `note` | `string` | Yes |  |
-| `success` | `boolean` | Yes |  |
-| `symbol` | `table` | Yes |  |
+| `country` | `string` | Yes |  |
+| `name` | `string` | Yes |  |
+| `symbol` | `string` | Yes |  |
 
 ### Operations
 
@@ -510,12 +508,12 @@ local timeseries = client:Timeseries(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `end_date` | `string` | Yes |  |
-| `rate` | `table` | Yes |  |
-| `start_date` | `string` | Yes |  |
-| `success` | `boolean` | Yes |  |
-| `timeseries` | `boolean` | Yes |  |
+| `base` | `string` | No |  |
+| `end_date` | `string` | No |  |
+| `rates` | `table` | No |  |
+| `start_date` | `string` | No |  |
+| `success` | `boolean` | No |  |
+| `timeseries` | `boolean` | No |  |
 
 ### Operations
 

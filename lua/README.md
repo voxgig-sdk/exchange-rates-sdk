@@ -50,7 +50,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local convert, err = client:Convert():load()
+local latest, err = client:Latest():load()
 if err then error(err) end
 ```
 
@@ -108,7 +108,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Convert():load()
+local result, err = client:Latest():load({ id = "test01" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -266,7 +266,7 @@ API path: `/`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -280,7 +280,7 @@ API path: `/{date}/{currency}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -294,7 +294,7 @@ API path: `/{date}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
-| `rate` |  |
+| `rates` |  |
 | `success` |  |
 | `timestamp` |  |
 
@@ -319,10 +319,8 @@ API path: `/status`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `count` |  |
-| `note` |  |
-| `success` |  |
+| `country` |  |
+| `name` |  |
 | `symbol` |  |
 
 Operations: Load.
@@ -335,7 +333,7 @@ API path: `/symbols`
 | --- | --- |
 | `base` |  |
 | `end_date` |  |
-| `rate` |  |
+| `rates` |  |
 | `start_date` |  |
 | `success` |  |
 | `timeseries` |  |
@@ -419,7 +417,7 @@ Create an instance: `local get_historical_rate_for_currency_and_date = client:Ge
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `table` |  |
+| `rates` | `table` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |
 
@@ -446,7 +444,7 @@ Create an instance: `local get_historical_rates_for_date = client:GetHistoricalR
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `table` |  |
+| `rates` | `table` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |
 
@@ -473,7 +471,7 @@ Create an instance: `local latest = client:Latest(nil)`
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
-| `rate` | `table` |  |
+| `rates` | `table` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |
 
@@ -524,11 +522,9 @@ Create an instance: `local symbol = client:Symbol(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `string` |  |
-| `count` | `number` |  |
-| `note` | `string` |  |
-| `success` | `boolean` |  |
-| `symbol` | `table` |  |
+| `country` | `string` |  |
+| `name` | `string` |  |
+| `symbol` | `string` |  |
 
 #### Example: Load
 
@@ -553,7 +549,7 @@ Create an instance: `local timeseries = client:Timeseries(nil)`
 | --- | --- | --- |
 | `base` | `string` |  |
 | `end_date` | `string` |  |
-| `rate` | `table` |  |
+| `rates` | `table` |  |
 | `start_date` | `string` |  |
 | `success` | `boolean` |  |
 | `timeseries` | `boolean` |  |
@@ -641,11 +637,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local convert = client:Convert()
-convert:load()
+local latest = client:Latest()
+latest:load()
 
--- convert:data_get() now returns the convert data from the last load
--- convert:match_get() returns the last match criteria
+-- latest:data_get() now returns the latest data from the last load
+-- latest:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

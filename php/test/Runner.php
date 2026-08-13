@@ -43,8 +43,8 @@ class ExchangeRatesTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('EXCHANGERATES_TEST_LIVE');
-        $override = self::getenv('EXCHANGERATES_TEST_OVERRIDE');
+        $live = self::getenv('EXCHANGE_RATES_TEST_LIVE');
+        $override = self::getenv('EXCHANGE_RATES_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class ExchangeRatesTestRunner
             }
         }
 
-        $explain = self::getenv('EXCHANGERATES_TEST_EXPLAIN');
+        $explain = self::getenv('EXCHANGE_RATES_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['EXCHANGERATES_TEST_EXPLAIN'] = $explain;
+            $m['EXCHANGE_RATES_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

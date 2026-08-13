@@ -7,27 +7,27 @@ main: kit: entity: latest: {
   fields: [
     {
       name: "base"
-      req: true
+      req: false
       type: "`$STRING`"
     }
     {
       name: "date"
-      req: true
+      req: false
       type: "`$STRING`"
     }
     {
-      name: "rate"
-      req: true
+      name: "rates"
+      req: false
       type: "`$OBJECT`"
     }
     {
       name: "success"
-      req: true
+      req: false
       type: "`$BOOLEAN`"
     }
     {
       name: "timestamp"
-      req: true
+      req: false
       type: "`$INTEGER`"
     }
   ]
@@ -71,7 +71,7 @@ main: kit: entity: latest: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.rates`"
           }
         }
         {
@@ -105,7 +105,7 @@ main: kit: entity: latest: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.rates`"
           }
         }
       ]

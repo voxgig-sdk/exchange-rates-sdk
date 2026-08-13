@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ ExchangeRatesUtility.registrar = ->(u) {
   u.prepare_params = ExchangeRatesUtilities::PrepareParams
   u.prepare_path = ExchangeRatesUtilities::PreparePath
   u.prepare_query = ExchangeRatesUtilities::PrepareQuery
+  u.graphql_body = ExchangeRatesUtilities::GraphqlBody
+  u.graphql_errors = ExchangeRatesUtilities::GraphqlErrors
   u.result_basic = ExchangeRatesUtilities::ResultBasic
   u.result_body = ExchangeRatesUtilities::ResultBody
   u.result_headers = ExchangeRatesUtilities::ResultHeaders
