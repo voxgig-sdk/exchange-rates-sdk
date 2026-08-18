@@ -98,7 +98,7 @@ class Latest
 /** Request payload for Latest#load. */
 class LatestLoadMatch
 {
-    public ?string $id = null;
+    public string $id;
 }
 
 /** Status entity data model. */

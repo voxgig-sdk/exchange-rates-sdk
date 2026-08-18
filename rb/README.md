@@ -51,7 +51,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  latest = client.Latest.load()
+  latest = client.Latest.load({ "id" => "example_id" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -659,7 +659,7 @@ stores the returned data and match criteria internally.
 
 ```ruby
 latest = client.Latest
-latest.load()
+latest.load({ "id" => "example_id" })
 
 # latest.data_get now returns the latest data from the last load
 # latest.match_get returns the last match criteria

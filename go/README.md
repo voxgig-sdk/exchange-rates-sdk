@@ -69,7 +69,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-latest, err := client.Latest(nil).Load(nil, nil)
+latest, err := client.Latest(nil).Load(map[string]any{"id": "example_id"}, nil)
 if err != nil {
     // handle err
     return
@@ -701,7 +701,7 @@ stores the returned data and match criteria internally.
 
 ```go
 latest := client.Latest(nil)
-latest.Load(nil, nil)
+latest.Load(map[string]any{"id": "example_id"}, nil)
 
 // latest.Data() now returns the latest data from the last load
 // latest.Match() returns the last match criteria

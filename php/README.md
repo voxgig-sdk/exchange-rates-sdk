@@ -53,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $latest = $client->Latest()->load();
+    $latest = $client->Latest()->load(["id" => "example_id"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -669,7 +669,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $latest = $client->Latest();
-$latest->load();
+$latest->load(["id" => "example_id"]);
 
 // $latest->data_get() now returns the latest data from the last load
 // $latest->match_get() returns the last match criteria

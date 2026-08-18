@@ -208,7 +208,7 @@ Latest = Struct.new(
 # Request payload for Latest#load.
 #
 # @!attribute [rw] id
-#   @return [String, nil]
+#   @return [String]
 LatestLoadMatch = Struct.new(
   :id,
   keyword_init: true

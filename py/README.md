@@ -58,7 +58,7 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    latest = client.Latest().load()
+    latest = client.Latest().load({"id": "example_id"})
     print(latest)
 except Exception as err:
     print(f"load failed: {err}")
@@ -654,7 +654,7 @@ stores the returned data and match criteria internally.
 
 ```python
 latest = client.Latest()
-latest.load()
+latest.load({"id": "example_id"})
 
 # latest.data_get() now returns the latest data from the last load
 # latest.match_get() returns the last match criteria

@@ -50,7 +50,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local latest, err = client:Latest():load()
+local latest, err = client:Latest():load({ id = "example_id" })
 if err then error(err) end
 ```
 
@@ -638,7 +638,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local latest = client:Latest()
-latest:load()
+latest:load({ id = "example_id" })
 
 -- latest:data_get() now returns the latest data from the last load
 -- latest:match_get() returns the last match criteria

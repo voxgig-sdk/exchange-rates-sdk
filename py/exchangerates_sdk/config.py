@@ -1,7 +1,30 @@
 # ExchangeRates SDK configuration
 
 
+_shared_config = None
+
+
+def shared_config():
+    """Return the process-wide config, built once on first use.
+
+    The SDK reads the config on every request and never writes to it, so one
+    instance is shared by every client rather than rebuilt per client.
+
+    The returned dict is shared: treat it as read-only. Callers that need to
+    mutate should use make_config, which always returns a fresh copy.
+    """
+    global _shared_config
+    if _shared_config is None:
+        _shared_config = make_config()
+    return _shared_config
+
+
 def make_config():
+    """Build a fresh, fully materialised config dict.
+
+    Every call rebuilds the whole structure, so prefer shared_config unless
+    you need a private copy you intend to mutate.
+    """
     return {
         "main": {
             "name": "ExchangeRates",
@@ -36,46 +59,33 @@ def make_config():
       "convert": {
         "fields": [
           {
-            "active": True,
             "name": "date",
             "req": True,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "free",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "info",
             "req": True,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "query",
             "req": True,
             "type": "`$OBJECT`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "result",
             "req": True,
             "type": "`$NUMBER`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "success",
             "req": True,
             "type": "`$BOOLEAN`",
-            "index$": 5,
           },
         ],
         "name": "convert",
@@ -85,11 +95,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": 100,
                       "kind": "query",
                       "name": "amount",
@@ -98,16 +106,13 @@ def make_config():
                       "type": "`$NUMBER`",
                     },
                     {
-                      "active": True,
                       "example": "2025-08-31",
                       "kind": "query",
                       "name": "date",
                       "orig": "date",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "AUD",
                       "kind": "query",
                       "name": "from",
@@ -116,7 +121,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "USD",
                       "kind": "query",
                       "name": "to",
@@ -144,10 +148,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -157,32 +159,24 @@ def make_config():
       "get_api_root": {
         "fields": [
           {
-            "active": True,
             "name": "documentation",
             "req": True,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "message",
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "success",
             "req": True,
             "type": "`$BOOLEAN`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "version",
             "req": True,
             "type": "`$STRING`",
-            "index$": 3,
           },
         ],
         "name": "get_api_root",
@@ -192,7 +186,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "GET",
@@ -203,10 +196,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -216,39 +207,24 @@ def make_config():
       "get_historical_rate_for_currency_and_date": {
         "fields": [
           {
-            "active": True,
             "name": "base",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "date",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "rates",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "success",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "timestamp",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 4,
           },
         ],
         "name": "get_historical_rate_for_currency_and_date",
@@ -258,28 +234,23 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "USD",
                       "kind": "param",
                       "name": "currency",
                       "orig": "currency",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                     {
-                      "active": True,
                       "example": "2025-08-31",
                       "kind": "param",
                       "name": "date",
                       "orig": "date",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 1,
                     },
                   ],
                 },
@@ -300,10 +271,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.rates`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -313,39 +282,24 @@ def make_config():
       "get_historical_rates_for_date": {
         "fields": [
           {
-            "active": True,
             "name": "base",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "date",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "rates",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "success",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "timestamp",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 4,
           },
         ],
         "name": "get_historical_rates_for_date",
@@ -355,18 +309,15 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "2025-08-31",
                       "kind": "param",
                       "name": "id",
                       "orig": "date",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -390,10 +341,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.rates`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -403,39 +352,24 @@ def make_config():
       "latest": {
         "fields": [
           {
-            "active": True,
             "name": "base",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "date",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "rates",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "success",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "timestamp",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 4,
           },
         ],
         "name": "latest",
@@ -445,25 +379,20 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": "AUD",
                       "kind": "query",
                       "name": "base",
                       "orig": "base",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "USD,EUR,GBP",
                       "kind": "query",
                       "name": "symbol",
                       "orig": "symbol",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -484,21 +413,17 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.rates`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "example": "USD",
                       "kind": "param",
                       "name": "id",
                       "orig": "currency",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -523,10 +448,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.rates`",
                 },
-                "index$": 1,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -536,32 +459,24 @@ def make_config():
       "status": {
         "fields": [
           {
-            "active": True,
             "name": "last_update",
             "req": True,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "next_update_expected",
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "stale",
             "req": True,
             "type": "`$BOOLEAN`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "status",
             "req": True,
             "type": "`$STRING`",
-            "index$": 3,
           },
         ],
         "name": "status",
@@ -571,7 +486,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "GET",
@@ -584,10 +498,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -597,25 +509,19 @@ def make_config():
       "symbol": {
         "fields": [
           {
-            "active": True,
             "name": "country",
             "req": True,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "name",
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "symbol",
             "req": True,
             "type": "`$STRING`",
-            "index$": 2,
           },
         ],
         "name": "symbol",
@@ -625,7 +531,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "GET",
@@ -638,10 +543,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.symbols`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -651,46 +554,28 @@ def make_config():
       "timeseries": {
         "fields": [
           {
-            "active": True,
             "name": "base",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "end_date",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "rates",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "start_date",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "success",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "timeseries",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 5,
           },
         ],
         "name": "timeseries",
@@ -700,20 +585,16 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": "AUD",
                       "kind": "query",
                       "name": "base",
                       "orig": "base",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "2025-08-31",
                       "kind": "query",
                       "name": "end_date",
@@ -722,7 +603,6 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "2025-08-01",
                       "kind": "query",
                       "name": "start_date",
@@ -731,12 +611,10 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "USD,EUR,GBP",
                       "kind": "query",
                       "name": "symbol",
                       "orig": "symbol",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -759,10 +637,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.rates`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
