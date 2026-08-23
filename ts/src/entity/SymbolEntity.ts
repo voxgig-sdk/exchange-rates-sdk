@@ -15,12 +15,12 @@ import type {
 } from '../types'
 
 import type {
-  Symbol,
+  SymbolType,
   SymbolLoadMatch,
 } from '../ExchangeRatesTypes'
 
 // TODO: needs Entity superclass
-class SymbolEntity extends ExchangeRatesEntityBase<Symbol> {
+class SymbolEntity extends ExchangeRatesEntityBase<SymbolType> {
 
   constructor(client: ExchangeRatesSDK, entopts: any) {
     super(client, entopts)

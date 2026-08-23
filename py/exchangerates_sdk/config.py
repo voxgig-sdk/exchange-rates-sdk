@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "ExchangeRates",
+            "slug": "exchange-rates",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -65,6 +68,7 @@ def make_config():
           },
           {
             "name": "free",
+            "short": "Indicates if this was a free (unauthenticated) request",
             "type": "`$BOOLEAN`",
           },
           {
@@ -80,6 +84,7 @@ def make_config():
           {
             "name": "result",
             "req": True,
+            "short": "Conversion result",
             "type": "`$NUMBER`",
           },
           {
@@ -461,21 +466,25 @@ def make_config():
           {
             "name": "last_update",
             "req": True,
+            "short": "Last successful data update timestamp or 'unknown'",
             "type": "`$STRING`",
           },
           {
             "name": "next_update_expected",
             "req": True,
+            "short": "ISO 8601 timestamp of when next RBA update is expected",
             "type": "`$STRING`",
           },
           {
             "name": "stale",
             "req": True,
+            "short": "Whether the data is considered stale",
             "type": "`$BOOLEAN`",
           },
           {
             "name": "status",
             "req": True,
+            "short": "Current API status",
             "type": "`$STRING`",
           },
         ],
@@ -511,16 +520,19 @@ def make_config():
           {
             "name": "country",
             "req": True,
+            "short": "Country or region",
             "type": "`$STRING`",
           },
           {
             "name": "name",
             "req": True,
+            "short": "Full name of the currency",
             "type": "`$STRING`",
           },
           {
             "name": "symbol",
             "req": True,
+            "short": "Currency symbol",
             "type": "`$STRING`",
           },
         ],

@@ -13,6 +13,7 @@ main: kit: entity: convert: {
     {
       name: "free"
       req: false
+      short: "Indicates if this was a free (unauthenticated) request"
       type: "`$BOOLEAN`"
     }
     {
@@ -28,6 +29,7 @@ main: kit: entity: convert: {
     {
       name: "result"
       req: true
+      short: "Conversion result"
       type: "`$NUMBER`"
     }
     {

@@ -8,16 +8,19 @@ main: kit: entity: symbol: {
     {
       name: "country"
       req: true
+      short: "Country or region"
       type: "`$STRING`"
     }
     {
       name: "name"
       req: true
+      short: "Full name of the currency"
       type: "`$STRING`"
     }
     {
       name: "symbol"
       req: true
+      short: "Currency symbol"
       type: "`$STRING`"
     }
   ]

@@ -117,10 +117,10 @@ convert = client.Convert()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `date` | `str` | Yes |  |
-| `free` | `bool` | No |  |
+| `free` | `bool` | No | Indicates if this was a free (unauthenticated) request |
 | `info` | `dict` | Yes |  |
 | `query` | `dict` | Yes |  |
-| `result` | `float` | Yes |  |
+| `result` | `float` | Yes | Conversion result |
 | `success` | `bool` | Yes |  |
 
 ### Operations
@@ -391,10 +391,10 @@ status = client.Status()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `last_update` | `str` | Yes |  |
-| `next_update_expected` | `str` | Yes |  |
-| `stale` | `bool` | Yes |  |
-| `status` | `str` | Yes |  |
+| `last_update` | `str` | Yes | Last successful data update timestamp or 'unknown' |
+| `next_update_expected` | `str` | Yes | ISO 8601 timestamp of when next RBA update is expected |
+| `stale` | `bool` | Yes | Whether the data is considered stale |
+| `status` | `str` | Yes | Current API status |
 
 ### Operations
 
@@ -445,9 +445,9 @@ symbol = client.Symbol()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country` | `str` | Yes |  |
-| `name` | `str` | Yes |  |
-| `symbol` | `str` | Yes |  |
+| `country` | `str` | Yes | Country or region |
+| `name` | `str` | Yes | Full name of the currency |
+| `symbol` | `str` | Yes | Currency symbol |
 
 ### Operations
 

@@ -88,7 +88,7 @@ export interface StatusLoadMatch {
   status?: string
 }
 
-export interface Symbol {
+export interface SymbolType {
   country: string
   name: string
   symbol: string

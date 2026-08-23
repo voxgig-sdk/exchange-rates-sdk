@@ -19,6 +19,9 @@ module ExchangeRatesConfig
     {
       "main" => {
         "name" => "ExchangeRates",
+        "slug" => "exchange-rates",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -56,6 +59,7 @@ module ExchangeRatesConfig
             },
             {
               "name" => "free",
+              "short" => "Indicates if this was a free (unauthenticated) request",
               "type" => "`$BOOLEAN`",
             },
             {
@@ -71,6 +75,7 @@ module ExchangeRatesConfig
             {
               "name" => "result",
               "req" => true,
+              "short" => "Conversion result",
               "type" => "`$NUMBER`",
             },
             {
@@ -452,21 +457,25 @@ module ExchangeRatesConfig
             {
               "name" => "last_update",
               "req" => true,
+              "short" => "Last successful data update timestamp or 'unknown'",
               "type" => "`$STRING`",
             },
             {
               "name" => "next_update_expected",
               "req" => true,
+              "short" => "ISO 8601 timestamp of when next RBA update is expected",
               "type" => "`$STRING`",
             },
             {
               "name" => "stale",
               "req" => true,
+              "short" => "Whether the data is considered stale",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "status",
               "req" => true,
+              "short" => "Current API status",
               "type" => "`$STRING`",
             },
           ],
@@ -502,16 +511,19 @@ module ExchangeRatesConfig
             {
               "name" => "country",
               "req" => true,
+              "short" => "Country or region",
               "type" => "`$STRING`",
             },
             {
               "name" => "name",
               "req" => true,
+              "short" => "Full name of the currency",
               "type" => "`$STRING`",
             },
             {
               "name" => "symbol",
               "req" => true,
+              "short" => "Currency symbol",
               "type" => "`$STRING`",
             },
           ],

@@ -250,10 +250,10 @@ returns a result `Hash` with these keys:
 | Field | Description |
 | --- | --- |
 | `date` |  |
-| `free` |  |
+| `free` | Indicates if this was a free (unauthenticated) request |
 | `info` |  |
 | `query` |  |
-| `result` |  |
+| `result` | Conversion result |
 | `success` |  |
 
 Operations: Load.
@@ -319,10 +319,10 @@ API path: `/latest`
 
 | Field | Description |
 | --- | --- |
-| `last_update` |  |
-| `next_update_expected` |  |
-| `stale` |  |
-| `status` |  |
+| `last_update` | Last successful data update timestamp or 'unknown' |
+| `next_update_expected` | ISO 8601 timestamp of when next RBA update is expected |
+| `stale` | Whether the data is considered stale |
+| `status` | Current API status |
 
 Operations: Load.
 
@@ -332,9 +332,9 @@ API path: `/status`
 
 | Field | Description |
 | --- | --- |
-| `country` |  |
-| `name` |  |
-| `symbol` |  |
+| `country` | Country or region |
+| `name` | Full name of the currency |
+| `symbol` | Currency symbol |
 
 Operations: Load.
 
@@ -375,10 +375,10 @@ Create an instance: `convert = client.Convert`
 | Field | Type | Description |
 | --- | --- | --- |
 | `date` | `String` |  |
-| `free` | `Boolean` |  |
+| `free` | `Boolean` | Indicates if this was a free (unauthenticated) request |
 | `info` | `Hash` |  |
 | `query` | `Hash` |  |
-| `result` | `Float` |  |
+| `result` | `Float` | Conversion result |
 | `success` | `Boolean` |  |
 
 #### Example: Load
@@ -514,10 +514,10 @@ Create an instance: `status = client.Status`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `last_update` | `String` |  |
-| `next_update_expected` | `String` |  |
-| `stale` | `Boolean` |  |
-| `status` | `String` |  |
+| `last_update` | `String` | Last successful data update timestamp or 'unknown' |
+| `next_update_expected` | `String` | ISO 8601 timestamp of when next RBA update is expected |
+| `stale` | `Boolean` | Whether the data is considered stale |
+| `status` | `String` | Current API status |
 
 #### Example: Load
 
@@ -541,9 +541,9 @@ Create an instance: `symbol = client.Symbol`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country` | `String` |  |
-| `name` | `String` |  |
-| `symbol` | `String` |  |
+| `country` | `String` | Country or region |
+| `name` | `String` | Full name of the currency |
+| `symbol` | `String` | Currency symbol |
 
 #### Example: Load
 

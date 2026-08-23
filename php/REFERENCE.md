@@ -122,10 +122,10 @@ $convert = $client->Convert();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `date` | `string` | Yes |  |
-| `free` | `bool` | No |  |
+| `free` | `bool` | No | Indicates if this was a free (unauthenticated) request |
 | `info` | `array` | Yes |  |
 | `query` | `array` | Yes |  |
-| `result` | `float` | Yes |  |
+| `result` | `float` | Yes | Conversion result |
 | `success` | `bool` | Yes |  |
 
 ### Operations
@@ -401,10 +401,10 @@ $status = $client->Status();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `last_update` | `string` | Yes |  |
-| `next_update_expected` | `string` | Yes |  |
-| `stale` | `bool` | Yes |  |
-| `status` | `string` | Yes |  |
+| `last_update` | `string` | Yes | Last successful data update timestamp or 'unknown' |
+| `next_update_expected` | `string` | Yes | ISO 8601 timestamp of when next RBA update is expected |
+| `stale` | `bool` | Yes | Whether the data is considered stale |
+| `status` | `string` | Yes | Current API status |
 
 ### Operations
 
@@ -456,9 +456,9 @@ $symbol = $client->Symbol();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country` | `string` | Yes |  |
-| `name` | `string` | Yes |  |
-| `symbol` | `string` | Yes |  |
+| `country` | `string` | Yes | Country or region |
+| `name` | `string` | Yes | Full name of the currency |
+| `symbol` | `string` | Yes | Currency symbol |
 
 ### Operations
 

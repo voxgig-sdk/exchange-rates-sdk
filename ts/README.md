@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -299,10 +299,10 @@ The `prepare()` method returns:
 | Field | Description |
 | --- | --- |
 | `date` |  |
-| `free` |  |
+| `free` | Indicates if this was a free (unauthenticated) request |
 | `info` |  |
 | `query` |  |
-| `result` |  |
+| `result` | Conversion result |
 | `success` |  |
 
 Operations: load.
@@ -368,10 +368,10 @@ API path: `/latest`
 
 | Field | Description |
 | --- | --- |
-| `last_update` |  |
-| `next_update_expected` |  |
-| `stale` |  |
-| `status` |  |
+| `last_update` | Last successful data update timestamp or 'unknown' |
+| `next_update_expected` | ISO 8601 timestamp of when next RBA update is expected |
+| `stale` | Whether the data is considered stale |
+| `status` | Current API status |
 
 Operations: load.
 
@@ -381,9 +381,9 @@ API path: `/status`
 
 | Field | Description |
 | --- | --- |
-| `country` |  |
-| `name` |  |
-| `symbol` |  |
+| `country` | Country or region |
+| `name` | Full name of the currency |
+| `symbol` | Currency symbol |
 
 Operations: load.
 
@@ -424,10 +424,10 @@ Create an instance: `const convert = client.Convert()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `date` | `string` |  |
-| `free` | `boolean` |  |
+| `free` | `boolean` | Indicates if this was a free (unauthenticated) request |
 | `info` | `Record<string, any>` |  |
 | `query` | `Record<string, any>` |  |
-| `result` | `number` |  |
+| `result` | `number` | Conversion result |
 | `success` | `boolean` |  |
 
 #### Example: Load
@@ -558,10 +558,10 @@ Create an instance: `const status = client.Status()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `last_update` | `string` |  |
-| `next_update_expected` | `string` |  |
-| `stale` | `boolean` |  |
-| `status` | `string` |  |
+| `last_update` | `string` | Last successful data update timestamp or 'unknown' |
+| `next_update_expected` | `string` | ISO 8601 timestamp of when next RBA update is expected |
+| `stale` | `boolean` | Whether the data is considered stale |
+| `status` | `string` | Current API status |
 
 #### Example: Load
 
@@ -584,9 +584,9 @@ Create an instance: `const symbol = client.Symbol()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country` | `string` |  |
-| `name` | `string` |  |
-| `symbol` | `string` |  |
+| `country` | `string` | Country or region |
+| `name` | `string` | Full name of the currency |
+| `symbol` | `string` | Currency symbol |
 
 #### Example: Load
 

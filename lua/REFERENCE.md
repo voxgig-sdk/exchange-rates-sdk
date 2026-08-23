@@ -120,10 +120,10 @@ local convert = client:Convert(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `date` | `string` | Yes |  |
-| `free` | `boolean` | No |  |
+| `free` | `boolean` | No | Indicates if this was a free (unauthenticated) request |
 | `info` | `table` | Yes |  |
 | `query` | `table` | Yes |  |
-| `result` | `number` | Yes |  |
+| `result` | `number` | Yes | Conversion result |
 | `success` | `boolean` | Yes |  |
 
 ### Operations
@@ -399,10 +399,10 @@ local status = client:Status(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `last_update` | `string` | Yes |  |
-| `next_update_expected` | `string` | Yes |  |
-| `stale` | `boolean` | Yes |  |
-| `status` | `string` | Yes |  |
+| `last_update` | `string` | Yes | Last successful data update timestamp or 'unknown' |
+| `next_update_expected` | `string` | Yes | ISO 8601 timestamp of when next RBA update is expected |
+| `stale` | `boolean` | Yes | Whether the data is considered stale |
+| `status` | `string` | Yes | Current API status |
 
 ### Operations
 
@@ -454,9 +454,9 @@ local symbol = client:Symbol(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country` | `string` | Yes |  |
-| `name` | `string` | Yes |  |
-| `symbol` | `string` | Yes |  |
+| `country` | `string` | Yes | Country or region |
+| `name` | `string` | Yes | Full name of the currency |
+| `symbol` | `string` | Yes | Currency symbol |
 
 ### Operations
 

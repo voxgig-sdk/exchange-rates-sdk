@@ -6,7 +6,7 @@ The Golang SDK for the ExchangeRates API — an entity-oriented client using sta
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Convert(nil)` — each with the same small set of operations (`Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -271,10 +271,10 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | Field | Description |
 | --- | --- |
 | `"date"` |  |
-| `"free"` |  |
+| `"free"` | Indicates if this was a free (unauthenticated) request |
 | `"info"` |  |
 | `"query"` |  |
-| `"result"` |  |
+| `"result"` | Conversion result |
 | `"success"` |  |
 
 Operations: Load.
@@ -340,10 +340,10 @@ API path: `/latest`
 
 | Field | Description |
 | --- | --- |
-| `"last_update"` |  |
-| `"next_update_expected"` |  |
-| `"stale"` |  |
-| `"status"` |  |
+| `"last_update"` | Last successful data update timestamp or 'unknown' |
+| `"next_update_expected"` | ISO 8601 timestamp of when next RBA update is expected |
+| `"stale"` | Whether the data is considered stale |
+| `"status"` | Current API status |
 
 Operations: Load.
 
@@ -353,9 +353,9 @@ API path: `/status`
 
 | Field | Description |
 | --- | --- |
-| `"country"` |  |
-| `"name"` |  |
-| `"symbol"` |  |
+| `"country"` | Country or region |
+| `"name"` | Full name of the currency |
+| `"symbol"` | Currency symbol |
 
 Operations: Load.
 
@@ -396,10 +396,10 @@ Create an instance: `convert := client.Convert(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `date` | `string` |  |
-| `free` | `bool` |  |
+| `free` | `bool` | Indicates if this was a free (unauthenticated) request |
 | `info` | `map[string]any` |  |
 | `query` | `map[string]any` |  |
-| `result` | `float64` |  |
+| `result` | `float64` | Conversion result |
 | `success` | `bool` |  |
 
 #### Example: Load
@@ -550,10 +550,10 @@ Create an instance: `status := client.Status(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `last_update` | `string` |  |
-| `next_update_expected` | `string` |  |
-| `stale` | `bool` |  |
-| `status` | `string` |  |
+| `last_update` | `string` | Last successful data update timestamp or 'unknown' |
+| `next_update_expected` | `string` | ISO 8601 timestamp of when next RBA update is expected |
+| `stale` | `bool` | Whether the data is considered stale |
+| `status` | `string` | Current API status |
 
 #### Example: Load
 
@@ -580,9 +580,9 @@ Create an instance: `symbol := client.Symbol(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country` | `string` |  |
-| `name` | `string` |  |
-| `symbol` | `string` |  |
+| `country` | `string` | Country or region |
+| `name` | `string` | Full name of the currency |
+| `symbol` | `string` | Currency symbol |
 
 #### Example: Load
 

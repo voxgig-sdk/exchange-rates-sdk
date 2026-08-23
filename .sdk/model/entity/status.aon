@@ -8,21 +8,25 @@ main: kit: entity: status: {
     {
       name: "last_update"
       req: true
+      short: "Last successful data update timestamp or 'unknown'"
       type: "`$STRING`"
     }
     {
       name: "next_update_expected"
       req: true
+      short: "ISO 8601 timestamp of when next RBA update is expected"
       type: "`$STRING`"
     }
     {
       name: "stale"
       req: true
+      short: "Whether the data is considered stale"
       type: "`$BOOLEAN`"
     }
     {
       name: "status"
       req: true
+      short: "Current API status"
       type: "`$STRING`"
     }
   ]

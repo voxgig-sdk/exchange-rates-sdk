@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "ExchangeRates",
+			"slug": "exchange-rates",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -48,6 +51,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "free",
+						"short": "Indicates if this was a free (unauthenticated) request",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
@@ -63,6 +67,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "result",
 						"req": true,
+						"short": "Conversion result",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
@@ -444,21 +449,25 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "last_update",
 						"req": true,
+						"short": "Last successful data update timestamp or 'unknown'",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "next_update_expected",
 						"req": true,
+						"short": "ISO 8601 timestamp of when next RBA update is expected",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "stale",
 						"req": true,
+						"short": "Whether the data is considered stale",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "status",
 						"req": true,
+						"short": "Current API status",
 						"type": "`$STRING`",
 					},
 				},
@@ -494,16 +503,19 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "country",
 						"req": true,
+						"short": "Country or region",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
 						"req": true,
+						"short": "Full name of the currency",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "symbol",
 						"req": true,
+						"short": "Currency symbol",
 						"type": "`$STRING`",
 					},
 				},
