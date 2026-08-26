@@ -289,6 +289,7 @@ local get_historical_rates_for_date = client:GetHistoricalRatesForDate(nil)
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `table` | No |  |
 | `success` | `boolean` | No |  |
 | `timestamp` | `number` | No |  |
@@ -345,6 +346,7 @@ local latest = client:Latest(nil)
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `table` | No |  |
 | `success` | `boolean` | No |  |
 | `timestamp` | `number` | No |  |

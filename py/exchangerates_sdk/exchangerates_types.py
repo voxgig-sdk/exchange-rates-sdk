@@ -67,6 +67,7 @@ class GetHistoricalRateForCurrencyAndDateLoadMatch(TypedDict):
 class GetHistoricalRatesForDate(TypedDict, total=False):
     base: str
     date: str
+    id: str
     rates: dict
     success: bool
     timestamp: int
@@ -79,6 +80,7 @@ class GetHistoricalRatesForDateLoadMatch(TypedDict):
 class Latest(TypedDict, total=False):
     base: str
     date: str
+    id: str
     rates: dict
     success: bool
     timestamp: int

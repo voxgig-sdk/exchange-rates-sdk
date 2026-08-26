@@ -16,6 +16,11 @@ main: kit: entity: get_historical_rates_for_date: {
       type: "`$STRING`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "rates"
       req: false
       type: "`$OBJECT`"
@@ -31,6 +36,11 @@ main: kit: entity: get_historical_rates_for_date: {
       type: "`$INTEGER`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "get_historical_rates_for_date"
   op: {

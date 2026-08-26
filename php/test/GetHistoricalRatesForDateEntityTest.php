@@ -48,9 +48,13 @@ class GetHistoricalRatesForDateEntityTest extends TestCase
 
         // LOAD
         $get_historical_rates_for_date_ref01_ent = $client->GetHistoricalRatesForDate(null);
-        $get_historical_rates_for_date_ref01_match_dt0 = [];
+        $get_historical_rates_for_date_ref01_match_dt0 = [
+            "id" => $get_historical_rates_for_date_ref01_data["id"],
+        ];
         $get_historical_rates_for_date_ref01_data_dt0_loaded = $get_historical_rates_for_date_ref01_ent->load($get_historical_rates_for_date_ref01_match_dt0, null);
-        $this->assertNotNull($get_historical_rates_for_date_ref01_data_dt0_loaded);
+        $get_historical_rates_for_date_ref01_data_dt0_load_result = Helpers::to_map(is_object($get_historical_rates_for_date_ref01_data_dt0_loaded) && method_exists($get_historical_rates_for_date_ref01_data_dt0_loaded, 'data_get') ? $get_historical_rates_for_date_ref01_data_dt0_loaded->data_get() : $get_historical_rates_for_date_ref01_data_dt0_loaded);
+        $this->assertNotNull($get_historical_rates_for_date_ref01_data_dt0_load_result);
+        $this->assertEquals($get_historical_rates_for_date_ref01_data_dt0_load_result["id"], $get_historical_rates_for_date_ref01_data["id"]);
 
     }
 }

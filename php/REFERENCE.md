@@ -291,6 +291,7 @@ $get_historical_rates_for_date = $client->GetHistoricalRatesForDate();
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `array` | No |  |
 | `success` | `bool` | No |  |
 | `timestamp` | `int` | No |  |
@@ -347,6 +348,7 @@ $latest = $client->Latest();
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `array` | No |  |
 | `success` | `bool` | No |  |
 | `timestamp` | `int` | No |  |

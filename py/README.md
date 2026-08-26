@@ -58,8 +58,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    latest = client.Latest().load({"id": "example_id"})
-    print(latest)
+    convert = client.Convert().load()
+    print(convert)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -127,8 +127,8 @@ client = ExchangeRatesSDK.test()
 
 # Entity ops return the ENTITY and raises on error;
 # call data_get() for the record.
-latest = client.Latest().load({"id": "test01"})
-# latest contains the mock response record
+convert = client.Convert().load()
+# convert contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -297,6 +297,7 @@ API path: `/{date}/{currency}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
+| `id` |  |
 | `rates` |  |
 | `success` |  |
 | `timestamp` |  |
@@ -311,6 +312,7 @@ API path: `/{date}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
+| `id` |  |
 | `rates` |  |
 | `success` |  |
 | `timestamp` |  |
@@ -461,6 +463,7 @@ Create an instance: `get_historical_rates_for_date = client.GetHistoricalRatesFo
 | --- | --- | --- |
 | `base` | `str` |  |
 | `date` | `str` |  |
+| `id` | `str` |  |
 | `rates` | `dict` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
@@ -488,6 +491,7 @@ Create an instance: `latest = client.Latest()`
 | --- | --- | --- |
 | `base` | `str` |  |
 | `date` | `str` |  |
+| `id` | `str` |  |
 | `rates` | `dict` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
@@ -653,11 +657,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-latest = client.Latest()
-latest.load({"id": "example_id"})
+convert = client.Convert()
+convert.load()
 
-# latest.data_get() now returns the latest data from the last load
-# latest.match_get() returns the last match criteria
+# convert.data_get() now returns the convert data from the last load
+# convert.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -48,9 +48,13 @@ class TestGetHistoricalRatesForDateEntity:
 
         # LOAD
         get_historical_rates_for_date_ref01_ent = client.GetHistoricalRatesForDate(None)
-        get_historical_rates_for_date_ref01_match_dt0 = {}
+        get_historical_rates_for_date_ref01_match_dt0 = {
+            "id": get_historical_rates_for_date_ref01_data["id"],
+        }
         get_historical_rates_for_date_ref01_data_dt0_loaded = get_historical_rates_for_date_ref01_ent.load(get_historical_rates_for_date_ref01_match_dt0, None)
-        assert get_historical_rates_for_date_ref01_data_dt0_loaded is not None
+        get_historical_rates_for_date_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(get_historical_rates_for_date_ref01_data_dt0_loaded))
+        assert get_historical_rates_for_date_ref01_data_dt0_load_result is not None
+        assert get_historical_rates_for_date_ref01_data_dt0_load_result["id"] == get_historical_rates_for_date_ref01_data["id"]
 
 
 

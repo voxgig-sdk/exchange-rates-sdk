@@ -59,9 +59,12 @@ describe('GetHistoricalRatesForDateEntity', async () => {
 
     let get_historical_rates_for_date_ref01_data = Object.values(setup.data.existing.get_historical_rates_for_date)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
+    // LOAD
     const get_historical_rates_for_date_ref01_ent = client.GetHistoricalRatesForDate()
+    const get_historical_rates_for_date_ref01_match_dt0: any = {}
+    get_historical_rates_for_date_ref01_match_dt0.id = get_historical_rates_for_date_ref01_data.id
+    const get_historical_rates_for_date_ref01_data_dt0 = (await get_historical_rates_for_date_ref01_ent.load(get_historical_rates_for_date_ref01_match_dt0)).data()
+    assert(get_historical_rates_for_date_ref01_data_dt0.id === get_historical_rates_for_date_ref01_data.id)
 
 
   })

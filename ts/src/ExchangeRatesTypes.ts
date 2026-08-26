@@ -53,6 +53,7 @@ export interface GetHistoricalRateForCurrencyAndDateLoadMatch {
 export interface GetHistoricalRatesForDate {
   base?: string
   date?: string
+  id?: string
   rates?: Record<string, any>
   success?: boolean
   timestamp?: number
@@ -65,6 +66,7 @@ export interface GetHistoricalRatesForDateLoadMatch {
 export interface Latest {
   base?: string
   date?: string
+  id?: string
   rates?: Record<string, any>
   success?: boolean
   timestamp?: number

@@ -2,39 +2,39 @@
   "existing": {
     "latest": {
       "LATEST00": {
-        "base": "s32",
-        "date": "s33",
+        "base": "s3c",
+        "date": "s3d",
+        "id": "LATEST00",
         "rates": {},
-        "success": false,
-        "timestamp": "s36",
-        "id": "LATEST00"
+        "success": true,
+        "timestamp": "s41"
       },
       "LATEST01": {
-        "base": "s64",
-        "date": "s65",
+        "base": "s78",
+        "date": "s79",
+        "id": "LATEST01",
         "rates": {},
-        "success": false,
-        "timestamp": "s68",
-        "id": "LATEST01"
+        "success": true,
+        "timestamp": "s7d"
       },
       "LATEST02": {
-        "base": "s96",
-        "date": "s97",
+        "base": "sb4",
+        "date": "sb5",
+        "id": "LATEST02",
         "rates": {},
-        "success": false,
-        "timestamp": "s9a",
-        "id": "LATEST02"
+        "success": true,
+        "timestamp": "sb9"
       }
     }
   },
   "new": {
     "latest": {
       "latest_ref01": {
-        "base": "sc8",
-        "date": "sc9",
+        "base": "sf0",
+        "date": "sf1",
         "rates": {},
-        "success": false,
-        "timestamp": "scc"
+        "success": true,
+        "timestamp": "sf5"
       }
     }
   }

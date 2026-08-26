@@ -69,12 +69,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-latest, err := client.Latest(nil).Load(map[string]any{"id": "example_id"}, nil)
+convert, err := client.Convert(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = latest
+_ = convert
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -138,13 +138,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-latest, err := client.Latest(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+convert, err := client.Convert(nil).Load(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(latest) // the returned mock data
+fmt.Println(convert) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -314,6 +314,7 @@ API path: `/{date}/{currency}`
 | --- | --- |
 | `"base"` |  |
 | `"date"` |  |
+| `"id"` |  |
 | `"rates"` |  |
 | `"success"` |  |
 | `"timestamp"` |  |
@@ -328,6 +329,7 @@ API path: `/{date}`
 | --- | --- |
 | `"base"` |  |
 | `"date"` |  |
+| `"id"` |  |
 | `"rates"` |  |
 | `"success"` |  |
 | `"timestamp"` |  |
@@ -490,6 +492,7 @@ Create an instance: `getHistoricalRatesForDate := client.GetHistoricalRatesForDa
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
+| `id` | `string` |  |
 | `rates` | `map[string]any` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
@@ -521,6 +524,7 @@ Create an instance: `latest := client.Latest(nil)`
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
+| `id` | `string` |  |
 | `rates` | `map[string]any` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |
@@ -700,11 +704,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-latest := client.Latest(nil)
-latest.Load(map[string]any{"id": "example_id"}, nil)
+convert := client.Convert(nil)
+convert.Load(nil, nil)
 
-// latest.Data() now returns the latest data from the last load
-// latest.Match() returns the last match criteria
+// convert.Data() now returns the convert data from the last load
+// convert.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

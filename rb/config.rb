@@ -28,6 +28,7 @@ module ExchangeRatesConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
@@ -286,6 +287,10 @@ module ExchangeRatesConfig
               "type" => "`$STRING`",
             },
             {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
+            {
               "name" => "rates",
               "type" => "`$OBJECT`",
             },
@@ -353,6 +358,10 @@ module ExchangeRatesConfig
             },
             {
               "name" => "date",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "id",
               "type" => "`$STRING`",
             },
             {

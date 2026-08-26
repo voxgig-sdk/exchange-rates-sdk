@@ -51,7 +51,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  latest = client.Latest.load({ "id" => "example_id" })
+  convert = client.Convert.load()
 rescue => err
   warn "load failed: #{err}"
 end
@@ -114,18 +114,15 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = ExchangeRatesSDK.test({
-  "entity" => { "latest" => { "test01" => { "id" => "test01" } } },
-})
+client = ExchangeRatesSDK.test
 
 # Entity ops return the ENTITY (raises on error);
 # call data_get for the mock record.
-latest = client.Latest.load({ "id" => "test01" })
-puts latest
+convert = client.Convert.load()
+puts convert
 ```
 
 ### Use a custom fetch function
@@ -293,6 +290,7 @@ API path: `/{date}/{currency}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
+| `id` |  |
 | `rates` |  |
 | `success` |  |
 | `timestamp` |  |
@@ -307,6 +305,7 @@ API path: `/{date}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
+| `id` |  |
 | `rates` |  |
 | `success` |  |
 | `timestamp` |  |
@@ -460,6 +459,7 @@ Create an instance: `get_historical_rates_for_date = client.GetHistoricalRatesFo
 | --- | --- | --- |
 | `base` | `String` |  |
 | `date` | `String` |  |
+| `id` | `String` |  |
 | `rates` | `Hash` |  |
 | `success` | `Boolean` |  |
 | `timestamp` | `Integer` |  |
@@ -488,6 +488,7 @@ Create an instance: `latest = client.Latest`
 | --- | --- | --- |
 | `base` | `String` |  |
 | `date` | `String` |  |
+| `id` | `String` |  |
 | `rates` | `Hash` |  |
 | `success` | `Boolean` |  |
 | `timestamp` | `Integer` |  |
@@ -658,11 +659,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-latest = client.Latest
-latest.load({ "id" => "example_id" })
+convert = client.Convert
+convert.load()
 
-# latest.data_get now returns the latest data from the last load
-# latest.match_get returns the last match criteria
+# convert.data_get now returns the convert data from the last load
+# convert.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

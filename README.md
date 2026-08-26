@@ -42,23 +42,23 @@ network, and no credentials:
 // Shape: { entity: { <entity-name>: { <id>: <record> } } }
 const client = ExchangeRatesSDK.test({
   entity: {
-    latest: {
+    convert: {
       test01: { id: 'test01' },
     },
   },
 })
-const latest = await client.Latest().load({ id: 'test01' })
-// latest is the Latest entity, populated with mock data
-// — call latest.data() for the record itself
-console.log(latest)
+const convert = await client.Convert().load()
+// convert is the Convert entity, populated with mock data
+// — call convert.data() for the record itself
+console.log(convert)
 ```
 
 ### Python
 
 ```python
 client = ExchangeRatesSDK.test()
-latest = client.Latest().load({"id": "test01"})
-print(latest)
+convert = client.Convert().load()
+print(convert)
 ```
 
 ### PHP
@@ -66,17 +66,17 @@ print(latest)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = ExchangeRatesSDK::test([
-    "entity" => ["latest" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["convert" => ["test01" => []]],
 ]);
-$latest = $client->Latest()->load(["id" => "test01"]);
+$convert = $client->Convert()->load();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Latest(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+result, err := client.Convert(nil).Load(
+    nil, nil,
 )
 ```
 
@@ -85,16 +85,16 @@ result, err := client.Latest(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = ExchangeRatesSDK.test({
-  "entity" => { "latest" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "convert" => { "test01" => {} } },
 })
-latest = client.Latest.load({ "id" => "test01" })
+convert = client.Convert.load()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Latest():load({ id = "test01" })
+local result, err = client:Convert():load()
 ```
 
 ## Packages

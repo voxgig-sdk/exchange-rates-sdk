@@ -55,8 +55,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const latest = await client.Latest().load({ id: "example_id" })
-  console.log(latest)
+  const convert = await client.Convert().load()
+  console.log(convert)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -122,10 +122,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ExchangeRatesSDK.test()
 
-const latest = await client.Latest().load({ id: 'test01' })
-// latest is the entity, populated with mock response data
-// — call latest.data() for the record itself
-console.log(latest)
+const convert = await client.Convert().load()
+// convert is the entity, populated with mock response data
+// — call convert.data() for the record itself
+console.log(convert)
 ```
 
 You can also use the instance method:
@@ -140,10 +140,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Latest()
+const entity = client.Convert()
 
 // First call runs the operation and stores its result
-await entity.load({ id: 'example' })
+await entity.load()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -342,6 +342,7 @@ API path: `/{date}/{currency}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
+| `id` |  |
 | `rates` |  |
 | `success` |  |
 | `timestamp` |  |
@@ -356,6 +357,7 @@ API path: `/{date}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
+| `id` |  |
 | `rates` |  |
 | `success` |  |
 | `timestamp` |  |
@@ -506,6 +508,7 @@ Create an instance: `const get_historical_rates_for_date = client.GetHistoricalR
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
+| `id` | `string` |  |
 | `rates` | `Record<string, any>` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |
@@ -533,6 +536,7 @@ Create an instance: `const latest = client.Latest()`
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
+| `id` | `string` |  |
 | `rates` | `Record<string, any>` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |
@@ -692,11 +696,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const latest = client.Latest()
-await latest.load({ id: "example_id" })
+const convert = client.Convert()
+await convert.load()
 
-// latest.data() now returns the latest data from the last `load`
-// latest.match() returns { id: "example_id" }
+// convert.data() now returns the convert data from the last `load`
+// convert.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

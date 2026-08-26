@@ -292,6 +292,7 @@ get_historical_rates_for_date = client.GetHistoricalRatesForDate
 | --- | --- | --- | --- |
 | `base` | `String` | No |  |
 | `date` | `String` | No |  |
+| `id` | `String` | No |  |
 | `rates` | `Hash` | No |  |
 | `success` | `Boolean` | No |  |
 | `timestamp` | `Integer` | No |  |
@@ -348,6 +349,7 @@ latest = client.Latest
 | --- | --- | --- | --- |
 | `base` | `String` | No |  |
 | `date` | `String` | No |  |
+| `id` | `String` | No |  |
 | `rates` | `Hash` | No |  |
 | `success` | `Boolean` | No |  |
 | `timestamp` | `Integer` | No |  |

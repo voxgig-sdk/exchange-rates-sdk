@@ -294,6 +294,7 @@ fmt.Println(getHistoricalRatesForDate.GetName()) // "get_historical_rates_for_da
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `map[string]any` | No |  |
 | `success` | `bool` | No |  |
 | `timestamp` | `int` | No |  |
@@ -349,6 +350,7 @@ fmt.Println(latest.GetName()) // "latest"
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `map[string]any` | No |  |
 | `success` | `bool` | No |  |
 | `timestamp` | `int` | No |  |

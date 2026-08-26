@@ -74,6 +74,7 @@ class GetHistoricalRatesForDate
 {
     public ?string $base = null;
     public ?string $date = null;
+    public ?string $id = null;
     public ?array $rates = null;
     public ?bool $success = null;
     public ?int $timestamp = null;
@@ -90,6 +91,7 @@ class Latest
 {
     public ?string $base = null;
     public ?string $date = null;
+    public ?string $id = null;
     public ?array $rates = null;
     public ?bool $success = null;
     public ?int $timestamp = null;

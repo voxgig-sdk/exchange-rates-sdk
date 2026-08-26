@@ -62,8 +62,9 @@ describe('LatestEntity', async () => {
     // LOAD
     const latest_ref01_ent = client.Latest()
     const latest_ref01_match_dt0: any = {}
+    latest_ref01_match_dt0.id = latest_ref01_data.id
     const latest_ref01_data_dt0 = (await latest_ref01_ent.load(latest_ref01_match_dt0)).data()
-    assert(null != latest_ref01_data_dt0)
+    assert(latest_ref01_data_dt0.id === latest_ref01_data.id)
 
 
   })

@@ -154,6 +154,9 @@ GetHistoricalRateForCurrencyAndDateLoadMatch = Struct.new(
 # @!attribute [rw] date
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] rates
 #   @return [Hash, nil]
 #
@@ -165,6 +168,7 @@ GetHistoricalRateForCurrencyAndDateLoadMatch = Struct.new(
 GetHistoricalRatesForDate = Struct.new(
   :base,
   :date,
+  :id,
   :rates,
   :success,
   :timestamp,
@@ -188,6 +192,9 @@ GetHistoricalRatesForDateLoadMatch = Struct.new(
 # @!attribute [rw] date
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] rates
 #   @return [Hash, nil]
 #
@@ -199,6 +206,7 @@ GetHistoricalRatesForDateLoadMatch = Struct.new(
 Latest = Struct.new(
   :base,
   :date,
+  :id,
   :rates,
   :success,
   :timestamp,

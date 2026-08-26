@@ -61,13 +61,19 @@ func TestGetHistoricalRatesForDateEntity(t *testing.T) {
 
 		// LOAD
 		getHistoricalRatesForDateRef01Ent := client.GetHistoricalRatesForDate(nil)
-		getHistoricalRatesForDateRef01MatchDt0 := map[string]any{}
+		getHistoricalRatesForDateRef01MatchDt0 := map[string]any{
+			"id": getHistoricalRatesForDateRef01Data["id"],
+		}
 		getHistoricalRatesForDateRef01DataDt0Loaded, err := getHistoricalRatesForDateRef01Ent.Load(getHistoricalRatesForDateRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if getHistoricalRatesForDateRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		getHistoricalRatesForDateRef01DataDt0LoadResult := core.ToMapAny(entityData(getHistoricalRatesForDateRef01DataDt0Loaded))
+		if getHistoricalRatesForDateRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if getHistoricalRatesForDateRef01DataDt0LoadResult["id"] != getHistoricalRatesForDateRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

@@ -50,7 +50,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local latest, err = client:Latest():load({ id = "example_id" })
+local convert, err = client:Convert():load()
 if err then error(err) end
 ```
 
@@ -108,7 +108,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Latest():load({ id = "test01" })
+local result, err = client:Convert():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -280,6 +280,7 @@ API path: `/{date}/{currency}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
+| `id` |  |
 | `rates` |  |
 | `success` |  |
 | `timestamp` |  |
@@ -294,6 +295,7 @@ API path: `/{date}`
 | --- | --- |
 | `base` |  |
 | `date` |  |
+| `id` |  |
 | `rates` |  |
 | `success` |  |
 | `timestamp` |  |
@@ -444,6 +446,7 @@ Create an instance: `local get_historical_rates_for_date = client:GetHistoricalR
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
+| `id` | `string` |  |
 | `rates` | `table` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |
@@ -471,6 +474,7 @@ Create an instance: `local latest = client:Latest(nil)`
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
+| `id` | `string` |  |
 | `rates` | `table` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |
@@ -637,11 +641,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local latest = client:Latest()
-latest:load({ id = "example_id" })
+local convert = client:Convert()
+convert:load()
 
--- latest:data_get() now returns the latest data from the last load
--- latest:match_get() returns the last match criteria
+-- convert:data_get() now returns the convert data from the last load
+-- convert:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

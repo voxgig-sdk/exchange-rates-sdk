@@ -365,6 +365,7 @@ const get_historical_rates_for_date = client.GetHistoricalRatesForDate()
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `Record<string, any>` | No |  |
 | `success` | `boolean` | No |  |
 | `timestamp` | `number` | No |  |
@@ -419,6 +420,7 @@ const latest = client.Latest()
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `Record<string, any>` | No |  |
 | `success` | `boolean` | No |  |
 | `timestamp` | `number` | No |  |

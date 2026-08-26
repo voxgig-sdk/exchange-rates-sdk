@@ -42,6 +42,7 @@ class ExchangeRatesConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
@@ -300,6 +301,10 @@ class ExchangeRatesConfig
               'type' => '`$STRING`',
             ],
             [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
+            [
               'name' => 'rates',
               'type' => '`$OBJECT`',
             ],
@@ -367,6 +372,10 @@ class ExchangeRatesConfig
             ],
             [
               'name' => 'date',
+              'type' => '`$STRING`',
+            ],
+            [
+              'name' => 'id',
               'type' => '`$STRING`',
             ],
             [
