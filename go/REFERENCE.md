@@ -141,7 +141,7 @@ fmt.Println(convert.GetName()) // "convert"
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Convert(nil).Load(nil, nil)
+result, err := client.Convert(nil).Load(map[string]any{"amount": 1, "from": "from", "to": "to"}, nil)
 if err != nil {
     panic(err)
 }
@@ -525,7 +525,7 @@ fmt.Println(timeseries.GetName()) // "timeseries"
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Timeseries(nil).Load(nil, nil)
+result, err := client.Timeseries(nil).Load(map[string]any{"end_date": "end_date", "start_date": "start_date"}, nil)
 if err != nil {
     panic(err)
 }
@@ -572,4 +572,42 @@ client := sdk.NewExchangeRatesSDK(map[string]any{
     },
 })
 ```
+
+
+### Configuring features
+
+Each feature is inactive until switched on, and an SDK with no feature
+configured does no feature work at all. Every option below keeps its default
+unless you name it.
+
+The array form of \`feature\` is significant: several features wrap the
+transport, and the order you list them in is the order they nest.
+
+#### `test`
+
+In-memory mock transport for testing without a live server.
+
+**Configuration**
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Options above are those the model carries a default for. A feature may
+also accept callback options — a `sink` to receive each record, for
+instance — which have no default and are covered in the full feature
+reference.
+
+**Usage**
+
+Set `feature.test.active` to true in the client options, and override any option above in the same entry. Every option keeps
+its default unless you name it.
+
+**Considerations**
+
+- Attaches to pipeline hooks, not the transport, so activation order does
+  not change what it observes.
+- Installs the BASE transport that the wrapping features wrap, so it must be
+  activated before them.
+- Inactive by default: leaving it out costs nothing at runtime.
 

@@ -28,13 +28,13 @@ class Convert(ConvertRequired, total=False):
     free: bool
 
 
-class ConvertLoadMatch(TypedDict, total=False):
+class ConvertLoadMatchRequired(TypedDict):
+    amount: float
+    to: str
+
+
+class ConvertLoadMatch(ConvertLoadMatchRequired, total=False):
     date: str
-    free: bool
-    info: dict
-    query: dict
-    result: float
-    success: bool
 
 
 class GetApiRoot(TypedDict):
@@ -125,10 +125,11 @@ class Timeseries(TypedDict, total=False):
     timeseries: bool
 
 
-class TimeseriesLoadMatch(TypedDict, total=False):
-    base: str
+class TimeseriesLoadMatchRequired(TypedDict):
     end_date: str
-    rates: dict
     start_date: str
-    success: bool
-    timeseries: bool
+
+
+class TimeseriesLoadMatch(TimeseriesLoadMatchRequired, total=False):
+    base: str
+    symbol: str

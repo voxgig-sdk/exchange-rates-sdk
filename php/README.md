@@ -38,7 +38,7 @@ $client = new ExchangeRatesSDK([
 ```php
 try {
     // load() returns the ENTITY — call data_get() for the Convert record (throws on error).
-    $convert = $client->Convert()->load();
+    $convert = $client->Convert()->load(["amount" => 1, "from" => "example_from", "to" => "example_to"]);
     print_r($convert);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -53,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $convert = $client->Convert()->load();
+    $convert = $client->Convert()->load(["amount" => 1, "from" => "example", "to" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -127,7 +127,7 @@ $client = ExchangeRatesSDK::test();
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$convert = $client->Convert()->load();
+$convert = $client->Convert()->load(["amount" => 1, "from" => "example", "to" => "example"]);
 print_r($convert);
 ```
 
@@ -394,7 +394,7 @@ Create an instance: `$convert = $client->Convert();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Convert record (throws on error).
-$convert = $client->Convert()->load();
+$convert = $client->Convert()->load(["amount" => 1, "from" => "from", "to" => "to"]);
 ```
 
 
@@ -589,8 +589,31 @@ Create an instance: `$timeseries = $client->Timeseries();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Timeseries record (throws on error).
-$timeseries = $client->Timeseries()->load();
+$timeseries = $client->Timeseries()->load(["end_date" => "end_date", "start_date" => "start_date"]);
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -670,7 +693,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $convert = $client->Convert();
-$convert->load();
+$convert->load(["amount" => 1, "from" => "example", "to" => "example"]);
 
 // $convert->data_get() now returns the convert data from the last load
 // $convert->match_get() returns the last match criteria

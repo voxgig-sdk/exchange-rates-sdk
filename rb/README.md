@@ -37,7 +37,7 @@ client = ExchangeRatesSDK.new({
 ```ruby
 begin
   # load returns the ENTITY — call data_get for the Convert record (raises on error).
-  convert = client.Convert.load()
+  convert = client.Convert.load({ "amount" => 1, "from" => "example_from", "to" => "example_to" })
   puts convert
 rescue => err
   warn "load failed: #{err}"
@@ -51,7 +51,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  convert = client.Convert.load()
+  convert = client.Convert.load({ "amount" => 1, "from" => "example", "to" => "example" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -121,7 +121,7 @@ client = ExchangeRatesSDK.test
 
 # Entity ops return the ENTITY (raises on error);
 # call data_get for the mock record.
-convert = client.Convert.load()
+convert = client.Convert.load({ "amount" => 1, "from" => "example", "to" => "example" })
 puts convert
 ```
 
@@ -384,7 +384,7 @@ Create an instance: `convert = client.Convert`
 
 ```ruby
 # load returns the ENTITY — call data_get for the Convert record (raises on error).
-convert = client.Convert.load()
+convert = client.Convert.load({ "amount" => 1, "from" => "from", "to" => "to" })
 ```
 
 
@@ -579,8 +579,31 @@ Create an instance: `timeseries = client.Timeseries`
 
 ```ruby
 # load returns the ENTITY — call data_get for the Timeseries record (raises on error).
-timeseries = client.Timeseries.load()
+timeseries = client.Timeseries.load({ "end_date" => "end_date", "start_date" => "start_date" })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -660,7 +683,7 @@ stores the returned data and match criteria internally.
 
 ```ruby
 convert = client.Convert
-convert.load()
+convert.load({ "amount" => 1, "from" => "example", "to" => "example" })
 
 # convert.data_get now returns the convert data from the last load
 # convert.match_get returns the last match criteria

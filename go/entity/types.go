@@ -24,12 +24,10 @@ type Convert struct {
 
 // ConvertLoadMatch is the typed request payload for Convert.LoadTyped.
 type ConvertLoadMatch struct {
+	Amount float64 `json:"amount"`
 	Date *string `json:"date,omitempty"`
-	Free *bool `json:"free,omitempty"`
-	Info *map[string]any `json:"info,omitempty"`
-	Query *map[string]any `json:"query,omitempty"`
-	Result *float64 `json:"result,omitempty"`
-	Success *bool `json:"success,omitempty"`
+	From string `json:"from"`
+	To string `json:"to"`
 }
 
 // GetApiRoot is the typed data model for the get_api_root entity.
@@ -136,11 +134,9 @@ type Timeseries struct {
 // TimeseriesLoadMatch is the typed request payload for Timeseries.LoadTyped.
 type TimeseriesLoadMatch struct {
 	Base *string `json:"base,omitempty"`
-	EndDate *string `json:"end_date,omitempty"`
-	Rates *map[string]any `json:"rates,omitempty"`
-	StartDate *string `json:"start_date,omitempty"`
-	Success *bool `json:"success,omitempty"`
-	Timeseries *bool `json:"timeseries,omitempty"`
+	EndDate string `json:"end_date"`
+	StartDate string `json:"start_date"`
+	Symbol *string `json:"symbol,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

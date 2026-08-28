@@ -26,12 +26,10 @@ class Convert
 /** Request payload for Convert#load. */
 class ConvertLoadMatch
 {
+    public float $amount;
     public ?string $date = null;
-    public ?bool $free = null;
-    public ?array $info = null;
-    public ?array $query = null;
-    public ?float $result = null;
-    public ?bool $success = null;
+    public string $from;
+    public string $to;
 }
 
 /** GetApiRoot entity data model. */
@@ -152,10 +150,8 @@ class Timeseries
 class TimeseriesLoadMatch
 {
     public ?string $base = null;
-    public ?string $end_date = null;
-    public ?array $rates = null;
-    public ?string $start_date = null;
-    public ?bool $success = null;
-    public ?bool $timeseries = null;
+    public string $end_date;
+    public string $start_date;
+    public ?string $symbol = null;
 }
 

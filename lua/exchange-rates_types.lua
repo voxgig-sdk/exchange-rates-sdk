@@ -15,12 +15,10 @@
 ---@field success boolean
 
 ---@class ConvertLoadMatch
+---@field amount number
 ---@field date? string
----@field free? boolean
----@field info? table
----@field query? table
----@field result? number
----@field success? boolean
+---@field from string
+---@field to string
 
 ---@class GetApiRoot
 ---@field documentation string
@@ -99,11 +97,9 @@
 
 ---@class TimeseriesLoadMatch
 ---@field base? string
----@field end_date? string
----@field rates? table
----@field start_date? string
----@field success? boolean
----@field timeseries? boolean
+---@field end_date string
+---@field start_date string
+---@field symbol? string
 
 local M = {}
 

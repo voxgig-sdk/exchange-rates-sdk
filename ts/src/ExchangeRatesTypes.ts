@@ -15,12 +15,10 @@ export interface Convert {
 }
 
 export interface ConvertLoadMatch {
+  amount: number
   date?: string
-  free?: boolean
-  info?: Record<string, any>
-  query?: Record<string, any>
-  result?: number
-  success?: boolean
+  from: string
+  to: string
 }
 
 export interface GetApiRoot {
@@ -113,10 +111,8 @@ export interface Timeseries {
 
 export interface TimeseriesLoadMatch {
   base?: string
-  end_date?: string
-  rates?: Record<string, any>
-  start_date?: string
-  success?: boolean
-  timeseries?: boolean
+  end_date: string
+  start_date: string
+  symbol?: string
 }
 

@@ -39,30 +39,22 @@ Convert = Struct.new(
 
 # Request payload for Convert#load.
 #
+# @!attribute [rw] amount
+#   @return [Float]
+#
 # @!attribute [rw] date
 #   @return [String, nil]
 #
-# @!attribute [rw] free
-#   @return [Boolean, nil]
+# @!attribute [rw] from
+#   @return [String]
 #
-# @!attribute [rw] info
-#   @return [Hash, nil]
-#
-# @!attribute [rw] query
-#   @return [Hash, nil]
-#
-# @!attribute [rw] result
-#   @return [Float, nil]
-#
-# @!attribute [rw] success
-#   @return [Boolean, nil]
+# @!attribute [rw] to
+#   @return [String]
 ConvertLoadMatch = Struct.new(
+  :amount,
   :date,
-  :free,
-  :info,
-  :query,
-  :result,
-  :success,
+  :from,
+  :to,
   keyword_init: true
 )
 
@@ -333,26 +325,18 @@ Timeseries = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] end_date
-#   @return [String, nil]
-#
-# @!attribute [rw] rates
-#   @return [Hash, nil]
+#   @return [String]
 #
 # @!attribute [rw] start_date
+#   @return [String]
+#
+# @!attribute [rw] symbol
 #   @return [String, nil]
-#
-# @!attribute [rw] success
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] timeseries
-#   @return [Boolean, nil]
 TimeseriesLoadMatch = Struct.new(
   :base,
   :end_date,
-  :rates,
   :start_date,
-  :success,
-  :timeseries,
+  :symbol,
   keyword_init: true
 )
 
