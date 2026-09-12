@@ -266,6 +266,7 @@ API path: `/`
 | --- | --- |
 | `base` |  |
 | `date` |  |
+| `id` |  |
 | `rates` |  |
 | `success` |  |
 | `timestamp` |  |
@@ -419,6 +420,7 @@ Create an instance: `local get_historical_rate_for_currency_and_date = client:Ge
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
+| `id` | `string` |  |
 | `rates` | `table` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |

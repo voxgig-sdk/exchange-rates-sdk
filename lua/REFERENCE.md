@@ -233,6 +233,7 @@ local get_historical_rate_for_currency_and_date = client:GetHistoricalRateForCur
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `table` | No |  |
 | `success` | `boolean` | No |  |
 | `timestamp` | `number` | No |  |

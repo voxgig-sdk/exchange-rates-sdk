@@ -328,6 +328,7 @@ API path: `/`
 | --- | --- |
 | `base` |  |
 | `date` |  |
+| `id` |  |
 | `rates` |  |
 | `success` |  |
 | `timestamp` |  |
@@ -481,6 +482,7 @@ Create an instance: `const get_historical_rate_for_currency_and_date = client.Ge
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
+| `id` | `string` |  |
 | `rates` | `Record<string, any>` |  |
 | `success` | `boolean` |  |
 | `timestamp` | `number` |  |

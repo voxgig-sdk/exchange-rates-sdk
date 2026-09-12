@@ -33,8 +33,10 @@ main: kit: entity: symbol: {
         {
           method: "GET"
           orig: "/symbols"
-          parts: [
-            "symbols"
+          segments: [
+            {
+              lit: "symbols"
+            }
           ]
           transform: {
             req: "`reqdata`"

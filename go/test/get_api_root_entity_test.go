@@ -50,7 +50,7 @@ func TestGetApiRootEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		getApiRootRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.get_api_root", setup.data)))
+		getApiRootRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.get_api_root")))
 		var getApiRootRef01Data map[string]any
 		if len(getApiRootRef01DataRaw) > 0 {
 			getApiRootRef01Data = core.ToMapAny(getApiRootRef01DataRaw[0][1])
@@ -97,7 +97,7 @@ func get_api_rootBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"get_api_root01", "get_api_root02", "get_api_root03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -117,7 +117,7 @@ func get_api_rootBasicSetup(extra map[string]any) *entityTestSetup {
 		"EXCHANGE_RATES_TEST_GET_API_ROOT_ENTID": idmap,
 		"EXCHANGE_RATES_TEST_LIVE":      "FALSE",
 		"EXCHANGE_RATES_TEST_EXPLAIN":   "FALSE",
-		"EXCHANGE_RATES_APIKEY":         "NONE",
+		"EXCHANGE_RATES_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["EXCHANGE_RATES_TEST_GET_API_ROOT_ENTID"])
@@ -126,11 +126,23 @@ func get_api_rootBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["EXCHANGE_RATES_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["EXCHANGE_RATES_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewExchangeRatesSDK(core.ToMapAny(mergedOpts))
 	}

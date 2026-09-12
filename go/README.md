@@ -300,6 +300,7 @@ API path: `/`
 | --- | --- |
 | `"base"` |  |
 | `"date"` |  |
+| `"id"` |  |
 | `"rates"` |  |
 | `"success"` |  |
 | `"timestamp"` |  |
@@ -461,6 +462,7 @@ Create an instance: `getHistoricalRateForCurrencyAndDate := client.GetHistorical
 | --- | --- | --- |
 | `base` | `string` |  |
 | `date` | `string` |  |
+| `id` | `string` |  |
 | `rates` | `map[string]any` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |

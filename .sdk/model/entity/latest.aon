@@ -70,8 +70,10 @@ main: kit: entity: latest: {
           }
           method: "GET"
           orig: "/latest"
-          parts: [
-            "latest"
+          segments: [
+            {
+              lit: "latest"
+            }
           ]
           select: {
             exist: [
@@ -99,15 +101,19 @@ main: kit: entity: latest: {
           }
           method: "GET"
           orig: "/latest/{currency}"
-          parts: [
-            "latest"
-            "{id}"
-          ]
           rename: {
             param: {
               currency: "id"
             }
           }
+          segments: [
+            {
+              lit: "latest"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

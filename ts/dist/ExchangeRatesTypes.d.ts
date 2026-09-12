@@ -1,0 +1,96 @@
+export interface Convert {
+    date: string;
+    free?: boolean;
+    info: Record<string, any>;
+    query: Record<string, any>;
+    result: number;
+    success: boolean;
+}
+export interface ConvertLoadMatch {
+    amount: number;
+    date?: string;
+    from: string;
+    to: string;
+}
+export interface GetApiRoot {
+    documentation: string;
+    message: string;
+    success: boolean;
+    version: string;
+}
+export interface GetApiRootLoadMatch {
+    documentation?: string;
+    message?: string;
+    success?: boolean;
+    version?: string;
+}
+export interface GetHistoricalRateForCurrencyAndDate {
+    base?: string;
+    date?: string;
+    id?: string;
+    rates?: Record<string, any>;
+    success?: boolean;
+    timestamp?: number;
+}
+export interface GetHistoricalRateForCurrencyAndDateLoadMatch {
+    currency: string;
+    date: string;
+}
+export interface GetHistoricalRatesForDate {
+    base?: string;
+    date?: string;
+    id?: string;
+    rates?: Record<string, any>;
+    success?: boolean;
+    timestamp?: number;
+}
+export interface GetHistoricalRatesForDateLoadMatch {
+    id: string;
+}
+export interface Latest {
+    base?: string;
+    date?: string;
+    id?: string;
+    rates?: Record<string, any>;
+    success?: boolean;
+    timestamp?: number;
+}
+export interface LatestLoadMatch {
+    id: string;
+}
+export interface Status {
+    last_update: string;
+    next_update_expected: string;
+    stale: boolean;
+    status: string;
+}
+export interface StatusLoadMatch {
+    last_update?: string;
+    next_update_expected?: string;
+    stale?: boolean;
+    status?: string;
+}
+export interface SymbolType {
+    country: string;
+    name: string;
+    symbol: string;
+}
+export interface SymbolLoadMatch {
+    country?: string;
+    name?: string;
+    symbol?: string;
+}
+export interface Timeseries {
+    base?: string;
+    end_date?: string;
+    rates?: Record<string, any>;
+    start_date?: string;
+    success?: boolean;
+    timeseries?: boolean;
+}
+export interface TimeseriesLoadMatch {
+    base?: string;
+    end_date: string;
+    start_date: string;
+    symbol?: string;
+}

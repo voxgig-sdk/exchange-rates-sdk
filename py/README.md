@@ -283,6 +283,7 @@ API path: `/`
 | --- | --- |
 | `base` |  |
 | `date` |  |
+| `id` |  |
 | `rates` |  |
 | `success` |  |
 | `timestamp` |  |
@@ -436,6 +437,7 @@ Create an instance: `get_historical_rate_for_currency_and_date = client.GetHisto
 | --- | --- | --- |
 | `base` | `str` |  |
 | `date` | `str` |  |
+| `id` | `str` |  |
 | `rates` | `dict` |  |
 | `success` | `bool` |  |
 | `timestamp` | `int` |  |

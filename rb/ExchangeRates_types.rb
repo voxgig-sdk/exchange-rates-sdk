@@ -108,6 +108,9 @@ GetApiRootLoadMatch = Struct.new(
 # @!attribute [rw] date
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] rates
 #   @return [Hash, nil]
 #
@@ -119,6 +122,7 @@ GetApiRootLoadMatch = Struct.new(
 GetHistoricalRateForCurrencyAndDate = Struct.new(
   :base,
   :date,
+  :id,
   :rates,
   :success,
   :timestamp,

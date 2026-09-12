@@ -54,6 +54,7 @@ class GetApiRootLoadMatch(TypedDict, total=False):
 class GetHistoricalRateForCurrencyAndDate(TypedDict, total=False):
     base: str
     date: str
+    id: str
     rates: dict
     success: bool
     timestamp: int

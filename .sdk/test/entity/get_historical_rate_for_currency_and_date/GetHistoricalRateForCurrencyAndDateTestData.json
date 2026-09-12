@@ -2,42 +2,42 @@
   "existing": {
     "get_historical_rate_for_currency_and_date": {
       "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE00": {
-        "base": "s32",
-        "date": "s33",
+        "base": "s3c",
+        "date": "s3d",
+        "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE00",
         "rates": {},
-        "success": false,
-        "timestamp": "s36",
-        "currency": "CURRENCY01",
-        "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE00"
+        "success": true,
+        "timestamp": "s41",
+        "currency": "CURRENCY01"
       },
       "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE01": {
-        "base": "s64",
-        "date": "s65",
+        "base": "s78",
+        "date": "s79",
+        "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE01",
         "rates": {},
-        "success": false,
-        "timestamp": "s68",
-        "currency": "CURRENCY01",
-        "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE01"
+        "success": true,
+        "timestamp": "s7d",
+        "currency": "CURRENCY01"
       },
       "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE02": {
-        "base": "s96",
-        "date": "s97",
+        "base": "sb4",
+        "date": "sb5",
+        "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE02",
         "rates": {},
-        "success": false,
-        "timestamp": "s9a",
-        "currency": "CURRENCY01",
-        "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE02"
+        "success": true,
+        "timestamp": "sb9",
+        "currency": "CURRENCY01"
       }
     }
   },
   "new": {
     "get_historical_rate_for_currency_and_date": {
       "get_historical_rate_for_currency_and_date_ref01": {
-        "base": "sc8",
-        "date": "sc9",
+        "base": "sf0",
+        "date": "sf1",
         "rates": {},
-        "success": false,
-        "timestamp": "scc"
+        "success": true,
+        "timestamp": "sf5"
       }
     }
   }

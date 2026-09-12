@@ -62,14 +62,16 @@ main: kit: entity: get_historical_rates_for_date: {
           }
           method: "GET"
           orig: "/{date}"
-          parts: [
-            "{id}"
-          ]
           rename: {
             param: {
               date: "id"
             }
           }
+          segments: [
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

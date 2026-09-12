@@ -38,6 +38,7 @@ export interface GetApiRootLoadMatch {
 export interface GetHistoricalRateForCurrencyAndDate {
   base?: string
   date?: string
+  id?: string
   rates?: Record<string, any>
   success?: boolean
   timestamp?: number

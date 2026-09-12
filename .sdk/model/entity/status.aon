@@ -39,8 +39,10 @@ main: kit: entity: status: {
         {
           method: "GET"
           orig: "/status"
-          parts: [
-            "status"
+          segments: [
+            {
+              lit: "status"
+            }
           ]
           transform: {
             req: "`reqdata`"

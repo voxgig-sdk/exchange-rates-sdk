@@ -16,6 +16,11 @@ main: kit: entity: get_historical_rate_for_currency_and_date: {
       type: "`$STRING`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "rates"
       req: false
       type: "`$OBJECT`"
@@ -31,6 +36,19 @@ main: kit: entity: get_historical_rate_for_currency_and_date: {
       type: "`$INTEGER`"
     }
   ]
+
+  id: {
+    field: "id"
+    from: {
+      date: "date"
+    }
+    name: "id"
+    parts: [
+      "date"
+      "currency"
+    ]
+    sep: "/"
+  }
 
   name: "get_historical_rate_for_currency_and_date"
   op: {
@@ -60,9 +78,13 @@ main: kit: entity: get_historical_rate_for_currency_and_date: {
           }
           method: "GET"
           orig: "/{date}/{currency}"
-          parts: [
-            "{date}"
-            "{currency}"
+          segments: [
+            {
+              var: "date"
+            }
+            {
+              var: "currency"
+            }
           ]
           select: {
             exist: [

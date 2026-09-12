@@ -50,7 +50,7 @@ func TestGetHistoricalRateForCurrencyAndDateEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		getHistoricalRateForCurrencyAndDateRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.get_historical_rate_for_currency_and_date", setup.data)))
+		getHistoricalRateForCurrencyAndDateRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.get_historical_rate_for_currency_and_date")))
 		var getHistoricalRateForCurrencyAndDateRef01Data map[string]any
 		if len(getHistoricalRateForCurrencyAndDateRef01DataRaw) > 0 {
 			getHistoricalRateForCurrencyAndDateRef01Data = core.ToMapAny(getHistoricalRateForCurrencyAndDateRef01DataRaw[0][1])
@@ -61,13 +61,19 @@ func TestGetHistoricalRateForCurrencyAndDateEntity(t *testing.T) {
 
 		// LOAD
 		getHistoricalRateForCurrencyAndDateRef01Ent := client.GetHistoricalRateForCurrencyAndDate(nil)
-		getHistoricalRateForCurrencyAndDateRef01MatchDt0 := map[string]any{}
+		getHistoricalRateForCurrencyAndDateRef01MatchDt0 := map[string]any{
+			"id": getHistoricalRateForCurrencyAndDateRef01Data["id"],
+		}
 		getHistoricalRateForCurrencyAndDateRef01DataDt0Loaded, err := getHistoricalRateForCurrencyAndDateRef01Ent.Load(getHistoricalRateForCurrencyAndDateRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if getHistoricalRateForCurrencyAndDateRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		getHistoricalRateForCurrencyAndDateRef01DataDt0LoadResult := core.ToMapAny(entityData(getHistoricalRateForCurrencyAndDateRef01DataDt0Loaded))
+		if getHistoricalRateForCurrencyAndDateRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if getHistoricalRateForCurrencyAndDateRef01DataDt0LoadResult["id"] != getHistoricalRateForCurrencyAndDateRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})
@@ -97,7 +103,7 @@ func get_historical_rate_for_currency_and_dateBasicSetup(extra map[string]any) *
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"get_historical_rate_for_currency_and_date01", "get_historical_rate_for_currency_and_date02", "get_historical_rate_for_currency_and_date03", "date01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -117,7 +123,7 @@ func get_historical_rate_for_currency_and_dateBasicSetup(extra map[string]any) *
 		"EXCHANGE_RATES_TEST_GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE_ENTID": idmap,
 		"EXCHANGE_RATES_TEST_LIVE":      "FALSE",
 		"EXCHANGE_RATES_TEST_EXPLAIN":   "FALSE",
-		"EXCHANGE_RATES_APIKEY":         "NONE",
+		"EXCHANGE_RATES_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["EXCHANGE_RATES_TEST_GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE_ENTID"])
@@ -126,11 +132,23 @@ func get_historical_rate_for_currency_and_dateBasicSetup(extra map[string]any) *
 	}
 
 	if env["EXCHANGE_RATES_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["EXCHANGE_RATES_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewExchangeRatesSDK(core.ToMapAny(mergedOpts))
 	}

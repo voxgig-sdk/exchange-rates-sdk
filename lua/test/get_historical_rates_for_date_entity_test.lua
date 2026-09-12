@@ -95,7 +95,7 @@ function get_historical_rates_for_date_basic_setup(extra)
     ["EXCHANGE_RATES_TEST_GET_HISTORICAL_RATES_FOR_DATE_ENTID"] = idmap,
     ["EXCHANGE_RATES_TEST_LIVE"] = "FALSE",
     ["EXCHANGE_RATES_TEST_EXPLAIN"] = "FALSE",
-    ["EXCHANGE_RATES_APIKEY"] = "NONE",
+    ["EXCHANGE_RATES_APIKEY"] = "",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -106,6 +106,9 @@ function get_historical_rates_for_date_basic_setup(extra)
 
   if env["EXCHANGE_RATES_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
+      -- FIRST, so the generated fields below win: sdk-test-control.json's
+      -- test.client.options adds to the live client, it does not redirect it.
+      runner.live_client_options(),
       {
         apikey = env["EXCHANGE_RATES_APIKEY"],
       },

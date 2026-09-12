@@ -122,8 +122,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/convert",
-                  "parts": [
-                    "convert"
+                  "segments": [
+                    {
+                      "lit": "convert"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -153,6 +155,7 @@
           "fields": [
             {
               "active": true,
+              "format": "uri",
               "name": "documentation",
               "req": true,
               "type": "`$STRING`"
@@ -188,7 +191,7 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/",
-                  "parts": [],
+                  "segments": [],
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
@@ -222,6 +225,12 @@
             },
             {
               "active": true,
+              "name": "id",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
               "name": "rates",
               "req": false,
               "type": "`$OBJECT`"
@@ -239,6 +248,18 @@
               "type": "`$INTEGER`"
             }
           ],
+          "id": {
+            "field": "id",
+            "from": {
+              "date": "date"
+            },
+            "name": "id",
+            "parts": [
+              "date",
+              "currency"
+            ],
+            "sep": "/"
+          },
           "name": "get_historical_rate_for_currency_and_date",
           "op": {
             "load": {
@@ -272,9 +293,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/{date}/{currency}",
-                  "parts": [
-                    "{date}",
-                    "{currency}"
+                  "segments": [
+                    {
+                      "var": "date"
+                    },
+                    {
+                      "var": "currency"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -365,14 +390,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/{date}",
-                  "parts": [
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "date": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id"
@@ -470,8 +497,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/latest",
-                  "parts": [
-                    "latest"
+                  "segments": [
+                    {
+                      "lit": "latest"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -502,15 +531,19 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/latest/{currency}",
-                  "parts": [
-                    "latest",
-                    "{id}"
-                  ],
                   "rename": {
                     "param": {
                       "currency": "id"
                     }
                   },
+                  "segments": [
+                    {
+                      "lit": "latest"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
                   "select": {
                     "exist": [
                       "id"
@@ -575,8 +608,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/status",
-                  "parts": [
-                    "status"
+                  "segments": [
+                    {
+                      "lit": "status"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -631,8 +666,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/symbols",
-                  "parts": [
-                    "symbols"
+                  "segments": [
+                    {
+                      "lit": "symbols"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -741,8 +778,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/timeseries",
-                  "parts": [
-                    "timeseries"
+                  "segments": [
+                    {
+                      "lit": "timeseries"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -829,8 +868,11 @@
             }
           },
           "name": "test",
+          "needs": {},
           "origname": "",
           "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
           "target": {
             "go": {
               "deps": {}
@@ -1178,6 +1220,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1203,6 +1248,10 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/runner_test.go",
+            "test/struct_runner_test.go"
+          ],
           "title": "Golang"
         },
         "go-cli": {
@@ -1254,6 +1303,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -1278,6 +1328,7 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [],
           "title": "Go CLI"
         },
         "go-mcp": {
@@ -1329,6 +1380,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -1353,6 +1405,7 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [],
           "title": "Go MCP server"
         },
         "lua": {
@@ -1393,6 +1446,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1418,6 +1474,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.lua"
+          ],
           "title": "Lua"
         },
         "php": {
@@ -1452,6 +1511,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1477,6 +1539,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/StructRunner.php"
+          ],
           "title": "PHP"
         },
         "py": {
@@ -1517,6 +1582,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1542,6 +1610,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.py"
+          ],
           "title": "Python"
         },
         "rb": {
@@ -1587,6 +1658,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1612,6 +1686,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.rb"
+          ],
           "title": "Ruby"
         },
         "ts": {
@@ -1629,11 +1706,6 @@
               "active": true,
               "kind": "dev",
               "version": "^25.6.0"
-            },
-            "dotenv": {
-              "active": true,
-              "kind": "dev",
-              "version": "^17.4.2"
             },
             "typescript": {
               "active": true,
@@ -1662,6 +1734,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1686,6 +1761,14 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [
+            "test/runner.ts",
+            "test/vendor/omni/compat.ts",
+            "src/feature/secrets/sekreto/Providers.ts",
+            "src/feature/secrets/sekreto/Sigv4.ts",
+            "src/feature/secrets/sekreto/provider/Registry.ts",
+            "src/feature/secrets/sekreto/provider/http.ts"
+          ],
           "title": "TypeScript"
         }
       },

@@ -6,6 +6,7 @@ main: kit: entity: get_api_root: {
 
   fields: [
     {
+      format: "uri"
       name: "documentation"
       req: true
       type: "`$STRING`"

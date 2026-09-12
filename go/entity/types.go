@@ -50,6 +50,7 @@ type GetApiRootLoadMatch struct {
 type GetHistoricalRateForCurrencyAndDate struct {
 	Base *string `json:"base,omitempty"`
 	Date *string `json:"date,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Rates *map[string]any `json:"rates,omitempty"`
 	Success *bool `json:"success,omitempty"`
 	Timestamp *int `json:"timestamp,omitempty"`

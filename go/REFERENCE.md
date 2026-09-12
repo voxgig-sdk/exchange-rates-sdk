@@ -239,6 +239,7 @@ fmt.Println(getHistoricalRateForCurrencyAndDate.GetName()) // "get_historical_ra
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `map[string]any` | No |  |
 | `success` | `bool` | No |  |
 | `timestamp` | `int` | No |  |

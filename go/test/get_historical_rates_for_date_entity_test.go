@@ -50,7 +50,7 @@ func TestGetHistoricalRatesForDateEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		getHistoricalRatesForDateRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.get_historical_rates_for_date", setup.data)))
+		getHistoricalRatesForDateRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.get_historical_rates_for_date")))
 		var getHistoricalRatesForDateRef01Data map[string]any
 		if len(getHistoricalRatesForDateRef01DataRaw) > 0 {
 			getHistoricalRatesForDateRef01Data = core.ToMapAny(getHistoricalRatesForDateRef01DataRaw[0][1])
@@ -103,7 +103,7 @@ func get_historical_rates_for_dateBasicSetup(extra map[string]any) *entityTestSe
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"get_historical_rates_for_date01", "get_historical_rates_for_date02", "get_historical_rates_for_date03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -123,7 +123,7 @@ func get_historical_rates_for_dateBasicSetup(extra map[string]any) *entityTestSe
 		"EXCHANGE_RATES_TEST_GET_HISTORICAL_RATES_FOR_DATE_ENTID": idmap,
 		"EXCHANGE_RATES_TEST_LIVE":      "FALSE",
 		"EXCHANGE_RATES_TEST_EXPLAIN":   "FALSE",
-		"EXCHANGE_RATES_APIKEY":         "NONE",
+		"EXCHANGE_RATES_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["EXCHANGE_RATES_TEST_GET_HISTORICAL_RATES_FOR_DATE_ENTID"])
@@ -132,11 +132,23 @@ func get_historical_rates_for_dateBasicSetup(extra map[string]any) *entityTestSe
 	}
 
 	if env["EXCHANGE_RATES_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["EXCHANGE_RATES_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewExchangeRatesSDK(core.ToMapAny(mergedOpts))
 	}

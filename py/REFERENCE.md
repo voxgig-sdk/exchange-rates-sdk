@@ -228,6 +228,7 @@ get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCurrencyA
 | --- | --- | --- | --- |
 | `base` | `str` | No |  |
 | `date` | `str` | No |  |
+| `id` | `str` | No |  |
 | `rates` | `dict` | No |  |
 | `success` | `bool` | No |  |
 | `timestamp` | `int` | No |  |

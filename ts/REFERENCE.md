@@ -311,6 +311,7 @@ const get_historical_rate_for_currency_and_date = client.GetHistoricalRateForCur
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `Record<string, any>` | No |  |
 | `success` | `boolean` | No |  |
 | `timestamp` | `number` | No |  |

@@ -81,8 +81,10 @@ main: kit: entity: timeseries: {
           }
           method: "GET"
           orig: "/timeseries"
-          parts: [
-            "timeseries"
+          segments: [
+            {
+              lit: "timeseries"
+            }
           ]
           select: {
             exist: [

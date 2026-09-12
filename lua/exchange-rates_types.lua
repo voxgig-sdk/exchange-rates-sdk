@@ -35,6 +35,7 @@
 ---@class GetHistoricalRateForCurrencyAndDate
 ---@field base? string
 ---@field date? string
+---@field id? string
 ---@field rates? table
 ---@field success? boolean
 ---@field timestamp? number

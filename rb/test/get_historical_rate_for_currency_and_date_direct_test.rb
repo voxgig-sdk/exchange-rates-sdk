@@ -71,15 +71,17 @@ def get_historical_rate_for_currency_and_date_direct_setup(mockres)
   env = Runner.env_override({
     "EXCHANGE_RATES_TEST_GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE_ENTID" => {},
     "EXCHANGE_RATES_TEST_LIVE" => "FALSE",
-    "EXCHANGE_RATES_APIKEY" => "NONE",
+    "EXCHANGE_RATES_APIKEY" => "",
   })
 
   live = env["EXCHANGE_RATES_TEST_LIVE"] == "TRUE"
 
   if live
-    merged_opts = {
+    # Merged so the generated fields win: sdk-test-control.json's
+    # test.client.options adds to the live client, it does not redirect it.
+    merged_opts = Runner.live_client_options.merge({
       "apikey" => env["EXCHANGE_RATES_APIKEY"],
-    }
+    })
     client = ExchangeRatesSDK.new(merged_opts)
     return {
       client: client,

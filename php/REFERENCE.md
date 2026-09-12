@@ -235,6 +235,7 @@ $get_historical_rate_for_currency_and_date = $client->GetHistoricalRateForCurren
 | --- | --- | --- | --- |
 | `base` | `string` | No |  |
 | `date` | `string` | No |  |
+| `id` | `string` | No |  |
 | `rates` | `array` | No |  |
 | `success` | `bool` | No |  |
 | `timestamp` | `int` | No |  |

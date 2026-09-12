@@ -144,8 +144,10 @@ class ExchangeRatesConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/convert',
-                  'parts' => [
-                    'convert',
+                  'segments' => [
+                    [
+                      'lit' => 'convert',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -159,6 +161,9 @@ class ExchangeRatesConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
+                  'parts' => [
+                    'convert',
+                  ],
                 ],
               ],
             ],
@@ -170,6 +175,7 @@ class ExchangeRatesConfig
         'get_api_root' => [
           'fields' => [
             [
+              'format' => 'uri',
               'name' => 'documentation',
               'req' => true,
               'type' => '`$STRING`',
@@ -201,12 +207,13 @@ class ExchangeRatesConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/',
-                  'parts' => [],
+                  'segments' => [],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
+                  'parts' => [],
                 ],
               ],
             ],
@@ -226,6 +233,10 @@ class ExchangeRatesConfig
               'type' => '`$STRING`',
             ],
             [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
+            [
               'name' => 'rates',
               'type' => '`$OBJECT`',
             ],
@@ -237,6 +248,18 @@ class ExchangeRatesConfig
               'name' => 'timestamp',
               'type' => '`$INTEGER`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'from' => [
+              'date' => 'date',
+            ],
+            'name' => 'id',
+            'parts' => [
+              'date',
+              'currency',
+            ],
+            'sep' => '/',
           ],
           'name' => 'get_historical_rate_for_currency_and_date',
           'op' => [
@@ -268,9 +291,13 @@ class ExchangeRatesConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/{date}/{currency}',
-                  'parts' => [
-                    '{date}',
-                    '{currency}',
+                  'segments' => [
+                    [
+                      'var' => 'date',
+                    ],
+                    [
+                      'var' => 'currency',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -281,6 +308,10 @@ class ExchangeRatesConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.rates`',
+                  ],
+                  'parts' => [
+                    '{date}',
+                    '{currency}',
                   ],
                 ],
               ],
@@ -317,6 +348,10 @@ class ExchangeRatesConfig
               'type' => '`$INTEGER`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'get_historical_rates_for_date',
           'op' => [
             'load' => [
@@ -339,12 +374,14 @@ class ExchangeRatesConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/{date}',
-                  'parts' => [
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'date' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -355,6 +392,9 @@ class ExchangeRatesConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.rates`',
+                  ],
+                  'parts' => [
+                    '{id}',
                   ],
                 ],
               ],
@@ -391,6 +431,10 @@ class ExchangeRatesConfig
               'type' => '`$INTEGER`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'latest',
           'op' => [
             'load' => [
@@ -419,8 +463,10 @@ class ExchangeRatesConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/latest',
-                  'parts' => [
-                    'latest',
+                  'segments' => [
+                    [
+                      'lit' => 'latest',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -431,6 +477,9 @@ class ExchangeRatesConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.rates`',
+                  ],
+                  'parts' => [
+                    'latest',
                   ],
                 ],
                 [
@@ -449,13 +498,17 @@ class ExchangeRatesConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/latest/{currency}',
-                  'parts' => [
-                    'latest',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'currency' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'latest',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -466,6 +519,10 @@ class ExchangeRatesConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.rates`',
+                  ],
+                  'parts' => [
+                    'latest',
+                    '{id}',
                   ],
                 ],
               ],
@@ -513,13 +570,18 @@ class ExchangeRatesConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/status',
-                  'parts' => [
-                    'status',
+                  'segments' => [
+                    [
+                      'lit' => 'status',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'status',
                   ],
                 ],
               ],
@@ -561,13 +623,18 @@ class ExchangeRatesConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/symbols',
-                  'parts' => [
-                    'symbols',
+                  'segments' => [
+                    [
+                      'lit' => 'symbols',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.symbols`',
+                  ],
+                  'parts' => [
+                    'symbols',
                   ],
                 ],
               ],
@@ -648,8 +715,10 @@ class ExchangeRatesConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/timeseries',
-                  'parts' => [
-                    'timeseries',
+                  'segments' => [
+                    [
+                      'lit' => 'timeseries',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -662,6 +731,9 @@ class ExchangeRatesConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.rates`',
+                  ],
+                  'parts' => [
+                    'timeseries',
                   ],
                 ],
               ],

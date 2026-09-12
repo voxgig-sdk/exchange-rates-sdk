@@ -81,7 +81,7 @@ def convert_basic_setup(extra)
     "EXCHANGE_RATES_TEST_CONVERT_ENTID" => idmap,
     "EXCHANGE_RATES_TEST_LIVE" => "FALSE",
     "EXCHANGE_RATES_TEST_EXPLAIN" => "FALSE",
-    "EXCHANGE_RATES_APIKEY" => "NONE",
+    "EXCHANGE_RATES_APIKEY" => "",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -92,6 +92,9 @@ def convert_basic_setup(extra)
 
   if env["EXCHANGE_RATES_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
         "apikey" => env["EXCHANGE_RATES_APIKEY"],
       },
