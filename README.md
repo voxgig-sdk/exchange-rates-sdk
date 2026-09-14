@@ -105,7 +105,7 @@ local result, err = client:Convert():load({ amount = 1, from = "example", to = "
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/exchange-rates` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/releases) |
+| TypeScript | `@voxgig-sdk/exchange-rates-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/releases) |
 | Python | `voxgig-sdk-exchange-rates` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/releases) |
 | PHP | `voxgig-sdk/exchange-rates` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/exchange-rates-sdk/go` | `go get github.com/voxgig-sdk/exchange-rates-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Convert():load({ amount = 1, from = "example", to = "
 ### TypeScript
 
 ```ts
-import { ExchangeRatesSDK } from '@voxgig-sdk/exchange-rates'
+import { ExchangeRatesSDK } from '@voxgig-sdk/exchange-rates-sdk'
 
 const client = new ExchangeRatesSDK({
   apikey: process.env.EXCHANGE_RATES_APIKEY,
