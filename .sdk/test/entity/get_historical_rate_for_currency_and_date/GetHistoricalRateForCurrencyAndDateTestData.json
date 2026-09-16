@@ -7,7 +7,7 @@
         "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE00",
         "rates": {},
         "success": true,
-        "timestamp": "s41",
+        "timestamp": 65,
         "currency": "CURRENCY01"
       },
       "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE01": {
@@ -16,7 +16,7 @@
         "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE01",
         "rates": {},
         "success": true,
-        "timestamp": "s7d",
+        "timestamp": 125,
         "currency": "CURRENCY01"
       },
       "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE02": {
@@ -25,7 +25,7 @@
         "id": "GET_HISTORICAL_RATE_FOR_CURRENCY_AND_DATE02",
         "rates": {},
         "success": true,
-        "timestamp": "sb9",
+        "timestamp": 185,
         "currency": "CURRENCY01"
       }
     }
@@ -37,7 +37,283 @@
         "date": "sf1",
         "rates": {},
         "success": true,
-        "timestamp": "sf5"
+        "timestamp": 245
+      }
+    }
+  },
+  "requests": {
+    "GET /{date}/{currency}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getHistoricalRateForCurrencyAndDate",
+        "parameters": [
+          {
+            "description": "Date in YYYY-MM-DD format",
+            "example": "2025-08-31",
+            "in": "path",
+            "name": "date",
+            "required": true,
+            "schema": {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Currency code",
+            "example": "USD",
+            "in": "path",
+            "name": "currency",
+            "required": true,
+            "schema": {
+              "description": "Three-letter currency code",
+              "enum": [
+                "AUD",
+                "USD",
+                "EUR",
+                "GBP",
+                "JPY",
+                "CNY",
+                "KRW",
+                "INR",
+                "SGD",
+                "NZD",
+                "THB",
+                "MYR",
+                "IDR",
+                "VND",
+                "HKD",
+                "PHP",
+                "CAD",
+                "CHF",
+                "TWD",
+                "TWI",
+                "SDR"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "base": "AUD",
+                  "date": "2025-08-31",
+                  "rates": {
+                    "USD": 0.678234
+                  },
+                  "success": true,
+                  "timestamp": 1725062400
+                },
+                "schema": {
+                  "properties": {
+                    "base": {
+                      "example": "AUD",
+                      "type": "string"
+                    },
+                    "date": {
+                      "description": "Date of the rates (YYYY-MM-DD)",
+                      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                      "type": "string"
+                    },
+                    "rates": {
+                      "additionalProperties": {
+                        "description": "Exchange rate (AUD per unit of foreign currency) with precision varying by currency (up to 6 decimal places for most, whole numbers for IDR/VND as provided by RBA)",
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "description": "Object containing currency codes as keys and exchange rates as values",
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    },
+                    "timestamp": {
+                      "description": "Unix timestamp of the rate date",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "timestamp",
+                    "base",
+                    "date",
+                    "rates"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Exchange rate for the specified currency and date"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": 400,
+                    "info": "Invalid currency format. Use 3-letter currency code (e.g., USD)",
+                    "type": "bad_request"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "description": "HTTP status code",
+                          "type": "integer"
+                        },
+                        "info": {
+                          "description": "Human-readable error description",
+                          "type": "string"
+                        },
+                        "type": {
+                          "description": "Error type identifier",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "type",
+                        "info"
+                      ],
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "error"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": 401,
+                    "info": "Invalid or missing API key",
+                    "type": "unauthorized"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "description": "HTTP status code",
+                          "type": "integer"
+                        },
+                        "info": {
+                          "description": "Human-readable error description",
+                          "type": "string"
+                        },
+                        "type": {
+                          "description": "Error type identifier",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "type",
+                        "info"
+                      ],
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "error"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication required"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": 404,
+                    "info": "No data available for the specified date",
+                    "type": "not_found"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "description": "HTTP status code",
+                          "type": "integer"
+                        },
+                        "info": {
+                          "description": "Human-readable error description",
+                          "type": "string"
+                        },
+                        "type": {
+                          "description": "Error type identifier",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "type",
+                        "info"
+                      ],
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "error"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource not found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "bearerAuth": {
+            "bearerFormat": "API Key",
+            "description": "API key authentication using Bearer token",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

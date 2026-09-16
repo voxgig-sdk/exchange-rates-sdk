@@ -33,5 +33,64 @@
         "version": "sa3"
       }
     }
+  },
+  "requests": {
+    "GET /": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getApiRoot",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "documentation": "https://docs.exchangeratesapi.com.au",
+                  "message": "RBA Exchange Rates API",
+                  "success": true,
+                  "version": "1.0.0"
+                },
+                "schema": {
+                  "properties": {
+                    "documentation": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "documentation",
+                    "version"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "API information"
+          }
+        },
+        "securitySchemes": {
+          "bearerAuth": {
+            "bearerFormat": "API Key",
+            "description": "API key authentication using Bearer token",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.EXCHANGE_RATES_TEST_LIVE;
         for (const op of ['load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'get_api_root.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'get_api_root.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set EXCHANGE_RATES_TEST_GET_API_ROOT_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "format": "uri", "name": "documentation", "req": true, "type": "`$STRING`", "index$": 0 }, { "active": true, "name": "message", "req": true, "type": "`$STRING`", "index$": 1 }, { "active": true, "name": "success", "req": true, "type": "`$BOOLEAN`", "index$": 2 }, { "active": true, "name": "version", "req": true, "type": "`$STRING`", "index$": 3 }], "name": "get_api_root", "op": { "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": {}, "contract": { "id": "GET /", "json": "{\"operationId\":\"getApiRoot\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"documentation\":\"https://docs.exchangeratesapi.com.au\",\"message\":\"RBA Exchange Rates API\",\"success\":true,\"version\":\"1.0.0\"},\"schema\":{\"properties\":{\"documentation\":{\"format\":\"uri\",\"type\":\"string\"},\"message\":{\"type\":\"string\"},\"success\":{\"example\":true,\"type\":\"boolean\"},\"version\":{\"type\":\"string\"}},\"required\":[\"success\",\"message\",\"documentation\",\"version\"],\"type\":\"object\"}}},\"description\":\"API information\"}},\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API Key\",\"description\":\"API key authentication using Bearer token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/", "segments": [], "select": {}, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "get_api_root", "name__orig": "get_api_root", "Name": "GetApiRoot", "name_": "get_api_root", "name-": "get-api-root", "NAME": "GET_API_ROOT", "index$": 1 }, { "active": true, "entity": "get_api_root", "key$": "BasicGetApiRootFlow", "kind": "basic", "name": "BasicGetApiRootFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "get_api_root_ref01", "srcdatavar": "get_api_root_ref01_data", "suffix": "_dt0" }, "match": {}, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-get_api_root_ref01" } }], "index$": 0 }] }, 'GetApiRoot');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -102,12 +100,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['EXCHANGE_RATES_TEST_GET_API_ROOT_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'EXCHANGE_RATES_TEST_GET_API_ROOT_ENTID': idmap,
         'EXCHANGE_RATES_TEST_LIVE': 'FALSE',
@@ -116,7 +108,13 @@ function basicSetup(extra) {
     });
     idmap = env['EXCHANGE_RATES_TEST_GET_API_ROOT_ENTID'];
     const live = 'TRUE' === env.EXCHANGE_RATES_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['EXCHANGE_RATES_TEST_GET_API_ROOT_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.ExchangeRatesSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -129,7 +127,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -141,7 +140,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.EXCHANGE_RATES_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

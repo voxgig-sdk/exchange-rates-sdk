@@ -29,5 +29,103 @@
         "symbol": "s7a"
       }
     }
+  },
+  "requests": {
+    "GET /symbols": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getSupportedCurrencies",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "base": "AUD",
+                  "count": 21,
+                  "note": "All rates are quoted as AUD per unit of foreign currency from the Reserve Bank of Australia",
+                  "success": true,
+                  "symbols": {
+                    "EUR": {
+                      "country": "European Union",
+                      "name": "Euro",
+                      "symbol": "€"
+                    },
+                    "USD": {
+                      "country": "United States",
+                      "name": "US Dollar",
+                      "symbol": "$"
+                    }
+                  }
+                },
+                "schema": {
+                  "properties": {
+                    "base": {
+                      "example": "AUD",
+                      "type": "string"
+                    },
+                    "count": {
+                      "description": "Number of supported currencies",
+                      "type": "integer"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    },
+                    "symbols": {
+                      "additionalProperties": {
+                        "properties": {
+                          "country": {
+                            "description": "Country or region",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "Full name of the currency",
+                            "type": "string"
+                          },
+                          "symbol": {
+                            "description": "Currency symbol",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "symbol",
+                          "country"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "symbols",
+                    "count",
+                    "base",
+                    "note"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "List of supported currencies"
+          }
+        },
+        "securitySchemes": {
+          "bearerAuth": {
+            "bearerFormat": "API Key",
+            "description": "API key authentication using Bearer token",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

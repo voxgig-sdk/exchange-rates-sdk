@@ -24,7 +24,71 @@
         "repr": "auto"
       },
       "contributor": {},
-      "docs": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "convert": {
           "active": true,
@@ -119,6 +183,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /convert",
+                    "json": "{\"operationId\":\"convertCurrency\",\"parameters\":[{\"description\":\"Source currency code\",\"example\":\"AUD\",\"in\":\"query\",\"name\":\"from\",\"required\":true,\"schema\":{\"description\":\"Three-letter currency code\",\"enum\":[\"AUD\",\"USD\",\"EUR\",\"GBP\",\"JPY\",\"CNY\",\"KRW\",\"INR\",\"SGD\",\"NZD\",\"THB\",\"MYR\",\"IDR\",\"VND\",\"HKD\",\"PHP\",\"CAD\",\"CHF\",\"TWD\",\"TWI\",\"SDR\"],\"type\":\"string\"}},{\"description\":\"Target currency code\",\"example\":\"USD\",\"in\":\"query\",\"name\":\"to\",\"required\":true,\"schema\":{\"description\":\"Three-letter currency code\",\"enum\":[\"AUD\",\"USD\",\"EUR\",\"GBP\",\"JPY\",\"CNY\",\"KRW\",\"INR\",\"SGD\",\"NZD\",\"THB\",\"MYR\",\"IDR\",\"VND\",\"HKD\",\"PHP\",\"CAD\",\"CHF\",\"TWD\",\"TWI\",\"SDR\"],\"type\":\"string\"}},{\"description\":\"Amount to convert\",\"example\":100,\"in\":\"query\",\"name\":\"amount\",\"required\":true,\"schema\":{\"exclusiveMinimum\":true,\"minimum\":0,\"type\":\"number\"}},{\"description\":\"Historical date for conversion (YYYY-MM-DD). Requires authentication.\",\"example\":\"2025-08-31\",\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"date\":\"2025-09-01\",\"free\":true,\"info\":{\"rate\":0.678234,\"timestamp\":1725148800},\"query\":{\"amount\":100,\"from\":\"AUD\",\"to\":\"USD\"},\"result\":67.8234,\"success\":true},\"schema\":{\"properties\":{\"date\":{\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"},\"free\":{\"description\":\"Indicates if this was a free (unauthenticated) request\",\"type\":\"boolean\"},\"info\":{\"properties\":{\"rate\":{\"description\":\"Exchange rate used for conversion with precision varying by currency (up to 6 decimal places for most, whole numbers for IDR/VND as provided by RBA)\",\"type\":\"number\"},\"timestamp\":{\"description\":\"Unix timestamp of the rate date\",\"type\":\"integer\"}},\"required\":[\"rate\"],\"type\":\"object\"},\"query\":{\"properties\":{\"amount\":{\"type\":\"number\"},\"from\":{\"type\":\"string\"},\"to\":{\"type\":\"string\"}},\"required\":[\"from\",\"to\",\"amount\"],\"type\":\"object\"},\"result\":{\"description\":\"Conversion result\",\"type\":\"number\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"required\":[\"success\",\"query\",\"info\",\"date\",\"result\"],\"type\":\"object\"}}},\"description\":\"Conversion result\",\"headers\":{\"X-RateLimit-Limit-Monthly\":{\"description\":\"Monthly request limit based on plan (Free=300, Starter=5,000, Professional=50,000, Business=500,000)\",\"schema\":{\"type\":\"integer\"}},\"X-RateLimit-Remaining-Monthly\":{\"description\":\"Remaining requests in current monthly period\",\"schema\":{\"type\":\"integer\"}}}},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":400,\"info\":\"Invalid currency format. Use 3-letter currency code (e.g., USD)\",\"type\":\"bad_request\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Bad request - invalid parameters\"},\"429\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":429,\"info\":\"Monthly quota exceeded. Free=300, Starter=5,000, Professional=50,000, Business=500,000 requests per month.\",\"type\":\"rate_limit\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"},\"503\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":503,\"info\":\"Rates temporarily unavailable\",\"type\":\"unavailable\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Service temporarily unavailable\"}},\"security\":[{\"bearerAuth\":[]},{}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API Key\",\"description\":\"API key authentication using Bearer token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/convert",
@@ -188,6 +258,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "GET /",
+                    "json": "{\"operationId\":\"getApiRoot\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"documentation\":\"https://docs.exchangeratesapi.com.au\",\"message\":\"RBA Exchange Rates API\",\"success\":true,\"version\":\"1.0.0\"},\"schema\":{\"properties\":{\"documentation\":{\"format\":\"uri\",\"type\":\"string\"},\"message\":{\"type\":\"string\"},\"success\":{\"example\":true,\"type\":\"boolean\"},\"version\":{\"type\":\"string\"}},\"required\":[\"success\",\"message\",\"documentation\",\"version\"],\"type\":\"object\"}}},\"description\":\"API information\"}},\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API Key\",\"description\":\"API key authentication using Bearer token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/",
@@ -290,6 +366,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /{date}/{currency}",
+                    "json": "{\"operationId\":\"getHistoricalRateForCurrencyAndDate\",\"parameters\":[{\"description\":\"Date in YYYY-MM-DD format\",\"example\":\"2025-08-31\",\"in\":\"path\",\"name\":\"date\",\"required\":true,\"schema\":{\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"}},{\"description\":\"Currency code\",\"example\":\"USD\",\"in\":\"path\",\"name\":\"currency\",\"required\":true,\"schema\":{\"description\":\"Three-letter currency code\",\"enum\":[\"AUD\",\"USD\",\"EUR\",\"GBP\",\"JPY\",\"CNY\",\"KRW\",\"INR\",\"SGD\",\"NZD\",\"THB\",\"MYR\",\"IDR\",\"VND\",\"HKD\",\"PHP\",\"CAD\",\"CHF\",\"TWD\",\"TWI\",\"SDR\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"base\":\"AUD\",\"date\":\"2025-08-31\",\"rates\":{\"USD\":0.678234},\"success\":true,\"timestamp\":1725062400},\"schema\":{\"properties\":{\"base\":{\"example\":\"AUD\",\"type\":\"string\"},\"date\":{\"description\":\"Date of the rates (YYYY-MM-DD)\",\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"},\"rates\":{\"additionalProperties\":{\"description\":\"Exchange rate (AUD per unit of foreign currency) with precision varying by currency (up to 6 decimal places for most, whole numbers for IDR/VND as provided by RBA)\",\"minimum\":0,\"type\":\"number\"},\"description\":\"Object containing currency codes as keys and exchange rates as values\",\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"},\"timestamp\":{\"description\":\"Unix timestamp of the rate date\",\"type\":\"integer\"}},\"required\":[\"success\",\"timestamp\",\"base\",\"date\",\"rates\"],\"type\":\"object\"}}},\"description\":\"Exchange rate for the specified currency and date\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":400,\"info\":\"Invalid currency format. Use 3-letter currency code (e.g., USD)\",\"type\":\"bad_request\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Bad request - invalid parameters\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":401,\"info\":\"Invalid or missing API key\",\"type\":\"unauthorized\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Authentication required\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":404,\"info\":\"No data available for the specified date\",\"type\":\"not_found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Resource not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API Key\",\"description\":\"API key authentication using Bearer token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/{date}/{currency}",
@@ -386,6 +468,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /{date}",
+                    "json": "{\"operationId\":\"getHistoricalRatesForDate\",\"parameters\":[{\"description\":\"Date in YYYY-MM-DD format\",\"example\":\"2025-08-31\",\"in\":\"path\",\"name\":\"date\",\"required\":true,\"schema\":{\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"base\":\"AUD\",\"date\":\"2025-08-31\",\"rates\":{\"EUR\":0.612345,\"GBP\":0.534567,\"USD\":0.678234},\"success\":true,\"timestamp\":1725062400},\"schema\":{\"properties\":{\"base\":{\"example\":\"AUD\",\"type\":\"string\"},\"date\":{\"description\":\"Date of the rates (YYYY-MM-DD)\",\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"},\"rates\":{\"additionalProperties\":{\"description\":\"Exchange rate (AUD per unit of foreign currency) with precision varying by currency (up to 6 decimal places for most, whole numbers for IDR/VND as provided by RBA)\",\"minimum\":0,\"type\":\"number\"},\"description\":\"Object containing currency codes as keys and exchange rates as values\",\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"},\"timestamp\":{\"description\":\"Unix timestamp of the rate date\",\"type\":\"integer\"}},\"required\":[\"success\",\"timestamp\",\"base\",\"date\",\"rates\"],\"type\":\"object\"}}},\"description\":\"Exchange rates for the specified date\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":400,\"info\":\"Invalid currency format. Use 3-letter currency code (e.g., USD)\",\"type\":\"bad_request\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Bad request - invalid parameters\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":401,\"info\":\"Invalid or missing API key\",\"type\":\"unauthorized\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Authentication required\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":404,\"info\":\"No data available for the specified date\",\"type\":\"not_found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Resource not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API Key\",\"description\":\"API key authentication using Bearer token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -494,6 +582,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /latest",
+                    "json": "{\"operationId\":\"getLatestRates\",\"parameters\":[{\"description\":\"Comma-separated list of currency codes to filter results\",\"example\":\"USD,EUR,GBP\",\"in\":\"query\",\"name\":\"symbols\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Base currency (currently only AUD supported)\",\"example\":\"AUD\",\"in\":\"query\",\"name\":\"base\",\"required\":false,\"schema\":{\"enum\":[\"AUD\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"base\":\"AUD\",\"date\":\"2025-09-01\",\"rates\":{\"EUR\":0.612345,\"GBP\":0.534567,\"USD\":0.678234},\"success\":true,\"timestamp\":1725148800},\"schema\":{\"properties\":{\"base\":{\"example\":\"AUD\",\"type\":\"string\"},\"date\":{\"description\":\"Date of the rates (YYYY-MM-DD)\",\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"},\"rates\":{\"additionalProperties\":{\"description\":\"Exchange rate (AUD per unit of foreign currency) with precision varying by currency (up to 6 decimal places for most, whole numbers for IDR/VND as provided by RBA)\",\"minimum\":0,\"type\":\"number\"},\"description\":\"Object containing currency codes as keys and exchange rates as values\",\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"},\"timestamp\":{\"description\":\"Unix timestamp of the rate date\",\"type\":\"integer\"}},\"required\":[\"success\",\"timestamp\",\"base\",\"date\",\"rates\"],\"type\":\"object\"}}},\"description\":\"Latest exchange rates\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":401,\"info\":\"Invalid or missing API key\",\"type\":\"unauthorized\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Authentication required\"},\"503\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":503,\"info\":\"Rates temporarily unavailable\",\"type\":\"unavailable\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Service temporarily unavailable\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API Key\",\"description\":\"API key authentication using Bearer token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/latest",
@@ -527,6 +621,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /latest/{currency}",
+                    "json": "{\"operationId\":\"getLatestRateForCurrency\",\"parameters\":[{\"description\":\"Currency code\",\"example\":\"USD\",\"in\":\"path\",\"name\":\"currency\",\"required\":true,\"schema\":{\"description\":\"Three-letter currency code\",\"enum\":[\"AUD\",\"USD\",\"EUR\",\"GBP\",\"JPY\",\"CNY\",\"KRW\",\"INR\",\"SGD\",\"NZD\",\"THB\",\"MYR\",\"IDR\",\"VND\",\"HKD\",\"PHP\",\"CAD\",\"CHF\",\"TWD\",\"TWI\",\"SDR\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"base\":\"AUD\",\"date\":\"2025-09-01\",\"rates\":{\"USD\":0.678234},\"success\":true,\"timestamp\":1725148800},\"schema\":{\"properties\":{\"base\":{\"example\":\"AUD\",\"type\":\"string\"},\"date\":{\"description\":\"Date of the rates (YYYY-MM-DD)\",\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"},\"rates\":{\"additionalProperties\":{\"description\":\"Exchange rate (AUD per unit of foreign currency) with precision varying by currency (up to 6 decimal places for most, whole numbers for IDR/VND as provided by RBA)\",\"minimum\":0,\"type\":\"number\"},\"description\":\"Object containing currency codes as keys and exchange rates as values\",\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"},\"timestamp\":{\"description\":\"Unix timestamp of the rate date\",\"type\":\"integer\"}},\"required\":[\"success\",\"timestamp\",\"base\",\"date\",\"rates\"],\"type\":\"object\"}}},\"description\":\"Latest exchange rate for currency\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":400,\"info\":\"Invalid currency format. Use 3-letter currency code (e.g., USD)\",\"type\":\"bad_request\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Bad request - invalid parameters\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":401,\"info\":\"Invalid or missing API key\",\"type\":\"unauthorized\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Authentication required\"},\"503\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":503,\"info\":\"Rates temporarily unavailable\",\"type\":\"unavailable\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Service temporarily unavailable\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API Key\",\"description\":\"API key authentication using Bearer token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -605,6 +705,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "GET /status",
+                    "json": "{\"operationId\":\"getApiStatus\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"last_update\":\"2025-09-01T16:00:00Z\",\"next_update_expected\":\"2025-09-02T06:00:00Z\",\"stale\":false,\"status\":\"operational\"},\"schema\":{\"properties\":{\"last_update\":{\"description\":\"Last successful data update timestamp or 'unknown'\",\"type\":\"string\"},\"next_update_expected\":{\"description\":\"ISO 8601 timestamp of when next RBA update is expected\",\"type\":\"string\"},\"stale\":{\"description\":\"Whether the data is considered stale\",\"type\":\"boolean\"},\"status\":{\"description\":\"Current API status\",\"enum\":[\"operational\",\"degraded\"],\"type\":\"string\"}},\"required\":[\"status\",\"last_update\",\"stale\",\"next_update_expected\"],\"type\":\"object\"}}},\"description\":\"API status information\"},\"503\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"last_update\":{\"description\":\"Last successful data update timestamp or 'unknown'\",\"type\":\"string\"},\"next_update_expected\":{\"description\":\"ISO 8601 timestamp of when next RBA update is expected\",\"type\":\"string\"},\"stale\":{\"description\":\"Whether the data is considered stale\",\"type\":\"boolean\"},\"status\":{\"description\":\"Current API status\",\"enum\":[\"operational\",\"degraded\"],\"type\":\"string\"}},\"required\":[\"status\",\"last_update\",\"stale\",\"next_update_expected\"],\"type\":\"object\"}}},\"description\":\"Service unavailable\"}},\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API Key\",\"description\":\"API key authentication using Bearer token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/status",
@@ -663,6 +769,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "GET /symbols",
+                    "json": "{\"operationId\":\"getSupportedCurrencies\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"base\":\"AUD\",\"count\":21,\"note\":\"All rates are quoted as AUD per unit of foreign currency from the Reserve Bank of Australia\",\"success\":true,\"symbols\":{\"EUR\":{\"country\":\"European Union\",\"name\":\"Euro\",\"symbol\":\"€\"},\"USD\":{\"country\":\"United States\",\"name\":\"US Dollar\",\"symbol\":\"$\"}}},\"schema\":{\"properties\":{\"base\":{\"example\":\"AUD\",\"type\":\"string\"},\"count\":{\"description\":\"Number of supported currencies\",\"type\":\"integer\"},\"note\":{\"type\":\"string\"},\"success\":{\"example\":true,\"type\":\"boolean\"},\"symbols\":{\"additionalProperties\":{\"properties\":{\"country\":{\"description\":\"Country or region\",\"type\":\"string\"},\"name\":{\"description\":\"Full name of the currency\",\"type\":\"string\"},\"symbol\":{\"description\":\"Currency symbol\",\"type\":\"string\"}},\"required\":[\"name\",\"symbol\",\"country\"],\"type\":\"object\"},\"type\":\"object\"}},\"required\":[\"success\",\"symbols\",\"count\",\"base\",\"note\"],\"type\":\"object\"}}},\"description\":\"List of supported currencies\"}},\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API Key\",\"description\":\"API key authentication using Bearer token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/symbols",
@@ -775,6 +887,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /timeseries",
+                    "json": "{\"operationId\":\"getTimeseriesRates\",\"parameters\":[{\"description\":\"Start date (YYYY-MM-DD)\",\"example\":\"2025-08-01\",\"in\":\"query\",\"name\":\"start_date\",\"required\":true,\"schema\":{\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"}},{\"description\":\"End date (YYYY-MM-DD)\",\"example\":\"2025-08-31\",\"in\":\"query\",\"name\":\"end_date\",\"required\":true,\"schema\":{\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"}},{\"description\":\"Comma-separated list of currency codes to filter\",\"example\":\"USD,EUR,GBP\",\"in\":\"query\",\"name\":\"symbols\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Base currency (currently only AUD supported)\",\"in\":\"query\",\"name\":\"base\",\"required\":false,\"schema\":{\"default\":\"AUD\",\"enum\":[\"AUD\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"base\":\"AUD\",\"end_date\":\"2025-08-31\",\"rates\":{\"2025-08-01\":{\"EUR\":0.612345,\"USD\":0.678234},\"2025-08-02\":{\"EUR\":0.613456,\"USD\":0.679123}},\"start_date\":\"2025-08-01\",\"success\":true,\"timeseries\":true},\"schema\":{\"properties\":{\"base\":{\"example\":\"AUD\",\"type\":\"string\"},\"end_date\":{\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"},\"rates\":{\"additionalProperties\":{\"additionalProperties\":{\"description\":\"Exchange rate (AUD per unit of foreign currency) with precision varying by currency (up to 6 decimal places for most, whole numbers for IDR/VND as provided by RBA)\",\"minimum\":0,\"type\":\"number\"},\"description\":\"Object containing currency codes as keys and exchange rates as values\",\"type\":\"object\"},\"description\":\"Object with dates as keys and rate objects as values\",\"type\":\"object\"},\"start_date\":{\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"},\"success\":{\"example\":true,\"type\":\"boolean\"},\"timeseries\":{\"example\":true,\"type\":\"boolean\"}},\"required\":[\"success\",\"timeseries\",\"start_date\",\"end_date\",\"base\",\"rates\"],\"type\":\"object\"}}},\"description\":\"Historical exchange rates\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":400,\"info\":\"Invalid currency format. Use 3-letter currency code (e.g., USD)\",\"type\":\"bad_request\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Bad request - invalid parameters\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":401,\"info\":\"Invalid or missing API key\",\"type\":\"unauthorized\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Authentication required\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":404,\"info\":\"No data available for the specified date\",\"type\":\"not_found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Resource not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API Key\",\"description\":\"API key authentication using Bearer token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/timeseries",
@@ -805,13 +923,223 @@
         }
       },
       "feature": {
+        "ratelimit": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "burst": 5,
+              "rate": 5
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "ratelimit",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Client-side rate limiting via a token bucket",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
+        "retry": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "factor": 2,
+              "maxDelay": 2000,
+              "minDelay": 50,
+              "retries": 2,
+              "statuses": [
+                408,
+                425,
+                429,
+                500,
+                502,
+                503,
+                504
+              ]
+            },
+            "optspec": {
+              "jitter": "`$BOOLEAN`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "retry",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Automatic retry of transient failures with exponential backoff",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
         "test": {
           "active": true,
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -901,6 +1229,102 @@
           },
           "title": "In-memory mock transport for testing without a live server",
           "transport": "base",
+          "version": "0.0.1"
+        },
+        "timeout": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "ms": 30000
+            },
+            "optspec": {
+              "clearTimer": "`$FUNCTION`",
+              "setTimer": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "timeout",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Per-request timeout with transport abort",
+          "transport": "wrap",
           "version": "0.0.1"
         }
       },
@@ -1181,6 +1605,48 @@
         "website": "https://exchangeratesapi.com.au"
       },
       "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "keys": "key,token,id"
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
       "repo": {
         "host": "github.com",
         "path": ""
@@ -1735,6 +2201,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -1776,7 +2243,7 @@
         "live": {
           "app": false,
           "base": "",
-          "strict": false
+          "strict": true
         }
       }
     }

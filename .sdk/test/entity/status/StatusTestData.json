@@ -33,5 +33,108 @@
         "status": "sa3"
       }
     }
+  },
+  "requests": {
+    "GET /status": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getApiStatus",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "last_update": "2025-09-01T16:00:00Z",
+                  "next_update_expected": "2025-09-02T06:00:00Z",
+                  "stale": false,
+                  "status": "operational"
+                },
+                "schema": {
+                  "properties": {
+                    "last_update": {
+                      "description": "Last successful data update timestamp or 'unknown'",
+                      "type": "string"
+                    },
+                    "next_update_expected": {
+                      "description": "ISO 8601 timestamp of when next RBA update is expected",
+                      "type": "string"
+                    },
+                    "stale": {
+                      "description": "Whether the data is considered stale",
+                      "type": "boolean"
+                    },
+                    "status": {
+                      "description": "Current API status",
+                      "enum": [
+                        "operational",
+                        "degraded"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "last_update",
+                    "stale",
+                    "next_update_expected"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "API status information"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "last_update": {
+                      "description": "Last successful data update timestamp or 'unknown'",
+                      "type": "string"
+                    },
+                    "next_update_expected": {
+                      "description": "ISO 8601 timestamp of when next RBA update is expected",
+                      "type": "string"
+                    },
+                    "stale": {
+                      "description": "Whether the data is considered stale",
+                      "type": "boolean"
+                    },
+                    "status": {
+                      "description": "Current API status",
+                      "enum": [
+                        "operational",
+                        "degraded"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "last_update",
+                    "stale",
+                    "next_update_expected"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service unavailable"
+          }
+        },
+        "securitySchemes": {
+          "bearerAuth": {
+            "bearerFormat": "API Key",
+            "description": "API key authentication using Bearer token",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

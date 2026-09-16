@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { ExchangeRatesSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('ConvertEntity', async () => {
 
     const live = 'TRUE' === process.env.EXCHANGE_RATES_TEST_LIVE
     for (const op of ['load']) {
-      if (maybeSkipControl(t, 'entityOp', 'convert.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'convert.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set EXCHANGE_RATES_TEST_CONVERT_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"date","req":true,"type":"`$STRING`","index$":0},{"active":true,"name":"free","req":false,"short":"Indicates if this was a free (unauthenticated) request","type":"`$BOOLEAN`","index$":1},{"active":true,"name":"info","req":true,"type":"`$OBJECT`","index$":2},{"active":true,"name":"query","req":true,"type":"`$OBJECT`","index$":3},{"active":true,"name":"result","req":true,"short":"Conversion result","type":"`$NUMBER`","index$":4},{"active":true,"name":"success","req":true,"type":"`$BOOLEAN`","index$":5}],"name":"convert","op":{"load":{"input":"data","name":"load","points":[{"active":true,"args":{"query":[{"active":true,"example":100,"kind":"query","name":"amount","orig":"amount","reqd":true,"type":"`$NUMBER`","index$":0},{"active":true,"example":"2025-08-31","kind":"query","name":"date","orig":"date","reqd":false,"type":"`$STRING`","index$":1},{"active":true,"example":"AUD","kind":"query","name":"from","orig":"from","reqd":true,"type":"`$STRING`","index$":2},{"active":true,"example":"USD","kind":"query","name":"to","orig":"to","reqd":true,"type":"`$STRING`","index$":3}]},"contract":{"id":"GET /convert","json":"{\"operationId\":\"convertCurrency\",\"parameters\":[{\"description\":\"Source currency code\",\"example\":\"AUD\",\"in\":\"query\",\"name\":\"from\",\"required\":true,\"schema\":{\"description\":\"Three-letter currency code\",\"enum\":[\"AUD\",\"USD\",\"EUR\",\"GBP\",\"JPY\",\"CNY\",\"KRW\",\"INR\",\"SGD\",\"NZD\",\"THB\",\"MYR\",\"IDR\",\"VND\",\"HKD\",\"PHP\",\"CAD\",\"CHF\",\"TWD\",\"TWI\",\"SDR\"],\"type\":\"string\"}},{\"description\":\"Target currency code\",\"example\":\"USD\",\"in\":\"query\",\"name\":\"to\",\"required\":true,\"schema\":{\"description\":\"Three-letter currency code\",\"enum\":[\"AUD\",\"USD\",\"EUR\",\"GBP\",\"JPY\",\"CNY\",\"KRW\",\"INR\",\"SGD\",\"NZD\",\"THB\",\"MYR\",\"IDR\",\"VND\",\"HKD\",\"PHP\",\"CAD\",\"CHF\",\"TWD\",\"TWI\",\"SDR\"],\"type\":\"string\"}},{\"description\":\"Amount to convert\",\"example\":100,\"in\":\"query\",\"name\":\"amount\",\"required\":true,\"schema\":{\"exclusiveMinimum\":true,\"minimum\":0,\"type\":\"number\"}},{\"description\":\"Historical date for conversion (YYYY-MM-DD). Requires authentication.\",\"example\":\"2025-08-31\",\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"date\":\"2025-09-01\",\"free\":true,\"info\":{\"rate\":0.678234,\"timestamp\":1725148800},\"query\":{\"amount\":100,\"from\":\"AUD\",\"to\":\"USD\"},\"result\":67.8234,\"success\":true},\"schema\":{\"properties\":{\"date\":{\"pattern\":\"^\\\\d{4}-\\\\d{2}-\\\\d{2}$\",\"type\":\"string\"},\"free\":{\"description\":\"Indicates if this was a free (unauthenticated) request\",\"type\":\"boolean\"},\"info\":{\"properties\":{\"rate\":{\"description\":\"Exchange rate used for conversion with precision varying by currency (up to 6 decimal places for most, whole numbers for IDR/VND as provided by RBA)\",\"type\":\"number\"},\"timestamp\":{\"description\":\"Unix timestamp of the rate date\",\"type\":\"integer\"}},\"required\":[\"rate\"],\"type\":\"object\"},\"query\":{\"properties\":{\"amount\":{\"type\":\"number\"},\"from\":{\"type\":\"string\"},\"to\":{\"type\":\"string\"}},\"required\":[\"from\",\"to\",\"amount\"],\"type\":\"object\"},\"result\":{\"description\":\"Conversion result\",\"type\":\"number\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"required\":[\"success\",\"query\",\"info\",\"date\",\"result\"],\"type\":\"object\"}}},\"description\":\"Conversion result\",\"headers\":{\"X-RateLimit-Limit-Monthly\":{\"description\":\"Monthly request limit based on plan (Free=300, Starter=5,000, Professional=50,000, Business=500,000)\",\"schema\":{\"type\":\"integer\"}},\"X-RateLimit-Remaining-Monthly\":{\"description\":\"Remaining requests in current monthly period\",\"schema\":{\"type\":\"integer\"}}}},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":400,\"info\":\"Invalid currency format. Use 3-letter currency code (e.g., USD)\",\"type\":\"bad_request\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Bad request - invalid parameters\"},\"429\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":429,\"info\":\"Monthly quota exceeded. Free=300, Starter=5,000, Professional=50,000, Business=500,000 requests per month.\",\"type\":\"rate_limit\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"},\"503\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":503,\"info\":\"Rates temporarily unavailable\",\"type\":\"unavailable\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"description\":\"HTTP status code\",\"type\":\"integer\"},\"info\":{\"description\":\"Human-readable error description\",\"type\":\"string\"},\"type\":{\"description\":\"Error type identifier\",\"type\":\"string\"}},\"required\":[\"code\",\"type\",\"info\"],\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"required\":[\"success\",\"error\"],\"type\":\"object\"}}},\"description\":\"Service temporarily unavailable\"}},\"security\":[{\"bearerAuth\":[]},{}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"API Key\",\"description\":\"API key authentication using Bearer token\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/convert","segments":[{"lit":"convert"}],"select":{"exist":["amount","date","from","to"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"convert","name__orig":"convert","Name":"Convert","name_":"convert","name-":"convert","NAME":"CONVERT","index$":0}, {"active":true,"entity":"convert","key$":"BasicConvertFlow","kind":"basic","name":"BasicConvertFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"convert_ref01","srcdatavar":"convert_ref01_data","suffix":"_dt0"},"match":{},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-convert_ref01"}}],"index$":0}]}, 'Convert')
     }
     const client = setup.client
     const struct = setup.struct
@@ -109,13 +108,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['EXCHANGE_RATES_TEST_CONVERT_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'EXCHANGE_RATES_TEST_CONVERT_ENTID': idmap,
     'EXCHANGE_RATES_TEST_LIVE': 'FALSE',
@@ -127,7 +119,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.EXCHANGE_RATES_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['EXCHANGE_RATES_TEST_CONVERT_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new ExchangeRatesSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -140,7 +138,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -153,7 +152,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.EXCHANGE_RATES_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

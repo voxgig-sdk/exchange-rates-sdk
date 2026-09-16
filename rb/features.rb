@@ -1,7 +1,10 @@
 # ExchangeRates SDK feature factory
 
 require_relative 'feature/base_feature'
+require_relative 'feature/ratelimit_feature'
+require_relative 'feature/retry_feature'
 require_relative 'feature/test_feature'
+require_relative 'feature/timeout_feature'
 
 
 module ExchangeRatesFeatures
@@ -9,8 +12,14 @@ module ExchangeRatesFeatures
     case name
     when "base"
       ExchangeRatesBaseFeature.new
+    when "ratelimit"
+      ExchangeRatesRatelimitFeature.new
+    when "retry"
+      ExchangeRatesRetryFeature.new
     when "test"
       ExchangeRatesTestFeature.new
+    when "timeout"
+      ExchangeRatesTimeoutFeature.new
     else
       ExchangeRatesBaseFeature.new
     end

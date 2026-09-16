@@ -1,12 +1,18 @@
 # ExchangeRates SDK feature factory
 
 from exchangerates_sdk.feature.base_feature import ExchangeRatesBaseFeature
+from exchangerates_sdk.feature.ratelimit_feature import ExchangeRatesRatelimitFeature
+from exchangerates_sdk.feature.retry_feature import ExchangeRatesRetryFeature
 from exchangerates_sdk.feature.test_feature import ExchangeRatesTestFeature
+from exchangerates_sdk.feature.timeout_feature import ExchangeRatesTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: ExchangeRatesBaseFeature(),
+    "ratelimit": lambda: ExchangeRatesRatelimitFeature(),
+    "retry": lambda: ExchangeRatesRetryFeature(),
     "test": lambda: ExchangeRatesTestFeature(),
+    "timeout": lambda: ExchangeRatesTimeoutFeature(),
 }
 
 
