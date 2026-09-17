@@ -1,10 +1,10 @@
 # Flows
 
-@"BasicConvertFlow.aon"
-@"BasicGetApiRootFlow.aon"
-@"BasicGetHistoricalRateForCurrencyAndDateFlow.aon"
-@"BasicGetHistoricalRatesForDateFlow.aon"
-@"BasicLatestFlow.aon"
-@"BasicStatusFlow.aon"
-@"BasicSymbolFlow.aon"
-@"BasicTimeseriesFlow.aon"
+@"./BasicConvertFlow.aon"
+@"./BasicGetApiRootFlow.aon"
+@"./BasicGetHistoricalRateForCurrencyAndDateFlow.aon"
+@"./BasicGetHistoricalRatesForDateFlow.aon"
+@"./BasicLatestFlow.aon"
+@"./BasicStatusFlow.aon"
+@"./BasicSymbolFlow.aon"
+@"./BasicTimeseriesFlow.aon"

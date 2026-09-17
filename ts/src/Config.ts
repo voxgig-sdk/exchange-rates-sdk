@@ -131,30 +131,30 @@ class Config {
 
     entity: {
       
-      convert: {
-      },
-
-      get_api_root: {
-      },
-
-      get_historical_rate_for_currency_and_date: {
-      },
-
-      get_historical_rates_for_date: {
-      },
-
-      latest: {
-      },
-
-      status: {
-      },
-
-      symbol: {
-      },
-
-      timeseries: {
-      },
-
+        convert: {
+        },
+  
+        get_api_root: {
+        },
+  
+        get_historical_rate_for_currency_and_date: {
+        },
+  
+        get_historical_rates_for_date: {
+        },
+  
+        latest: {
+        },
+  
+        status: {
+        },
+  
+        symbol: {
+        },
+  
+        timeseries: {
+        },
+  
     }
   }
 
