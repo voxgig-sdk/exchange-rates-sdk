@@ -1,0 +1,117 @@
+# Entity: get_historical_rate_for_currency_and_date
+
+main: kit: entity: get_historical_rate_for_currency_and_date: {
+
+  alias: field: {}
+
+  fields: {
+    base: {
+      h: "Base"
+      n: "base"
+      r: false
+      t: "`$STRING`"
+    }
+    date: {
+      h: "Date"
+      n: "date"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    rates: {
+      h: "Rates"
+      n: "rates"
+      r: false
+      t: "`$OBJECT`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    timestamp: {
+      h: "Timestamp"
+      n: "timestamp"
+      r: false
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    from: {
+      date: "date"
+    }
+    name: "id"
+    parts: [
+      "date"
+      "currency"
+    ]
+    sep: "/"
+  }
+
+  name: "get_historical_rate_for_currency_and_date"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /{date}/{currency}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "USD"
+                k: "param"
+                n: "currency"
+                or: "currency"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2025-08-31"
+                k: "param"
+                n: "date"
+                or: "date"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/{date}/{currency}"
+          q: {
+            exist: [
+              "currency"
+              "date"
+            ]
+          }
+          s: [
+            {
+              var: "date"
+            }
+            {
+              var: "currency"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.rates`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

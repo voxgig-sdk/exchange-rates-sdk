@@ -1,0 +1,119 @@
+# Entity: timeseries
+
+main: kit: entity: timeseries: {
+
+  alias: field: {}
+
+  fields: {
+    base: {
+      h: "Base"
+      n: "base"
+      r: false
+      t: "`$STRING`"
+    }
+    end_date: {
+      h: "End Date"
+      n: "end_date"
+      r: false
+      t: "`$STRING`"
+    }
+    rates: {
+      h: "Rates"
+      n: "rates"
+      r: false
+      t: "`$OBJECT`"
+    }
+    start_date: {
+      h: "Start Date"
+      n: "start_date"
+      r: false
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    timeseries: {
+      h: "Timeseries"
+      n: "timeseries"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "timeseries"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /timeseries"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "AUD"
+                k: "query"
+                n: "base"
+                or: "base"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "2025-08-31"
+                k: "query"
+                n: "end_date"
+                or: "end_date"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2025-08-01"
+                k: "query"
+                n: "start_date"
+                or: "start_date"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "USD,EUR,GBP"
+                k: "query"
+                n: "symbol"
+                or: "symbol"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/timeseries"
+          q: {
+            exist: [
+              "base"
+              "end_date"
+              "start_date"
+              "symbol"
+            ]
+          }
+          s: [
+            {
+              lit: "timeseries"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.rates`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

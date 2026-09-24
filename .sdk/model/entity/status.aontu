@@ -1,0 +1,67 @@
+# Entity: status
+
+main: kit: entity: status: {
+
+  alias: field: {}
+
+  fields: {
+    last_update: {
+      h: "Last Update"
+      n: "last_update"
+      r: true
+      sh: "Last successful data update timestamp or 'unknown'"
+      t: "`$STRING`"
+    }
+    next_update_expected: {
+      h: "Next Update Expected"
+      n: "next_update_expected"
+      r: true
+      sh: "ISO 8601 timestamp of when next RBA update is expected"
+      t: "`$STRING`"
+    }
+    stale: {
+      h: "Stale"
+      n: "stale"
+      r: true
+      sh: "Whether the data is considered stale"
+      t: "`$BOOLEAN`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      sh: "Current API status"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "status"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /status"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/status"
+          s: [
+            {
+              lit: "status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,28 @@
+# BasicTimeseriesFlow
+
+main: kit: flow: BasicTimeseriesFlow:
+{
+  entity: "timeseries",
+  kind: "basic",
+  name: "BasicTimeseriesFlow",
+  step: [
+    {
+      i: {
+        ref: "timeseries_ref01",
+        srcdatavar: "timeseries_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-timeseries_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTimeseriesFlow"
+}

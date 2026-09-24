@@ -11,19 +11,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -124,34 +117,40 @@ class Config {
             "fields": [
                 {
                     "name": "date",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Date",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "free",
-                    "short": "Indicates if this was a free (unauthenticated) request",
-                    "type": "`$BOOLEAN`"
+                    "title": "Free",
+                    "type": "`$BOOLEAN`",
+                    "short": "Indicates if this was a free (unauthenticated) request"
                 },
                 {
                     "name": "info",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Info",
+                    "type": "`$OBJECT`",
+                    "req": true
                 },
                 {
                     "name": "query",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Query",
+                    "type": "`$OBJECT`",
+                    "req": true
                 },
                 {
                     "name": "result",
+                    "title": "Result",
+                    "type": "`$NUMBER`",
                     "req": true,
-                    "short": "Conversion result",
-                    "type": "`$NUMBER`"
+                    "short": "Conversion result"
                 },
                 {
                     "name": "success",
-                    "req": true,
-                    "type": "`$BOOLEAN`"
+                    "title": "Success",
+                    "type": "`$BOOLEAN`",
+                    "req": true
                 }
             ],
             "name": "convert",
@@ -161,41 +160,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": 100,
-                                        "kind": "query",
-                                        "name": "amount",
-                                        "orig": "amount",
-                                        "reqd": true,
-                                        "type": "`$NUMBER`"
-                                    },
-                                    {
-                                        "example": "2025-08-31",
-                                        "kind": "query",
-                                        "name": "date",
-                                        "orig": "date",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "AUD",
-                                        "kind": "query",
-                                        "name": "from",
-                                        "orig": "from",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "USD",
-                                        "kind": "query",
-                                        "name": "to",
-                                        "orig": "to",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/convert",
@@ -204,6 +168,49 @@ class Config {
                                     "lit": "convert"
                                 }
                             ],
+                            "parts": [
+                                "convert"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "amount",
+                                        "orig": "amount",
+                                        "type": "`$NUMBER`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": 100
+                                    },
+                                    {
+                                        "name": "date",
+                                        "orig": "date",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "2025-08-31"
+                                    },
+                                    {
+                                        "name": "from",
+                                        "orig": "from",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "AUD"
+                                    },
+                                    {
+                                        "name": "to",
+                                        "orig": "to",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "USD"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "amount",
@@ -211,14 +218,7 @@ class Config {
                                     "from",
                                     "to"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "convert"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -230,25 +230,29 @@ class Config {
         "get_api_root": {
             "fields": [
                 {
-                    "format": "uri",
                     "name": "documentation",
+                    "title": "Documentation",
+                    "type": "`$STRING`",
                     "req": true,
-                    "type": "`$STRING`"
+                    "format": "uri"
                 },
                 {
                     "name": "message",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Message",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "success",
-                    "req": true,
-                    "type": "`$BOOLEAN`"
+                    "title": "Success",
+                    "type": "`$BOOLEAN`",
+                    "req": true
                 },
                 {
                     "name": "version",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Version",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "name": "get_api_root",
@@ -258,17 +262,18 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/",
                             "segments": [],
-                            "select": {},
+                            "parts": [],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": []
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -281,26 +286,32 @@ class Config {
             "fields": [
                 {
                     "name": "base",
+                    "title": "Base",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "date",
+                    "title": "Date",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "rates",
+                    "title": "Rates",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "success",
+                    "title": "Success",
                     "type": "`$BOOLEAN`"
                 },
                 {
                     "name": "timestamp",
+                    "title": "Timestamp",
                     "type": "`$INTEGER`"
                 }
             ],
@@ -323,26 +334,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "example": "USD",
-                                        "kind": "param",
-                                        "name": "currency",
-                                        "orig": "currency",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "2025-08-31",
-                                        "kind": "param",
-                                        "name": "date",
-                                        "orig": "date",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/{date}/{currency}",
@@ -354,20 +345,41 @@ class Config {
                                     "var": "currency"
                                 }
                             ],
+                            "parts": [
+                                "{date}",
+                                "{currency}"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.rates`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "currency",
+                                        "orig": "currency",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true,
+                                        "example": "USD"
+                                    },
+                                    {
+                                        "name": "date",
+                                        "orig": "date",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true,
+                                        "example": "2025-08-31"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "currency",
                                     "date"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.rates`"
-                            },
-                            "parts": [
-                                "{date}",
-                                "{currency}"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -380,26 +392,32 @@ class Config {
             "fields": [
                 {
                     "name": "base",
+                    "title": "Base",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "date",
+                    "title": "Date",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "rates",
+                    "title": "Rates",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "success",
+                    "title": "Success",
                     "type": "`$BOOLEAN`"
                 },
                 {
                     "name": "timestamp",
+                    "title": "Timestamp",
                     "type": "`$INTEGER`"
                 }
             ],
@@ -414,43 +432,43 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "example": "2025-08-31",
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "date",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/{date}",
-                            "rename": {
-                                "param": {
-                                    "date": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "date": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.rates`"
                             },
-                            "parts": [
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "date",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true,
+                                        "example": "2025-08-31"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -463,26 +481,32 @@ class Config {
             "fields": [
                 {
                     "name": "base",
+                    "title": "Base",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "date",
+                    "title": "Date",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "rates",
+                    "title": "Rates",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "success",
+                    "title": "Success",
                     "type": "`$BOOLEAN`"
                 },
                 {
                     "name": "timestamp",
+                    "title": "Timestamp",
                     "type": "`$INTEGER`"
                 }
             ],
@@ -497,24 +521,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": "AUD",
-                                        "kind": "query",
-                                        "name": "base",
-                                        "orig": "base",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "USD,EUR,GBP",
-                                        "kind": "query",
-                                        "name": "symbol",
-                                        "orig": "symbol",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/latest",
@@ -523,41 +529,43 @@ class Config {
                                     "lit": "latest"
                                 }
                             ],
+                            "parts": [
+                                "latest"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.rates`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "base",
+                                        "orig": "base",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "AUD"
+                                    },
+                                    {
+                                        "name": "symbol",
+                                        "orig": "symbol",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "USD,EUR,GBP"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "base",
                                     "symbol"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.rates`"
-                            },
-                            "parts": [
-                                "latest"
-                            ]
+                            }
                         },
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "example": "USD",
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "currency",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/latest/{currency}",
-                            "rename": {
-                                "param": {
-                                    "currency": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "latest"
@@ -566,19 +574,36 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "latest",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "currency": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.rates`"
                             },
-                            "parts": [
-                                "latest",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "currency",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true,
+                                        "example": "USD"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -591,27 +616,31 @@ class Config {
             "fields": [
                 {
                     "name": "last_update",
+                    "title": "Last Update",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Last successful data update timestamp or 'unknown'",
-                    "type": "`$STRING`"
+                    "short": "Last successful data update timestamp or 'unknown'"
                 },
                 {
                     "name": "next_update_expected",
+                    "title": "Next Update Expected",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "ISO 8601 timestamp of when next RBA update is expected",
-                    "type": "`$STRING`"
+                    "short": "ISO 8601 timestamp of when next RBA update is expected"
                 },
                 {
                     "name": "stale",
+                    "title": "Stale",
+                    "type": "`$BOOLEAN`",
                     "req": true,
-                    "short": "Whether the data is considered stale",
-                    "type": "`$BOOLEAN`"
+                    "short": "Whether the data is considered stale"
                 },
                 {
                     "name": "status",
+                    "title": "Status",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Current API status",
-                    "type": "`$STRING`"
+                    "short": "Current API status"
                 }
             ],
             "name": "status",
@@ -621,7 +650,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/status",
@@ -630,14 +658,16 @@ class Config {
                                     "lit": "status"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "status"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "status"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -650,21 +680,24 @@ class Config {
             "fields": [
                 {
                     "name": "country",
+                    "title": "Country",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Country or region",
-                    "type": "`$STRING`"
+                    "short": "Country or region"
                 },
                 {
                     "name": "name",
+                    "title": "Name",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Full name of the currency",
-                    "type": "`$STRING`"
+                    "short": "Full name of the currency"
                 },
                 {
                     "name": "symbol",
+                    "title": "Symbol",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Currency symbol",
-                    "type": "`$STRING`"
+                    "short": "Currency symbol"
                 }
             ],
             "name": "symbol",
@@ -674,7 +707,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/symbols",
@@ -683,14 +715,16 @@ class Config {
                                     "lit": "symbols"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "symbols"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.symbols`"
                             },
-                            "parts": [
-                                "symbols"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -703,26 +737,32 @@ class Config {
             "fields": [
                 {
                     "name": "base",
+                    "title": "Base",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "end_date",
+                    "title": "End Date",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "rates",
+                    "title": "Rates",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "start_date",
+                    "title": "Start Date",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "success",
+                    "title": "Success",
                     "type": "`$BOOLEAN`"
                 },
                 {
                     "name": "timeseries",
+                    "title": "Timeseries",
                     "type": "`$BOOLEAN`"
                 }
             ],
@@ -733,40 +773,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": "AUD",
-                                        "kind": "query",
-                                        "name": "base",
-                                        "orig": "base",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "2025-08-31",
-                                        "kind": "query",
-                                        "name": "end_date",
-                                        "orig": "end_date",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "2025-08-01",
-                                        "kind": "query",
-                                        "name": "start_date",
-                                        "orig": "start_date",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "USD,EUR,GBP",
-                                        "kind": "query",
-                                        "name": "symbol",
-                                        "orig": "symbol",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/timeseries",
@@ -775,6 +781,48 @@ class Config {
                                     "lit": "timeseries"
                                 }
                             ],
+                            "parts": [
+                                "timeseries"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.rates`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "base",
+                                        "orig": "base",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "AUD"
+                                    },
+                                    {
+                                        "name": "end_date",
+                                        "orig": "end_date",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "2025-08-31"
+                                    },
+                                    {
+                                        "name": "start_date",
+                                        "orig": "start_date",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "2025-08-01"
+                                    },
+                                    {
+                                        "name": "symbol",
+                                        "orig": "symbol",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "USD,EUR,GBP"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "base",
@@ -782,14 +830,7 @@ class Config {
                                     "start_date",
                                     "symbol"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.rates`"
-                            },
-                            "parts": [
-                                "timeseries"
-                            ]
+                            }
                         }
                     ]
                 }

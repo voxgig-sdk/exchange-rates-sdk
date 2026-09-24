@@ -1,7 +1,7 @@
 // Typed models for the ExchangeRates SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,12 +14,6 @@ import (
 
 // Convert is the typed data model for the convert entity.
 type Convert struct {
-	Date string `json:"date"`
-	Free *bool `json:"free,omitempty"`
-	Info map[string]any `json:"info"`
-	Query map[string]any `json:"query"`
-	Result float64 `json:"result"`
-	Success bool `json:"success"`
 }
 
 // ConvertLoadMatch is the typed request payload for Convert.LoadTyped.
@@ -32,10 +26,6 @@ type ConvertLoadMatch struct {
 
 // GetApiRoot is the typed data model for the get_api_root entity.
 type GetApiRoot struct {
-	Documentation string `json:"documentation"`
-	Message string `json:"message"`
-	Success bool `json:"success"`
-	Version string `json:"version"`
 }
 
 // GetApiRootLoadMatch is the typed request payload for GetApiRoot.LoadTyped.
@@ -48,12 +38,6 @@ type GetApiRootLoadMatch struct {
 
 // GetHistoricalRateForCurrencyAndDate is the typed data model for the get_historical_rate_for_currency_and_date entity.
 type GetHistoricalRateForCurrencyAndDate struct {
-	Base *string `json:"base,omitempty"`
-	Date *string `json:"date,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Rates *map[string]any `json:"rates,omitempty"`
-	Success *bool `json:"success,omitempty"`
-	Timestamp *int `json:"timestamp,omitempty"`
 }
 
 // GetHistoricalRateForCurrencyAndDateLoadMatch is the typed request payload for GetHistoricalRateForCurrencyAndDate.LoadTyped.
@@ -64,12 +48,6 @@ type GetHistoricalRateForCurrencyAndDateLoadMatch struct {
 
 // GetHistoricalRatesForDate is the typed data model for the get_historical_rates_for_date entity.
 type GetHistoricalRatesForDate struct {
-	Base *string `json:"base,omitempty"`
-	Date *string `json:"date,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Rates *map[string]any `json:"rates,omitempty"`
-	Success *bool `json:"success,omitempty"`
-	Timestamp *int `json:"timestamp,omitempty"`
 }
 
 // GetHistoricalRatesForDateLoadMatch is the typed request payload for GetHistoricalRatesForDate.LoadTyped.
@@ -79,12 +57,6 @@ type GetHistoricalRatesForDateLoadMatch struct {
 
 // Latest is the typed data model for the latest entity.
 type Latest struct {
-	Base *string `json:"base,omitempty"`
-	Date *string `json:"date,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Rates *map[string]any `json:"rates,omitempty"`
-	Success *bool `json:"success,omitempty"`
-	Timestamp *int `json:"timestamp,omitempty"`
 }
 
 // LatestLoadMatch is the typed request payload for Latest.LoadTyped.
@@ -94,10 +66,6 @@ type LatestLoadMatch struct {
 
 // Status is the typed data model for the status entity.
 type Status struct {
-	LastUpdate string `json:"last_update"`
-	NextUpdateExpected string `json:"next_update_expected"`
-	Stale bool `json:"stale"`
-	Status string `json:"status"`
 }
 
 // StatusLoadMatch is the typed request payload for Status.LoadTyped.
@@ -110,9 +78,6 @@ type StatusLoadMatch struct {
 
 // Symbol is the typed data model for the symbol entity.
 type Symbol struct {
-	Country string `json:"country"`
-	Name string `json:"name"`
-	Symbol string `json:"symbol"`
 }
 
 // SymbolLoadMatch is the typed request payload for Symbol.LoadTyped.
@@ -124,12 +89,6 @@ type SymbolLoadMatch struct {
 
 // Timeseries is the typed data model for the timeseries entity.
 type Timeseries struct {
-	Base *string `json:"base,omitempty"`
-	EndDate *string `json:"end_date,omitempty"`
-	Rates *map[string]any `json:"rates,omitempty"`
-	StartDate *string `json:"start_date,omitempty"`
-	Success *bool `json:"success,omitempty"`
-	Timeseries *bool `json:"timeseries,omitempty"`
 }
 
 // TimeseriesLoadMatch is the typed request payload for Timeseries.LoadTyped.

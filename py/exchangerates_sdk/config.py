@@ -126,34 +126,40 @@ def make_config():
         "fields": [
           {
             "name": "date",
-            "req": True,
+            "title": "Date",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "free",
-            "short": "Indicates if this was a free (unauthenticated) request",
+            "title": "Free",
             "type": "`$BOOLEAN`",
+            "short": "Indicates if this was a free (unauthenticated) request",
           },
           {
             "name": "info",
-            "req": True,
+            "title": "Info",
             "type": "`$OBJECT`",
+            "req": True,
           },
           {
             "name": "query",
-            "req": True,
+            "title": "Query",
             "type": "`$OBJECT`",
+            "req": True,
           },
           {
             "name": "result",
+            "title": "Result",
+            "type": "`$NUMBER`",
             "req": True,
             "short": "Conversion result",
-            "type": "`$NUMBER`",
           },
           {
             "name": "success",
-            "req": True,
+            "title": "Success",
             "type": "`$BOOLEAN`",
+            "req": True,
           },
         ],
         "name": "convert",
@@ -163,41 +169,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": 100,
-                      "kind": "query",
-                      "name": "amount",
-                      "orig": "amount",
-                      "reqd": True,
-                      "type": "`$NUMBER`",
-                    },
-                    {
-                      "example": "2025-08-31",
-                      "kind": "query",
-                      "name": "date",
-                      "orig": "date",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "AUD",
-                      "kind": "query",
-                      "name": "from",
-                      "orig": "from",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "USD",
-                      "kind": "query",
-                      "name": "to",
-                      "orig": "to",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/convert",
@@ -206,6 +177,49 @@ def make_config():
                     "lit": "convert",
                   },
                 ],
+                "parts": [
+                  "convert",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "amount",
+                      "orig": "amount",
+                      "type": "`$NUMBER`",
+                      "kind": "query",
+                      "reqd": True,
+                      "example": 100,
+                    },
+                    {
+                      "name": "date",
+                      "orig": "date",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "2025-08-31",
+                    },
+                    {
+                      "name": "from",
+                      "orig": "from",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                      "example": "AUD",
+                    },
+                    {
+                      "name": "to",
+                      "orig": "to",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                      "example": "USD",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "amount",
@@ -214,13 +228,6 @@ def make_config():
                     "to",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "convert",
-                ],
               },
             ],
           },
@@ -232,25 +239,29 @@ def make_config():
       "get_api_root": {
         "fields": [
           {
-            "format": "uri",
             "name": "documentation",
-            "req": True,
+            "title": "Documentation",
             "type": "`$STRING`",
+            "req": True,
+            "format": "uri",
           },
           {
             "name": "message",
-            "req": True,
+            "title": "Message",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "success",
-            "req": True,
+            "title": "Success",
             "type": "`$BOOLEAN`",
+            "req": True,
           },
           {
             "name": "version",
-            "req": True,
+            "title": "Version",
             "type": "`$STRING`",
+            "req": True,
           },
         ],
         "name": "get_api_root",
@@ -260,17 +271,18 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/",
                 "segments": [],
-                "select": {},
+                "parts": [],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -283,26 +295,32 @@ def make_config():
         "fields": [
           {
             "name": "base",
+            "title": "Base",
             "type": "`$STRING`",
           },
           {
             "name": "date",
+            "title": "Date",
             "type": "`$STRING`",
           },
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
           {
             "name": "rates",
+            "title": "Rates",
             "type": "`$OBJECT`",
           },
           {
             "name": "success",
+            "title": "Success",
             "type": "`$BOOLEAN`",
           },
           {
             "name": "timestamp",
+            "title": "Timestamp",
             "type": "`$INTEGER`",
           },
         ],
@@ -325,26 +343,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "example": "USD",
-                      "kind": "param",
-                      "name": "currency",
-                      "orig": "currency",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "2025-08-31",
-                      "kind": "param",
-                      "name": "date",
-                      "orig": "date",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/{date}/{currency}",
@@ -356,20 +354,41 @@ def make_config():
                     "var": "currency",
                   },
                 ],
+                "parts": [
+                  "{date}",
+                  "{currency}",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.rates`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "currency",
+                      "orig": "currency",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                      "example": "USD",
+                    },
+                    {
+                      "name": "date",
+                      "orig": "date",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                      "example": "2025-08-31",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "currency",
                     "date",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.rates`",
-                },
-                "parts": [
-                  "{date}",
-                  "{currency}",
-                ],
               },
             ],
           },
@@ -382,26 +401,32 @@ def make_config():
         "fields": [
           {
             "name": "base",
+            "title": "Base",
             "type": "`$STRING`",
           },
           {
             "name": "date",
+            "title": "Date",
             "type": "`$STRING`",
           },
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
           {
             "name": "rates",
+            "title": "Rates",
             "type": "`$OBJECT`",
           },
           {
             "name": "success",
+            "title": "Success",
             "type": "`$BOOLEAN`",
           },
           {
             "name": "timestamp",
+            "title": "Timestamp",
             "type": "`$INTEGER`",
           },
         ],
@@ -416,43 +441,43 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "example": "2025-08-31",
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "date",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/{date}",
-                "rename": {
-                  "param": {
-                    "date": "id",
-                  },
-                },
                 "segments": [
                   {
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
+                "parts": [
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "date": "id",
+                  },
                 },
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.rates`",
                 },
-                "parts": [
-                  "{id}",
-                ],
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "date",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                      "example": "2025-08-31",
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
@@ -465,26 +490,32 @@ def make_config():
         "fields": [
           {
             "name": "base",
+            "title": "Base",
             "type": "`$STRING`",
           },
           {
             "name": "date",
+            "title": "Date",
             "type": "`$STRING`",
           },
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
           {
             "name": "rates",
+            "title": "Rates",
             "type": "`$OBJECT`",
           },
           {
             "name": "success",
+            "title": "Success",
             "type": "`$BOOLEAN`",
           },
           {
             "name": "timestamp",
+            "title": "Timestamp",
             "type": "`$INTEGER`",
           },
         ],
@@ -499,24 +530,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": "AUD",
-                      "kind": "query",
-                      "name": "base",
-                      "orig": "base",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "USD,EUR,GBP",
-                      "kind": "query",
-                      "name": "symbol",
-                      "orig": "symbol",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/latest",
@@ -525,41 +538,43 @@ def make_config():
                     "lit": "latest",
                   },
                 ],
+                "parts": [
+                  "latest",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.rates`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "base",
+                      "orig": "base",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "AUD",
+                    },
+                    {
+                      "name": "symbol",
+                      "orig": "symbol",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "USD,EUR,GBP",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "base",
                     "symbol",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.rates`",
-                },
-                "parts": [
-                  "latest",
-                ],
               },
               {
-                "args": {
-                  "params": [
-                    {
-                      "example": "USD",
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "currency",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/latest/{currency}",
-                "rename": {
-                  "param": {
-                    "currency": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "latest",
@@ -568,19 +583,36 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
+                "parts": [
+                  "latest",
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "currency": "id",
+                  },
                 },
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.rates`",
                 },
-                "parts": [
-                  "latest",
-                  "{id}",
-                ],
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "currency",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                      "example": "USD",
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
@@ -593,27 +625,31 @@ def make_config():
         "fields": [
           {
             "name": "last_update",
+            "title": "Last Update",
+            "type": "`$STRING`",
             "req": True,
             "short": "Last successful data update timestamp or 'unknown'",
-            "type": "`$STRING`",
           },
           {
             "name": "next_update_expected",
+            "title": "Next Update Expected",
+            "type": "`$STRING`",
             "req": True,
             "short": "ISO 8601 timestamp of when next RBA update is expected",
-            "type": "`$STRING`",
           },
           {
             "name": "stale",
+            "title": "Stale",
+            "type": "`$BOOLEAN`",
             "req": True,
             "short": "Whether the data is considered stale",
-            "type": "`$BOOLEAN`",
           },
           {
             "name": "status",
+            "title": "Status",
+            "type": "`$STRING`",
             "req": True,
             "short": "Current API status",
-            "type": "`$STRING`",
           },
         ],
         "name": "status",
@@ -623,7 +659,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/status",
@@ -632,14 +667,16 @@ def make_config():
                     "lit": "status",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "status",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "status",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -652,21 +689,24 @@ def make_config():
         "fields": [
           {
             "name": "country",
+            "title": "Country",
+            "type": "`$STRING`",
             "req": True,
             "short": "Country or region",
-            "type": "`$STRING`",
           },
           {
             "name": "name",
+            "title": "Name",
+            "type": "`$STRING`",
             "req": True,
             "short": "Full name of the currency",
-            "type": "`$STRING`",
           },
           {
             "name": "symbol",
+            "title": "Symbol",
+            "type": "`$STRING`",
             "req": True,
             "short": "Currency symbol",
-            "type": "`$STRING`",
           },
         ],
         "name": "symbol",
@@ -676,7 +716,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/symbols",
@@ -685,14 +724,16 @@ def make_config():
                     "lit": "symbols",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "symbols",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.symbols`",
                 },
-                "parts": [
-                  "symbols",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -705,26 +746,32 @@ def make_config():
         "fields": [
           {
             "name": "base",
+            "title": "Base",
             "type": "`$STRING`",
           },
           {
             "name": "end_date",
+            "title": "End Date",
             "type": "`$STRING`",
           },
           {
             "name": "rates",
+            "title": "Rates",
             "type": "`$OBJECT`",
           },
           {
             "name": "start_date",
+            "title": "Start Date",
             "type": "`$STRING`",
           },
           {
             "name": "success",
+            "title": "Success",
             "type": "`$BOOLEAN`",
           },
           {
             "name": "timeseries",
+            "title": "Timeseries",
             "type": "`$BOOLEAN`",
           },
         ],
@@ -735,40 +782,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": "AUD",
-                      "kind": "query",
-                      "name": "base",
-                      "orig": "base",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "2025-08-31",
-                      "kind": "query",
-                      "name": "end_date",
-                      "orig": "end_date",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "2025-08-01",
-                      "kind": "query",
-                      "name": "start_date",
-                      "orig": "start_date",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "USD,EUR,GBP",
-                      "kind": "query",
-                      "name": "symbol",
-                      "orig": "symbol",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/timeseries",
@@ -777,6 +790,48 @@ def make_config():
                     "lit": "timeseries",
                   },
                 ],
+                "parts": [
+                  "timeseries",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.rates`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "base",
+                      "orig": "base",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "AUD",
+                    },
+                    {
+                      "name": "end_date",
+                      "orig": "end_date",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                      "example": "2025-08-31",
+                    },
+                    {
+                      "name": "start_date",
+                      "orig": "start_date",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                      "example": "2025-08-01",
+                    },
+                    {
+                      "name": "symbol",
+                      "orig": "symbol",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "USD,EUR,GBP",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "base",
@@ -785,13 +840,6 @@ def make_config():
                     "symbol",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.rates`",
-                },
-                "parts": [
-                  "timeseries",
-                ],
               },
             ],
           },

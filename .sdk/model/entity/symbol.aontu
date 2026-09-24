@@ -1,0 +1,60 @@
+# Entity: symbol
+
+main: kit: entity: symbol: {
+
+  alias: field: {}
+
+  fields: {
+    country: {
+      h: "Country"
+      n: "country"
+      r: true
+      sh: "Country or region"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "Full name of the currency"
+      t: "`$STRING`"
+    }
+    symbol: {
+      h: "Symbol"
+      n: "symbol"
+      r: true
+      sh: "Currency symbol"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "symbol"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /symbols"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/symbols"
+          s: [
+            {
+              lit: "symbols"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.symbols`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

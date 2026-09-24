@@ -101,34 +101,40 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "date",
-						"req": true,
+						"title": "Date",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "free",
-						"short": "Indicates if this was a free (unauthenticated) request",
+						"title": "Free",
 						"type": "`$BOOLEAN`",
+						"short": "Indicates if this was a free (unauthenticated) request",
 					},
 					map[string]any{
 						"name": "info",
-						"req": true,
+						"title": "Info",
 						"type": "`$OBJECT`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "query",
-						"req": true,
+						"title": "Query",
 						"type": "`$OBJECT`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "result",
+						"title": "Result",
+						"type": "`$NUMBER`",
 						"req": true,
 						"short": "Conversion result",
-						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "success",
-						"req": true,
+						"title": "Success",
 						"type": "`$BOOLEAN`",
+						"req": true,
 					},
 				},
 				"name": "convert",
@@ -138,47 +144,55 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": 100,
-											"kind": "query",
-											"name": "amount",
-											"orig": "amount",
-											"reqd": true,
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"example": "2025-08-31",
-											"kind": "query",
-											"name": "date",
-											"orig": "date",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "AUD",
-											"kind": "query",
-											"name": "from",
-											"orig": "from",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "USD",
-											"kind": "query",
-											"name": "to",
-											"orig": "to",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/convert",
 								"segments": []any{
 									map[string]any{
 										"lit": "convert",
+									},
+								},
+								"parts": []any{
+									"convert",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "amount",
+											"orig": "amount",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"reqd": true,
+											"example": 100,
+										},
+										map[string]any{
+											"name": "date",
+											"orig": "date",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "2025-08-31",
+										},
+										map[string]any{
+											"name": "from",
+											"orig": "from",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "AUD",
+										},
+										map[string]any{
+											"name": "to",
+											"orig": "to",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "USD",
+										},
 									},
 								},
 								"select": map[string]any{
@@ -188,13 +202,6 @@ func MakeConfig() map[string]any {
 										"from",
 										"to",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"convert",
 								},
 							},
 						},
@@ -207,25 +214,29 @@ func MakeConfig() map[string]any {
 			"get_api_root": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"format": "uri",
 						"name": "documentation",
-						"req": true,
+						"title": "Documentation",
 						"type": "`$STRING`",
+						"req": true,
+						"format": "uri",
 					},
 					map[string]any{
 						"name": "message",
-						"req": true,
+						"title": "Message",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "success",
-						"req": true,
+						"title": "Success",
 						"type": "`$BOOLEAN`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "version",
-						"req": true,
+						"title": "Version",
 						"type": "`$STRING`",
+						"req": true,
 					},
 				},
 				"name": "get_api_root",
@@ -235,17 +246,18 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/",
 								"segments": []any{},
-								"select": map[string]any{},
+								"parts": []any{},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -258,26 +270,32 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "base",
+						"title": "Base",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "date",
+						"title": "Date",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "rates",
+						"title": "Rates",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "success",
+						"title": "Success",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "timestamp",
+						"title": "Timestamp",
 						"type": "`$INTEGER`",
 					},
 				},
@@ -300,26 +318,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "USD",
-											"kind": "param",
-											"name": "currency",
-											"orig": "currency",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "2025-08-31",
-											"kind": "param",
-											"name": "date",
-											"orig": "date",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/{date}/{currency}",
@@ -331,19 +329,40 @@ func MakeConfig() map[string]any {
 										"var": "currency",
 									},
 								},
+								"parts": []any{
+									"{date}",
+									"{currency}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.rates`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "currency",
+											"orig": "currency",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "USD",
+										},
+										map[string]any{
+											"name": "date",
+											"orig": "date",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "2025-08-31",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"currency",
 										"date",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.rates`",
-								},
-								"parts": []any{
-									"{date}",
-									"{currency}",
 								},
 							},
 						},
@@ -357,26 +376,32 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "base",
+						"title": "Base",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "date",
+						"title": "Date",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "rates",
+						"title": "Rates",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "success",
+						"title": "Success",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "timestamp",
+						"title": "Timestamp",
 						"type": "`$INTEGER`",
 					},
 				},
@@ -391,42 +416,42 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "2025-08-31",
-											"kind": "param",
-											"name": "id",
-											"orig": "date",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/{date}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"date": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"date": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.rates`",
 								},
-								"parts": []any{
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "date",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "2025-08-31",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -440,26 +465,32 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "base",
+						"title": "Base",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "date",
+						"title": "Date",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "rates",
+						"title": "Rates",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "success",
+						"title": "Success",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "timestamp",
+						"title": "Timestamp",
 						"type": "`$INTEGER`",
 					},
 				},
@@ -474,24 +505,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "AUD",
-											"kind": "query",
-											"name": "base",
-											"orig": "base",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "USD,EUR,GBP",
-											"kind": "query",
-											"name": "symbol",
-											"orig": "symbol",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/latest",
@@ -500,41 +513,43 @@ func MakeConfig() map[string]any {
 										"lit": "latest",
 									},
 								},
+								"parts": []any{
+									"latest",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.rates`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "base",
+											"orig": "base",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "AUD",
+										},
+										map[string]any{
+											"name": "symbol",
+											"orig": "symbol",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "USD,EUR,GBP",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"base",
 										"symbol",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.rates`",
-								},
-								"parts": []any{
-									"latest",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "USD",
-											"kind": "param",
-											"name": "id",
-											"orig": "currency",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/latest/{currency}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"currency": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "latest",
@@ -543,18 +558,35 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"latest",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"currency": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.rates`",
 								},
-								"parts": []any{
-									"latest",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "currency",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "USD",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -568,27 +600,31 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "last_update",
+						"title": "Last Update",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "Last successful data update timestamp or 'unknown'",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "next_update_expected",
+						"title": "Next Update Expected",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "ISO 8601 timestamp of when next RBA update is expected",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "stale",
+						"title": "Stale",
+						"type": "`$BOOLEAN`",
 						"req": true,
 						"short": "Whether the data is considered stale",
-						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "status",
+						"title": "Status",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "Current API status",
-						"type": "`$STRING`",
 					},
 				},
 				"name": "status",
@@ -598,7 +634,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/status",
@@ -607,14 +642,16 @@ func MakeConfig() map[string]any {
 										"lit": "status",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"status",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"status",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -627,21 +664,24 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "country",
+						"title": "Country",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "Country or region",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"title": "Name",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "Full name of the currency",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "symbol",
+						"title": "Symbol",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "Currency symbol",
-						"type": "`$STRING`",
 					},
 				},
 				"name": "symbol",
@@ -651,7 +691,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/symbols",
@@ -660,14 +699,16 @@ func MakeConfig() map[string]any {
 										"lit": "symbols",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"symbols",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.symbols`",
 								},
-								"parts": []any{
-									"symbols",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -680,26 +721,32 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "base",
+						"title": "Base",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "end_date",
+						"title": "End Date",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "rates",
+						"title": "Rates",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "start_date",
+						"title": "Start Date",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "success",
+						"title": "Success",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "timeseries",
+						"title": "Timeseries",
 						"type": "`$BOOLEAN`",
 					},
 				},
@@ -710,46 +757,54 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "AUD",
-											"kind": "query",
-											"name": "base",
-											"orig": "base",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "2025-08-31",
-											"kind": "query",
-											"name": "end_date",
-											"orig": "end_date",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "2025-08-01",
-											"kind": "query",
-											"name": "start_date",
-											"orig": "start_date",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "USD,EUR,GBP",
-											"kind": "query",
-											"name": "symbol",
-											"orig": "symbol",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/timeseries",
 								"segments": []any{
 									map[string]any{
 										"lit": "timeseries",
+									},
+								},
+								"parts": []any{
+									"timeseries",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.rates`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "base",
+											"orig": "base",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "AUD",
+										},
+										map[string]any{
+											"name": "end_date",
+											"orig": "end_date",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "2025-08-31",
+										},
+										map[string]any{
+											"name": "start_date",
+											"orig": "start_date",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "2025-08-01",
+										},
+										map[string]any{
+											"name": "symbol",
+											"orig": "symbol",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "USD,EUR,GBP",
+										},
 									},
 								},
 								"select": map[string]any{
@@ -759,13 +814,6 @@ func MakeConfig() map[string]any {
 										"start_date",
 										"symbol",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.rates`",
-								},
-								"parts": []any{
-									"timeseries",
 								},
 							},
 						},
