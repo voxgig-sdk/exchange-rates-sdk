@@ -106,11 +106,11 @@ local result, err = client:Convert():load({ amount = 1, from = "example", to = "
 | Language | Package | Install |
 | --- | --- | --- |
 | TypeScript | `@voxgig-sdk/exchange-rates-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/tags) |
-| Python | `voxgig-sdk-exchange-rates` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/tags) |
-| PHP | `voxgig-sdk/exchange-rates` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/tags) |
+| Python | `voxgig-sdk-exchange-rates-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/tags) |
+| PHP | `voxgig-sdk/exchange-rates-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/exchange-rates-sdk/go` | `go get github.com/voxgig-sdk/exchange-rates-sdk/go@latest` |
-| Ruby | `voxgig-sdk-exchange-rates` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/tags) |
-| Lua | `voxgig-sdk-exchange-rates` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/tags) |
+| Ruby | `voxgig-sdk-exchange-rates-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/tags) |
+| Lua | `voxgig-sdk-exchange-rates-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/exchange-rates-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/exchange-rates-sdk/go-cli` | `go install github.com/voxgig-sdk/exchange-rates-sdk/go-cli/cmd/exchange-rates@latest` |
 | Go MCP server | `github.com/voxgig-sdk/exchange-rates-sdk/go-mcp` | `go get github.com/voxgig-sdk/exchange-rates-sdk/go-mcp@latest` |
 
@@ -360,10 +360,10 @@ forking the SDK.
 
 | Feature | Purpose |
 | --- | --- |
-| **RatelimitFeature** | Client-side rate limiting via a token bucket |
-| **RetryFeature** | Automatic retry of transient failures with exponential backoff |
-| **TestFeature** | In-memory mock transport for testing without a live server |
-| **TimeoutFeature** | Per-request timeout with transport abort |
+| **RatelimitFeature** | Rate limiting |
+| **RetryFeature** | Retry |
+| **TestFeature** | Test transport |
+| **TimeoutFeature** | Timeout |
 
 Pass custom features via the `extend` option at construction time.
 
